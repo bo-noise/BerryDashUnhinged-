@@ -1,6 +1,7 @@
 using System;
 using System.Numerics;
 using System.Text;
+using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -143,22 +144,17 @@ public class LeaderboardsMenu : MonoBehaviour
             }
             else
             {
-                var splitResponse = response.Split(';');
-                for (int i = 0; i < splitResponse.Length; i++)
+                var jsonResponse = JArray.Parse(response);
+                for (int i = 0; i < jsonResponse.Count; i++)
                 {
-                    var entry = splitResponse[i];
-                    var split = entry.Split(":");
-                    var username = Encoding.UTF8.GetString(Convert.FromBase64String(split[0]));
-                    var highScore = split[1];
-                    var icon = split[2];
-                    var overlay = split[3];
-                    var uid = split[4];
-                    var birdR = split[5];
-                    var birdG = split[6];
-                    var birdB = split[7];
-                    var overlayR = split[8];
-                    var overlayG = split[9];
-                    var overlayB = split[10];
+                    var entry = JObject.Parse(jsonResponse[i].ToString());
+                    var username = (string)entry["username"];
+                    var highScore = BigInteger.Parse((string)entry["value"]);
+                    var icon = (int)entry["icon"];
+                    var overlay = (int)entry["overlay"];
+                    var uid = BigInteger.Parse((string)entry["userid"]);
+                    var birdColor = (JArray)entry["birdColor"];
+                    var overlayColor = (JArray)entry["overlayColor"];
 
                     var entryInfo = Instantiate(scoreSampleObject, scoreContent.transform);
                     var usernameText = entryInfo.transform.GetChild(0).GetComponent<TMP_Text>();
@@ -166,7 +162,7 @@ public class LeaderboardsMenu : MonoBehaviour
                     var playerOverlayIcon = playerIcon.transform.GetChild(0).GetComponent<Image>();
                     var highScoreText = entryInfo.transform.GetChild(1).GetComponent<TMP_Text>();
 
-                    if (BazookaManager.Instance.GetAccountID() == BigInteger.Parse(uid))
+                    if (BazookaManager.Instance.GetAccountID() == uid)
                     {
                         usernameText.color = Color.aquamarine;
                         highScoreText.color = Color.aquamarine;
@@ -175,31 +171,31 @@ public class LeaderboardsMenu : MonoBehaviour
                     usernameText.text = $"{username} (#{i + 1})";
                     highScoreText.text += Tools.FormatWithCommas(highScore);
                     playerIcon.sprite = Resources.Load<Sprite>("Icons/Icons/bird_" + icon);
-                    if (icon == "1")
+                    if (icon == 1)
                     {
-                        playerIcon.sprite = Tools.GetIconForUser(int.Parse(uid));
+                        playerIcon.sprite = Tools.GetIconForUser(uid);
                     }
                     playerOverlayIcon.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + overlay);
-                    if (overlay == "0")
+                    if (overlay == 0)
                     {
                         playerOverlayIcon.gameObject.SetActive(false);
                     }
-                    else if (overlay == "8")
+                    else if (overlay == 8)
                     {
                         playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.56f, 14.81f);
                     }
-                    else if (overlay == "11")
+                    else if (overlay == 11)
                     {
                         playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-14.74451f, 20.39122f);
                     }
-                    else if (overlay == "13")
+                    else if (overlay == 13)
                     {
                         playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.54019f, 14.70365f);
                     }
                     try
                     {
-                        playerIcon.color = new Color32(byte.Parse(birdR), byte.Parse(birdG), byte.Parse(birdB), 255);
-                        playerOverlayIcon.color = new Color32(byte.Parse(overlayR), byte.Parse(overlayG), byte.Parse(overlayB), 255);
+                        playerIcon.color = new Color((int)birdColor[0] / 255f, (int)birdColor[1] / 255f, (int)birdColor[2] / 255f, 1f);
+                        playerOverlayIcon.color =  new Color((int)overlayColor[0] / 255f, (int)overlayColor[1] / 255f, (int)overlayColor[2] / 255f, 1f);
                     }
                     catch (Exception)
                     {
@@ -265,22 +261,17 @@ public class LeaderboardsMenu : MonoBehaviour
             }
             else
             {
-                var splitResponse = response.Split(';');
-                for (int i = 0; i < splitResponse.Length; i++)
+                var jsonResponse = JArray.Parse(response);
+                for (int i = 0; i < jsonResponse.Count; i++)
                 {
-                    var entry = splitResponse[i];
-                    var split = entry.Split(":");
-                    var username = Encoding.UTF8.GetString(Convert.FromBase64String(split[0]));
-                    var highScore = split[1];
-                    var icon = split[2];
-                    var overlay = split[3];
-                    var uid = split[4];
-                    var birdR = split[5];
-                    var birdG = split[6];
-                    var birdB = split[7];
-                    var overlayR = split[8];
-                    var overlayG = split[9];
-                    var overlayB = split[10];
+                    var entry = JObject.Parse(jsonResponse[i].ToString());
+                    var username = (string)entry["username"];
+                    var highScore = BigInteger.Parse((string)entry["value"]);
+                    var icon = (int)entry["icon"];
+                    var overlay = (int)entry["overlay"];
+                    var uid = BigInteger.Parse((string)entry["userid"]);
+                    var birdColor = (JArray)entry["birdColor"];
+                    var overlayColor = (JArray)entry["overlayColor"];
 
                     var entryInfo = Instantiate(berrySampleObject, berryContent.transform);
                     var usernameText = entryInfo.transform.GetChild(0).GetComponent<TMP_Text>();
@@ -288,7 +279,7 @@ public class LeaderboardsMenu : MonoBehaviour
                     var playerOverlayIcon = playerIcon.transform.GetChild(0).GetComponent<Image>();
                     var highScoreText = entryInfo.transform.GetChild(1).GetComponent<TMP_Text>();
 
-                    if (BazookaManager.Instance.GetAccountID() == BigInteger.Parse(uid))
+                    if (BazookaManager.Instance.GetAccountID() == uid)
                     {
                         usernameText.color = Color.aquamarine;
                         highScoreText.color = Color.aquamarine;
@@ -297,31 +288,31 @@ public class LeaderboardsMenu : MonoBehaviour
                     usernameText.text = $"{username} (#{i + 1})";
                     highScoreText.text += Tools.FormatWithCommas(highScore);
                     playerIcon.sprite = Resources.Load<Sprite>("Icons/Icons/bird_" + icon);
-                    if (icon == "1")
+                    if (icon == 1)
                     {
-                        playerIcon.sprite = Tools.GetIconForUser(int.Parse(uid));
+                        playerIcon.sprite = Tools.GetIconForUser(uid);
                     }
                     playerOverlayIcon.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + overlay);
-                    if (overlay == "0")
+                    if (overlay == 0)
                     {
                         playerOverlayIcon.gameObject.SetActive(false);
                     }
-                    else if (overlay == "8")
+                    else if (overlay == 8)
                     {
                         playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.56f, 14.81f);
                     }
-                    else if (overlay == "11")
+                    else if (overlay == 11)
                     {
                         playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-14.74451f, 20.39122f);
                     }
-                    else if (overlay == "13")
+                    else if (overlay == 13)
                     {
                         playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.54019f, 14.70365f);
                     }
                     try
                     {
-                        playerIcon.color = new Color32(byte.Parse(birdR), byte.Parse(birdG), byte.Parse(birdB), 255);
-                        playerOverlayIcon.color = new Color32(byte.Parse(overlayR), byte.Parse(overlayG), byte.Parse(overlayB), 255);
+                        playerIcon.color = new Color((int)birdColor[0] / 255f, (int)birdColor[1] / 255f, (int)birdColor[2] / 255f, 1f);
+                        playerOverlayIcon.color =  new Color((int)overlayColor[0] / 255f, (int)overlayColor[1] / 255f, (int)overlayColor[2] / 255f, 1f);
                     }
                     catch (Exception)
                     {
