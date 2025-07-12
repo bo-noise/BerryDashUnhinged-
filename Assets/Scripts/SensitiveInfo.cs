@@ -39,7 +39,6 @@ public class SensitiveInfo
         }
         catch
         {
-            Application.Quit();
             return "-997"; //the server returns this if theres an issue with encryption/decryption so the client will too ig
         }
     }
@@ -72,7 +71,6 @@ public class SensitiveInfo
         }
         catch
         {
-            Application.Quit();
             return null;
         }
     }
@@ -104,7 +102,6 @@ public class SensitiveInfo
         }
         catch
         {
-            Application.Quit();
             return "-997"; //the server returns this if theres an issue with encryption/decryption so the client will too ig
         }
     }
@@ -135,7 +132,6 @@ public class SensitiveInfo
         }
         catch
         {
-            Application.Quit();
             return null;
         }
     }
