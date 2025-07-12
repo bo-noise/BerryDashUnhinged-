@@ -37,9 +37,22 @@ public class Iconsmenu : MonoBehaviour
     public Button overlay13;
     public Button overlay14;
     public GameObject previewBirdObject;
+    public ColorPanel iconColorPanel;
+    public ColorPanel overlayColorPanel;
 
     private void Start()
     {
+        iconColorPanel.Init(BazookaManager.Instance.GetColorSettingIcon(), Color.white);
+        iconColorPanel.OnColorChanged += color =>
+        {
+            BazookaManager.Instance.SetColorSettingIcon(color);
+        };
+        overlayColorPanel.Init(BazookaManager.Instance.GetColorSettingOverlay(), Color.white);
+        overlayColorPanel.OnColorChanged += color =>
+        {
+            BazookaManager.Instance.SetColorSettingOverlay(color);
+        };
+
         defaultIcon = Tools.GetIconForUser(BazookaManager.Instance.GetAccountID() ?? 0);
         icon1.transform.GetChild(0).GetComponent<Image>().sprite = defaultIcon;
         SwitchToIcon();

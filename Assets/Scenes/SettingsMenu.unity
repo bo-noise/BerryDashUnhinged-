@@ -720,7 +720,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 96579867}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 851d6819986698659a53cdf0cb057649, type: 3}
+  m_Script: {fileID: 11500000, guid: be845a3d96a3e4c4db8a150c05c99b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rSlider: {fileID: 1003646544}
@@ -728,11 +728,10 @@ MonoBehaviour:
   bSlider: {fileID: 1502389286}
   colorPickerUI: {fileID: 1647778840}
   manualModeUI: {fileID: 804553763}
-  settingsUI: {fileID: 876482803}
   hexValue: {fileID: 1509429880}
+  previewImage: {fileID: 0}
   resetButton: {fileID: 877006207}
   switchModeButton: {fileID: 1009561871}
-  previewButton: {fileID: 253951279}
 --- !u!1 &99615552
 GameObject:
   m_ObjectHideFlags: 0
@@ -1592,6 +1591,9 @@ MonoBehaviour:
   setting4toggle: {fileID: 1304594480}
   musicSlider: {fileID: 382287572}
   sfxSlider: {fileID: 964986325}
+  bgColorPanel: {fileID: 96579872}
+  bgPreviewModePanel: {fileID: 253951279}
+  settingsUI: {fileID: 876482803}
 --- !u!1 &372795356
 GameObject:
   m_ObjectHideFlags: 0

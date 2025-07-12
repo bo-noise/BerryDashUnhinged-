@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,9 +10,26 @@ public class SettingsMenu : MonoBehaviour
     public Toggle setting4toggle;
     public Slider musicSlider;
     public Slider sfxSlider;
+    public ColorPanel bgColorPanel;
+    public Button bgPreviewModePanel;
+    public GameObject settingsUI;
 
-    private void Awake()
+    private void Start()
     {
+        bgColorPanel.Init(BazookaManager.Instance.GetColorSettingBackground(), new Color(58 / 255f, 58 / 255f, 58 / 255f));
+        bgColorPanel.OnColorChanged += color =>
+        {
+            BazookaManager.Instance.SetColorSettingBackground(color);
+            if (!settingsUI.activeSelf) Camera.main.backgroundColor = new Color((int)color[0] / 255f, (int)color[1] / 255f, (int)color[2] / 255f);
+        };
+        bgPreviewModePanel.onClick.AddListener(() =>
+        {
+            settingsUI.SetActive(!settingsUI.activeSelf);
+            var value = BazookaManager.Instance.GetColorSettingBackground();
+            Camera.main.backgroundColor = !settingsUI.activeSelf ? new Color((int)value[0] / 255f, (int)value[1] / 255f, (int)value[2] / 255f) : new Color(24 / 255f, 24 / 255f, 24 / 255f);
+            bgPreviewModePanel.transform.GetChild(0).GetComponent<TMP_Text>().text = settingsUI.activeSelf ? "Preview On" : "Preview Off";
+        });
+
         musicSlider.value = BazookaManager.Instance.GetSettingMusicVolume();
         sfxSlider.value = BazookaManager.Instance.GetSettingSFXVolume();
         if (!Application.isMobilePlatform)

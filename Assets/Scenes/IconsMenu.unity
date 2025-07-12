@@ -2432,7 +2432,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 346076455}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2570aea461bc94f28157a7cc7d381ef, type: 3}
+  m_Script: {fileID: 11500000, guid: be845a3d96a3e4c4db8a150c05c99b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rSlider: {fileID: 415708120}
@@ -6215,7 +6215,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 989561978}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65f6bd5c95bc89f17b1446eb992dc697, type: 3}
+  m_Script: {fileID: 11500000, guid: be845a3d96a3e4c4db8a150c05c99b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rSlider: {fileID: 139542974}
@@ -6460,6 +6460,8 @@ MonoBehaviour:
   overlay13: {fileID: 1736703}
   overlay14: {fileID: 1798643177}
   previewBirdObject: {fileID: 2072730781}
+  iconColorPanel: {fileID: 346076460}
+  overlayColorPanel: {fileID: 989561983}
 --- !u!1 &1098647304
 GameObject:
   m_ObjectHideFlags: 0

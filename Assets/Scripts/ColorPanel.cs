@@ -1,9 +1,10 @@
+using System;
 using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class IconsMenuOverlayColorPanel : MonoBehaviour
+public class ColorPanel : MonoBehaviour
 {
     public Slider rSlider;
     public Slider gSlider;
@@ -14,13 +15,13 @@ public class IconsMenuOverlayColorPanel : MonoBehaviour
     public Image previewImage;
     public Button resetButton;
     public Button switchModeButton;
+    public event Action<JArray> OnColorChanged;
 
-    void Awake()
+    public void Init(JArray color, Color defaultColor)
     {
-        var overlayColor = BazookaManager.Instance.GetColorSettingOverlay();
-        rSlider.value = (int)overlayColor[0];
-        gSlider.value = (int)overlayColor[1];
-        bSlider.value = (int)overlayColor[2];
+        rSlider.value = (int)color[0];
+        gSlider.value = (int)color[1];
+        bSlider.value = (int)color[2];
 
         SyncAll();
 
@@ -42,7 +43,9 @@ public class IconsMenuOverlayColorPanel : MonoBehaviour
 
         resetButton.onClick.AddListener(() =>
         {
-            rSlider.value = gSlider.value = bSlider.value = 255;
+            rSlider.value = defaultColor.r * 255f;
+            gSlider.value = defaultColor.g * 255f;
+            bSlider.value = defaultColor.b * 255f;
         });
 
         switchModeButton.onClick.AddListener(() =>
@@ -67,9 +70,9 @@ public class IconsMenuOverlayColorPanel : MonoBehaviour
 
         if (!fromPicker) colorPickerUI.SetSelectedColor(rSlider.value, gSlider.value, bSlider.value);
 
-        previewImage.color = col;
+        if (previewImage != null) previewImage.color = col;
         hexValue.SetTextWithoutNotify("#" + ColorUtility.ToHtmlStringRGB(col));
-        BazookaManager.Instance.SetColorSettingOverlay(new JArray(
+        OnColorChanged?.Invoke(new JArray(
             (int)rSlider.value,
             (int)gSlider.value,
             (int)bSlider.value
