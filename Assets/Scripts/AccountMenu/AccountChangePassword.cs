@@ -50,7 +50,6 @@ public class AccountChangePassword : MonoBehaviour
             return;
         }
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
-
         if (response == "-999")
         {
             AccountHandler.UpdateStatusText(changePasswordStatusText, "Server error while fetching data", Color.red);

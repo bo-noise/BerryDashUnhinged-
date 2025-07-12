@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -42,38 +43,39 @@ public class AccountChangeUsername : MonoBehaviour
             return;
         }
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
-        switch (response)
+        if (response == "-999")
         {
-            case "-999":
-                AccountHandler.UpdateStatusText(changeUsernameStatusText, "Server error while fetching data", Color.red);
-                break;
-            case "-998":
-                AccountHandler.UpdateStatusText(changeUsernameStatusText, "Client version too outdated to access servers", Color.red);
-                break;
-            case "-997":
-                AccountHandler.UpdateStatusText(changeUsernameStatusText, "Encryption/decryption issues", Color.red);
-                break;
-            case "-996":
-                AccountHandler.UpdateStatusText(changeUsernameStatusText, "Can't send requests on self-built instance", Color.red);
-                break;
-            case "1":
+            AccountHandler.UpdateStatusText(changeUsernameStatusText, "Server error while fetching data", Color.red);
+            return;
+        }
+        else if (response == "-998")
+        {
+            AccountHandler.UpdateStatusText(changeUsernameStatusText, "Client version too outdated to access servers", Color.red);
+            return;
+        }
+        else if (response == "-997")
+        {
+            AccountHandler.UpdateStatusText(changeUsernameStatusText, "Encryption/decryption issues", Color.red);
+            return;
+        }
+        else if (response == "-996")
+        {
+            AccountHandler.UpdateStatusText(changeUsernameStatusText, "Can't send requests on self-built instance", Color.red);
+            return;
+        }
+        else
+        {
+            var jsonResponse = JObject.Parse(response);
+            if ((bool)jsonResponse["success"])
+            {
                 BazookaManager.Instance.SetAccountName(changeUsernameNewUsernameInput.text);
                 AccountHandler.instance.SwitchPanel(0);
                 AccountHandler.UpdateStatusText(AccountHandler.instance.accountLoggedIn.loggedInText, "Username changed successfully", Color.green);
-                break;
-            case "-1":
-                AccountHandler.UpdateStatusText(changeUsernameStatusText, "New Username must be 3-16 characters, letters and numbers only", Color.red);
-                break;
-            case "-2":
-                AccountHandler.UpdateStatusText(changeUsernameStatusText, "New username already exists", Color.red);
-                break;
-            case "-3":
-                AccountHandler.instance.SwitchPanel(0);
-                AccountHandler.UpdateStatusText(AccountHandler.instance.accountLoggedIn.loggedInText, "Failed to find info about your user (refresh login?)", Color.red);
-                break;
-            default:
-                AccountHandler.UpdateStatusText(changeUsernameStatusText, "Unknown server response", Color.red);
-                break;
+            }
+            else
+            {
+                AccountHandler.UpdateStatusText(changeUsernameStatusText, (string)jsonResponse["message"], Color.red);
+            }
         }
     }
 }
