@@ -1,4 +1,4 @@
-using System.Text.RegularExpressions;
+using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -35,10 +35,10 @@ public class AccountChangePassword : MonoBehaviour
             return;
         }
         EncryptedWWWForm dataForm = new();
-        dataForm.AddField("inputPassword", changePasswordCurrentPasswordInput.text);
-        dataForm.AddField("inputNewPassword", changePasswordNewPasswordInput.text);
-        dataForm.AddField("session", BazookaManager.Instance.GetAccountSession());
-        dataForm.AddField("userName", BazookaManager.Instance.GetAccountName());
+        dataForm.AddField("oldpassword", changePasswordCurrentPasswordInput.text);
+        dataForm.AddField("newpassword", changePasswordNewPasswordInput.text);
+        dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
+        dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
         using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "changeAccountPassword.php", dataForm.GetWWWForm());
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
@@ -50,45 +50,40 @@ public class AccountChangePassword : MonoBehaviour
             return;
         }
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
-        switch (response)
+
+        if (response == "-999")
         {
-            case "-999":
-                AccountHandler.UpdateStatusText(changePasswordStatusText, "Server error while fetching data", Color.red);
-                break;
-            case "-998":
-                AccountHandler.UpdateStatusText(changePasswordStatusText, "Client version too outdated to access servers", Color.red);
-                break;
-            case "-997":
-                AccountHandler.UpdateStatusText(changePasswordStatusText, "Encryption/decryption issues", Color.red);
-                break;
-            case "-996":
-                AccountHandler.UpdateStatusText(changePasswordStatusText, "Can't send requests on self-built instance", Color.red);
-                break;
-            case "-1":
-                AccountHandler.UpdateStatusText(changePasswordStatusText, "New Password is too short or too long", Color.red);
-                break;
-            case "-2":
-                AccountHandler.UpdateStatusText(changePasswordStatusText, "Password must have 8 characters, one number and one letter", Color.red);
-                break;
-            case "-3":
-                AccountHandler.UpdateStatusText(changePasswordStatusText, "Incorrect current password", Color.red);
-                break;
-            case "-4":
-                AccountHandler.UpdateStatusText(changePasswordStatusText, "Failed to find info about your user (refresh login?)", Color.red);
-                break;
-            case "-5":
-                AccountHandler.UpdateStatusText(changePasswordStatusText, "New password cannot be the same as your old password", Color.red);
-                break;
+            AccountHandler.UpdateStatusText(changePasswordStatusText, "Server error while fetching data", Color.red);
+            return;
         }
-        if (Regex.IsMatch(response, "^[a-zA-Z0-9]{512}$"))
+        else if (response == "-998")
         {
-            BazookaManager.Instance.SetAccountSession(response);
-            AccountHandler.instance.SwitchPanel(0);
-            AccountHandler.UpdateStatusText(AccountHandler.instance.accountLoggedIn.loggedInText, "Password changed successfully", Color.green);
+            AccountHandler.UpdateStatusText(changePasswordStatusText, "Client version too outdated to access servers", Color.red);
+            return;
+        }
+        else if (response == "-997")
+        {
+            AccountHandler.UpdateStatusText(changePasswordStatusText, "Encryption/decryption issues", Color.red);
+            return;
+        }
+        else if (response == "-996")
+        {
+            AccountHandler.UpdateStatusText(changePasswordStatusText, "Can't send requests on self-built instance", Color.red);
+            return;
         }
         else
         {
-            AccountHandler.UpdateStatusText(changePasswordStatusText, "Unknown server response " + response, Color.red);
+            var jsonResponse = JObject.Parse(response);
+            if ((bool)jsonResponse["success"])
+            {
+                BazookaManager.Instance.SetAccountSession((string)jsonResponse["token"]);
+                AccountHandler.instance.SwitchPanel(0);
+                AccountHandler.UpdateStatusText(AccountHandler.instance.accountLoggedIn.loggedInText, "Password changed successfully", Color.green);
+            }
+            else
+            {
+                AccountHandler.UpdateStatusText(changePasswordStatusText, (string)jsonResponse["message"], Color.red);
+            }
         }
     }
 }
