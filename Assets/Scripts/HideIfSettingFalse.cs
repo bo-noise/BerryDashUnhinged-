@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class HideIfSettingFalse : MonoBehaviour {
-    public BazookaSetting setting;
+    public SettingTypes setting;
     public bool reverse;
 
     void Start() {
@@ -9,13 +9,13 @@ public class HideIfSettingFalse : MonoBehaviour {
         gameObject.SetActive(value == !reverse);
     }
 
-    bool GetSettingValue(BazookaSetting s) {
+    bool GetSettingValue(SettingTypes s) {
         var b = BazookaManager.Instance;
         return s switch {
-            BazookaSetting.FullScreen => b.GetSettingFullScreen() ?? false,
-            BazookaSetting.ShowFPS => b.GetSettingShowFPS(),
-            BazookaSetting.Vsync => b.GetSettingVsync() ?? false,
-            BazookaSetting.HideSocials => b.GetSettingHideSocials() ?? false,
+            SettingTypes.FullScreen => b.GetSettingFullScreen() ?? false,
+            SettingTypes.ShowFPS => b.GetSettingShowFPS(),
+            SettingTypes.Vsync => b.GetSettingVsync() ?? false,
+            SettingTypes.HideSocials => b.GetSettingHideSocials() ?? false,
             _ => false
         };
     }

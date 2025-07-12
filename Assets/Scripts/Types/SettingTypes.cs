@@ -1,4 +1,4 @@
-public enum BazookaSetting
+public enum SettingTypes
 {
     FullScreen,
     ShowFPS,
