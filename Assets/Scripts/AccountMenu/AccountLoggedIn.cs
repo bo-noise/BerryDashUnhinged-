@@ -37,7 +37,7 @@ public class AccountLoggedIn : MonoBehaviour
     {
         loggedInSaveButton.interactable = true;
         loggedInLoadButton.interactable = true;
-        loggedInText.text = "Logged in as: " + BazookaManager.Instance.GetAccountName();
+        AccountHandler.UpdateStatusText(loggedInText, "Logged in as: " + BazookaManager.Instance.GetAccountName(), Color.white);
     }
 
     async void SaveAccount()
