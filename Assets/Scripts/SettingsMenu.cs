@@ -43,7 +43,11 @@ public class SettingsMenu : MonoBehaviour
             QualitySettings.vSyncCount = value ? 1 : -1;
         });
         setting4toggle.onValueChanged.AddListener(value => BazookaManager.Instance.SetSettingHideSocials(value));
-        musicSlider.onValueChanged.AddListener(value => BazookaManager.Instance.SetSettingMusicVolume(value));
+        musicSlider.onValueChanged.AddListener(value =>
+        {
+            BazookaManager.Instance.SetSettingMusicVolume(value);
+            MenuMusic.Instance.GetComponent<AudioSource>().volume = value;
+        });
         sfxSlider.onValueChanged.AddListener(value => BazookaManager.Instance.SetSettingSFXVolume(value));
     }
 }

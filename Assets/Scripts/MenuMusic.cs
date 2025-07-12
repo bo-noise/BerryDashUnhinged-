@@ -12,12 +12,16 @@ public class MenuMusic : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded;
-            GetComponent<AudioSource>().volume = BazookaManager.Instance.GetSettingMusicVolume();
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    void Start()
+    {
+        GetComponent<AudioSource>().volume = BazookaManager.Instance.GetSettingMusicVolume();
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
