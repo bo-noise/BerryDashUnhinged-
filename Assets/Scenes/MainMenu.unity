@@ -1301,8 +1301,6 @@ MonoBehaviour:
   updateText: {fileID: 673338280}
   updateButton: {fileID: 1292044491}
   selfBuiltPanel: {fileID: 603486472}
-  loadButton: {fileID: 0}
-  saveButton: {fileID: 0}
 --- !u!1 &603486472
 GameObject:
   m_ObjectHideFlags: 0
@@ -2015,7 +2013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510ceabd73a028caaacaff223c041fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setting: Setting4
+  setting: 3
   reverse: 1
 --- !u!1 &1083924172
 GameObject:
@@ -2390,6 +2388,7 @@ RectTransform:
   - {fileID: 673338278}
   - {fileID: 989689724}
   - {fileID: 603486473}
+  - {fileID: 2001843693}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4603,12 +4602,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001843690}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -640, y: -360.04208, z: 0}
+  m_LocalScale: {x: 1.3459517, y: 1.3459517, z: 1.3459517}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1263503583}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2038556859
 GameObject:
@@ -4753,6 +4752,5 @@ SceneRoots:
   - {fileID: 101625093}
   - {fileID: 1608799622}
   - {fileID: 583716567}
-  - {fileID: 2001843693}
   - {fileID: 1263503583}
   - {fileID: 1513462405}
