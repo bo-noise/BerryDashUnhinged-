@@ -68,6 +68,11 @@ public class LoadingMenu : MonoBehaviour
             updateButton.gameObject.SetActive(true);
             continueButton.gameObject.SetActive(true);
         }
+        else if (response == "4")
+        {
+            text.text = "You are on a beta version of the game. You can still play the game and access the servers, but it is recommended to use the latest stable version.";
+            continueButton.gameObject.SetActive(true);
+        }
         else
         {
             text.text = "Outdated client! Please update your client to play";
