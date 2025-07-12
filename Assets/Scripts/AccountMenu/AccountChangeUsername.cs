@@ -28,8 +28,8 @@ public class AccountChangeUsername : MonoBehaviour
     async void ChangeUsername()
     {
         EncryptedWWWForm dataForm = new();
-        dataForm.AddField("oldusername", changeUsernameNewUsernameInput.text);
-        dataForm.AddField("newusername", changeUsernameCurrentUsernameInput.text);
+        dataForm.AddField("oldusername", changeUsernameCurrentUsernameInput.text);
+        dataForm.AddField("newusername", changeUsernameNewUsernameInput.text);
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
         using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "changeAccountUsername.php", dataForm.GetWWWForm());
