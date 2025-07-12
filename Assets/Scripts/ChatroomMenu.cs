@@ -22,7 +22,7 @@ public class ChatroomMenu : MonoBehaviour
 
     void Start()
     {
-        if (!PlayerPrefs.HasKey("gameSession") || !PlayerPrefs.HasKey("userName") || !PlayerPrefs.HasKey("userId"))
+        if (BazookaManager.Instance.GetAccountID() == null || BazookaManager.Instance.GetAccountName() == null || BazookaManager.Instance.GetAccountSession() == null)
         {
             sendButton.interactable = false;
             messageInputField.interactable = false;
@@ -56,7 +56,7 @@ public class ChatroomMenu : MonoBehaviour
 
         EncryptedWWWForm dataForm = new();
         dataForm.AddField("content", text);
-        dataForm.AddField("gameSession", PlayerPrefs.GetString("gameSession", ""));
+        dataForm.AddField("gameSession", BazookaManager.Instance.GetAccountSession());
         using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "sendChatroomMessage.php", dataForm.GetWWWForm());
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
@@ -179,7 +179,7 @@ public class ChatroomMenu : MonoBehaviour
                         var overlayG = rowSplit[10];
                         var overlayB = rowSplit[11];
 
-                        if (content.transform.Find("ChatroomRow_" + id) != null)
+                        if (content.transform.Find("ChatroomRow_" + id + "_" + uid) != null)
                         {
                             continue;
                         }
@@ -229,7 +229,7 @@ public class ChatroomMenu : MonoBehaviour
                             playerIcon.color = Color.white;
                             playerOverlayIcon.color = Color.white;
                         }
-                        rowInfo.name = "ChatroomRow_" + id;
+                        rowInfo.name = "ChatroomRow_" + id + "_" + uid;
                         rowInfo.SetActive(true);
                     }
                 }

@@ -40,12 +40,12 @@ public class Iconsmenu : MonoBehaviour
 
     private void Start()
     {
-        defaultIcon = Tools.GetIconForUser(PlayerPrefs.GetInt("userId", 0));
+        defaultIcon = Tools.GetIconForUser(BazookaManager.Instance.GetAccountID() ?? 0);
         icon1.transform.GetChild(0).GetComponent<Image>().sprite = defaultIcon;
         SwitchToIcon();
-        SelectOverlay(PlayerPrefs.GetInt("overlay", Mathf.Clamp(PlayerPrefs.GetInt("overlay", 0), 0, 14)));
-        SelectIcon(PlayerPrefs.GetInt("icon", Mathf.Clamp(PlayerPrefs.GetInt("icon", 0), 1, 8)));
-        if (PlayerPrefs.GetInt("icon", 0) == 7)
+        SelectOverlay(BazookaManager.Instance.GetBirdOverlay());
+        SelectIcon(BazookaManager.Instance.GetBirdIcon());
+        if (BazookaManager.Instance.GetBirdIcon() == 7)
         {
             SelectOverlay(0);
             placeholderButton.interactable = false;
@@ -53,9 +53,6 @@ public class Iconsmenu : MonoBehaviour
         placeholderButton.onClick.AddListener(ToggleKit);
         backButton.onClick.AddListener(async () =>
         {
-            PlayerPrefs.SetInt("icon", Mathf.Clamp(PlayerPrefs.GetInt("icon", 0), 1, 8));
-            PlayerPrefs.SetInt("overlay", Mathf.Clamp(PlayerPrefs.GetInt("overlay", 0), 0, 14));
-            PlayerPrefs.Save();
             await SceneManager.LoadSceneAsync("MainMenu");
         });
         previewBird.GetComponentInParent<Button>().onClick.AddListener(() =>
@@ -139,8 +136,7 @@ public class Iconsmenu : MonoBehaviour
 
     private void SelectIcon(int iconID)
     {
-        PlayerPrefs.SetInt("icon", iconID);
-        PlayerPrefs.Save();
+        BazookaManager.Instance.SetBirdIcon(iconID);
         icon1.interactable = iconID != 1;
         icon2.interactable = iconID != 2;
         icon3.interactable = iconID != 3;
@@ -161,7 +157,7 @@ public class Iconsmenu : MonoBehaviour
         }
         else
         {
-            SelectOverlay(PlayerPrefs.GetInt("pastOverlay", 0), false);
+            SelectOverlay(BazookaManager.Instance.GetBirdPastOverlay(), false);
             placeholderButton.interactable = true;
         }
     }
@@ -170,10 +166,9 @@ public class Iconsmenu : MonoBehaviour
     {
         if (savePast)
         {
-            PlayerPrefs.SetInt("pastOverlay", PlayerPrefs.GetInt("overlay", 0));
+            BazookaManager.Instance.SetBirdPastOverlay(BazookaManager.Instance.GetBirdOverlay());
         }
-        PlayerPrefs.SetInt("overlay", overlayID);
-        PlayerPrefs.Save();
+        BazookaManager.Instance.SetBirdOverlay(overlayID);
         overlay0.interactable = overlayID != 0;
         overlay1.interactable = overlayID != 1;
         overlay2.interactable = overlayID != 2;
@@ -182,7 +177,7 @@ public class Iconsmenu : MonoBehaviour
         overlay5.interactable = overlayID != 5;
         overlay6.interactable = overlayID != 6;
         overlay7.interactable = overlayID != 7;
-        overlay8.interactable = !(PlayerPrefs.GetInt("userId", 0) == 1 && PlayerPrefs.GetInt("icon", 0) == 1) && overlayID != 8;
+        overlay8.interactable = !(BazookaManager.Instance.GetAccountID() == 1 && BazookaManager.Instance.GetBirdIcon() == 1) && overlayID != 8;
         overlay9.interactable = overlayID != 9;
         overlay10.interactable = overlayID != 10;
         overlay11.interactable = overlayID != 11;

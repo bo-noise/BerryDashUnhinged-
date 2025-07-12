@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,56 +8,71 @@ public class IconsMenuBirdColorPanel : MonoBehaviour
     public Slider rSlider;
     public Slider gSlider;
     public Slider bSlider;
+    public ColorPickerUI colorPickerUI;
+    public GameObject manualModeUI;
     public TMP_InputField hexValue;
     public Image previewImage;
     public Button resetButton;
+    public Button switchModeButton;
 
     void Awake()
     {
-        var birdColor = PlayerPrefs.GetString("BirdColor", "255;255;255").Split(";");
-        try
-        {
-            rSlider.value = int.Parse(birdColor[0]);
-            gSlider.value = int.Parse(birdColor[1]);
-            bSlider.value = int.Parse(birdColor[2]);
-        }
-        catch
-        {
-            Debug.LogError("Invalid BirdColor format");
-            rSlider.value = 255; gSlider.value = 255; bSlider.value = 255;
-        }
-        SlidersChanged();
+        var birdColor = BazookaManager.Instance.GetColorSettingIcon();
+        rSlider.value = (int)birdColor[0];
+        gSlider.value = (int)birdColor[1];
+        bSlider.value = (int)birdColor[2];
 
-        rSlider.onValueChanged.AddListener(_ => SlidersChanged());
-        gSlider.onValueChanged.AddListener(_ => SlidersChanged());
-        bSlider.onValueChanged.AddListener(_ => SlidersChanged());
+        SyncAll();
+
+        rSlider.onValueChanged.AddListener(_ => SyncAll());
+        gSlider.onValueChanged.AddListener(_ => SyncAll());
+        bSlider.onValueChanged.AddListener(_ => SyncAll());
 
         hexValue.onValueChanged.AddListener(value =>
         {
-            var v = value.StartsWith("#") ? value[1..] : value;
-            if (v.Length == 6 && ColorUtility.TryParseHtmlString("#" + v, out var col))
+            var hex = value.StartsWith("#") ? value : "#" + value;
+            if (hex.Length == 7 && ColorUtility.TryParseHtmlString(hex, out var col))
             {
                 rSlider.SetValueWithoutNotify(col.r * 255f);
                 gSlider.SetValueWithoutNotify(col.g * 255f);
                 bSlider.SetValueWithoutNotify(col.b * 255f);
-                previewImage.color = col;
-                PlayerPrefs.SetString("BirdColor", $"{(int)(col.r * 255)};{(int)(col.g * 255)};{(int)(col.b * 255)}");
-                PlayerPrefs.Save();
+                SyncAll();
             }
         });
 
         resetButton.onClick.AddListener(() =>
         {
-            hexValue.text = "#FFFFFF";
+            rSlider.value = gSlider.value = bSlider.value = 255;
         });
+
+        switchModeButton.onClick.AddListener(() =>
+        {
+            bool enableManual = !manualModeUI.activeSelf;
+            manualModeUI.SetActive(enableManual);
+            colorPickerUI.gameObject.SetActive(!enableManual);
+        });
+
+        colorPickerUI.OnColorChanged += color =>
+        {
+            rSlider.SetValueWithoutNotify(color.r * 255);
+            gSlider.SetValueWithoutNotify(color.g * 255);
+            bSlider.SetValueWithoutNotify(color.b * 255);
+            SyncAll(fromPicker: true);
+        };
     }
 
-    void SlidersChanged()
+    void SyncAll(bool fromPicker = false)
     {
         var col = new Color(rSlider.value / 255f, gSlider.value / 255f, bSlider.value / 255f);
+
+        if (!fromPicker) colorPickerUI.SetSelectedColor(rSlider.value, gSlider.value, bSlider.value);
+
         previewImage.color = col;
-        hexValue.SetTextWithoutNotify($"#{ColorUtility.ToHtmlStringRGB(col)}");
-        PlayerPrefs.SetString("BirdColor", $"{(int)rSlider.value};{(int)gSlider.value};{(int)bSlider.value}");
-        PlayerPrefs.Save();
+        hexValue.SetTextWithoutNotify("#" + ColorUtility.ToHtmlStringRGB(col));
+        BazookaManager.Instance.SetColorSettingIcon(new JArray(
+            (int)rSlider.value,
+            (int)gSlider.value,
+            (int)bSlider.value
+        ));
     }
 }

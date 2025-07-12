@@ -1,5 +1,4 @@
-using System;
-using System.Text.RegularExpressions;
+using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -34,19 +33,25 @@ public class AccountRegister : MonoBehaviour
 
     async void SubmitRegister()
     {
-        if (!registerEmailInput.text.Trim().Equals(registerRetypeEmailInput.text.Trim(), StringComparison.OrdinalIgnoreCase))
+        if (
+            registerUsernameInput.text == string.Empty ||
+            registerEmailInput.text == string.Empty ||
+            registerRetypeEmailInput.text == string.Empty ||
+            registerPasswordInput.text == string.Empty ||
+            registerRetypePasswordInput.text == string.Empty
+        )
         {
-            AccountHandler.UpdateStatusText(registerPanelStatusText, "Email doesn't match", Color.red);
+            AccountHandler.UpdateStatusText(registerPanelStatusText, "All input fields must be filled", Color.red);
             return;
         }
-        if (!registerPasswordInput.text.Trim().Equals(registerRetypePasswordInput.text.Trim(), StringComparison.OrdinalIgnoreCase))
+        if (registerEmailInput.text != registerRetypeEmailInput.text)
         {
-            AccountHandler.UpdateStatusText(registerPanelStatusText, "Password doesn't match", Color.red);
+            AccountHandler.UpdateStatusText(registerPanelStatusText, "Emails don't match", Color.red);
             return;
         }
-        if (!Regex.IsMatch(registerUsernameInput.text, "^[a-zA-Z0-9]{3,16}$"))
+        if (registerPasswordInput.text != registerRetypePasswordInput.text)
         {
-            AccountHandler.UpdateStatusText(registerPanelStatusText, "Username must be 3-16 characters, letters and numbers only", Color.red);
+            AccountHandler.UpdateStatusText(registerPanelStatusText, "Passwords don't match", Color.red);
             return;
         }
         EncryptedWWWForm dataForm = new();
@@ -64,38 +69,37 @@ public class AccountRegister : MonoBehaviour
             return;
         }
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
-        switch (response)
+        if (response == "-999")
         {
-            case "-999":
-                AccountHandler.UpdateStatusText(registerPanelStatusText, "Server error while fetching data", Color.red);
-                break;
-            case "-998":
-                AccountHandler.UpdateStatusText(registerPanelStatusText, "Client version too outdated to access servers", Color.red);
-                break;
-            case "-997":
-                AccountHandler.UpdateStatusText(registerPanelStatusText, "Encryption/decryption issues", Color.red);
-                break;
-            case "-996":
-                AccountHandler.UpdateStatusText(registerPanelStatusText, "Can't send requests on self-built instance", Color.red);
-                break;
-            case "1":
+            AccountHandler.UpdateStatusText(registerPanelStatusText, "Server error while fetching data", Color.red);
+            return;
+        }
+        else if (response == "-998")
+        {
+            AccountHandler.UpdateStatusText(registerPanelStatusText, "Client version too outdated to access servers", Color.red);
+            return;
+        }
+        else if (response == "-997")
+        {
+            AccountHandler.UpdateStatusText(registerPanelStatusText, "Encryption/decryption issues", Color.red);
+            return;
+        }
+        else if (response == "-996")
+        {
+            AccountHandler.UpdateStatusText(registerPanelStatusText, "Can't send requests on self-built instance", Color.red);
+            return;
+        }
+        else
+        {
+            var jsonResponse = JObject.Parse(response);
+            if ((bool)jsonResponse["success"])
+            {
                 AccountHandler.instance.SwitchPanel(2);
-                break;
-            case "-1":
-                AccountHandler.UpdateStatusText(registerPanelStatusText, "Username must be 3-16 characters, letters and numbers only", Color.red);
-                break;
-            case "-2":
-                AccountHandler.UpdateStatusText(registerPanelStatusText, "Email not valid", Color.red);
-                break;
-            case "-3":
-                AccountHandler.UpdateStatusText(registerPanelStatusText, "Password must have 8 characters, one number and one letter", Color.red);
-                break;
-            case "-4":
-                AccountHandler.UpdateStatusText(registerPanelStatusText, "Username or email already exists", Color.red);
-                break;
-            default:
-                AccountHandler.UpdateStatusText(registerPanelStatusText, "Unknown server response", Color.red);
-                break;
+            }
+            else
+            {
+                AccountHandler.UpdateStatusText(registerPanelStatusText, (string)jsonResponse["message"], Color.red);
+            }
         }
     }
 }

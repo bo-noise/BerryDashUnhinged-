@@ -19,7 +19,7 @@ public class AccountHandler : MonoBehaviour
 
     void Start()
     {
-        if (PlayerPrefs.HasKey("gameSession") && PlayerPrefs.HasKey("userName") && PlayerPrefs.HasKey("userId"))
+        if (BazookaManager.Instance.GetAccountID() != null && BazookaManager.Instance.GetAccountName() != null && BazookaManager.Instance.GetAccountSession() != null)
         {
             SwitchPanel(0);
         }

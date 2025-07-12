@@ -12,50 +12,38 @@ public class SettingsMenu : MonoBehaviour
 
     private void Awake()
     {
-        musicSlider.value = PlayerPrefs.GetFloat("musicVolume", 1f);
-        sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume", 1f);
+        musicSlider.value = BazookaManager.Instance.GetSettingMusicVolume();
+        sfxSlider.value = BazookaManager.Instance.GetSettingSFXVolume();
         if (!Application.isMobilePlatform)
         {
-            setting1toggle.isOn = PlayerPrefs.GetInt("Setting1", 1) == 1;
-            setting2toggle.isOn = PlayerPrefs.GetInt("Setting2", 0) == 1;
-            setting3toggle.isOn = PlayerPrefs.GetInt("Setting3", 1) == 1;
-            setting4toggle.isOn = PlayerPrefs.GetInt("Setting4", 0) == 1;
+            setting1toggle.isOn = BazookaManager.Instance.GetSettingFullScreen() ?? true == true;
+            setting2toggle.isOn = BazookaManager.Instance.GetSettingShowFPS() == true;
+            setting3toggle.isOn = BazookaManager.Instance.GetSettingVsync() ?? true == true;
+            setting4toggle.isOn = BazookaManager.Instance.GetSettingHideSocials() == true;
         }
         else
         {
             setting1toggle.interactable = false;
-            setting2toggle.isOn = PlayerPrefs.GetInt("Setting2", 0) == 1;
+            setting2toggle.isOn = BazookaManager.Instance.GetSettingShowFPS() == true;
             setting3toggle.interactable = false;
-            setting4toggle.isOn = PlayerPrefs.GetInt("Setting4", 0) == 1;
+            setting4toggle.isOn = BazookaManager.Instance.GetSettingHideSocials() == true;
         }
         setting1toggle.onValueChanged.AddListener(value =>
         {
+            BazookaManager.Instance.SetSettingFullScreen(value);
             Screen.fullScreen = value;
-            PlayerPrefs.SetInt("Setting1", value ? 1 : 0);
         });
         setting2toggle.onValueChanged.AddListener(value =>
         {
-            PlayerPrefs.SetInt("Setting2", value ? 1 : 0);
+            BazookaManager.Instance.SetSettingShowFPS(value);
         });
         setting3toggle.onValueChanged.AddListener(value =>
         {
-            PlayerPrefs.SetInt("Setting3", value ? 1 : 0);
+            BazookaManager.Instance.SetSettingVsync(value);
             QualitySettings.vSyncCount = value ? 1 : -1;
         });
-        setting4toggle.onValueChanged.AddListener(value =>
-        {
-            PlayerPrefs.SetInt("Setting4", value ? 1 : 0);
-        });
-        musicSlider.onValueChanged.AddListener(value =>
-        {
-            PlayerPrefs.SetFloat("musicVolume", value);
-            PlayerPrefs.Save();
-            MenuMusic.Instance.GetComponent<AudioSource>().volume = value;
-        });
-        sfxSlider.onValueChanged.AddListener(value =>
-        {
-            PlayerPrefs.SetFloat("sfxVolume", value);
-            PlayerPrefs.Save();
-        });
+        setting4toggle.onValueChanged.AddListener(value => BazookaManager.Instance.SetSettingHideSocials(value));
+        musicSlider.onValueChanged.AddListener(value => BazookaManager.Instance.SetSettingMusicVolume(value));
+        sfxSlider.onValueChanged.AddListener(value => BazookaManager.Instance.SetSettingSFXVolume(value));
     }
 }

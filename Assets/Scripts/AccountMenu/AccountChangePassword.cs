@@ -37,8 +37,8 @@ public class AccountChangePassword : MonoBehaviour
         EncryptedWWWForm dataForm = new();
         dataForm.AddField("inputPassword", changePasswordCurrentPasswordInput.text);
         dataForm.AddField("inputNewPassword", changePasswordNewPasswordInput.text);
-        dataForm.AddField("session", PlayerPrefs.GetString("gameSession"));
-        dataForm.AddField("userName", PlayerPrefs.GetString("userName"));
+        dataForm.AddField("session", BazookaManager.Instance.GetAccountSession());
+        dataForm.AddField("userName", BazookaManager.Instance.GetAccountName());
         using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "changeAccountPassword.php", dataForm.GetWWWForm());
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
@@ -82,7 +82,7 @@ public class AccountChangePassword : MonoBehaviour
         }
         if (Regex.IsMatch(response, "^[a-zA-Z0-9]{512}$"))
         {
-            PlayerPrefs.SetString("gameSession", response);
+            BazookaManager.Instance.SetAccountSession(response);
             AccountHandler.instance.SwitchPanel(0);
             AccountHandler.UpdateStatusText(AccountHandler.instance.accountLoggedIn.loggedInText, "Password changed successfully", Color.green);
         }

@@ -1,3 +1,4 @@
+using System.Numerics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -69,10 +70,10 @@ public class AccountRefreshLogin : MonoBehaviour
             string[] array = response.Split(':');
             string session = array[1];
             string userName = array[2];
-            int userId = int.Parse(array[3]);
-            PlayerPrefs.SetString("gameSession", session);
-            PlayerPrefs.SetString("userName", userName);
-            PlayerPrefs.SetInt("userId", userId);
+            BigInteger userId = BigInteger.Parse(array[3]);
+            BazookaManager.Instance.SetAccountSession(session);
+            BazookaManager.Instance.SetAccountName(userName);
+            BazookaManager.Instance.SetAccountID(userId);
             AccountHandler.instance.SwitchPanel(0);
             AccountHandler.UpdateStatusText(refreshLoginStatusText, "", Color.red);
         }

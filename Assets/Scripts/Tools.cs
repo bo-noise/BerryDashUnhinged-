@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class Tools
 {
-    public static Sprite GetIconForUser(int user)
+    public static Sprite GetIconForUser(BigInteger user)
     {
         if (user == 1)
         {

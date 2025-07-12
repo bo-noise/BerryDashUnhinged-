@@ -40,27 +40,27 @@ public class GamePlayer : MonoBehaviour
     public GameObject backButton;
     public float lastMoveTime;
 
-    void Awake()
+    void Start()
     {
-        var backgroundColor = PlayerPrefs.GetString("BackgroundColor", "58;58;58").Split(";");
-        var birdColor = PlayerPrefs.GetString("BirdColor", "255;255;255").Split(";");
-        var overlayColor = PlayerPrefs.GetString("OverlayColor", "255;255;255").Split(";");
+        var backgroundColor = BazookaManager.Instance.GetColorSettingBackground();
+        var birdColor = BazookaManager.Instance.GetColorSettingIcon();
+        var overlayColor = BazookaManager.Instance.GetColorSettingOverlay();
         try
         {
             Camera.main.backgroundColor = new Color(
-                int.Parse(backgroundColor[0]) / 255f,
-                int.Parse(backgroundColor[1]) / 255f,
-                int.Parse(backgroundColor[2]) / 255f
+                int.Parse(backgroundColor[0].ToString()) / 255f,
+                int.Parse(backgroundColor[1].ToString()) / 255f,
+                int.Parse(backgroundColor[2].ToString()) / 255f
             );
             bird.GetComponent<SpriteRenderer>().color = new Color(
-                int.Parse(birdColor[0]) / 255f,
-                int.Parse(birdColor[1]) / 255f,
-                int.Parse(birdColor[2]) / 255f
+                int.Parse(birdColor[0].ToString()) / 255f,
+                int.Parse(birdColor[1].ToString()) / 255f,
+                int.Parse(birdColor[2].ToString()) / 255f
             );
             bird.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(
-                int.Parse(overlayColor[0]) / 255f,
-                int.Parse(overlayColor[1]) / 255f,
-                int.Parse(overlayColor[2]) / 255f
+                int.Parse(overlayColor[0].ToString()) / 255f,
+                int.Parse(overlayColor[1].ToString()) / 255f,
+                int.Parse(overlayColor[2].ToString()) / 255f
             );
         }
         catch
@@ -71,25 +71,22 @@ public class GamePlayer : MonoBehaviour
         lastMoveTime = Time.time;
         UnityEngine.InputSystem.EnhancedTouch.EnhancedTouchSupport.Enable();
         instance = this;
-        highscore = BigInteger.Parse(PlayerPrefs.GetString("HighScoreV2", "0"));
-        totalNormalBerries = BigInteger.Parse(PlayerPrefs.GetString("TotalNormalBerries", "0"));
-        totalPoisonBerries = BigInteger.Parse(PlayerPrefs.GetString("TotalPoisonBerries", "0"));
-        totalSlowBerries = BigInteger.Parse(PlayerPrefs.GetString("TotalSlowBerries", "0"));
-        totalUltraBerries = BigInteger.Parse(PlayerPrefs.GetString("TotalUltraBerries", "0"));
-        totalSpeedyBerries = BigInteger.Parse(PlayerPrefs.GetString("TotalSpeedyBerries", "0"));
-        totalAttempts = BigInteger.Parse(PlayerPrefs.GetString("TotalAttempts", "0"));
-    }
+        highscore = BazookaManager.Instance.GetGameStoreHighScore();
+        totalNormalBerries = BazookaManager.Instance.GetGameStoreTotalNormalBerries();
+        totalPoisonBerries = BazookaManager.Instance.GetGameStoreTotalPoisonBerries();
+        totalSlowBerries = BazookaManager.Instance.GetGameStoreTotalSlowBerries();
+        totalUltraBerries = BazookaManager.Instance.GetGameStoreTotalUltraBerries();
+        totalSpeedyBerries = BazookaManager.Instance.GetGameStoreTotalSpeedyBerries();
+        totalAttempts = BazookaManager.Instance.GetGameStoreTotalAttepts();
 
-    void Start()
-    {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         SpriteRenderer component = bird.GetComponent<SpriteRenderer>();
-        int num = PlayerPrefs.GetInt("icon", 1);
-        int num2 = PlayerPrefs.GetInt("overlay", 0);
+        int num = BazookaManager.Instance.GetBirdIcon();
+        int num2 = BazookaManager.Instance.GetBirdOverlay();
         if (num == 1)
         {
-            component.sprite = Tools.GetIconForUser(PlayerPrefs.GetInt("userId", 0));
+            component.sprite = Tools.GetIconForUser(BazookaManager.Instance.GetAccountID() ?? 0);
         }
         else
         {
@@ -118,15 +115,14 @@ public class GamePlayer : MonoBehaviour
         if (component.sprite == null)
         {
             component.sprite = Resources.Load<Sprite>("Icons/Icons/bird_1");
-            PlayerPrefs.SetInt("icon", 1);
+            BazookaManager.Instance.SetBirdIcon(1);
         }
         if (overlayRender.sprite == null && num2 != 0)
         {
             overlayRender.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_1");
-            PlayerPrefs.SetInt("overlay", 1);
+            BazookaManager.Instance.SetBirdOverlay(1);
         }
-        PlayerPrefs.Save();
-        backgroundMusic.volume = PlayerPrefs.GetFloat("musicVolume", 1f);
+        backgroundMusic.volume = BazookaManager.Instance.GetSettingMusicVolume();
         screenWidth = Camera.main.orthographicSize * 2f * Camera.main.aspect;
         if (Application.isMobilePlatform)
         {
@@ -264,7 +260,7 @@ public class GamePlayer : MonoBehaviour
         if (doJump && isGrounded)
         {
             lastMoveTime = Time.time;
-            AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/Jump"), Camera.main.transform.position, 0.75f * PlayerPrefs.GetFloat("sfxVolume", 1f));
+            AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/Jump"), Camera.main.transform.position, 0.75f * BazookaManager.Instance.GetSettingSFXVolume());
             if (boostLeft > 0f || speedyLeft > 0f)
             {
                 rb.linearVelocity = UnityEngine.Vector2.up * 12f;
@@ -401,7 +397,7 @@ public class GamePlayer : MonoBehaviour
 
     void Update()
     {
-        if (PlayerPrefs.GetInt("Setting2", 0) == 1 && Time.time > nextUpdate)
+        if (BazookaManager.Instance.GetSettingShowFPS() && Time.time > nextUpdate)
         {
             fps = 1f / Time.deltaTime;
             fpsCounter.text = "FPS: " + Mathf.Round(fps);
@@ -448,7 +444,7 @@ public class GamePlayer : MonoBehaviour
                 }
                 else if (UnityEngine.Vector3.Distance(bird.transform.position, berry.transform.position) < 1.5f)
                 {
-                    AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/Eat"), Camera.main.transform.position, 1.2f * PlayerPrefs.GetFloat("sfxVolume", 1f));
+                    AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/Eat"), Camera.main.transform.position, 1.2f * BazookaManager.Instance.GetSettingSFXVolume());
                     Destroy(berry);
                     totalNormalBerries++;
                     UpdateStats(1, 0);
@@ -471,7 +467,7 @@ public class GamePlayer : MonoBehaviour
                 }
                 else if (UnityEngine.Vector3.Distance(bird.transform.position, gameObject7.transform.position) < 1.5f)
                 {
-                    AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/Death"), Camera.main.transform.position, 1.2f * PlayerPrefs.GetFloat("sfxVolume", 1f));
+                    AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/Death"), Camera.main.transform.position, 1.2f * BazookaManager.Instance.GetSettingSFXVolume());
                     Respawn();
                     totalPoisonBerries++;
                     UpdateStats(0, 0);
@@ -494,7 +490,7 @@ public class GamePlayer : MonoBehaviour
                 }
                 else if (UnityEngine.Vector3.Distance(bird.transform.position, gameObject8.transform.position) < 1.5f)
                 {
-                    AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/Powerup"), Camera.main.transform.position, 0.35f * PlayerPrefs.GetFloat("sfxVolume", 1f));
+                    AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/Powerup"), Camera.main.transform.position, 0.35f * BazookaManager.Instance.GetSettingSFXVolume());
                     Destroy(gameObject8);
                     totalUltraBerries++;
                     speedyLeft = 0f;
@@ -527,7 +523,7 @@ public class GamePlayer : MonoBehaviour
                 }
                 else if (UnityEngine.Vector3.Distance(bird.transform.position, gameObject9.transform.position) < 1.5f)
                 {
-                    AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/Downgrade"), Camera.main.transform.position, 0.35f * PlayerPrefs.GetFloat("sfxVolume", 1f));
+                    AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/Downgrade"), Camera.main.transform.position, 0.35f * BazookaManager.Instance.GetSettingSFXVolume());
                     Destroy(gameObject9);
                     boostLeft = 0f;
                     slownessLeft = 10f;
@@ -556,7 +552,7 @@ public class GamePlayer : MonoBehaviour
                 }
                 else if (UnityEngine.Vector3.Distance(bird.transform.position, gameObject10.transform.position) < 1.5f)
                 {
-                    AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/SpeedyPowerup"), Camera.main.transform.position, 0.35f * PlayerPrefs.GetFloat("sfxVolume", 1f));
+                    AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/SpeedyPowerup"), Camera.main.transform.position, 0.35f * BazookaManager.Instance.GetSettingSFXVolume());
                     Destroy(gameObject10);
                     boostLeft = 0f;
                     slownessLeft = 0f;
@@ -658,14 +654,13 @@ public class GamePlayer : MonoBehaviour
         {
             highscore = score;
         }
-        PlayerPrefs.SetString("HighScoreV2", highscore.ToString());
-        PlayerPrefs.SetString("TotalNormalBerries", totalNormalBerries.ToString());
-        PlayerPrefs.SetString("TotalPoisonBerries", totalPoisonBerries.ToString());
-        PlayerPrefs.SetString("TotalSlowBerries", totalSlowBerries.ToString());
-        PlayerPrefs.SetString("TotalUltraBerries", totalUltraBerries.ToString());
-        PlayerPrefs.SetString("TotalSpeedyBerries", totalSpeedyBerries.ToString());
-        PlayerPrefs.SetString("TotalAttempts", totalAttempts.ToString());
-        PlayerPrefs.Save();
+        BazookaManager.Instance.SetGameStoreHighScore(highscore);
+        BazookaManager.Instance.SetGameStoreTotalNormalBerries(totalNormalBerries);
+        BazookaManager.Instance.SetGameStoreTotalPoisonBerries(totalPoisonBerries);
+        BazookaManager.Instance.SetGameStoreTotalSlowBerries(totalSlowBerries);
+        BazookaManager.Instance.SetGameStoreTotalUltraBerries(totalUltraBerries);
+        BazookaManager.Instance.SetGameStoreTotalSpeedyBerries(totalSpeedyBerries);
+        BazookaManager.Instance.SetGameStoreTotalAttepts(totalAttempts);
         scoreText.text = $"Score: {Tools.FormatWithCommas(score)} \\u2022 Attempts: {Tools.FormatWithCommas(attempts)}";
         highScoreText.text = $"High Score: {Tools.FormatWithCommas(highscore)} \\u2022 Total Attempts: {Tools.FormatWithCommas(totalAttempts)}";
         if (restartButton != null) restartButton.GetComponent<Renderer>().material.color = score == 0 ? Color.gray : Color.white;

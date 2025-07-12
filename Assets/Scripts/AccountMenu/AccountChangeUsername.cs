@@ -29,8 +29,8 @@ public class AccountChangeUsername : MonoBehaviour
         EncryptedWWWForm dataForm = new();
         dataForm.AddField("inputUserName", changeUsernameCurrentUsernameInput.text);
         dataForm.AddField("inputNewUserName", changeUsernameNewUsernameInput.text);
-        dataForm.AddField("session", PlayerPrefs.GetString("gameSession"));
-        dataForm.AddField("userName", PlayerPrefs.GetString("userName"));
+        dataForm.AddField("session", BazookaManager.Instance.GetAccountSession());
+        dataForm.AddField("userName", BazookaManager.Instance.GetAccountName());
         using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "changeAccountUsername.php", dataForm.GetWWWForm());
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
@@ -57,7 +57,7 @@ public class AccountChangeUsername : MonoBehaviour
                 AccountHandler.UpdateStatusText(changeUsernameStatusText, "Can't send requests on self-built instance", Color.red);
                 break;
             case "1":
-                PlayerPrefs.SetString("userName", changeUsernameNewUsernameInput.text);
+                BazookaManager.Instance.SetAccountName(changeUsernameNewUsernameInput.text);
                 AccountHandler.instance.SwitchPanel(0);
                 AccountHandler.UpdateStatusText(AccountHandler.instance.accountLoggedIn.loggedInText, "Username changed successfully", Color.green);
                 break;

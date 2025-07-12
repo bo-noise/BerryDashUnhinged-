@@ -21,8 +21,8 @@ public class GamePlayerPauseMenu : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        musicSlider.value = PlayerPrefs.GetFloat("musicVolume", 1f);
-        sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume", 1f);
+        musicSlider.value = BazookaManager.Instance.GetSettingMusicVolume();
+        sfxSlider.value = BazookaManager.Instance.GetSettingSFXVolume();
         backButton.onClick.AddListener(async () =>
         {
             await UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("MainMenu");
@@ -30,14 +30,12 @@ public class GamePlayerPauseMenu : MonoBehaviour
         continueButton.onClick.AddListener(GamePlayer.instance.DisablePause);
         musicSlider.onValueChanged.AddListener(value =>
         {
-            PlayerPrefs.SetFloat("musicVolume", value);
-            PlayerPrefs.Save();
+            BazookaManager.Instance.SetSettingMusicVolume(value);
             songLoop.volume = value;
         });
         sfxSlider.onValueChanged.AddListener(value =>
         {
-            PlayerPrefs.SetFloat("sfxVolume", value);
-            PlayerPrefs.Save();
+            BazookaManager.Instance.SetSettingSFXVolume(value);
         });
         editUiButton.onClick.AddListener(() =>
         {

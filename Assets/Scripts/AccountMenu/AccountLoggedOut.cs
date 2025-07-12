@@ -20,20 +20,20 @@ public class AccountLoggedOut : MonoBehaviour
     {
         if (clearValues)
         {
-            PlayerPrefs.DeleteKey("gameSession");
-            PlayerPrefs.DeleteKey("userName");
-            PlayerPrefs.DeleteKey("userId");
-            PlayerPrefs.SetString("HighScoreV2", "0");
-            PlayerPrefs.SetInt("icon", 1);
-            PlayerPrefs.SetInt("overlay", 0);
-            PlayerPrefs.DeleteKey("TotalNormalBerries");
-            PlayerPrefs.DeleteKey("TotalPoisonBerries");
-            PlayerPrefs.DeleteKey("TotalSlowBerries");
-            PlayerPrefs.DeleteKey("TotalUltraBerries");
-            PlayerPrefs.DeleteKey("TotalSpeedyBerries");
-            PlayerPrefs.DeleteKey("TotalAttempts");
-            PlayerPrefs.DeleteKey("BirdColor");
-            PlayerPrefs.DeleteKey("OverlayColor");
+            BazookaManager.Instance.UnsetAccountSession();
+            BazookaManager.Instance.UnsetAccountName();
+            BazookaManager.Instance.UnsetAccountID();
+            BazookaManager.Instance.UnsetGameStoreHighScore();
+            BazookaManager.Instance.UnsetBirdIcon();
+            BazookaManager.Instance.UnsetBirdOverlay();
+            BazookaManager.Instance.UnsetGameStoreTotalNormalBerries();
+            BazookaManager.Instance.UnsetGameStoreTotalPoisonBerries();
+            BazookaManager.Instance.UnsetGameStoreTotalSlowBerries();
+            BazookaManager.Instance.UnsetGameStoreTotalUltraBerries();
+            BazookaManager.Instance.UnsetGameStoreTotalSpeedyBerries();
+            BazookaManager.Instance.UnsetGameStoreTotalAttepts();
+            BazookaManager.Instance.UnsetColorSettingIcon();
+            BazookaManager.Instance.UnsetColorSettingOverlay();
             clearValues = false;
         }
     }

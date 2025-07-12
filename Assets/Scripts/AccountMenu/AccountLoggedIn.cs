@@ -1,3 +1,5 @@
+using System.Numerics;
+using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -35,7 +37,7 @@ public class AccountLoggedIn : MonoBehaviour
     {
         loggedInSaveButton.interactable = true;
         loggedInLoadButton.interactable = true;
-        loggedInText.text = "Logged in as: " + PlayerPrefs.GetString("userName");
+        loggedInText.text = "Logged in as: " + BazookaManager.Instance.GetAccountName();
     }
 
     async void SaveAccount()
@@ -43,23 +45,23 @@ public class AccountLoggedIn : MonoBehaviour
         loggedInLoadButton.interactable = false;
         loggedInSaveButton.interactable = false;
         EncryptedWWWForm dataForm = new();
-        dataForm.AddField("userName", PlayerPrefs.GetString("userName", ""));
-        dataForm.AddField("gameSession", PlayerPrefs.GetString("gameSession", ""));
-        dataForm.AddField("highScore", PlayerPrefs.GetString("HighScoreV2", "0"));
-        dataForm.AddField("icon", PlayerPrefs.GetInt("icon", 1).ToString());
-        dataForm.AddField("overlay", PlayerPrefs.GetInt("overlay", 0).ToString());
-        dataForm.AddField("totalNormalBerries", PlayerPrefs.GetString("TotalNormalBerries", "0"));
-        dataForm.AddField("totalPoisonBerries", PlayerPrefs.GetString("TotalPoisonBerries", "0"));
-        dataForm.AddField("totalSlowBerries", PlayerPrefs.GetString("TotalSlowBerries", "0"));
-        dataForm.AddField("totalUltraBerries", PlayerPrefs.GetString("TotalUltraBerries", "0"));
-        dataForm.AddField("totalSpeedyBerries", PlayerPrefs.GetString("TotalSpeedyBerries", "0"));
-        dataForm.AddField("totalAttempts", PlayerPrefs.GetString("TotalAttempts", "0"));
-        dataForm.AddField("birdR", PlayerPrefs.GetString("BirdColor", "255;255;255").Split(';')[0]);
-        dataForm.AddField("birdG", PlayerPrefs.GetString("BirdColor", "255;255;255").Split(';')[1]);
-        dataForm.AddField("birdB", PlayerPrefs.GetString("BirdColor", "255;255;255").Split(';')[2]);
-        dataForm.AddField("overlayR", PlayerPrefs.GetString("OverlayColor", "255;255;255").Split(';')[0]);
-        dataForm.AddField("overlayG", PlayerPrefs.GetString("OverlayColor", "255;255;255").Split(';')[1]);
-        dataForm.AddField("overlayB", PlayerPrefs.GetString("OverlayColor", "255;255;255").Split(';')[2]);
+        dataForm.AddField("userName", BazookaManager.Instance.GetAccountName());
+        dataForm.AddField("gameSession", BazookaManager.Instance.GetAccountSession());
+        dataForm.AddField("highScore", BazookaManager.Instance.GetGameStoreHighScore().ToString());
+        dataForm.AddField("icon", BazookaManager.Instance.GetBirdIcon().ToString());
+        dataForm.AddField("overlay", BazookaManager.Instance.GetBirdOverlay().ToString());
+        dataForm.AddField("totalNormalBerries", BazookaManager.Instance.GetGameStoreTotalNormalBerries().ToString());
+        dataForm.AddField("totalPoisonBerries", BazookaManager.Instance.GetGameStoreTotalPoisonBerries().ToString());
+        dataForm.AddField("totalSlowBerries", BazookaManager.Instance.GetGameStoreTotalSlowBerries().ToString());
+        dataForm.AddField("totalUltraBerries", BazookaManager.Instance.GetGameStoreTotalUltraBerries().ToString());
+        dataForm.AddField("totalSpeedyBerries", BazookaManager.Instance.GetGameStoreTotalSpeedyBerries().ToString());
+        dataForm.AddField("totalAttempts", BazookaManager.Instance.GetGameStoreTotalAttepts().ToString());
+        dataForm.AddField("birdR", BazookaManager.Instance.GetColorSettingIcon()[0].ToString());
+        dataForm.AddField("birdG", BazookaManager.Instance.GetColorSettingIcon()[1].ToString());
+        dataForm.AddField("birdB", BazookaManager.Instance.GetColorSettingIcon()[2].ToString());
+        dataForm.AddField("overlayR", BazookaManager.Instance.GetColorSettingOverlay()[0].ToString());
+        dataForm.AddField("overlayG", BazookaManager.Instance.GetColorSettingOverlay()[1].ToString());
+        dataForm.AddField("overlayB", BazookaManager.Instance.GetColorSettingOverlay()[2].ToString());
         using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "saveAccount.php", dataForm.GetWWWForm());
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
@@ -104,8 +106,8 @@ public class AccountLoggedIn : MonoBehaviour
         loggedInLoadButton.interactable = false;
         loggedInSaveButton.interactable = false;
         EncryptedWWWForm dataForm = new();
-        dataForm.AddField("userName", PlayerPrefs.GetString("userName", ""));
-        dataForm.AddField("gameSession", PlayerPrefs.GetString("gameSession", ""));
+        dataForm.AddField("userName", BazookaManager.Instance.GetAccountName());
+        dataForm.AddField("gameSession", BazookaManager.Instance.GetAccountSession());
         using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "loadAccount.php", dataForm.GetWWWForm());
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
@@ -138,17 +140,25 @@ public class AccountLoggedIn : MonoBehaviour
                 var split = response.Split(":");
                 if (split[0] == "1")
                 {
-                    PlayerPrefs.SetString("HighScoreV2", split[1]);
-                    PlayerPrefs.SetInt("icon", int.Parse(split[2]));
-                    PlayerPrefs.SetInt("overlay", int.Parse(split[3]));
-                    PlayerPrefs.SetString("TotalNormalBerries", split[4]);
-                    PlayerPrefs.SetString("TotalPoisonBerries", split[5]);
-                    PlayerPrefs.SetString("TotalSlowBerries", split[6]);
-                    PlayerPrefs.SetString("TotalUltraBerries", split[7]);
-                    PlayerPrefs.SetString("TotalSpeedyBerries", split[8]);
-                    PlayerPrefs.SetString("TotalAttempts", split[9]);
-                    PlayerPrefs.SetString("BirdColor", $"{split[10]};{split[11]};{split[12]}");
-                    PlayerPrefs.SetString("OverlayColor", $"{split[13]};{split[14]};{split[15]}");
+                    BazookaManager.Instance.SetGameStoreHighScore(BigInteger.Parse(split[1]));
+                    BazookaManager.Instance.SetBirdIcon(int.Parse(split[2]));
+                    BazookaManager.Instance.SetBirdOverlay(int.Parse(split[3]));
+                    BazookaManager.Instance.SetGameStoreTotalNormalBerries(BigInteger.Parse(split[4]));
+                    BazookaManager.Instance.SetGameStoreTotalPoisonBerries(BigInteger.Parse(split[5]));
+                    BazookaManager.Instance.SetGameStoreTotalSlowBerries(BigInteger.Parse(split[6]));
+                    BazookaManager.Instance.SetGameStoreTotalUltraBerries(BigInteger.Parse(split[7]));
+                    BazookaManager.Instance.SetGameStoreTotalSpeedyBerries(BigInteger.Parse(split[8]));
+                    BazookaManager.Instance.SetGameStoreTotalAttepts(BigInteger.Parse(split[9]));
+                    BazookaManager.Instance.SetColorSettingIcon(new JArray(
+                        int.Parse(split[10]),
+                        int.Parse(split[11]),
+                        int.Parse(split[12])
+                    ));
+                    BazookaManager.Instance.SetColorSettingOverlay(new JArray(
+                        int.Parse(split[13]),
+                        int.Parse(split[14]),
+                        int.Parse(split[15])
+                    ));
                     AccountHandler.UpdateStatusText(loggedInText, "Loaded account data", Color.green);
                 }
                 else

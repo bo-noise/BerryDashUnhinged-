@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -78,7 +79,7 @@ public class LeaderboardsMenu : MonoBehaviour
                 berryPanel.SetActive(false);
                 break;
             case 1:
-                refreshButton.transform.localPosition = new Vector2(-402.5f, -282.33f);
+                refreshButton.transform.localPosition = new UnityEngine.Vector2(-402.5f, -282.33f);
                 refreshButton.gameObject.SetActive(true);
                 GetTopPlayersScore();
                 selectionPanel.SetActive(false);
@@ -86,7 +87,7 @@ public class LeaderboardsMenu : MonoBehaviour
                 berryPanel.SetActive(false);
                 break;
             case 2:
-                refreshButton.transform.localPosition = new Vector2(402.5f, 282.33f);
+                refreshButton.transform.localPosition = new UnityEngine.Vector2(402.5f, 282.33f);
                 refreshButton.gameObject.SetActive(true);
                 berryShowTypeDropdown.value = 0;
                 GetTopPlayersBerry(0);
@@ -165,6 +166,12 @@ public class LeaderboardsMenu : MonoBehaviour
                     var playerOverlayIcon = playerIcon.transform.GetChild(0).GetComponent<Image>();
                     var highScoreText = entryInfo.transform.GetChild(1).GetComponent<TMP_Text>();
 
+                    if (BazookaManager.Instance.GetAccountID() == BigInteger.Parse(uid))
+                    {
+                        usernameText.color = Color.aquamarine;
+                        highScoreText.color = Color.aquamarine;
+                    }
+
                     usernameText.text = $"{username} (#{i + 1})";
                     highScoreText.text += Tools.FormatWithCommas(highScore);
                     playerIcon.sprite = Resources.Load<Sprite>("Icons/Icons/bird_" + icon);
@@ -179,15 +186,15 @@ public class LeaderboardsMenu : MonoBehaviour
                     }
                     else if (overlay == "8")
                     {
-                        playerOverlayIcon.transform.localPosition = new Vector2(-16.56f, 14.81f);
+                        playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.56f, 14.81f);
                     }
                     else if (overlay == "11")
                     {
-                        playerOverlayIcon.transform.localPosition = new Vector2(-14.74451f, 20.39122f);
+                        playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-14.74451f, 20.39122f);
                     }
                     else if (overlay == "13")
                     {
-                        playerOverlayIcon.transform.localPosition = new Vector2(-16.54019f, 14.70365f);
+                        playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.54019f, 14.70365f);
                     }
                     try
                     {
@@ -281,6 +288,12 @@ public class LeaderboardsMenu : MonoBehaviour
                     var playerOverlayIcon = playerIcon.transform.GetChild(0).GetComponent<Image>();
                     var highScoreText = entryInfo.transform.GetChild(1).GetComponent<TMP_Text>();
 
+                    if (BazookaManager.Instance.GetAccountID() == BigInteger.Parse(uid))
+                    {
+                        usernameText.color = Color.aquamarine;
+                        highScoreText.color = Color.aquamarine;
+                    }
+
                     usernameText.text = $"{username} (#{i + 1})";
                     highScoreText.text += Tools.FormatWithCommas(highScore);
                     playerIcon.sprite = Resources.Load<Sprite>("Icons/Icons/bird_" + icon);
@@ -295,15 +308,15 @@ public class LeaderboardsMenu : MonoBehaviour
                     }
                     else if (overlay == "8")
                     {
-                        playerOverlayIcon.transform.localPosition = new Vector2(-16.56f, 14.81f);
+                        playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.56f, 14.81f);
                     }
                     else if (overlay == "11")
                     {
-                        playerOverlayIcon.transform.localPosition = new Vector2(-14.74451f, 20.39122f);
+                        playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-14.74451f, 20.39122f);
                     }
                     else if (overlay == "13")
                     {
-                        playerOverlayIcon.transform.localPosition = new Vector2(-16.54019f, 14.70365f);
+                        playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.54019f, 14.70365f);
                     }
                     try
                     {

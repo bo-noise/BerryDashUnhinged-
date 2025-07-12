@@ -1,12 +1,22 @@
 using UnityEngine;
 
-public class HideIfSettingFalse : MonoBehaviour
-{
-    public string setting;
+public class HideIfSettingFalse : MonoBehaviour {
+    public BazookaSetting setting;
     public bool reverse;
 
-    void Awake()
-    {
-        gameObject.SetActive(PlayerPrefs.GetInt(setting, 0) == (reverse ? 0 : 1));
+    void Start() {
+        bool value = GetSettingValue(setting);
+        gameObject.SetActive(value == !reverse);
+    }
+
+    bool GetSettingValue(BazookaSetting s) {
+        var b = BazookaManager.Instance;
+        return s switch {
+            BazookaSetting.FullScreen => b.GetSettingFullScreen() ?? false,
+            BazookaSetting.ShowFPS => b.GetSettingShowFPS(),
+            BazookaSetting.Vsync => b.GetSettingVsync() ?? false,
+            BazookaSetting.HideSocials => b.GetSettingHideSocials() ?? false,
+            _ => false
+        };
     }
 }

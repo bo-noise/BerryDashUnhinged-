@@ -1,4 +1,5 @@
 using System.Numerics;
+using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -27,10 +28,15 @@ public class AccountLogin : MonoBehaviour
 
     async void SubmitLogin()
     {
+        if (loginUsernameInput.text == string.Empty || loginPasswordInput.text == string.Empty)
+        {
+            AccountHandler.UpdateStatusText(loginPanelStatusText, "All input fields must be filled", Color.red);
+            return;
+        }
         EncryptedWWWForm dataForm = new();
         dataForm.AddField("username", loginUsernameInput.text);
         dataForm.AddField("password", loginPasswordInput.text);
-        dataForm.AddField("currentHighScore", PlayerPrefs.GetString("HighScoreV2", "0"));
+        dataForm.AddField("currentHighScore", BazookaManager.Instance.GetGameStoreHighScore().ToString());
         dataForm.AddField("loginType", "0");
         using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "loginAccount.php", dataForm.GetWWWForm());
         request.SetRequestHeader("Requester", "BerryDashClient");
@@ -63,39 +69,32 @@ public class AccountLogin : MonoBehaviour
             AccountHandler.UpdateStatusText(loginPanelStatusText, "Can't send requests on self-built instance", Color.red);
             return;
         }
-        else if (response == "-1")
-        {
-            AccountHandler.UpdateStatusText(loginPanelStatusText, "Incorrect username or password", Color.red);
-        }
-        else if (response.Split(":")[0] == "1")
-        {
-            string[] array = response.Split(':');
-            string session = array[1];
-            string userName = array[2];
-            int userId = int.Parse(array[3]);
-            BigInteger highScore = BigInteger.Parse(array[4]);
-            int iconId = int.Parse(array[5]);
-            int overlayId = int.Parse(array[6]);
-            PlayerPrefs.SetString("gameSession", session);
-            PlayerPrefs.SetString("userName", userName);
-            PlayerPrefs.SetInt("userId", userId);
-            PlayerPrefs.SetString("HighScoreV2", highScore.ToString());
-            PlayerPrefs.SetInt("icon", iconId);
-            PlayerPrefs.SetInt("overlay", overlayId);
-            PlayerPrefs.SetString("TotalNormalBerries", array[7]);
-            PlayerPrefs.SetString("TotalPoisonBerries", array[8]);
-            PlayerPrefs.SetString("TotalSlowBerries", array[9]);
-            PlayerPrefs.SetString("TotalUltraBerries", array[10]);
-            PlayerPrefs.SetString("TotalSpeedyBerries", array[11]);
-            PlayerPrefs.SetString("TotalAttempts", array[12]);
-            PlayerPrefs.SetString("BirdColor", $"{array[13]};{array[14]};{array[15]}");
-            PlayerPrefs.SetString("OverlayColor", $"{array[16]};{array[17]};{array[18]}");
-            AccountHandler.instance.SwitchPanel(0);
-            AccountHandler.UpdateStatusText(loginPanelStatusText, "", Color.red);
-        }
         else
         {
-            AccountHandler.UpdateStatusText(loginPanelStatusText, "Unknown server response", Color.red);
+            var jsonResponse = JObject.Parse(response);
+            if ((bool)jsonResponse["success"])
+            {
+                BazookaManager.Instance.SetAccountSession((string)jsonResponse["data"]["session"]);
+                BazookaManager.Instance.SetAccountName((string)jsonResponse["data"]["username"]);
+                BazookaManager.Instance.SetAccountID(BigInteger.Parse((string)jsonResponse["data"]["userid"]));
+                BazookaManager.Instance.SetGameStoreHighScore(BigInteger.Parse((string)jsonResponse["data"]["highscore"]));
+                BazookaManager.Instance.SetBirdIcon((int)jsonResponse["data"]["icon"]);
+                BazookaManager.Instance.SetBirdOverlay((int)jsonResponse["data"]["overlay"]);
+                BazookaManager.Instance.SetGameStoreTotalNormalBerries(BigInteger.Parse((string)jsonResponse["data"]["totalNormalBerries"]));
+                BazookaManager.Instance.SetGameStoreTotalPoisonBerries(BigInteger.Parse((string)jsonResponse["data"]["totalPoisonBerries"]));
+                BazookaManager.Instance.SetGameStoreTotalSlowBerries(BigInteger.Parse((string)jsonResponse["data"]["totalSlowBerries"]));
+                BazookaManager.Instance.SetGameStoreTotalUltraBerries(BigInteger.Parse((string)jsonResponse["data"]["totalUltraBerries"]));
+                BazookaManager.Instance.SetGameStoreTotalSpeedyBerries(BigInteger.Parse((string)jsonResponse["data"]["totalSpeedyBerries"]));
+                BazookaManager.Instance.SetGameStoreTotalAttepts(BigInteger.Parse((string)jsonResponse["data"]["totalAttempts"]));
+                BazookaManager.Instance.SetColorSettingIcon(JArray.Parse(jsonResponse["data"]["birdColor"].ToString()));
+                BazookaManager.Instance.SetColorSettingOverlay(JArray.Parse(jsonResponse["data"]["overlayColor"].ToString()));
+                AccountHandler.instance.SwitchPanel(0);
+                AccountHandler.UpdateStatusText(loginPanelStatusText, "", Color.red);
+            }
+            else
+            {
+                AccountHandler.UpdateStatusText(loginPanelStatusText, (string)jsonResponse["message"], Color.red);
+            }
         }
     }
 }
