@@ -60,6 +60,7 @@ public class ChatroomMenu : MonoBehaviour
         EncryptedWWWForm dataForm = new();
         dataForm.AddField("content", text);
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
+        dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
         using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "sendChatroomMessage.php", dataForm.GetWWWForm());
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
