@@ -34,12 +34,13 @@ public class GamePlayer : MonoBehaviour
     private float nextUpdate;
     private float fps;
     public SpriteRenderer overlayRender;
-    public GameObject leftArrow;
-    public GameObject rightArrow;
-    public GameObject jumpArrow;
-    public GameObject restartButton;
-    public GameObject backButton;
-    public float lastMoveTime;
+    private GameObject leftArrow;
+    private GameObject rightArrow;
+    private GameObject jumpArrow;
+    private GameObject restartButton;
+    private GameObject backButton;
+    private float lastMoveTime;
+    public GameObject berryParent;
 
     void Start()
     {
@@ -347,47 +348,36 @@ public class GamePlayer : MonoBehaviour
         float spawnProbability = Random.value;
         if (!pausePanel.activeSelf)
         {
-            GameObject newBerry;
-            SpriteRenderer spriteRenderer;
+            GameObject newBerry = new("Berry");
+            newBerry.transform.SetParent(berryParent.transform);
+            SpriteRenderer spriteRenderer = newBerry.AddComponent<SpriteRenderer>();
             if (spawnProbability <= 0.6f)
             {
-                newBerry = new GameObject("Berry");
-                spriteRenderer = newBerry.AddComponent<SpriteRenderer>();
                 spriteRenderer.sprite = Resources.Load<Sprite>("Berries/Berry");
                 newBerry.tag = "NormalBerry";
             }
             else if (spawnProbability <= 0.65f)
             {
-                newBerry = new GameObject("PoisonBerry");
-                spriteRenderer = newBerry.AddComponent<SpriteRenderer>();
                 spriteRenderer.sprite = Resources.Load<Sprite>("Berries/PoisonBerry");
                 newBerry.tag = "PoisonBerry";
             }
             else if (spawnProbability <= 0.75f)
             {
-                newBerry = new GameObject("SlowBerry");
-                spriteRenderer = newBerry.AddComponent<SpriteRenderer>();
                 spriteRenderer.sprite = Resources.Load<Sprite>("Berries/SlowBerry");
                 newBerry.tag = "SlowBerry";
             }
             else if (spawnProbability <= 0.85f)
             {
-                newBerry = new GameObject("UltraBerry");
-                spriteRenderer = newBerry.AddComponent<SpriteRenderer>();
                 spriteRenderer.sprite = Resources.Load<Sprite>("Berries/UltraBerry");
                 newBerry.tag = "UltraBerry";
             }
             else if (spawnProbability <= 0.95f)
             {
-                newBerry = new GameObject("SpeedyBerry");
-                spriteRenderer = newBerry.AddComponent<SpriteRenderer>();
                 spriteRenderer.sprite = Resources.Load<Sprite>("Berries/SpeedyBerry");
                 newBerry.tag = "SpeedyBerry";
             }
             else
             {
-                newBerry = new GameObject("CoinBerry");
-                spriteRenderer = newBerry.AddComponent<SpriteRenderer>();
                 spriteRenderer.sprite = Resources.Load<Sprite>("Berries/CoinBerry");
                 newBerry.tag = "CoinBerry";
             }
