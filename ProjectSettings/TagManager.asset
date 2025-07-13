@@ -9,6 +9,7 @@ TagManager:
   - SlowBerry
   - UltraBerry
   - SpeedyBerry
+  - CoinBerry
   layers:
   - Default
   - TransparentFX

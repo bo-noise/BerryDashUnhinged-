@@ -355,33 +355,40 @@ public class GamePlayer : MonoBehaviour
                 spriteRenderer.sprite = Resources.Load<Sprite>("Berries/Berry");
                 newBerry.tag = "Berry";
             }
-            else if (spawnProbability <= 0.7f)
+            else if (spawnProbability <= 0.65f)
             {
                 newBerry = new GameObject("PoisonBerry");
                 spriteRenderer = newBerry.AddComponent<SpriteRenderer>();
                 spriteRenderer.sprite = Resources.Load<Sprite>("Berries/PoisonBerry");
                 newBerry.tag = "PoisonBerry";
             }
-            else if (spawnProbability <= 0.8f)
+            else if (spawnProbability <= 0.75f)
             {
                 newBerry = new GameObject("SlowBerry");
                 spriteRenderer = newBerry.AddComponent<SpriteRenderer>();
                 spriteRenderer.sprite = Resources.Load<Sprite>("Berries/SlowBerry");
                 newBerry.tag = "SlowBerry";
             }
-            else if (spawnProbability <= 0.9f)
+            else if (spawnProbability <= 0.85f)
             {
                 newBerry = new GameObject("UltraBerry");
                 spriteRenderer = newBerry.AddComponent<SpriteRenderer>();
                 spriteRenderer.sprite = Resources.Load<Sprite>("Berries/UltraBerry");
                 newBerry.tag = "UltraBerry";
             }
-            else
+            else if (spawnProbability <= 0.95f)
             {
                 newBerry = new GameObject("SpeedyBerry");
                 spriteRenderer = newBerry.AddComponent<SpriteRenderer>();
                 spriteRenderer.sprite = Resources.Load<Sprite>("Berries/SpeedyBerry");
                 newBerry.tag = "SpeedyBerry";
+            }
+            else
+            {
+                newBerry = new GameObject("CoinBerry");
+                spriteRenderer = newBerry.AddComponent<SpriteRenderer>();
+                spriteRenderer.sprite = Resources.Load<Sprite>("Berries/CoinBerry");
+                newBerry.tag = "CoinBerry";
             }
             spriteRenderer.sortingOrder = -5;
 
@@ -427,6 +434,7 @@ public class GamePlayer : MonoBehaviour
         GameObject[] ultraberries = GameObject.FindGameObjectsWithTag("UltraBerry");
         GameObject[] slownessberries = GameObject.FindGameObjectsWithTag("SlowBerry");
         GameObject[] speedyberries = GameObject.FindGameObjectsWithTag("SpeedyBerry");
+        GameObject[] coinberries = GameObject.FindGameObjectsWithTag("CoinBerry");
         if (!pausePanel.activeSelf)
         {
             if (Time.time - lastMoveTime > 20)
@@ -569,6 +577,26 @@ public class GamePlayer : MonoBehaviour
                     gameObject10.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -4f);
                 }
             }
+            array5 = coinberries;
+            foreach (GameObject gameObject11 in array5)
+            {
+                if (gameObject11.transform.position.y < 0f - Camera.main.orthographicSize - 1f)
+                {
+                    Destroy(gameObject11);
+                }
+                else if (UnityEngine.Vector3.Distance(bird.transform.position, gameObject11.transform.position) < 1.5f)
+                {
+                    Destroy(gameObject11);
+                }
+                if (speedyLeft > 0)
+                {
+                    gameObject11.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -7.5f);
+                }
+                else
+                {
+                    gameObject11.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -4f);
+                }
+            }
         }
         else
         {
@@ -622,6 +650,7 @@ public class GamePlayer : MonoBehaviour
         GameObject[] ultraberries = GameObject.FindGameObjectsWithTag("UltraBerry");
         GameObject[] slownessberries = GameObject.FindGameObjectsWithTag("SlowBerry");
         GameObject[] speedyberries = GameObject.FindGameObjectsWithTag("SpeedyBerry");
+        GameObject[] coinberries = GameObject.FindGameObjectsWithTag("CoinBerry");
 
         foreach (GameObject b in berries)
         {
@@ -642,6 +671,10 @@ public class GamePlayer : MonoBehaviour
         foreach (GameObject syb in speedyberries)
         {
             Destroy(syb);
+        }
+        foreach (GameObject cb in coinberries)
+        {
+            Destroy(cb);
         }
     }
 
