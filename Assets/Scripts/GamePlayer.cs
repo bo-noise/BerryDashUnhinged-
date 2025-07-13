@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System.Linq;
+using System.Numerics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -353,7 +354,7 @@ public class GamePlayer : MonoBehaviour
                 newBerry = new GameObject("Berry");
                 spriteRenderer = newBerry.AddComponent<SpriteRenderer>();
                 spriteRenderer.sprite = Resources.Load<Sprite>("Berries/Berry");
-                newBerry.tag = "Berry";
+                newBerry.tag = "NormalBerry";
             }
             else if (spawnProbability <= 0.65f)
             {
@@ -429,12 +430,13 @@ public class GamePlayer : MonoBehaviour
                 backButton.transform.localScale = new UnityEngine.Vector3(screenWidth / 14f, screenWidth / 14f, 1f);
             }
         }
-        GameObject[] berries = GameObject.FindGameObjectsWithTag("Berry");
-        GameObject[] poisonberries = GameObject.FindGameObjectsWithTag("PoisonBerry");
-        GameObject[] ultraberries = GameObject.FindGameObjectsWithTag("UltraBerry");
-        GameObject[] slownessberries = GameObject.FindGameObjectsWithTag("SlowBerry");
-        GameObject[] speedyberries = GameObject.FindGameObjectsWithTag("SpeedyBerry");
-        GameObject[] coinberries = GameObject.FindGameObjectsWithTag("CoinBerry");
+        GameObject[] normalBerries = GameObject.FindGameObjectsWithTag("NormalBerry");
+        GameObject[] poisonBerries = GameObject.FindGameObjectsWithTag("PoisonBerry");
+        GameObject[] slowBerries = GameObject.FindGameObjectsWithTag("SlowBerry");
+        GameObject[] ultraBerries = GameObject.FindGameObjectsWithTag("UltraBerry");
+        GameObject[] speedyBerries = GameObject.FindGameObjectsWithTag("SpeedyBerry");
+        GameObject[] coinBerries = GameObject.FindGameObjectsWithTag("CoinBerry");
+
         if (!pausePanel.activeSelf)
         {
             if (Time.time - lastMoveTime > 20)
@@ -443,37 +445,35 @@ public class GamePlayer : MonoBehaviour
                 EnablePause();
             }
             CheckIfGrounded();
-            GameObject[] array5 = berries;
-            foreach (GameObject berry in array5)
+            foreach (GameObject normalBerry in normalBerries)
             {
-                if (berry.transform.position.y < 0f - Camera.main.orthographicSize - 1f)
+                if (normalBerry.transform.position.y < 0f - Camera.main.orthographicSize - 1f)
                 {
-                    Destroy(berry);
+                    Destroy(normalBerry);
                 }
-                else if (UnityEngine.Vector3.Distance(bird.transform.position, berry.transform.position) < 1.5f)
+                else if (UnityEngine.Vector3.Distance(bird.transform.position, normalBerry.transform.position) < 1.5f)
                 {
                     AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/Eat"), Camera.main.transform.position, 1.2f * BazookaManager.Instance.GetSettingSFXVolume());
-                    Destroy(berry);
+                    Destroy(normalBerry);
                     totalNormalBerries++;
                     UpdateStats(1, 0);
                 }
                 if (speedyLeft > 0)
                 {
-                    berry.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -7.5f);
+                    normalBerry.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -7.5f);
                 }
                 else
                 {
-                    berry.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -4f);
+                    normalBerry.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -4f);
                 }
             }
-            array5 = poisonberries;
-            foreach (GameObject gameObject7 in array5)
+            foreach (GameObject poisonBerry in poisonBerries)
             {
-                if (gameObject7.transform.position.y < 0f - Camera.main.orthographicSize - 1f)
+                if (poisonBerry.transform.position.y < 0f - Camera.main.orthographicSize - 1f)
                 {
-                    Destroy(gameObject7);
+                    Destroy(poisonBerry);
                 }
-                else if (UnityEngine.Vector3.Distance(bird.transform.position, gameObject7.transform.position) < 1.5f)
+                else if (UnityEngine.Vector3.Distance(bird.transform.position, poisonBerry.transform.position) < 1.5f)
                 {
                     AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/Death"), Camera.main.transform.position, 1.2f * BazookaManager.Instance.GetSettingSFXVolume());
                     Respawn();
@@ -482,24 +482,51 @@ public class GamePlayer : MonoBehaviour
                 }
                 if (speedyLeft > 0)
                 {
-                    gameObject7.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -7.5f);
+                    poisonBerry.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -7.5f);
                 }
                 else
                 {
-                    gameObject7.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -4f);
+                    poisonBerry.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -4f);
                 }
             }
-            array5 = ultraberries;
-            foreach (GameObject gameObject8 in array5)
+            foreach (GameObject slowBerry in slowBerries)
             {
-                if (gameObject8.transform.position.y < 0f - Camera.main.orthographicSize - 1f)
+                if (slowBerry.transform.position.y < 0f - Camera.main.orthographicSize - 1f)
                 {
-                    Destroy(gameObject8);
+                    Destroy(slowBerry);
                 }
-                else if (UnityEngine.Vector3.Distance(bird.transform.position, gameObject8.transform.position) < 1.5f)
+                else if (UnityEngine.Vector3.Distance(bird.transform.position, slowBerry.transform.position) < 1.5f)
+                {
+                    AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/Downgrade"), Camera.main.transform.position, 0.35f * BazookaManager.Instance.GetSettingSFXVolume());
+                    Destroy(slowBerry);
+                    boostLeft = 0f;
+                    slownessLeft = 10f;
+                    speedyLeft = 0f;
+                    totalSlowBerries++;
+                    if (score > 0)
+                    {
+                        UpdateStats(-1, 0);
+                    }
+                }
+                if (speedyLeft > 0)
+                {
+                    slowBerry.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -7.5f);
+                }
+                else
+                {
+                    slowBerry.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -4f);
+                }
+            }
+            foreach (GameObject ultraBerry in ultraBerries)
+            {
+                if (ultraBerry.transform.position.y < 0f - Camera.main.orthographicSize - 1f)
+                {
+                    Destroy(ultraBerry);
+                }
+                else if (UnityEngine.Vector3.Distance(bird.transform.position, ultraBerry.transform.position) < 1.5f)
                 {
                     AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/Powerup"), Camera.main.transform.position, 0.35f * BazookaManager.Instance.GetSettingSFXVolume());
-                    Destroy(gameObject8);
+                    Destroy(ultraBerry);
                     totalUltraBerries++;
                     speedyLeft = 0f;
                     if (slownessLeft > 0f)
@@ -515,53 +542,23 @@ public class GamePlayer : MonoBehaviour
                 }
                 if (speedyLeft > 0)
                 {
-                    gameObject8.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -7.5f);
+                    ultraBerry.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -7.5f);
                 }
                 else
                 {
-                    gameObject8.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -4f);
+                    ultraBerry.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -4f);
                 }
             }
-            array5 = slownessberries;
-            foreach (GameObject gameObject9 in array5)
+            foreach (GameObject speedyBerry in speedyBerries)
             {
-                if (gameObject9.transform.position.y < 0f - Camera.main.orthographicSize - 1f)
+                if (speedyBerry.transform.position.y < 0f - Camera.main.orthographicSize - 1f)
                 {
-                    Destroy(gameObject9);
+                    Destroy(speedyBerry);
                 }
-                else if (UnityEngine.Vector3.Distance(bird.transform.position, gameObject9.transform.position) < 1.5f)
-                {
-                    AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/Downgrade"), Camera.main.transform.position, 0.35f * BazookaManager.Instance.GetSettingSFXVolume());
-                    Destroy(gameObject9);
-                    boostLeft = 0f;
-                    slownessLeft = 10f;
-                    speedyLeft = 0f;
-                    totalSlowBerries++;
-                    if (score > 0)
-                    {
-                        UpdateStats(-1, 0);
-                    }
-                }
-                if (speedyLeft > 0)
-                {
-                    gameObject9.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -7.5f);
-                }
-                else
-                {
-                    gameObject9.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -4f);
-                }
-            }
-            array5 = speedyberries;
-            foreach (GameObject gameObject10 in array5)
-            {
-                if (gameObject10.transform.position.y < 0f - Camera.main.orthographicSize - 1f)
-                {
-                    Destroy(gameObject10);
-                }
-                else if (UnityEngine.Vector3.Distance(bird.transform.position, gameObject10.transform.position) < 1.5f)
+                else if (UnityEngine.Vector3.Distance(bird.transform.position, speedyBerry.transform.position) < 1.5f)
                 {
                     AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/SpeedyPowerup"), Camera.main.transform.position, 0.35f * BazookaManager.Instance.GetSettingSFXVolume());
-                    Destroy(gameObject10);
+                    Destroy(speedyBerry);
                     boostLeft = 0f;
                     slownessLeft = 0f;
                     speedyLeft = 10f;
@@ -570,31 +567,30 @@ public class GamePlayer : MonoBehaviour
                 }
                 if (speedyLeft > 0)
                 {
-                    gameObject10.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -7.5f);
+                    speedyBerry.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -7.5f);
                 }
                 else
                 {
-                    gameObject10.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -4f);
+                    speedyBerry.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -4f);
                 }
             }
-            array5 = coinberries;
-            foreach (GameObject gameObject11 in array5)
+            foreach (GameObject coinBerry in coinBerries)
             {
-                if (gameObject11.transform.position.y < 0f - Camera.main.orthographicSize - 1f)
+                if (coinBerry.transform.position.y < 0f - Camera.main.orthographicSize - 1f)
                 {
-                    Destroy(gameObject11);
+                    Destroy(coinBerry);
                 }
-                else if (UnityEngine.Vector3.Distance(bird.transform.position, gameObject11.transform.position) < 1.5f)
+                else if (UnityEngine.Vector3.Distance(bird.transform.position, coinBerry.transform.position) < 1.5f)
                 {
-                    Destroy(gameObject11);
+                    Destroy(coinBerry);
                 }
                 if (speedyLeft > 0)
                 {
-                    gameObject11.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -7.5f);
+                    coinBerry.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -7.5f);
                 }
                 else
                 {
-                    gameObject11.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -4f);
+                    coinBerry.GetComponent<Rigidbody2D>().linearVelocity = new UnityEngine.Vector2(0f, -4f);
                 }
             }
         }
@@ -602,30 +598,16 @@ public class GamePlayer : MonoBehaviour
         {
             rb.gravityScale = 0f;
             rb.linearVelocity = UnityEngine.Vector2.zero;
-            GameObject[] array5 = berries;
-            for (int i = 0; i < array5.Length; i++)
+            GameObject[] allberries = normalBerries
+                .Concat(poisonBerries)
+                .Concat(slowBerries)
+                .Concat(ultraBerries)
+                .Concat(speedyBerries)
+                .Concat(coinBerries)
+                .ToArray();
+            foreach (GameObject berry in allberries)
             {
-                array5[i].GetComponent<Rigidbody2D>().linearVelocity = UnityEngine.Vector2.zero;
-            }
-            array5 = poisonberries;
-            for (int i = 0; i < array5.Length; i++)
-            {
-                array5[i].GetComponent<Rigidbody2D>().linearVelocity = UnityEngine.Vector2.zero;
-            }
-            array5 = ultraberries;
-            for (int i = 0; i < array5.Length; i++)
-            {
-                array5[i].GetComponent<Rigidbody2D>().linearVelocity = UnityEngine.Vector2.zero;
-            }
-            array5 = slownessberries;
-            for (int i = 0; i < array5.Length; i++)
-            {
-                array5[i].GetComponent<Rigidbody2D>().linearVelocity = UnityEngine.Vector2.zero;
-            }
-            array5 = speedyberries;
-            for (int i = 0; i < array5.Length; i++)
-            {
-                array5[i].GetComponent<Rigidbody2D>().linearVelocity = UnityEngine.Vector2.zero;
+                berry.GetComponent<Rigidbody2D>().linearVelocity = UnityEngine.Vector2.zero;
             }
         }
         if (!Application.isMobilePlatform && (Keyboard.current.escapeKey.wasPressedThisFrame || (Gamepad.current != null && (Gamepad.current.startButton.wasPressedThisFrame || Gamepad.current.buttonEast.wasPressedThisFrame))))
@@ -645,36 +627,17 @@ public class GamePlayer : MonoBehaviour
         slownessLeft = 0f;
         speedyLeft = 0f;
         UpdateStats(0, 1);
-        GameObject[] berries = GameObject.FindGameObjectsWithTag("Berry");
-        GameObject[] poisonberries = GameObject.FindGameObjectsWithTag("PoisonBerry");
-        GameObject[] ultraberries = GameObject.FindGameObjectsWithTag("UltraBerry");
-        GameObject[] slownessberries = GameObject.FindGameObjectsWithTag("SlowBerry");
-        GameObject[] speedyberries = GameObject.FindGameObjectsWithTag("SpeedyBerry");
-        GameObject[] coinberries = GameObject.FindGameObjectsWithTag("CoinBerry");
 
-        foreach (GameObject b in berries)
+        GameObject[] allberries = GameObject.FindGameObjectsWithTag("NormalBerry")
+            .Concat(GameObject.FindGameObjectsWithTag("PoisonBerry"))
+            .Concat(GameObject.FindGameObjectsWithTag("SlowBerry"))
+            .Concat(GameObject.FindGameObjectsWithTag("UltraBerry"))
+            .Concat(GameObject.FindGameObjectsWithTag("SpeedyBerry"))
+            .Concat(GameObject.FindGameObjectsWithTag("CoinBerry"))
+            .ToArray();
+        foreach (GameObject berry in allberries)
         {
-            Destroy(b);
-        }
-        foreach (GameObject pb in poisonberries)
-        {
-            Destroy(pb);
-        }
-        foreach (GameObject ub in ultraberries)
-        {
-            Destroy(ub);
-        }
-        foreach (GameObject sb in slownessberries)
-        {
-            Destroy(sb);
-        }
-        foreach (GameObject syb in speedyberries)
-        {
-            Destroy(syb);
-        }
-        foreach (GameObject cb in coinberries)
-        {
-            Destroy(cb);
+            Destroy(berry);
         }
     }
 
