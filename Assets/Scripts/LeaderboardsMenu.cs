@@ -194,8 +194,8 @@ public class LeaderboardsMenu : MonoBehaviour
                     }
                     try
                     {
-                        playerIcon.color = new Color((int)birdColor[0] / 255f, (int)birdColor[1] / 255f, (int)birdColor[2] / 255f, 1f);
-                        playerOverlayIcon.color =  new Color((int)overlayColor[0] / 255f, (int)overlayColor[1] / 255f, (int)overlayColor[2] / 255f, 1f);
+                        playerIcon.color = new Color((int)birdColor[0] / 255f, (int)birdColor[1] / 255f, (int)birdColor[2] / 255f);
+                        playerOverlayIcon.color = new Color((int)overlayColor[0] / 255f, (int)overlayColor[1] / 255f, (int)overlayColor[2] / 255f);
                     }
                     catch (Exception)
                     {
@@ -311,8 +311,8 @@ public class LeaderboardsMenu : MonoBehaviour
                     }
                     try
                     {
-                        playerIcon.color = new Color((int)birdColor[0] / 255f, (int)birdColor[1] / 255f, (int)birdColor[2] / 255f, 1f);
-                        playerOverlayIcon.color =  new Color((int)overlayColor[0] / 255f, (int)overlayColor[1] / 255f, (int)overlayColor[2] / 255f, 1f);
+                        playerIcon.color = new Color((int)birdColor[0] / 255f, (int)birdColor[1] / 255f, (int)birdColor[2] / 255f);
+                        playerOverlayIcon.color = new Color((int)overlayColor[0] / 255f, (int)overlayColor[1] / 255f, (int)overlayColor[2] / 255f);
                     }
                     catch (Exception)
                     {
