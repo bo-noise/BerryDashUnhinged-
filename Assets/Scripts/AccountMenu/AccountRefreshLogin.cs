@@ -1,4 +1,5 @@
 using System.Numerics;
+using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -61,25 +62,21 @@ public class AccountRefreshLogin : MonoBehaviour
             AccountHandler.UpdateStatusText(refreshLoginStatusText, "Can't send requests on self-built instance", Color.red);
             return;
         }
-        else if (response == "-1")
-        {
-            AccountHandler.UpdateStatusText(refreshLoginStatusText, "Incorrect username or password", Color.red);
-        }
-        else if (response.Split(":")[0] == "1")
-        {
-            string[] array = response.Split(':');
-            string session = array[1];
-            string userName = array[2];
-            BigInteger userId = BigInteger.Parse(array[3]);
-            BazookaManager.Instance.SetAccountSession(session);
-            BazookaManager.Instance.SetAccountName(userName);
-            BazookaManager.Instance.SetAccountID(userId);
-            AccountHandler.instance.SwitchPanel(0);
-            AccountHandler.UpdateStatusText(refreshLoginStatusText, "", Color.red);
-        }
         else
         {
-            AccountHandler.UpdateStatusText(refreshLoginStatusText, "Unknown server response", Color.red);
+            var jsonResponse = JObject.Parse(response);
+            if ((bool)jsonResponse["success"])
+            {
+                BazookaManager.Instance.SetAccountSession((string)jsonResponse["data"]["session"]);
+                BazookaManager.Instance.SetAccountName((string)jsonResponse["data"]["username"]);
+                BazookaManager.Instance.SetAccountID(BigInteger.Parse((string)jsonResponse["data"]["userid"]));
+                AccountHandler.instance.SwitchPanel(0);
+                AccountHandler.UpdateStatusText(refreshLoginStatusText, "", Color.red);
+            }
+            else
+            {
+                AccountHandler.UpdateStatusText(refreshLoginStatusText, (string)jsonResponse["message"], Color.red);
+            }
         }
     }
 }
