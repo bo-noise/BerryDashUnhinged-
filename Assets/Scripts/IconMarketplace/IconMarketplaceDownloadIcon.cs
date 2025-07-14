@@ -70,8 +70,8 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
 
                 ImageUtil.RenderFromBase64(entry["data"].ToString(), newIcon.transform.GetChild(0).GetChild(0).GetComponent<Image>());
                 newIcon.transform.GetChild(1).GetComponent<TMP_Text>().text = "Bird Name: " + entry["name"].ToString();
-                newIcon.transform.GetChild(2).GetComponent<TMP_Text>().text = "Designer Name: " + entry["username"].ToString();
-                newIcon.transform.GetChild(3).GetComponent<TMP_Text>().text = "Price " + entry["price"].ToString() + " coin";
+                newIcon.transform.GetChild(2).GetComponent<TMP_Text>().text = "Price " + entry["price"].ToString() + " coin";
+                newIcon.transform.GetChild(3).GetComponent<TMP_Text>().text = "Designer Name: " + entry["username"].ToString();
                 newIcon.transform.GetChild(4).GetChild(0).GetComponent<TMP_Text>().text = "Purchase";
 
                 newIcon.SetActive(true);
