@@ -4123,6 +4123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac25b048bc0f6aded8697b98caef8382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  marketplaceManager: {fileID: 789608752}
   statusText: {fileID: 1732844199}
 --- !u!1 &1708620717
 GameObject:
@@ -5717,6 +5718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8133693b9ee6eec098e9cef8b719edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  marketplaceManager: {fileID: 789608752}
   statusText: {fileID: 1866125040}
   backButton: {fileID: 968417894}
   content: {fileID: 1517048288}

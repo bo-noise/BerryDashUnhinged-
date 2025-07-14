@@ -14,7 +14,7 @@ public class IconMarketplaceManager : MonoBehaviour
     public Button downloadButton;
     public Button uploadButton;
 
-    void Start()
+    void Awake()
     {
         downloadButton.onClick.AddListener(() => SwitchPanel(1));
 #if !UNITY_STANDALONE_OSX && !UNITY_STANDALONE_WIN && !UNITY_STANDALONE_LINUX && !UNITY_EDITOR
@@ -45,13 +45,11 @@ public class IconMarketplaceManager : MonoBehaviour
                 uploadPanel.SetActive(false);
                 break;
             case 1:
-                downloadPanelScript.Load(this);
                 normalPanel.SetActive(false);
                 downloadPanel.SetActive(true);
                 uploadPanel.SetActive(false);
                 break;
             case 2:
-                uploadPanelScript.Load();
                 normalPanel.SetActive(false);
                 downloadPanel.SetActive(false);
                 uploadPanel.SetActive(true);

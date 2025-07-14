@@ -6,15 +6,14 @@ using UnityEngine.UI;
 
 public class IconMarketplaceDownloadIcon : MonoBehaviour
 {
+    public IconMarketplaceManager marketplaceManager;
     public TMP_Text statusText;
     public Button backButton;
-    private IconMarketplaceManager marketplaceManager;
     public GameObject content;
     public GameObject sample;
 
-    public void Load(IconMarketplaceManager loadedFrom)
+    void Awake()
     {
-        marketplaceManager = loadedFrom;
         backButton.onClick.AddListener(() => marketplaceManager.SwitchPanel(0));
         GetIcons();
     }

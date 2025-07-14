@@ -8,9 +8,10 @@ using UnityEngine.Networking;
 
 public class IconMarketplaceUploadIcon : MonoBehaviour
 {
+    public IconMarketplaceManager marketplaceManager;
     public TMP_Text statusText;
 
-    public void Load()
+    void Awake()
     {
         OpenFilePicker();
     }
