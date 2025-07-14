@@ -137,6 +137,46 @@ public class BazookaManager : MonoBehaviour
         if (saveFile["bird"]["pastOverlay"] == null) return 0;
         return int.Parse(saveFile["bird"]["pastOverlay"].ToString());
     }
+    
+    public void SetCustomBirdIcon(string value)
+    {
+        if (saveFile["bird"] == null) saveFile["bird"] = new JObject();
+        saveFile["bird"]["customIcon"] = value;
+    }
+
+    public void UnsetCustomBirdIcon()
+    {
+        if (saveFile["bird"] == null) return;
+        if (saveFile["bird"]["customIcon"] == null) return;
+        (saveFile["bird"] as JObject)?.Remove("customIcon");
+    }
+
+    public string GetCustomBirdIcon()
+    {
+        if (saveFile["bird"] == null) return null;
+        if (saveFile["bird"]["customIcon"] == null) return null;
+        return saveFile["bird"]["customIcon"].ToString();
+    }
+    
+    public void SetCustomBirdIconID(int value)
+    {
+        if (saveFile["bird"] == null) saveFile["bird"] = new JObject();
+        saveFile["bird"]["customIconID"] = value;
+    }
+
+    public void UnsetCustomBirdIconID()
+    {
+        if (saveFile["bird"] == null) return;
+        if (saveFile["bird"]["customIconID"] == null) return;
+        (saveFile["bird"] as JObject)?.Remove("customIconID");
+    }
+
+    public int? GetCustomBirdIconID()
+    {
+        if (saveFile["bird"] == null) return null;
+        if (saveFile["bird"]["customIconID"] == null) return null;
+        return int.Parse(saveFile["bird"]["customIconID"].ToString());
+    }
 
     //Settings stuff
 
