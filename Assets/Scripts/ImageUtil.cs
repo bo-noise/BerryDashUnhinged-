@@ -3,9 +3,9 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ImageUtil
+public static class ImageUtil
 {
-    public void RenderFromBase64(string base64, Image targetImage)
+    public static void RenderFromBase64(string base64, Image targetImage)
     {
         byte[] imageData = Convert.FromBase64String(base64);
         Texture2D tex = new(2, 2, TextureFormat.ARGB32, false);
@@ -18,7 +18,7 @@ public class ImageUtil
         targetImage.sprite = sprite;
     }
 
-    public void RenderFromBase64(string base64, SpriteRenderer targetImage)
+    public static void RenderFromBase64(string base64, SpriteRenderer targetImage)
     {
         byte[] imageData = Convert.FromBase64String(base64);
         Texture2D tex = new(2, 2, TextureFormat.ARGB32, false);
