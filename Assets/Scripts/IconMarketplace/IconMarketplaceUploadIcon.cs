@@ -5,14 +5,17 @@ using SFB;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class IconMarketplaceUploadIcon : MonoBehaviour
 {
     public IconMarketplaceManager marketplaceManager;
     public TMP_Text statusText;
+    public Button backButton;
 
     void Awake()
     {
+        backButton.onClick.AddListener(() => marketplaceManager.SwitchPanel(0));
         OpenFilePicker();
     }
 
