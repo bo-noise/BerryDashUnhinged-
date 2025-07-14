@@ -13,6 +13,7 @@ public class IconMarketplaceManager : MonoBehaviour
 
     public Button downloadButton;
     public Button uploadButton;
+    public TMP_Text coinText;
 
     void Awake()
     {
@@ -33,13 +34,15 @@ public class IconMarketplaceManager : MonoBehaviour
             uploadButton.transform.GetChild(1).GetComponent<TMP_Text>().text = "Not logged in to an account";
         }
 #endif
+        SwitchPanel(0);
     }
 
-    public void SwitchPanel(int panelIndex)
+    internal void SwitchPanel(int panelIndex)
     {
         switch (panelIndex)
         {
             case 0:
+                coinText.text = "You have " + Tools.FormatWithCommas((BazookaManager.Instance.GetCustomBirdIconData()["totalCoins"] ?? "0").ToString()) + " coins";
                 normalPanel.SetActive(true);
                 downloadPanel.SetActive(false);
                 uploadPanel.SetActive(false);
@@ -50,6 +53,7 @@ public class IconMarketplaceManager : MonoBehaviour
                 uploadPanel.SetActive(false);
                 break;
             case 2:
+                uploadPanelScript.Reset();
                 normalPanel.SetActive(false);
                 downloadPanel.SetActive(false);
                 uploadPanel.SetActive(true);

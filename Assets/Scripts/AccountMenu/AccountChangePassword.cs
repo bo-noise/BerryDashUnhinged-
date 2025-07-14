@@ -31,7 +31,7 @@ public class AccountChangePassword : MonoBehaviour
     {
         if (changePasswordNewPasswordInput.text != changePasswordRetypeNewPasswordInput.text)
         {
-            AccountHandler.UpdateStatusText(changePasswordStatusText, "Passwords do not match", Color.red);
+            Tools.UpdateStatusText(changePasswordStatusText, "Passwords do not match", Color.red);
             return;
         }
         EncryptedWWWForm dataForm = new();
@@ -39,35 +39,35 @@ public class AccountChangePassword : MonoBehaviour
         dataForm.AddField("newpassword", changePasswordNewPasswordInput.text);
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "changeAccountPassword.php", dataForm.GetWWWForm());
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "changeAccountPassword.php", dataForm.form);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
         await request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.Success)
         {
-            AccountHandler.UpdateStatusText(changePasswordStatusText, "Failed to make HTTP request", Color.red);
+            Tools.UpdateStatusText(changePasswordStatusText, "Failed to make HTTP request", Color.red);
             return;
         }
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
         if (response == "-999")
         {
-            AccountHandler.UpdateStatusText(changePasswordStatusText, "Server error while fetching data", Color.red);
+            Tools.UpdateStatusText(changePasswordStatusText, "Server error while fetching data", Color.red);
             return;
         }
         else if (response == "-998")
         {
-            AccountHandler.UpdateStatusText(changePasswordStatusText, "Client version too outdated to access servers", Color.red);
+            Tools.UpdateStatusText(changePasswordStatusText, "Client version too outdated to access servers", Color.red);
             return;
         }
         else if (response == "-997")
         {
-            AccountHandler.UpdateStatusText(changePasswordStatusText, "Encryption/decryption issues", Color.red);
+            Tools.UpdateStatusText(changePasswordStatusText, "Encryption/decryption issues", Color.red);
             return;
         }
         else if (response == "-996")
         {
-            AccountHandler.UpdateStatusText(changePasswordStatusText, "Can't send requests on self-built instance", Color.red);
+            Tools.UpdateStatusText(changePasswordStatusText, "Can't send requests on self-built instance", Color.red);
             return;
         }
         else
@@ -77,11 +77,11 @@ public class AccountChangePassword : MonoBehaviour
             {
                 BazookaManager.Instance.SetAccountSession((string)jsonResponse["token"]);
                 AccountHandler.instance.SwitchPanel(0);
-                AccountHandler.UpdateStatusText(AccountHandler.instance.accountLoggedIn.loggedInText, "Password changed successfully", Color.green);
+                Tools.UpdateStatusText(AccountHandler.instance.accountLoggedIn.loggedInText, "Password changed successfully", Color.green);
             }
             else
             {
-                AccountHandler.UpdateStatusText(changePasswordStatusText, (string)jsonResponse["message"], Color.red);
+                Tools.UpdateStatusText(changePasswordStatusText, (string)jsonResponse["message"], Color.red);
             }
         }
     }

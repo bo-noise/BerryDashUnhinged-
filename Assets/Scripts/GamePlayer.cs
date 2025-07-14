@@ -672,7 +672,7 @@ public class GamePlayer : MonoBehaviour
         }
     }
 
-    public void TogglePause()
+    internal void TogglePause()
     {
         if (pausePanel.activeSelf)
         {
@@ -684,7 +684,7 @@ public class GamePlayer : MonoBehaviour
         }
     }
 
-    public void EnablePause()
+    internal void EnablePause()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -692,7 +692,7 @@ public class GamePlayer : MonoBehaviour
         pausePanel.SetActive(true);
     }
 
-    public void DisablePause()
+    internal void DisablePause()
     {
         lastMoveTime = Time.time;
         Cursor.visible = false;

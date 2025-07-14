@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 public class AccountHandler : MonoBehaviour
@@ -97,11 +96,5 @@ public class AccountHandler : MonoBehaviour
                 accountRefreshLogin.gameObject.SetActive(true);
                 break;
         }
-    }
-
-    public static void UpdateStatusText(TMP_Text statusText, string message, Color color)
-    {
-        statusText.text = message;
-        statusText.color = color;
     }
 }

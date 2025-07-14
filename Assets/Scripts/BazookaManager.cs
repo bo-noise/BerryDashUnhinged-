@@ -153,8 +153,8 @@ public class BazookaManager : MonoBehaviour
 
     public JObject GetCustomBirdIconData()
     {
-        if (saveFile["bird"] == null) return null;
-        if (saveFile["bird"]["customIcon"] == null) return null;
+        if (saveFile["bird"] == null) return new();
+        if (saveFile["bird"]["customIcon"] == null) return new();
         return saveFile["bird"]["customIcon"] as JObject;
     }
 

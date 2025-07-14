@@ -31,7 +31,7 @@ public class AccountLogin : MonoBehaviour
     {
         if (loginUsernameInput.text == string.Empty || loginPasswordInput.text == string.Empty)
         {
-            AccountHandler.UpdateStatusText(loginPanelStatusText, "All input fields must be filled", Color.red);
+            Tools.UpdateStatusText(loginPanelStatusText, "All input fields must be filled", Color.red);
             return;
         }
         EncryptedWWWForm dataForm = new();
@@ -39,35 +39,35 @@ public class AccountLogin : MonoBehaviour
         dataForm.AddField("password", loginPasswordInput.text);
         dataForm.AddField("currentHighScore", BazookaManager.Instance.GetGameStoreHighScore().ToString());
         dataForm.AddField("loginType", "0");
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "loginAccount.php", dataForm.GetWWWForm());
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "loginAccount.php", dataForm.form);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
         await request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.Success)
         {
-            AccountHandler.UpdateStatusText(loginPanelStatusText, "Failed to make HTTP request", Color.red);
+            Tools.UpdateStatusText(loginPanelStatusText, "Failed to make HTTP request", Color.red);
             return;
         }
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
         if (response == "-999")
         {
-            AccountHandler.UpdateStatusText(loginPanelStatusText, "Server error while fetching data", Color.red);
+            Tools.UpdateStatusText(loginPanelStatusText, "Server error while fetching data", Color.red);
             return;
         }
         else if (response == "-998")
         {
-            AccountHandler.UpdateStatusText(loginPanelStatusText, "Client version too outdated to access servers", Color.red);
+            Tools.UpdateStatusText(loginPanelStatusText, "Client version too outdated to access servers", Color.red);
             return;
         }
         else if (response == "-997")
         {
-            AccountHandler.UpdateStatusText(loginPanelStatusText, "Encryption/decryption issues", Color.red);
+            Tools.UpdateStatusText(loginPanelStatusText, "Encryption/decryption issues", Color.red);
             return;
         }
         else if (response == "-996")
         {
-            AccountHandler.UpdateStatusText(loginPanelStatusText, "Can't send requests on self-built instance", Color.red);
+            Tools.UpdateStatusText(loginPanelStatusText, "Can't send requests on self-built instance", Color.red);
             return;
         }
         else
@@ -90,11 +90,11 @@ public class AccountLogin : MonoBehaviour
                 BazookaManager.Instance.SetColorSettingIcon(JArray.Parse(jsonResponse["data"]["birdColor"].ToString()));
                 BazookaManager.Instance.SetColorSettingOverlay(JArray.Parse(jsonResponse["data"]["overlayColor"].ToString()));
                 AccountHandler.instance.SwitchPanel(0);
-                AccountHandler.UpdateStatusText(loginPanelStatusText, "", Color.red);
+                Tools.UpdateStatusText(loginPanelStatusText, "", Color.red);
             }
             else
             {
-                AccountHandler.UpdateStatusText(loginPanelStatusText, (string)jsonResponse["message"], Color.red);
+                Tools.UpdateStatusText(loginPanelStatusText, (string)jsonResponse["message"], Color.red);
             }
         }
     }

@@ -26,15 +26,15 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
         {
             if (birdNameInput.text.Trim() == string.Empty)
             {
-                AccountHandler.UpdateStatusText(statusText, "Bird name can't be empty", Color.red);
+                Tools.UpdateStatusText(statusText, "Bird name can't be empty", Color.red);
             }
             else if (birdPriceInput.text.Trim() == string.Empty)
             {
-                AccountHandler.UpdateStatusText(statusText, "Bird price can't be empty", Color.red);
+                Tools.UpdateStatusText(statusText, "Bird price can't be empty", Color.red);
             }
             else if (birdData == null)
             {
-                AccountHandler.UpdateStatusText(statusText, "You must upload an image", Color.red);
+                Tools.UpdateStatusText(statusText, "You must upload an image", Color.red);
             }
             else
             {
@@ -51,15 +51,15 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
                 fileContent = File.ReadAllBytes(path);
                 if (fileContent.Length > 1024 * 1024)
                 {
-                    AccountHandler.UpdateStatusText(statusText, "File size exceeds 1 MB limit", Color.red);
+                    Tools.UpdateStatusText(statusText, "File size exceeds 1 MB limit", Color.red);
                     return;
                 }
                 birdData = Convert.ToBase64String(fileContent);
-                ImageUtil.RenderFromBase64(birdData, birdImage);
+                Tools.RenderFromBase64(birdData, birdImage);
             }
             catch (Exception e)
             {
-                AccountHandler.UpdateStatusText(statusText, "Failed to read file: " + e.Message, Color.red);
+                Tools.UpdateStatusText(statusText, "Failed to read file: " + e.Message, Color.red);
                 return;
             }
         });
@@ -86,35 +86,35 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
         dataForm.AddField("name", birdNameInput.text);
         dataForm.AddField("price", birdPriceInput.text);
         dataForm.AddField("filecontent", birdData);
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "uploadMarketplaceIcon.php", dataForm.GetWWWForm());
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "uploadMarketplaceIcon.php", dataForm.form);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
         await request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.Success)
         {
-            AccountHandler.UpdateStatusText(statusText, "Failed to make HTTP request", Color.red);
+            Tools.UpdateStatusText(statusText, "Failed to make HTTP request", Color.red);
             return;
         }
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
         if (response == "-999")
         {
-            AccountHandler.UpdateStatusText(statusText, "Server error while fetching data", Color.red);
+            Tools.UpdateStatusText(statusText, "Server error while fetching data", Color.red);
             return;
         }
         else if (response == "-998")
         {
-            AccountHandler.UpdateStatusText(statusText, "Client version too outdated to access servers", Color.red);
+            Tools.UpdateStatusText(statusText, "Client version too outdated to access servers", Color.red);
             return;
         }
         else if (response == "-997")
         {
-            AccountHandler.UpdateStatusText(statusText, "Encryption/decryption issues", Color.red);
+            Tools.UpdateStatusText(statusText, "Encryption/decryption issues", Color.red);
             return;
         }
         else if (response == "-996")
         {
-            AccountHandler.UpdateStatusText(statusText, "Can't send requests on self-built instance", Color.red);
+            Tools.UpdateStatusText(statusText, "Can't send requests on self-built instance", Color.red);
             return;
         }
         else
@@ -122,16 +122,22 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
             var jsonResponse = JObject.Parse(response);
             if ((bool)jsonResponse["success"])
             {
-                birdImage.sprite = Resources.Load<Sprite>("Other/X");
-                birdData = null;
-                birdNameInput.text = "";
-                birdPriceInput.text = "";
-                AccountHandler.UpdateStatusText(statusText, "Icon uploaded successfully!", Color.green);
+                Reset();
+                Tools.UpdateStatusText(statusText, "Icon uploaded successfully!", Color.green);
             }
             else
             {
-                AccountHandler.UpdateStatusText(statusText, (string)jsonResponse["message"], Color.red);
+                Tools.UpdateStatusText(statusText, (string)jsonResponse["message"], Color.red);
             }
         }
+    }
+
+    internal void Reset()
+    {
+        birdImage.sprite = Resources.Load<Sprite>("Other/X");
+        birdData = null;
+        birdNameInput.text = string.Empty;
+        birdPriceInput.text = string.Empty;
+        statusText.text = string.Empty;
     }
 }

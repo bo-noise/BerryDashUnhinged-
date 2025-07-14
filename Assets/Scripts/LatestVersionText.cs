@@ -59,7 +59,7 @@ public class LatestVersionText : MonoBehaviour
         RefreshText();
     }
 
-    public void RefreshText()
+    internal void RefreshText()
     {
         if (text == null || updateButton == null) return;
         if (latest == null)

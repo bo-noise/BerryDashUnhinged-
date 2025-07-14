@@ -41,52 +41,52 @@ public class AccountRegister : MonoBehaviour
             registerRetypePasswordInput.text == string.Empty
         )
         {
-            AccountHandler.UpdateStatusText(registerPanelStatusText, "All input fields must be filled", Color.red);
+            Tools.UpdateStatusText(registerPanelStatusText, "All input fields must be filled", Color.red);
             return;
         }
         if (registerEmailInput.text != registerRetypeEmailInput.text)
         {
-            AccountHandler.UpdateStatusText(registerPanelStatusText, "Emails don't match", Color.red);
+            Tools.UpdateStatusText(registerPanelStatusText, "Emails don't match", Color.red);
             return;
         }
         if (registerPasswordInput.text != registerRetypePasswordInput.text)
         {
-            AccountHandler.UpdateStatusText(registerPanelStatusText, "Passwords don't match", Color.red);
+            Tools.UpdateStatusText(registerPanelStatusText, "Passwords don't match", Color.red);
             return;
         }
         EncryptedWWWForm dataForm = new();
         dataForm.AddField("username", registerUsernameInput.text);
         dataForm.AddField("email", registerEmailInput.text);
         dataForm.AddField("password", registerPasswordInput.text);
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "registerAccount.php", dataForm.GetWWWForm());
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "registerAccount.php", dataForm.form);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
         await request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.Success)
         {
-            AccountHandler.UpdateStatusText(registerPanelStatusText, "Failed to make HTTP request", Color.red);
+            Tools.UpdateStatusText(registerPanelStatusText, "Failed to make HTTP request", Color.red);
             return;
         }
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
         if (response == "-999")
         {
-            AccountHandler.UpdateStatusText(registerPanelStatusText, "Server error while fetching data", Color.red);
+            Tools.UpdateStatusText(registerPanelStatusText, "Server error while fetching data", Color.red);
             return;
         }
         else if (response == "-998")
         {
-            AccountHandler.UpdateStatusText(registerPanelStatusText, "Client version too outdated to access servers", Color.red);
+            Tools.UpdateStatusText(registerPanelStatusText, "Client version too outdated to access servers", Color.red);
             return;
         }
         else if (response == "-997")
         {
-            AccountHandler.UpdateStatusText(registerPanelStatusText, "Encryption/decryption issues", Color.red);
+            Tools.UpdateStatusText(registerPanelStatusText, "Encryption/decryption issues", Color.red);
             return;
         }
         else if (response == "-996")
         {
-            AccountHandler.UpdateStatusText(registerPanelStatusText, "Can't send requests on self-built instance", Color.red);
+            Tools.UpdateStatusText(registerPanelStatusText, "Can't send requests on self-built instance", Color.red);
             return;
         }
         else
@@ -98,7 +98,7 @@ public class AccountRegister : MonoBehaviour
             }
             else
             {
-                AccountHandler.UpdateStatusText(registerPanelStatusText, (string)jsonResponse["message"], Color.red);
+                Tools.UpdateStatusText(registerPanelStatusText, (string)jsonResponse["message"], Color.red);
             }
         }
     }

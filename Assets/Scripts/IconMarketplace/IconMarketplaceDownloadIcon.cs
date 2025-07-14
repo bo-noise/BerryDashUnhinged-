@@ -27,7 +27,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
                 Destroy(item.gameObject);
             }
         }
-        AccountHandler.UpdateStatusText(statusText, "Loading...", Color.white);
+        Tools.UpdateStatusText(statusText, "Loading...", Color.white);
         using UnityWebRequest request = UnityWebRequest.Get(SensitiveInfo.SERVER_DATABASE_PREFIX + "getMarketplaceIcons.php");
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
@@ -35,40 +35,40 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         await request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.Success)
         {
-            AccountHandler.UpdateStatusText(statusText, "Failed to make HTTP request", Color.red);
+            Tools.UpdateStatusText(statusText, "Failed to make HTTP request", Color.red);
             return;
         }
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
         if (response == "-999")
         {
-            AccountHandler.UpdateStatusText(statusText, "Server error while fetching data", Color.red);
+            Tools.UpdateStatusText(statusText, "Server error while fetching data", Color.red);
             return;
         }
         else if (response == "-998")
         {
-            AccountHandler.UpdateStatusText(statusText, "Client version too outdated to access servers", Color.red);
+            Tools.UpdateStatusText(statusText, "Client version too outdated to access servers", Color.red);
             return;
         }
         else if (response == "-997")
         {
-            AccountHandler.UpdateStatusText(statusText, "Encryption/decryption issues", Color.red);
+            Tools.UpdateStatusText(statusText, "Encryption/decryption issues", Color.red);
             return;
         }
         else if (response == "-996")
         {
-            AccountHandler.UpdateStatusText(statusText, "Can't send requests on self-built instance", Color.red);
+            Tools.UpdateStatusText(statusText, "Can't send requests on self-built instance", Color.red);
             return;
         }
         else
         {
-            AccountHandler.UpdateStatusText(statusText, "", Color.red);
+            Tools.UpdateStatusText(statusText, "", Color.red);
             var jsonResponse = JArray.Parse(response);
             foreach (var item in jsonResponse)
             {
                 JObject entry = (JObject)item;
                 GameObject newIcon = Instantiate(sample, content.transform);
 
-                ImageUtil.RenderFromBase64(entry["data"].ToString(), newIcon.transform.GetChild(0).GetChild(0).GetComponent<Image>());
+                Tools.RenderFromBase64(entry["data"].ToString(), newIcon.transform.GetChild(0).GetChild(0).GetComponent<Image>());
                 newIcon.transform.GetChild(1).GetComponent<TMP_Text>().text = "Bird Name: " + entry["name"].ToString();
                 newIcon.transform.GetChild(2).GetComponent<TMP_Text>().text = "Price " + entry["price"].ToString() + " coin";
                 newIcon.transform.GetChild(3).GetComponent<TMP_Text>().text = "Designer Name: " + entry["username"].ToString();
