@@ -4388,6 +4388,8 @@ MonoBehaviour:
   selectButton: {fileID: 1745561408}
   birdNameInput: {fileID: 382778012}
   birdPriceInput: {fileID: 210372877}
+  birdImage: {fileID: 2023785527}
+  birdData: 
 --- !u!1 &1708620717
 GameObject:
   m_ObjectHideFlags: 0
