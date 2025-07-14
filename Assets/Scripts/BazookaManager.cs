@@ -138,44 +138,24 @@ public class BazookaManager : MonoBehaviour
         return int.Parse(saveFile["bird"]["pastOverlay"].ToString());
     }
     
-    public void SetCustomBirdIcon(string value)
+    public void SetCustomBirdIconData(JObject value)
     {
         if (saveFile["bird"] == null) saveFile["bird"] = new JObject();
         saveFile["bird"]["customIcon"] = value;
     }
 
-    public void UnsetCustomBirdIcon()
+    public void UnsetCustomBirdIconData()
     {
         if (saveFile["bird"] == null) return;
         if (saveFile["bird"]["customIcon"] == null) return;
         (saveFile["bird"] as JObject)?.Remove("customIcon");
     }
 
-    public string GetCustomBirdIcon()
+    public JObject GetCustomBirdIconData()
     {
         if (saveFile["bird"] == null) return null;
         if (saveFile["bird"]["customIcon"] == null) return null;
-        return saveFile["bird"]["customIcon"].ToString();
-    }
-    
-    public void SetCustomBirdIconID(int value)
-    {
-        if (saveFile["bird"] == null) saveFile["bird"] = new JObject();
-        saveFile["bird"]["customIconID"] = value;
-    }
-
-    public void UnsetCustomBirdIconID()
-    {
-        if (saveFile["bird"] == null) return;
-        if (saveFile["bird"]["customIconID"] == null) return;
-        (saveFile["bird"] as JObject)?.Remove("customIconID");
-    }
-
-    public int? GetCustomBirdIconID()
-    {
-        if (saveFile["bird"] == null) return null;
-        if (saveFile["bird"]["customIconID"] == null) return null;
-        return int.Parse(saveFile["bird"]["customIconID"].ToString());
+        return saveFile["bird"]["customIcon"] as JObject;
     }
 
     //Settings stuff
@@ -511,5 +491,24 @@ public class BazookaManager : MonoBehaviour
     {
         if (saveFile["gameStore"] == null) return;
         (saveFile["gameStore"] as JObject)?.Remove("totalSpeedyBerries");
+    }
+
+    public void SetGameStoreTotalCoinBerries(BigInteger value)
+    {
+        if (saveFile["gameStore"] == null) saveFile["gameStore"] = new JObject();
+        saveFile["gameStore"]["totalCoinBerries"] = value.ToString();
+    }
+
+    public BigInteger GetGameStoreTotalCoinBerries()
+    {
+        if (saveFile["gameStore"] == null) return 0;
+        if (saveFile["gameStore"]["totalCoinBerries"] == null) return 0;
+        return BigInteger.Parse(saveFile["gameStore"]["totalCoinBerries"].ToString());
+    }
+
+    public void UnsetGameStoreTotalCoinBerries()
+    {
+        if (saveFile["gameStore"] == null) return;
+        (saveFile["gameStore"] as JObject)?.Remove("totalCoinBerries");
     }
 }

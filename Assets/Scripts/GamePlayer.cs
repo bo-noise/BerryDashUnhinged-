@@ -17,6 +17,7 @@ public class GamePlayer : MonoBehaviour
     private BigInteger totalSlowBerries;
     private BigInteger totalUltraBerries;
     private BigInteger totalSpeedyBerries;
+    private BigInteger totalCoinBerries;
     private BigInteger totalAttempts;
     private float boostLeft;
     private float slownessLeft;
@@ -79,6 +80,7 @@ public class GamePlayer : MonoBehaviour
         totalSlowBerries = BazookaManager.Instance.GetGameStoreTotalSlowBerries();
         totalUltraBerries = BazookaManager.Instance.GetGameStoreTotalUltraBerries();
         totalSpeedyBerries = BazookaManager.Instance.GetGameStoreTotalSpeedyBerries();
+        totalCoinBerries = BazookaManager.Instance.GetGameStoreTotalCoinBerries();
         totalAttempts = BazookaManager.Instance.GetGameStoreTotalAttepts();
 
         Cursor.visible = false;
@@ -646,6 +648,7 @@ public class GamePlayer : MonoBehaviour
         BazookaManager.Instance.SetGameStoreTotalSlowBerries(totalSlowBerries);
         BazookaManager.Instance.SetGameStoreTotalUltraBerries(totalUltraBerries);
         BazookaManager.Instance.SetGameStoreTotalSpeedyBerries(totalSpeedyBerries);
+        BazookaManager.Instance.SetGameStoreTotalCoinBerries(totalCoinBerries);
         BazookaManager.Instance.SetGameStoreTotalAttepts(totalAttempts);
         scoreText.text = $"Score: {Tools.FormatWithCommas(score)} \\u2022 Attempts: {Tools.FormatWithCommas(attempts)}";
         highScoreText.text = $"High Score: {Tools.FormatWithCommas(highscore)} \\u2022 Total Attempts: {Tools.FormatWithCommas(totalAttempts)}";
