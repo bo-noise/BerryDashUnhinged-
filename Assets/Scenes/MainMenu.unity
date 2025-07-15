@@ -1172,7 +1172,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Copyright 2024-2025 Lncvrt
+  m_text: \u00A9 2024 - 2025 Lncvrt. All rights reserved.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4fd546dd0900395408d2de20f5025882, type: 2}
   m_sharedMaterial: {fileID: -1476194838487357290, guid: 4fd546dd0900395408d2de20f5025882, type: 2}
@@ -1205,7 +1205,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 1024
   m_textAlignment: 65535
