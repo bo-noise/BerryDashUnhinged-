@@ -1,6 +1,3 @@
-using System;
-using System.Text;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
@@ -75,16 +72,22 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
             {
                 JObject entry = (JObject)item;
                 GameObject newIcon = Instantiate(sample, content.transform);
-                newIcon.name = "Icon_" + Convert.ToBase64String(Encoding.UTF8.GetBytes(entry.ToString(Formatting.None)));
+                newIcon.name = "IconEntry";
 
                 Tools.RenderFromBase64(entry["data"].ToString(), newIcon.transform.GetChild(0).GetChild(0).GetComponent<Image>());
                 newIcon.transform.GetChild(1).GetComponent<TMP_Text>().text = "Bird Name: " + entry["name"].ToString();
                 newIcon.transform.GetChild(2).GetComponent<TMP_Text>().text = "Price " + entry["price"].ToString() + " coin";
                 newIcon.transform.GetChild(3).GetComponent<TMP_Text>().text = "Designer Name: " + entry["username"].ToString();
                 newIcon.transform.GetChild(4).GetChild(0).GetComponent<TMP_Text>().text = "Purchase";
+                newIcon.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => HandlePurchase(entry));
 
                 newIcon.SetActive(true);
             }
         }
+    }
+
+    void HandlePurchase(JObject data)
+    {
+        //will work on this
     }
 }
