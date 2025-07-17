@@ -4167,6 +4167,9 @@ MonoBehaviour:
     - m_Text: Speedy Berry
       m_Image: {fileID: -2055337169336843231, guid: 59235d26eca651e63a56cb40b86e7afb, type: 3}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
+    - m_Text: Coin Berry
+      m_Image: {fileID: -8654162663755415972, guid: 95fcc20fbfe7c43a2a484251feb32a00, type: 3}
+      m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
