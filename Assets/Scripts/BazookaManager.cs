@@ -142,7 +142,7 @@ public class BazookaManager : MonoBehaviour
     public void SetCustomBirdIconData(MarketplaceIconStorageType value)
     {
         if (saveFile["bird"] == null) saveFile["bird"] = new JObject();
-        saveFile["bird"]["customIcon"] = value.ConvertTo<JObject>();
+        saveFile["bird"]["customIcon"] = JObject.FromObject(value);
     }
 
     public void UnsetCustomBirdIconData()
