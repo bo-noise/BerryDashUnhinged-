@@ -2,6 +2,7 @@ using System.IO;
 using System.Numerics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BazookaManager : MonoBehaviour
@@ -138,10 +139,10 @@ public class BazookaManager : MonoBehaviour
         return int.Parse(saveFile["bird"]["pastOverlay"].ToString());
     }
     
-    public void SetCustomBirdIconData(JObject value)
+    public void SetCustomBirdIconData(MarketplaceIconStorageType value)
     {
         if (saveFile["bird"] == null) saveFile["bird"] = new JObject();
-        saveFile["bird"]["customIcon"] = value;
+        saveFile["bird"]["customIcon"] = value.ConvertTo<JObject>();
     }
 
     public void UnsetCustomBirdIconData()
@@ -151,11 +152,11 @@ public class BazookaManager : MonoBehaviour
         (saveFile["bird"] as JObject)?.Remove("customIcon");
     }
 
-    public JObject GetCustomBirdIconData()
+    public MarketplaceIconStorageType GetCustomBirdIconData()
     {
         if (saveFile["bird"] == null) return new();
         if (saveFile["bird"]["customIcon"] == null) return new();
-        return saveFile["bird"]["customIcon"] as JObject;
+        return saveFile["bird"]["customIcon"].ToObject<MarketplaceIconStorageType>();
     }
 
     //Settings stuff

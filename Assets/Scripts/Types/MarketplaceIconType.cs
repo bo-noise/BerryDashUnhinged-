@@ -1,10 +1,10 @@
 using Newtonsoft.Json;
 
-public class DownloadIconType {
+public class MarketplaceIconType {
   [JsonProperty("username")]
-  public string Username { get; set; }
+  public string CreatorUsername { get; set; }
   [JsonProperty("userid")]
-  public string UserID { get; set; }
+  public string CreatorUserID { get; set; }
   [JsonProperty("data")]
   public string Data { get; set; }
   [JsonProperty("uuid")]

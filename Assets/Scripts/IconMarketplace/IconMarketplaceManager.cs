@@ -42,14 +42,14 @@ public class IconMarketplaceManager : MonoBehaviour
         switch (panelIndex)
         {
             case 0:
-                coinText.text = "You have " + Tools.FormatWithCommas((BazookaManager.Instance.GetCustomBirdIconData()["totalCoins"] ?? "0").ToString()) + " coins";
+                coinText.text = "You have " + Tools.FormatWithCommas(BazookaManager.Instance.GetCustomBirdIconData().Balance) + " coins";
                 normalPanel.SetActive(true);
                 downloadPanel.SetActive(false);
                 uploadPanel.SetActive(false);
                 break;
             case 1:
                 downloadPanelScript.Load();
-                downloadPanelScript.balanceText.text = "You have " + Tools.FormatWithCommas((BazookaManager.Instance.GetCustomBirdIconData()["totalCoins"] ?? "0").ToString()) + " coins to spend";
+                downloadPanelScript.balanceText.text = "You have " + Tools.FormatWithCommas(BazookaManager.Instance.GetCustomBirdIconData().Balance) + " coins to spend";
                 normalPanel.SetActive(false);
                 downloadPanel.SetActive(true);
                 uploadPanel.SetActive(false);

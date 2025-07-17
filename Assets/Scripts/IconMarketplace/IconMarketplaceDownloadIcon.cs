@@ -70,14 +70,14 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
             var jsonResponse = JArray.Parse(response);
             foreach (var item in jsonResponse)
             {
-                DownloadIconType entry = ((JObject)item).ToObject<DownloadIconType>();
+                MarketplaceIconType entry = ((JObject)item).ToObject<MarketplaceIconType>();
                 GameObject newIcon = Instantiate(sample, content.transform);
                 newIcon.name = "IconEntry";
 
                 Tools.RenderFromBase64(entry.Data, newIcon.transform.GetChild(0).GetChild(0).GetComponent<Image>());
                 newIcon.transform.GetChild(1).GetComponent<TMP_Text>().text = "Bird Name: " + entry.Name;
                 newIcon.transform.GetChild(2).GetComponent<TMP_Text>().text = "Price " + entry.Price + " coin";
-                newIcon.transform.GetChild(3).GetComponent<TMP_Text>().text = "Designer Name: " + entry.Username;
+                newIcon.transform.GetChild(3).GetComponent<TMP_Text>().text = "Designer Name: " + entry.CreatorUsername;
                 newIcon.transform.GetChild(4).GetChild(0).GetComponent<TMP_Text>().text = "Purchase";
                 newIcon.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => HandlePurchase(entry));
 
@@ -86,7 +86,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         }
     }
 
-    void HandlePurchase(DownloadIconType data)
+    void HandlePurchase(MarketplaceIconType data)
     {
         //will work on this
     }
