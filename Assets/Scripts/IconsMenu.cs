@@ -165,22 +165,17 @@ public class Iconsmenu : MonoBehaviour
         }
         if (iconID == 7)
         {
-            SelectOverlay(0, false);
+            SelectOverlay(0);
             placeholderButton.interactable = false;
         }
         else
         {
-            SelectOverlay(BazookaManager.Instance.GetBirdPastOverlay(), false);
             placeholderButton.interactable = true;
         }
     }
 
-    private void SelectOverlay(int overlayID, bool savePast = true)
+    private void SelectOverlay(int overlayID)
     {
-        if (savePast)
-        {
-            BazookaManager.Instance.SetBirdPastOverlay(BazookaManager.Instance.GetBirdOverlay());
-        }
         BazookaManager.Instance.SetBirdOverlay(overlayID);
         overlay0.interactable = overlayID != 0;
         overlay1.interactable = overlayID != 1;

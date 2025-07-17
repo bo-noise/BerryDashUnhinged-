@@ -118,26 +118,6 @@ public class BazookaManager : MonoBehaviour
         if (saveFile["bird"]["overlay"] == null) return 0;
         return int.Parse(saveFile["bird"]["overlay"].ToString());
     }
-
-    public void SetBirdPastOverlay(int value)
-    {
-        if (saveFile["bird"] == null) saveFile["bird"] = new JObject();
-        saveFile["bird"]["pastOverlay"] = value;
-    }
-
-    public void UnsetBirdPastOverlay()
-    {
-        if (saveFile["bird"] == null) return;
-        if (saveFile["bird"]["pastOverlay"] == null) return;
-        (saveFile["bird"] as JObject)?.Remove("pastOverlay");
-    }
-
-    public int GetBirdPastOverlay()
-    {
-        if (saveFile["bird"] == null) return 0;
-        if (saveFile["bird"]["pastOverlay"] == null) return 0;
-        return int.Parse(saveFile["bird"]["pastOverlay"].ToString());
-    }
     
     public void SetCustomBirdIconData(MarketplaceIconStorageType value)
     {
