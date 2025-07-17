@@ -8,6 +8,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
 {
     public IconMarketplaceManager marketplaceManager;
     public TMP_Text statusText;
+    public TMP_Text balanceText;
     public Button backButton;
     public GameObject content;
     public GameObject sample;

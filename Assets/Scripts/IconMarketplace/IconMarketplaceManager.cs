@@ -48,6 +48,7 @@ public class IconMarketplaceManager : MonoBehaviour
                 uploadPanel.SetActive(false);
                 break;
             case 1:
+                downloadPanelScript.balanceText.text = "You have " + Tools.FormatWithCommas((BazookaManager.Instance.GetCustomBirdIconData()["totalCoins"] ?? "0").ToString()) + " coins to spend";
                 normalPanel.SetActive(false);
                 downloadPanel.SetActive(true);
                 uploadPanel.SetActive(false);
