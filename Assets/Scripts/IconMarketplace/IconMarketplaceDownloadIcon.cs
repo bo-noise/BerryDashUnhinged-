@@ -1,3 +1,6 @@
+using System;
+using System.Text;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
@@ -16,6 +19,10 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
     void Awake()
     {
         backButton.onClick.AddListener(() => marketplaceManager.SwitchPanel(0));
+    }
+
+    internal void Load()
+    {
         GetIcons();
     }
 
@@ -68,6 +75,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
             {
                 JObject entry = (JObject)item;
                 GameObject newIcon = Instantiate(sample, content.transform);
+                newIcon.name = "Icon_" + Convert.ToBase64String(Encoding.UTF8.GetBytes(entry.ToString(Formatting.None)));
 
                 Tools.RenderFromBase64(entry["data"].ToString(), newIcon.transform.GetChild(0).GetChild(0).GetComponent<Image>());
                 newIcon.transform.GetChild(1).GetComponent<TMP_Text>().text = "Bird Name: " + entry["name"].ToString();
