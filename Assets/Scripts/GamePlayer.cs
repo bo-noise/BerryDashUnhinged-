@@ -19,6 +19,7 @@ public class GamePlayer : MonoBehaviour
     private BigInteger totalSpeedyBerries;
     private BigInteger totalCoinBerries;
     private BigInteger totalAttempts;
+    private BigInteger totalCoins;
     private float boostLeft;
     private float slownessLeft;
     private float speedyLeft;
@@ -27,6 +28,7 @@ public class GamePlayer : MonoBehaviour
     public TMP_Text scoreText;
     public TMP_Text highScoreText;
     public TMP_Text boostText;
+    public TMP_Text coinText;
     public GameObject bird;
     public GameObject pausePanel;
     public Rigidbody2D rb;
@@ -82,6 +84,7 @@ public class GamePlayer : MonoBehaviour
         totalSpeedyBerries = BazookaManager.Instance.GetGameStoreTotalSpeedyBerries();
         totalCoinBerries = BazookaManager.Instance.GetGameStoreTotalCoinBerries();
         totalAttempts = BazookaManager.Instance.GetGameStoreTotalAttepts();
+        totalCoins = BazookaManager.Instance.GetCustomBirdIconData().Balance;
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -574,7 +577,11 @@ public class GamePlayer : MonoBehaviour
                 }
                 else if (UnityEngine.Vector3.Distance(bird.transform.position, coinBerry.transform.position) < 1.5f)
                 {
+                    AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/CoinCollect"), Camera.main.transform.position, 0.35f * BazookaManager.Instance.GetSettingSFXVolume());
                     Destroy(coinBerry);
+                    totalCoinBerries++;
+                    totalCoins++;
+                    UpdateStats(0, 0);
                 }
                 if (speedyLeft > 0)
                 {
@@ -650,8 +657,12 @@ public class GamePlayer : MonoBehaviour
         BazookaManager.Instance.SetGameStoreTotalSpeedyBerries(totalSpeedyBerries);
         BazookaManager.Instance.SetGameStoreTotalCoinBerries(totalCoinBerries);
         BazookaManager.Instance.SetGameStoreTotalAttepts(totalAttempts);
+        var customBirdIconData = BazookaManager.Instance.GetCustomBirdIconData();
+        customBirdIconData.Balance = totalCoins;
+        BazookaManager.Instance.SetCustomBirdIconData(customBirdIconData);
         scoreText.text = $"Score: {Tools.FormatWithCommas(score)} \\u2022 Attempts: {Tools.FormatWithCommas(attempts)}";
         highScoreText.text = $"High Score: {Tools.FormatWithCommas(highscore)} \\u2022 Total Attempts: {Tools.FormatWithCommas(totalAttempts)}";
+        coinText.text = $"Coins: {Tools.FormatWithCommas(totalCoins)}";
         if (restartButton != null) restartButton.GetComponent<Renderer>().material.color = score == 0 ? Color.gray : Color.white;
     }
 

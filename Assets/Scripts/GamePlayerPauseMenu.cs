@@ -16,6 +16,7 @@ public class GamePlayerPauseMenu : MonoBehaviour
     public TMP_Text scoreText;
     public TMP_Text highScoreText;
     public TMP_Text boostText;
+    public TMP_Text coinsText;
     public bool editingUI = false;
 
     void Awake()
@@ -47,10 +48,12 @@ public class GamePlayerPauseMenu : MonoBehaviour
             ((RectTransform)scoreText.transform).anchoredPosition = new Vector2(0f, -70f);
             ((RectTransform)highScoreText.transform).anchoredPosition = new Vector2(0f, -140f);
             ((RectTransform)boostText.transform).anchoredPosition = new Vector2(0f, -190f);
+            ((RectTransform)coinsText.transform).anchoredPosition = new Vector2(260f, 47.5f);
             PlayerPrefs.DeleteKey("DraggedUIFPSText");
             PlayerPrefs.DeleteKey("DraggedUIScoreText");
             PlayerPrefs.DeleteKey("DraggedUIHighScoreText");
             PlayerPrefs.DeleteKey("DraggedUIBoostText");
+            PlayerPrefs.DeleteKey("DraggedUICoinsText");
         });
     }
 
@@ -67,5 +70,6 @@ public class GamePlayerPauseMenu : MonoBehaviour
         scoreText.GetComponent<DraggableUI>().canDrag = !scoreText.GetComponent<DraggableUI>().canDrag;
         highScoreText.GetComponent<DraggableUI>().canDrag = !highScoreText.GetComponent<DraggableUI>().canDrag;
         boostText.GetComponent<DraggableUI>().canDrag = !boostText.GetComponent<DraggableUI>().canDrag;
+        coinsText.GetComponent<DraggableUI>().canDrag = !coinsText.GetComponent<DraggableUI>().canDrag;
     }
 }
