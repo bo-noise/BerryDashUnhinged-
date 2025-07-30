@@ -20,6 +20,10 @@ public static class Tools
         {
             return Resources.Load<Sprite>("Icons/Icons/bird_-3");
         }
+        else if (user == 3)
+        {
+            return Resources.Load<Sprite>("Icons/Icons/bird_-4");
+        }
         else
         {
             return Resources.Load<Sprite>("Icons/Icons/bird_1");

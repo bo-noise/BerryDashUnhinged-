@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b6e274f049bc03f469f53c121cedb11b
+guid: f755766365ccb9522b11a8c3ad5ca4ad
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5363695876248709511
-    second: SlowBerry_0
+      213: -2782012579205326331
+    second: bird_-4_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -101,7 +101,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SlowBerry_0
+      name: bird_-4_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 6
         y: 0
-        width: 128
-        height: 128
+        width: 119
+        height: 101
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 976d7f4c4035095b0800000000000000
-      internalID: -5363695876248709511
+      spriteID: 50a5cc78c4e4469d0800000000000000
+      internalID: -2782012579205326331
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 1886ff130a209c64f86cf70c119372e7
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SlowBerry_0: -5363695876248709511
+      bird_-4_0: -2782012579205326331
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
