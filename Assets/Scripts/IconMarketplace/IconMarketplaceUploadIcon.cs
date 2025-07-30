@@ -24,6 +24,8 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
         backButton.onClick.AddListener(() => marketplaceManager.SwitchPanel(0));
         uploadButton.onClick.AddListener(() =>
         {
+            uploadButton.interactable = false;
+            backButton.interactable = false;
             if (birdNameInput.text.Trim() == string.Empty)
             {
                 Tools.UpdateStatusText(statusText, "Bird name can't be empty", Color.red);
@@ -40,6 +42,8 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
             {
                 UploadIcon();
             }
+            uploadButton.interactable = true;
+            backButton.interactable = true;
         });
         selectButton.onClick.AddListener(() =>
         {

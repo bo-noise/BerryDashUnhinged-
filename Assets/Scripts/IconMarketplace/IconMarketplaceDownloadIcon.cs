@@ -30,6 +30,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
 
     async void GetIcons()
     {
+        backButton.interactable = false;
         foreach (Transform item in content.transform)
         {
             if (item.gameObject.activeSelf)
@@ -101,13 +102,16 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
                 newIcon.SetActive(true);
             }
         }
+        backButton.interactable = true;
     }
 
     void HandlePurchase(MarketplaceIconType data, Button button)
     {
+        button.interactable = false;
         MarketplaceIconStorageType marketplaceIconStorage = BazookaManager.Instance.GetCustomBirdIconData();
         if (data.Price > marketplaceIconStorage.Balance)
         {
+            button.interactable = true;
             ShowStatus("You can't afford this icon! You need " + (data.Price - marketplaceIconStorage.Balance) + " more coins");
             return;
         }
@@ -115,7 +119,6 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         list.Add(data);
         marketplaceIconStorage.Data = list.ToArray();
         marketplaceIconStorage.Balance -= data.Price;
-        button.interactable = false;
         button.transform.GetChild(0).GetComponent<TMP_Text>().text = "Purchased";
         balanceText.text = "You have " + Tools.FormatWithCommas(marketplaceIconStorage.Balance) + " coins to spend";
         BazookaManager.Instance.SetCustomBirdIconData(marketplaceIconStorage);
