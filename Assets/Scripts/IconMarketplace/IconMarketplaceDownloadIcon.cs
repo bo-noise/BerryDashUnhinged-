@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Linq;
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -72,17 +72,16 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         else
         {
             ShowStatus(null);
-            var jsonResponse = JArray.Parse(response);
-            foreach (var item in jsonResponse)
+            var icons = JsonConvert.DeserializeObject<MarketplaceIconType[]>(response);
+            foreach (var entry in icons)
             {
-                MarketplaceIconType entry = ((JObject)item).ToObject<MarketplaceIconType>();
                 GameObject newIcon = Instantiate(sample, content.transform);
                 newIcon.name = "IconEntry";
 
                 Tools.RenderFromBase64(entry.Data, newIcon.transform.GetChild(0).GetChild(0).GetComponent<Image>());
                 newIcon.transform.GetChild(1).GetComponent<TMP_Text>().text = "Bird Name: " + entry.Name;
                 newIcon.transform.GetChild(2).GetComponent<TMP_Text>().text = "Price " + entry.Price + " coin";
-                newIcon.transform.GetChild(3).GetComponent<TMP_Text>().text = "Designer Name: " + ((JObject)item)["username"].ToString();
+                newIcon.transform.GetChild(3).GetComponent<TMP_Text>().text = "Designer Name: " + entry.CreatorUsername;
 
                 var btn = newIcon.transform.GetChild(4).GetComponent<Button>();
                 var btnText = btn.transform.GetChild(0).GetComponent<TMP_Text>();
@@ -121,8 +120,6 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         balanceText.text = "You have " + Tools.FormatWithCommas(marketplaceIconStorage.Balance) + " coins to spend";
         BazookaManager.Instance.SetCustomBirdIconData(marketplaceIconStorage);
     }
-
-
 
     void ShowStatus(string content)
     {
