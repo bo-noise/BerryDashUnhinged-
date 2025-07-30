@@ -80,7 +80,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
 
                 Tools.RenderFromBase64(entry.Data, newIcon.transform.GetChild(0).GetChild(0).GetComponent<Image>());
                 newIcon.transform.GetChild(1).GetComponent<TMP_Text>().text = "Bird Name: " + entry.Name;
-                newIcon.transform.GetChild(2).GetComponent<TMP_Text>().text = "Price " + entry.Price + " coin";
+                newIcon.transform.GetChild(2).GetComponent<TMP_Text>().text = "Price " + Tools.FormatWithCommas(entry.Price) + " coin";
                 newIcon.transform.GetChild(3).GetComponent<TMP_Text>().text = "Designer Name: " + entry.CreatorUsername;
 
                 var btn = newIcon.transform.GetChild(4).GetComponent<Button>();
