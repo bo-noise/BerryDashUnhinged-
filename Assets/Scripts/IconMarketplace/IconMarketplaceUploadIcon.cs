@@ -24,8 +24,6 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
         backButton.onClick.AddListener(() => marketplaceManager.SwitchPanel(0));
         uploadButton.onClick.AddListener(() =>
         {
-            uploadButton.interactable = false;
-            backButton.interactable = false;
             if (birdNameInput.text.Trim() == string.Empty)
             {
                 Tools.UpdateStatusText(statusText, "Bird name can't be empty", Color.red);
@@ -42,8 +40,6 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
             {
                 UploadIcon();
             }
-            uploadButton.interactable = true;
-            backButton.interactable = true;
         });
         selectButton.onClick.AddListener(() =>
         {
@@ -84,6 +80,9 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
 
     async void UploadIcon()
     {
+        uploadButton.interactable = false;
+        backButton.interactable = false;
+        selectButton.interactable = false;
         EncryptedWWWForm dataForm = new();
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
@@ -134,6 +133,9 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
                 Tools.UpdateStatusText(statusText, (string)jsonResponse["message"], Color.red);
             }
         }
+        uploadButton.interactable = true;
+        backButton.interactable = true;
+        selectButton.interactable = true;
     }
 
     internal void Reset()
