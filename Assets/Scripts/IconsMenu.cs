@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,6 +9,9 @@ public class Iconsmenu : MonoBehaviour
 {
     public GameObject iconsPanel;
     public GameObject overlaysPanel;
+    public GameObject marketplaceIconsPanel;
+    public GameObject marketplaceIconsContent;
+    public GameObject marketplaceIconsSample;
     public Button backButton;
     public Sprite defaultIcon;
     public Button placeholderButton;
@@ -42,6 +47,17 @@ public class Iconsmenu : MonoBehaviour
 
     private void Start()
     {
+        foreach (var icon in BazookaManager.Instance.GetCustomBirdIconData().Data)
+        {
+            var iconEntry = Instantiate(marketplaceIconsSample, marketplaceIconsContent.transform);
+            iconEntry.name = "MarketplaceIcon";
+            iconEntry.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                SelectCustomIcon(icon);
+            });
+            Tools.RenderFromBase64(icon.Data, iconEntry.transform.GetChild(0).GetComponent<Image>());
+            iconEntry.SetActive(true);
+        }
         iconColorPanel.Init(BazookaManager.Instance.GetColorSettingIcon(), Color.white);
         iconColorPanel.OnColorChanged += color =>
         {
@@ -110,6 +126,7 @@ public class Iconsmenu : MonoBehaviour
     {
         iconsPanel.SetActive(true);
         overlaysPanel.SetActive(false);
+        marketplaceIconsPanel.SetActive(false);
         selectionText.text = "Icon selection";
         placeholderButton.GetComponentInChildren<TMP_Text>().text = "Overlays";
     }
@@ -118,7 +135,17 @@ public class Iconsmenu : MonoBehaviour
     {
         iconsPanel.SetActive(false);
         overlaysPanel.SetActive(true);
+        marketplaceIconsPanel.SetActive(false);
         selectionText.text = "Overlay selection";
+        placeholderButton.GetComponentInChildren<TMP_Text>().text = "Marketplace";
+    }
+
+    private void SwitchToMarketplaceIcons()
+    {
+        iconsPanel.SetActive(false);
+        overlaysPanel.SetActive(false);
+        marketplaceIconsPanel.SetActive(true);
+        selectionText.text = "Marketplace Icons selection";
         placeholderButton.GetComponentInChildren<TMP_Text>().text = "Icons";
     }
 
@@ -129,6 +156,10 @@ public class Iconsmenu : MonoBehaviour
             SwitchToOverlay();
         }
         else if (GetCurrentKit() == 2)
+        {
+            SwitchToMarketplaceIcons();
+        }
+        else if (GetCurrentKit() == 3)
         {
             SwitchToIcon();
         }
@@ -143,6 +174,10 @@ public class Iconsmenu : MonoBehaviour
         if (overlaysPanel.activeSelf)
         {
             return 2;
+        }
+        if (marketplaceIconsPanel.activeSelf)
+        {
+            return 3;
         }
         return 0;
     }
@@ -216,5 +251,10 @@ public class Iconsmenu : MonoBehaviour
         {
             previewOverlay.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + overlayID);
         }
+    }
+
+    void SelectCustomIcon(MarketplaceIconType icon)
+    {
+        Debug.Log(JObject.FromObject(icon));
     }
 }
