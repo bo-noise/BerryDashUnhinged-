@@ -112,7 +112,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         if (data.Price > marketplaceIconStorage.Balance)
         {
             button.interactable = true;
-            ShowStatus("You can't afford this icon! You need " + (data.Price - marketplaceIconStorage.Balance) + " more coins");
+            ShowStatus("You can't afford this icon! You need " + Tools.FormatWithCommas(data.Price - marketplaceIconStorage.Balance) + " more coins");
             return;
         }
         var list = marketplaceIconStorage.Data.ToList();
