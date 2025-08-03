@@ -101,7 +101,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 464dfad19359f774eaf326e9a1e94d82
+    spriteID: 3aeff4616d270d54f83bad4fdd74b5ed
     internalID: 0
     vertices: []
     indices: 
