@@ -176,7 +176,7 @@ public class AccountLoggedIn : MonoBehaviour
                 BazookaManager.Instance.SetGameStoreTotalSlowBerries(BigInteger.Parse((string)jsonResponse["totalSlowBerries"]));
                 BazookaManager.Instance.SetGameStoreTotalUltraBerries(BigInteger.Parse((string)jsonResponse["totalUltraBerries"]));
                 BazookaManager.Instance.SetGameStoreTotalSpeedyBerries(BigInteger.Parse((string)jsonResponse["totalSpeedyBerries"]));
-                BazookaManager.Instance.SetGameStoreTotalCoinBerries(BigInteger.Parse((string)jsonResponse["totalCOinBerries"]));
+                BazookaManager.Instance.SetGameStoreTotalCoinBerries(BigInteger.Parse((string)jsonResponse["totalCoinBerries"]));
                 BazookaManager.Instance.SetGameStoreTotalAttepts(BigInteger.Parse((string)jsonResponse["totalAttempts"]));
                 BazookaManager.Instance.SetColorSettingIcon(JArray.Parse(jsonResponse["birdColor"].ToString()));
                 BazookaManager.Instance.SetColorSettingOverlay(JArray.Parse(jsonResponse["overlayColor"].ToString()));
