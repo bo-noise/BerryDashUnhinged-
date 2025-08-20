@@ -61,7 +61,7 @@ public class AccountLoggedIn : MonoBehaviour
         dataForm.AddField("totalAttempts", BazookaManager.Instance.GetGameStoreTotalAttepts().ToString());
         dataForm.AddField("birdColor", BazookaManager.Instance.GetColorSettingIcon().ToString(Formatting.None));
         dataForm.AddField("overlayColor", BazookaManager.Instance.GetColorSettingOverlay().ToString(Formatting.None));
-        dataForm.AddField("marketplaceData", BazookaManager.Instance.GetCustomBirdIconData().ToString());
+        dataForm.AddField("marketplaceData", JsonConvert.SerializeObject(BazookaManager.Instance.GetCustomBirdIconData()));
         using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "saveAccount.php", dataForm.form);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
