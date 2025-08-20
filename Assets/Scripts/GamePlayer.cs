@@ -47,30 +47,89 @@ public class GamePlayer : MonoBehaviour
 
     void Start()
     {
-        var backgroundColor = BazookaManager.Instance.GetColorSettingBackground();
-        var birdColor = BazookaManager.Instance.GetColorSettingIcon();
-        var overlayColor = BazookaManager.Instance.GetColorSettingOverlay();
-        try
+        var customIconData = BazookaManager.Instance.GetCustomBirdIconData();
+        SpriteRenderer component = bird.GetComponent<SpriteRenderer>();
+        if (customIconData.Selected == null)
         {
-            Camera.main.backgroundColor = new Color(
-                int.Parse(backgroundColor[0].ToString()) / 255f,
-                int.Parse(backgroundColor[1].ToString()) / 255f,
-                int.Parse(backgroundColor[2].ToString()) / 255f
-            );
-            bird.GetComponent<SpriteRenderer>().color = new Color(
-                int.Parse(birdColor[0].ToString()) / 255f,
-                int.Parse(birdColor[1].ToString()) / 255f,
-                int.Parse(birdColor[2].ToString()) / 255f
-            );
-            bird.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(
-                int.Parse(overlayColor[0].ToString()) / 255f,
-                int.Parse(overlayColor[1].ToString()) / 255f,
-                int.Parse(overlayColor[2].ToString()) / 255f
-            );
+            var backgroundColor = BazookaManager.Instance.GetColorSettingBackground();
+            var birdColor = BazookaManager.Instance.GetColorSettingIcon();
+            var overlayColor = BazookaManager.Instance.GetColorSettingOverlay();
+            try
+            {
+                Camera.main.backgroundColor = new Color(
+                    int.Parse(backgroundColor[0].ToString()) / 255f,
+                    int.Parse(backgroundColor[1].ToString()) / 255f,
+                    int.Parse(backgroundColor[2].ToString()) / 255f
+                );
+                bird.GetComponent<SpriteRenderer>().color = new Color(
+                    int.Parse(birdColor[0].ToString()) / 255f,
+                    int.Parse(birdColor[1].ToString()) / 255f,
+                    int.Parse(birdColor[2].ToString()) / 255f
+                );
+                bird.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(
+                    int.Parse(overlayColor[0].ToString()) / 255f,
+                    int.Parse(overlayColor[1].ToString()) / 255f,
+                    int.Parse(overlayColor[2].ToString()) / 255f
+                );
+            }
+            catch
+            {
+                Debug.LogError("Invalid BackgroundColor format");
+            }
+
+            int num = BazookaManager.Instance.GetBirdIcon();
+            int num2 = BazookaManager.Instance.GetBirdOverlay();
+            if (num == 1)
+            {
+                component.sprite = Tools.GetIconForUser(BazookaManager.Instance.GetAccountID() ?? 0);
+            }
+            else
+            {
+                component.sprite = Resources.Load<Sprite>("Icons/Icons/bird_" + num);
+            }
+            if (num2 == 8)
+            {
+                overlayRender.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + num2);
+                overlayRender.transform.localPosition = new UnityEngine.Vector3(-0.37f, 0.32f, 0f);
+            }
+            else if (num2 == 11)
+            {
+                overlayRender.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + num2);
+                overlayRender.transform.localScale = new UnityEngine.Vector3(1.1f, 1.1f, 1.1f); //yea i didnt feel like doing it for all lmao
+                overlayRender.transform.localPosition = new UnityEngine.Vector3(-0.3141809f, 0.4324968f, 0f);
+            }
+            else if (num2 == 13)
+            {
+                overlayRender.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + num2);
+                overlayRender.transform.localPosition = new UnityEngine.Vector3(-0.3559977f, 0.3179995f, 0f);
+            }
+            else
+            {
+                overlayRender.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + num2);
+            }
+            if (component.sprite == null)
+            {
+                component.sprite = Resources.Load<Sprite>("Icons/Icons/bird_1");
+                BazookaManager.Instance.SetBirdIcon(1);
+            }
+            if (overlayRender.sprite == null && num2 != 0)
+            {
+                overlayRender.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_1");
+                BazookaManager.Instance.SetBirdOverlay(1);
+            }
         }
-        catch
+        else
         {
-            Debug.LogError("Invalid BackgroundColor format");
+            if (customIconData.Selected != null)
+            {
+                foreach (var icon in customIconData.Data)
+                {
+                    if (icon.UUID == customIconData.Selected)
+                    {
+                        Tools.RenderFromBase64(icon.Data, component);
+                    }
+                }
+            }
         }
 
         lastMoveTime = Time.time;
@@ -88,47 +147,6 @@ public class GamePlayer : MonoBehaviour
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        SpriteRenderer component = bird.GetComponent<SpriteRenderer>();
-        int num = BazookaManager.Instance.GetBirdIcon();
-        int num2 = BazookaManager.Instance.GetBirdOverlay();
-        if (num == 1)
-        {
-            component.sprite = Tools.GetIconForUser(BazookaManager.Instance.GetAccountID() ?? 0);
-        }
-        else
-        {
-            component.sprite = Resources.Load<Sprite>("Icons/Icons/bird_" + num);
-        }
-        if (num2 == 8)
-        {
-            overlayRender.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + num2);
-            overlayRender.transform.localPosition = new UnityEngine.Vector3(-0.37f, 0.32f, 0f);
-        }
-        else if (num2 == 11)
-        {
-            overlayRender.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + num2);
-            overlayRender.transform.localScale = new UnityEngine.Vector3(1.1f, 1.1f, 1.1f); //yea i didnt feel like doing it for all lmao
-            overlayRender.transform.localPosition = new UnityEngine.Vector3(-0.3141809f, 0.4324968f, 0f);
-        }
-        else if (num2 == 13)
-        {
-            overlayRender.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + num2);
-            overlayRender.transform.localPosition = new UnityEngine.Vector3(-0.3559977f, 0.3179995f, 0f);
-        }
-        else
-        {
-            overlayRender.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + num2);
-        }
-        if (component.sprite == null)
-        {
-            component.sprite = Resources.Load<Sprite>("Icons/Icons/bird_1");
-            BazookaManager.Instance.SetBirdIcon(1);
-        }
-        if (overlayRender.sprite == null && num2 != 0)
-        {
-            overlayRender.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_1");
-            BazookaManager.Instance.SetBirdOverlay(1);
-        }
         backgroundMusic.volume = BazookaManager.Instance.GetSettingMusicVolume();
         screenWidth = Camera.main.orthographicSize * 2f * Camera.main.aspect;
         if (Application.isMobilePlatform)
