@@ -20,7 +20,7 @@ public class Iconsmenu : MonoBehaviour
     public Image previewOverlay;
     public Button[] icons;
     public Button[] overlays;
-    private Dictionary<MarketplaceIconType, Button> customIcons = new();
+    private Dictionary<string, Button> customIcons = new();
     public GameObject previewBirdObject;
     public ColorPanel iconColorPanel;
     public ColorPanel overlayColorPanel;
@@ -33,7 +33,7 @@ public class Iconsmenu : MonoBehaviour
             var iconEntry = Instantiate(marketplaceIconsSample, marketplaceIconsContent.transform);
             iconEntry.name = "MarketplaceIcon";
             var button = iconEntry.GetComponent<Button>();
-            customIcons[icon] = button;
+            customIcons[icon.UUID] = button;
             button.onClick.AddListener(() =>
             {
                 SelectCustomIcon(icon);
@@ -263,7 +263,7 @@ public class Iconsmenu : MonoBehaviour
         previewOverlay.color = Color.white;
         foreach (var loopIcon in customData.Data)
         {
-            customIcons[loopIcon].interactable = loopIcon.UUID == icon.UUID;
+            customIcons[loopIcon.UUID].interactable = loopIcon.UUID != icon.UUID;
         }
     }
 }
