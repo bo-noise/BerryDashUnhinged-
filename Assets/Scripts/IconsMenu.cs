@@ -45,11 +45,30 @@ public class Iconsmenu : MonoBehaviour
         iconColorPanel.OnColorChanged += color =>
         {
             BazookaManager.Instance.SetColorSettingIcon(color);
+            foreach (var icon in icons)
+            {
+                icon.transform.GetChild(0).GetComponent<Image>().color = new Color(
+                    int.Parse(color[0].ToString()) / 255f,
+                    int.Parse(color[1].ToString()) / 255f,
+                    int.Parse(color[2].ToString()) / 255f
+                );
+            }
         };
         overlayColorPanel.Init(customIconData.Selected == null ? BazookaManager.Instance.GetColorSettingOverlay() : JArray.Parse("[255,255,255]"), Color.white);
         overlayColorPanel.OnColorChanged += color =>
         {
             BazookaManager.Instance.SetColorSettingOverlay(color);
+            foreach (var overlay in overlays)
+            {
+                var img = overlay.transform.GetChild(0).TryGetComponent<Image>(out var image) ? image : null;
+                if (img == null) continue;
+
+                img.color = new Color(
+                    int.Parse(color[0].ToString()) / 255f,
+                    int.Parse(color[1].ToString()) / 255f,
+                    int.Parse(color[2].ToString()) / 255f
+                );
+            }
         };
 
         if (customIconData.Selected == null)
