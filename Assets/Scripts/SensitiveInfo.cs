@@ -10,6 +10,7 @@ public class SensitiveInfo
     public static readonly string SERVER_RECEIVE_TRANSFER_KEY = "";
     public static readonly string SERVER_SEND_TRANSFER_KEY = "";
     public static readonly string BAZOOKA_MANAGER_KEY = "";
+    public static readonly string BAZOOKA_MANAGER_FILE_KEY = "9b9ad7a5a824436144083c19dd071d66";
 
     public static string Encrypt(string plainText, string key)
     {
