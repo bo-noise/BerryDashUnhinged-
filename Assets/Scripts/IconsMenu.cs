@@ -139,6 +139,7 @@ public class Iconsmenu : MonoBehaviour
                 {
                     SelectCustomIcon(icon);
                 }
+                customIcons[icon.UUID].interactable = icon.UUID != customIconData.Selected;
             }
         }
     }
