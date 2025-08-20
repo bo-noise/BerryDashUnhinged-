@@ -1,4 +1,5 @@
 using System.Numerics;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
@@ -91,9 +92,11 @@ public class AccountLogin : MonoBehaviour
                 BazookaManager.Instance.SetGameStoreTotalSlowBerries(BigInteger.Parse((string)jsonResponse["data"]["totalSlowBerries"]));
                 BazookaManager.Instance.SetGameStoreTotalUltraBerries(BigInteger.Parse((string)jsonResponse["data"]["totalUltraBerries"]));
                 BazookaManager.Instance.SetGameStoreTotalSpeedyBerries(BigInteger.Parse((string)jsonResponse["data"]["totalSpeedyBerries"]));
+                BazookaManager.Instance.SetGameStoreTotalCoinBerries(BigInteger.Parse((string)jsonResponse["data"]["totalCoinBerries"]));
                 BazookaManager.Instance.SetGameStoreTotalAttepts(BigInteger.Parse((string)jsonResponse["data"]["totalAttempts"]));
                 BazookaManager.Instance.SetColorSettingIcon(JArray.Parse(jsonResponse["data"]["birdColor"].ToString()));
                 BazookaManager.Instance.SetColorSettingOverlay(JArray.Parse(jsonResponse["data"]["overlayColor"].ToString()));
+                BazookaManager.Instance.SetCustomBirdIconData(JsonConvert.DeserializeObject<MarketplaceIconStorageType>(jsonResponse["data"]["marketplaceData"].ToString()));
                 AccountHandler.instance.SwitchPanel(0);
                 Tools.UpdateStatusText(loginPanelStatusText, "", Color.red);
             }
