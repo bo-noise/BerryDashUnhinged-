@@ -33,6 +33,7 @@ public class AccountRegister : MonoBehaviour
 
     async void SubmitRegister()
     {
+        registerBackButton.interactable = false;
         if (
             registerUsernameInput.text == string.Empty ||
             registerEmailInput.text == string.Empty ||
@@ -41,16 +42,19 @@ public class AccountRegister : MonoBehaviour
             registerRetypePasswordInput.text == string.Empty
         )
         {
+            registerBackButton.interactable = true;
             Tools.UpdateStatusText(registerPanelStatusText, "All input fields must be filled", Color.red);
             return;
         }
         if (registerEmailInput.text != registerRetypeEmailInput.text)
         {
+            registerBackButton.interactable = true;
             Tools.UpdateStatusText(registerPanelStatusText, "Emails don't match", Color.red);
             return;
         }
         if (registerPasswordInput.text != registerRetypePasswordInput.text)
         {
+            registerBackButton.interactable = true;
             Tools.UpdateStatusText(registerPanelStatusText, "Passwords don't match", Color.red);
             return;
         }
@@ -65,27 +69,32 @@ public class AccountRegister : MonoBehaviour
         await request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.Success)
         {
+            registerBackButton.interactable = true;
             Tools.UpdateStatusText(registerPanelStatusText, "Failed to make HTTP request", Color.red);
             return;
         }
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
         if (response == "-999")
         {
+            registerBackButton.interactable = true;
             Tools.UpdateStatusText(registerPanelStatusText, "Server error while fetching data", Color.red);
             return;
         }
         else if (response == "-998")
         {
+            registerBackButton.interactable = true;
             Tools.UpdateStatusText(registerPanelStatusText, "Client version too outdated to access servers", Color.red);
             return;
         }
         else if (response == "-997")
         {
+            registerBackButton.interactable = true;
             Tools.UpdateStatusText(registerPanelStatusText, "Encryption/decryption issues", Color.red);
             return;
         }
         else if (response == "-996")
         {
+            registerBackButton.interactable = true;
             Tools.UpdateStatusText(registerPanelStatusText, "Can't send requests on self-built instance", Color.red);
             return;
         }
@@ -101,5 +110,6 @@ public class AccountRegister : MonoBehaviour
                 Tools.UpdateStatusText(registerPanelStatusText, (string)jsonResponse["message"], Color.red);
             }
         }
+        registerBackButton.interactable = true;
     }
 }

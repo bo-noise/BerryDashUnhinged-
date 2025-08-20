@@ -96,27 +96,42 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
         await request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.Success)
         {
+            uploadButton.interactable = true;
+            backButton.interactable = true;
+            selectButton.interactable = true;
             Tools.UpdateStatusText(statusText, "Failed to make HTTP request", Color.red);
             return;
         }
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
         if (response == "-999")
         {
+            uploadButton.interactable = true;
+            backButton.interactable = true;
+            selectButton.interactable = true;
             Tools.UpdateStatusText(statusText, "Server error while fetching data", Color.red);
             return;
         }
         else if (response == "-998")
         {
+            uploadButton.interactable = true;
+            backButton.interactable = true;
+            selectButton.interactable = true;
             Tools.UpdateStatusText(statusText, "Client version too outdated to access servers", Color.red);
             return;
         }
         else if (response == "-997")
         {
+            uploadButton.interactable = true;
+            backButton.interactable = true;
+            selectButton.interactable = true;
             Tools.UpdateStatusText(statusText, "Encryption/decryption issues", Color.red);
             return;
         }
         else if (response == "-996")
         {
+            uploadButton.interactable = true;
+            backButton.interactable = true;
+            selectButton.interactable = true;
             Tools.UpdateStatusText(statusText, "Can't send requests on self-built instance", Color.red);
             return;
         }

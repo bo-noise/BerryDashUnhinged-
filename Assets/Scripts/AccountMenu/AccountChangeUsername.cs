@@ -27,6 +27,7 @@ public class AccountChangeUsername : MonoBehaviour
 
     async void ChangeUsername()
     {
+        changeUsernameBackButton.interactable = false;
         EncryptedWWWForm dataForm = new();
         dataForm.AddField("oldusername", changeUsernameCurrentUsernameInput.text);
         dataForm.AddField("newusername", changeUsernameNewUsernameInput.text);
@@ -39,27 +40,32 @@ public class AccountChangeUsername : MonoBehaviour
         await request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.Success)
         {
+            changeUsernameBackButton.interactable = true;
             Tools.UpdateStatusText(changeUsernameStatusText, "Failed to make HTTP request", Color.red);
             return;
         }
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
         if (response == "-999")
         {
+            changeUsernameBackButton.interactable = true;
             Tools.UpdateStatusText(changeUsernameStatusText, "Server error while fetching data", Color.red);
             return;
         }
         else if (response == "-998")
         {
+            changeUsernameBackButton.interactable = true;
             Tools.UpdateStatusText(changeUsernameStatusText, "Client version too outdated to access servers", Color.red);
             return;
         }
         else if (response == "-997")
         {
+            changeUsernameBackButton.interactable = true;
             Tools.UpdateStatusText(changeUsernameStatusText, "Encryption/decryption issues", Color.red);
             return;
         }
         else if (response == "-996")
         {
+            changeUsernameBackButton.interactable = true;
             Tools.UpdateStatusText(changeUsernameStatusText, "Can't send requests on self-built instance", Color.red);
             return;
         }
@@ -77,5 +83,6 @@ public class AccountChangeUsername : MonoBehaviour
                 Tools.UpdateStatusText(changeUsernameStatusText, (string)jsonResponse["message"], Color.red);
             }
         }
+        changeUsernameBackButton.interactable = true;
     }
 }

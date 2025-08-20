@@ -50,6 +50,7 @@ public class ChatroomMenu : MonoBehaviour
     async Task HandleMessageSubmit()
     {
         if (!sendButton.interactable) return;
+        backButton.interactable = false;
         var text = messageInputField.text.Clone() as string;
         messageInputField.text = string.Empty;
         if (string.IsNullOrEmpty(text))
@@ -68,26 +69,31 @@ public class ChatroomMenu : MonoBehaviour
         await request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.Success)
         {
+            backButton.interactable = true;
             return;
         }
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
         if (response == "-999")
         {
+            backButton.interactable = true;
             ShowStatus("Server error while fetching data");
             return;
         }
         else if (response == "-998")
         {
+            backButton.interactable = true;
             ShowStatus("Client version too outdated to access servers");
             return;
         }
         else if (response == "-997")
         {
+            backButton.interactable = true;
             ShowStatus("Encryption/decryption issues");
             return;
         }
         else if (response == "-996")
         {
+            backButton.interactable = true;
             ShowStatus("Can't send requests on self-built instance");
             return;
         }
@@ -105,6 +111,7 @@ public class ChatroomMenu : MonoBehaviour
                 ShowStatus((string)jsonResponse["message"]);
             }
         }
+        backButton.interactable = true;
     }
 
     void ShowStatus(string content)

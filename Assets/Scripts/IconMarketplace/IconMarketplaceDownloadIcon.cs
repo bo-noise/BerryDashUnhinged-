@@ -46,27 +46,32 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         await request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.Success)
         {
+            backButton.interactable = true;
             ShowStatus("Failed to make HTTP request");
             return;
         }
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
         if (response == "-999")
         {
+            backButton.interactable = true;
             ShowStatus("Server error while fetching data");
             return;
         }
         else if (response == "-998")
         {
+            backButton.interactable = true;
             ShowStatus("Client version too outdated to access servers");
             return;
         }
         else if (response == "-997")
         {
+            backButton.interactable = true;
             ShowStatus("Encryption/decryption issues");
             return;
         }
         else if (response == "-996")
         {
+            backButton.interactable = true;
             ShowStatus("Can't send requests on self-built instance");
             return;
         }
