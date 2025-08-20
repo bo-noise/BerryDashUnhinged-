@@ -78,4 +78,20 @@ public class ColorPanel : MonoBehaviour
             (int)bSlider.value
         ));
     }
+
+    public void SetColor(Color col)
+    {
+        rSlider.SetValueWithoutNotify(col.r * 255f);
+        gSlider.SetValueWithoutNotify(col.g * 255f);
+        bSlider.SetValueWithoutNotify(col.b * 255f);
+        SyncAll();
+    }
+
+    public void SetColor(JArray color)
+    {
+        rSlider.SetValueWithoutNotify((int)color[0]);
+        gSlider.SetValueWithoutNotify((int)color[1]);
+        bSlider.SetValueWithoutNotify((int)color[2]);
+        SyncAll();
+    }
 }

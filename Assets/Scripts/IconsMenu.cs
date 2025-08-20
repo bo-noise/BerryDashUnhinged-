@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
@@ -18,66 +18,58 @@ public class Iconsmenu : MonoBehaviour
     public TMP_Text selectionText;
     public Image previewBird;
     public Image previewOverlay;
-    public Button icon1;
-    public Button icon2;
-    public Button icon3;
-    public Button icon4;
-    public Button icon5;
-    public Button icon6;
-    public Button icon7;
-    public Button icon8;
-    public Button overlay0;
-    public Button overlay1;
-    public Button overlay2;
-    public Button overlay3;
-    public Button overlay4;
-    public Button overlay5;
-    public Button overlay6;
-    public Button overlay7;
-    public Button overlay8;
-    public Button overlay9;
-    public Button overlay10;
-    public Button overlay11;
-    public Button overlay12;
-    public Button overlay13;
-    public Button overlay14;
+    public Button[] icons;
+    public Button[] overlays;
+    private Dictionary<MarketplaceIconType, Button> customIcons = new();
     public GameObject previewBirdObject;
     public ColorPanel iconColorPanel;
     public ColorPanel overlayColorPanel;
 
     private void Start()
     {
-        foreach (var icon in BazookaManager.Instance.GetCustomBirdIconData().Data)
+        var customIconData = BazookaManager.Instance.GetCustomBirdIconData();
+        foreach (var icon in customIconData.Data)
         {
             var iconEntry = Instantiate(marketplaceIconsSample, marketplaceIconsContent.transform);
             iconEntry.name = "MarketplaceIcon";
-            iconEntry.GetComponent<Button>().onClick.AddListener(() =>
+            var button = iconEntry.GetComponent<Button>();
+            customIcons[icon] = button;
+            button.onClick.AddListener(() =>
             {
                 SelectCustomIcon(icon);
             });
             Tools.RenderFromBase64(icon.Data, iconEntry.transform.GetChild(0).GetComponent<Image>());
             iconEntry.SetActive(true);
         }
-        iconColorPanel.Init(BazookaManager.Instance.GetColorSettingIcon(), Color.white);
+        iconColorPanel.Init(customIconData.Selected == null ? BazookaManager.Instance.GetColorSettingIcon() : JArray.Parse("[255,255,255]"), Color.white);
         iconColorPanel.OnColorChanged += color =>
         {
             BazookaManager.Instance.SetColorSettingIcon(color);
         };
-        overlayColorPanel.Init(BazookaManager.Instance.GetColorSettingOverlay(), Color.white);
+        overlayColorPanel.Init(customIconData.Selected == null ? BazookaManager.Instance.GetColorSettingOverlay() : JArray.Parse("[255,255,255]"), Color.white);
         overlayColorPanel.OnColorChanged += color =>
         {
             BazookaManager.Instance.SetColorSettingOverlay(color);
         };
 
-        defaultIcon = Tools.GetIconForUser(BazookaManager.Instance.GetAccountID() ?? 0);
-        icon1.transform.GetChild(0).GetComponent<Image>().sprite = defaultIcon;
-        SwitchToIcon();
-        SelectOverlay(BazookaManager.Instance.GetBirdOverlay());
-        SelectIcon(BazookaManager.Instance.GetBirdIcon());
-        if (BazookaManager.Instance.GetBirdIcon() == 7)
+        if (customIconData.Selected == null)
         {
-            SelectOverlay(0);
-            placeholderButton.interactable = false;
+            defaultIcon = Tools.GetIconForUser(BazookaManager.Instance.GetAccountID() ?? 0);
+            icons[0].transform.GetChild(0).GetComponent<Image>().sprite = defaultIcon;
+
+            SwitchToIcon();
+            SelectOverlay(BazookaManager.Instance.GetBirdOverlay());
+            SelectIcon(BazookaManager.Instance.GetBirdIcon());
+
+            if (BazookaManager.Instance.GetBirdIcon() == 7)
+            {
+                SelectOverlay(0);
+                placeholderButton.interactable = false;
+            }
+        }
+        else
+        {
+            SwitchToMarketplaceIcons();
         }
         placeholderButton.onClick.AddListener(ToggleKit);
         backButton.onClick.AddListener(async () =>
@@ -97,29 +89,16 @@ public class Iconsmenu : MonoBehaviour
             }
             previewBird.transform.localScale = scale;
         });
-        icon1.onClick.AddListener(() => SelectIcon(1));
-        icon2.onClick.AddListener(() => SelectIcon(2));
-        icon3.onClick.AddListener(() => SelectIcon(3));
-        icon4.onClick.AddListener(() => SelectIcon(4));
-        icon5.onClick.AddListener(() => SelectIcon(5));
-        icon6.onClick.AddListener(() => SelectIcon(6));
-        icon7.onClick.AddListener(() => SelectIcon(7));
-        icon8.onClick.AddListener(() => SelectIcon(8));
-        overlay0.onClick.AddListener(() => SelectOverlay(0));
-        overlay1.onClick.AddListener(() => SelectOverlay(1));
-        overlay2.onClick.AddListener(() => SelectOverlay(2));
-        overlay3.onClick.AddListener(() => SelectOverlay(3));
-        overlay4.onClick.AddListener(() => SelectOverlay(4));
-        overlay5.onClick.AddListener(() => SelectOverlay(5));
-        overlay6.onClick.AddListener(() => SelectOverlay(6));
-        overlay7.onClick.AddListener(() => SelectOverlay(7));
-        overlay8.onClick.AddListener(() => SelectOverlay(8));
-        overlay9.onClick.AddListener(() => SelectOverlay(9));
-        overlay10.onClick.AddListener(() => SelectOverlay(10));
-        overlay11.onClick.AddListener(() => SelectOverlay(11));
-        overlay12.onClick.AddListener(() => SelectOverlay(12));
-        overlay13.onClick.AddListener(() => SelectOverlay(13));
-        overlay14.onClick.AddListener(() => SelectOverlay(14));
+        for (int i = 0; i < icons.Length; i++)
+        {
+            int index = i;
+            icons[i].onClick.AddListener(() => SelectIcon(index + 1));
+        }
+        for (int i = 0; i < overlays.Length; i++)
+        {
+            int index = i;
+            overlays[i].onClick.AddListener(() => SelectOverlay(index));
+        }
     }
 
     private void SwitchToIcon()
@@ -129,6 +108,8 @@ public class Iconsmenu : MonoBehaviour
         marketplaceIconsPanel.SetActive(false);
         selectionText.text = "Icon selection";
         placeholderButton.GetComponentInChildren<TMP_Text>().text = "Overlays";
+        iconColorPanel.gameObject.SetActive(true);
+        overlayColorPanel.gameObject.SetActive(true);
     }
 
     private void SwitchToOverlay()
@@ -147,6 +128,19 @@ public class Iconsmenu : MonoBehaviour
         marketplaceIconsPanel.SetActive(true);
         selectionText.text = "Marketplace Icons selection";
         placeholderButton.GetComponentInChildren<TMP_Text>().text = "Icons";
+        iconColorPanel.gameObject.SetActive(false);
+        overlayColorPanel.gameObject.SetActive(false);
+        var customIconData = BazookaManager.Instance.GetCustomBirdIconData();
+        if (customIconData.Selected != null)
+        {
+            foreach (var icon in customIconData.Data)
+            {
+                if (icon.UUID == customIconData.Selected)
+                {
+                    SelectCustomIcon(icon);
+                }
+            }
+        }
     }
 
     private void ToggleKit()
@@ -161,7 +155,20 @@ public class Iconsmenu : MonoBehaviour
         }
         else if (GetCurrentKit() == 3)
         {
+            defaultIcon = Tools.GetIconForUser(BazookaManager.Instance.GetAccountID() ?? 0);
+            icons[0].transform.GetChild(0).GetComponent<Image>().sprite = defaultIcon;
+
             SwitchToIcon();
+            SelectOverlay(BazookaManager.Instance.GetBirdOverlay());
+            SelectIcon(BazookaManager.Instance.GetBirdIcon());
+            iconColorPanel.SetColor(BazookaManager.Instance.GetColorSettingIcon());
+            overlayColorPanel.SetColor(BazookaManager.Instance.GetColorSettingOverlay());
+
+            if (BazookaManager.Instance.GetBirdIcon() == 7)
+            {
+                SelectOverlay(0);
+                placeholderButton.interactable = false;
+            }
         }
     }
 
@@ -184,15 +191,14 @@ public class Iconsmenu : MonoBehaviour
 
     private void SelectIcon(int iconID)
     {
+        var customData = BazookaManager.Instance.GetCustomBirdIconData();
+        customData.Selected = null;
+        BazookaManager.Instance.SetCustomBirdIconData(customData);
         BazookaManager.Instance.SetBirdIcon(iconID);
-        icon1.interactable = iconID != 1;
-        icon2.interactable = iconID != 2;
-        icon3.interactable = iconID != 3;
-        icon4.interactable = iconID != 4;
-        icon5.interactable = iconID != 5;
-        icon6.interactable = iconID != 6;
-        icon7.interactable = iconID != 7;
-        icon8.interactable = iconID != 8;
+        for (int i = 0; i < icons.Length; i++)
+        {
+            icons[i].interactable = iconID != i + 1;
+        }
         previewBird.sprite = Resources.Load<Sprite>("Icons/Icons/bird_" + iconID);
         if (iconID == 1)
         {
@@ -211,22 +217,14 @@ public class Iconsmenu : MonoBehaviour
 
     private void SelectOverlay(int overlayID)
     {
+        var customData = BazookaManager.Instance.GetCustomBirdIconData();
+        customData.Selected = null;
+        BazookaManager.Instance.SetCustomBirdIconData(customData);
         BazookaManager.Instance.SetBirdOverlay(overlayID);
-        overlay0.interactable = overlayID != 0;
-        overlay1.interactable = overlayID != 1;
-        overlay2.interactable = overlayID != 2;
-        overlay3.interactable = overlayID != 3;
-        overlay4.interactable = overlayID != 4;
-        overlay5.interactable = overlayID != 5;
-        overlay6.interactable = overlayID != 6;
-        overlay7.interactable = overlayID != 7;
-        overlay8.interactable = !(BazookaManager.Instance.GetAccountID() == 1 && BazookaManager.Instance.GetBirdIcon() == 1) && overlayID != 8;
-        overlay9.interactable = overlayID != 9;
-        overlay10.interactable = overlayID != 10;
-        overlay11.interactable = overlayID != 11;
-        overlay12.interactable = overlayID != 12;
-        overlay13.interactable = overlayID != 13;
-        overlay14.interactable = overlayID != 14;
+        for (int i = 0; i < overlays.Length; i++)
+        {
+            overlays[i].interactable = overlayID != i;
+        }
         previewOverlay.rectTransform.localPosition = new Vector3(-32f, 44.50001f, 0f);
         previewOverlay.gameObject.SetActive(true);
         if (overlayID == 8)
@@ -255,6 +253,17 @@ public class Iconsmenu : MonoBehaviour
 
     void SelectCustomIcon(MarketplaceIconType icon)
     {
-        Debug.Log(JObject.FromObject(icon));
+        var customData = BazookaManager.Instance.GetCustomBirdIconData();
+        customData.Selected = icon.UUID;
+        BazookaManager.Instance.SetCustomBirdIconData(customData);
+        Tools.RenderFromBase64(icon.Data, previewBird);
+        previewBird.color = Color.white;
+        previewOverlay.gameObject.SetActive(false);
+        previewOverlay.sprite = null;
+        previewOverlay.color = Color.white;
+        foreach (var loopIcon in customData.Data)
+        {
+            customIcons[loopIcon].interactable = loopIcon.UUID == icon.UUID;
+        }
     }
 }

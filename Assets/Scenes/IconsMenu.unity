@@ -2512,7 +2512,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &346076456
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6421,7 +6421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &989561979
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6717,29 +6717,31 @@ MonoBehaviour:
   selectionText: {fileID: 283532290}
   previewBird: {fileID: 485555076}
   previewOverlay: {fileID: 1953625730}
-  icon1: {fileID: 1374823590}
-  icon2: {fileID: 1587955963}
-  icon3: {fileID: 2082761349}
-  icon4: {fileID: 105058369}
-  icon5: {fileID: 1275335465}
-  icon6: {fileID: 1682251926}
-  icon7: {fileID: 2044046146}
-  icon8: {fileID: 1433968977}
-  overlay0: {fileID: 437256206}
-  overlay1: {fileID: 388694500}
-  overlay2: {fileID: 606851916}
-  overlay3: {fileID: 1721135576}
-  overlay4: {fileID: 1786729680}
-  overlay5: {fileID: 519880727}
-  overlay6: {fileID: 2122644443}
-  overlay7: {fileID: 490807504}
-  overlay8: {fileID: 1197784014}
-  overlay9: {fileID: 420083143}
-  overlay10: {fileID: 367978220}
-  overlay11: {fileID: 1860444778}
-  overlay12: {fileID: 1513997428}
-  overlay13: {fileID: 1736703}
-  overlay14: {fileID: 1798643177}
+  icons:
+  - {fileID: 1374823590}
+  - {fileID: 1587955963}
+  - {fileID: 2082761349}
+  - {fileID: 105058369}
+  - {fileID: 1275335465}
+  - {fileID: 1682251926}
+  - {fileID: 2044046146}
+  - {fileID: 1433968977}
+  overlays:
+  - {fileID: 437256206}
+  - {fileID: 388694500}
+  - {fileID: 606851916}
+  - {fileID: 1721135576}
+  - {fileID: 1786729680}
+  - {fileID: 519880727}
+  - {fileID: 2122644443}
+  - {fileID: 490807504}
+  - {fileID: 1197784014}
+  - {fileID: 420083143}
+  - {fileID: 367978220}
+  - {fileID: 1860444778}
+  - {fileID: 1513997428}
+  - {fileID: 1736703}
+  - {fileID: 1798643177}
   previewBirdObject: {fileID: 2072730781}
   iconColorPanel: {fileID: 346076460}
   overlayColorPanel: {fileID: 989561983}
