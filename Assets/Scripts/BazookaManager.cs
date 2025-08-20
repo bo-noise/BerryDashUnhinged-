@@ -68,7 +68,7 @@ public class BazookaManager : MonoBehaviour
 #if UNITY_EDITOR
         return;
 #else
-        string path = Path.Join(Application.persistentDataPath, SensitiveInfo.BAZOOKA_MANAGER_FILE_KEY + "BazookaManager.dat");
+        string path = Path.Join(Application.persistentDataPath, SensitiveInfo.BAZOOKA_MANAGER_FILE_KEY + ".dat");
         var encoded = SensitiveInfo.EncryptRaw(saveFile.ToString(Formatting.None), SensitiveInfo.BAZOOKA_MANAGER_KEY);
         if (encoded == null) return;
         using var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
