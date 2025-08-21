@@ -10,8 +10,18 @@ public class LoadingMenu : MonoBehaviour
     public Button updateButton;
     public Button continueButton;
 
-    void Awake()
+    void Start()
     {
+        QualitySettings.vSyncCount = BazookaManager.Instance.GetSettingVsync() ? 1 : -1;
+        if (!Application.isMobilePlatform)
+        {
+            Screen.fullScreen = BazookaManager.Instance.GetSettingFullScreen();
+        }
+        else
+        {
+            Application.targetFrameRate = 360;
+            QualitySettings.vSyncCount = 0;
+        }
         PlayerPrefs.SetString("latestVersion", Application.version);
         updateButton.onClick.AddListener(() =>
         {
@@ -21,16 +31,11 @@ public class LoadingMenu : MonoBehaviour
         {
             await SceneManager.LoadSceneAsync("MainMenu");
         });
-    }
-
-    void Start()
-    {
         CheckUpdate();
     }
 
     async void CheckUpdate()
     {
-        string response;
         using UnityWebRequest request = UnityWebRequest.Get(SensitiveInfo.SERVER_DATABASE_PREFIX + "canLoadClient.php");
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
@@ -41,7 +46,7 @@ public class LoadingMenu : MonoBehaviour
             text.text = "Failed to check version";
             return;
         }
-        response = request.downloadHandler.text;
+        string response = request.downloadHandler.text;
         if (response == "1")
         {
             await SceneManager.LoadSceneAsync("MainMenu");

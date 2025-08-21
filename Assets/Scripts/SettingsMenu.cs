@@ -34,9 +34,9 @@ public class SettingsMenu : MonoBehaviour
         sfxSlider.value = BazookaManager.Instance.GetSettingSFXVolume();
         if (!Application.isMobilePlatform)
         {
-            setting1toggle.isOn = BazookaManager.Instance.GetSettingFullScreen() ?? true == true;
+            setting1toggle.isOn = BazookaManager.Instance.GetSettingFullScreen() == true;
             setting2toggle.isOn = BazookaManager.Instance.GetSettingShowFPS() == true;
-            setting3toggle.isOn = BazookaManager.Instance.GetSettingVsync() ?? true == true;
+            setting3toggle.isOn = BazookaManager.Instance.GetSettingVsync() == true;
             setting4toggle.isOn = BazookaManager.Instance.GetSettingHideSocials() == true;
         }
         else

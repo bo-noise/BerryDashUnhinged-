@@ -147,10 +147,10 @@ public class BazookaManager : MonoBehaviour
         saveFile["settings"]["fullScreen"] = value;
     }
 
-    public bool? GetSettingFullScreen()
+    public bool GetSettingFullScreen()
     {
-        if (saveFile["settings"] == null) return null;
-        if (saveFile["settings"]["fullScreen"] == null) return null;
+        if (saveFile["settings"] == null) return true;
+        if (saveFile["settings"]["fullScreen"] == null) return true;
         return bool.Parse(saveFile["settings"]["fullScreen"].ToString());
     }
 
@@ -173,10 +173,10 @@ public class BazookaManager : MonoBehaviour
         saveFile["settings"]["vsync"] = value;
     }
 
-    public bool? GetSettingVsync()
+    public bool GetSettingVsync()
     {
-        if (saveFile["settings"] == null) return null;
-        if (saveFile["settings"]["vsync"] == null) return null;
+        if (saveFile["settings"] == null) return true;
+        if (saveFile["settings"]["vsync"] == null) return true;
         return bool.Parse(saveFile["settings"]["vsync"].ToString());
     }
 

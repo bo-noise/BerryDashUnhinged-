@@ -12,9 +12,9 @@ public class HideIfSettingFalse : MonoBehaviour {
     bool GetSettingValue(SettingTypes s) {
         var b = BazookaManager.Instance;
         return s switch {
-            SettingTypes.FullScreen => b.GetSettingFullScreen() ?? false,
+            SettingTypes.FullScreen => b.GetSettingFullScreen(),
             SettingTypes.ShowFPS => b.GetSettingShowFPS(),
-            SettingTypes.Vsync => b.GetSettingVsync() ?? false,
+            SettingTypes.Vsync => b.GetSettingVsync(),
             SettingTypes.HideSocials => b.GetSettingHideSocials() ?? false,
             _ => false
         };
