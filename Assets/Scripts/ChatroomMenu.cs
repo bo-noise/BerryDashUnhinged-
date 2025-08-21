@@ -22,6 +22,7 @@ public class ChatroomMenu : MonoBehaviour
     private string statusMessage;
     private Coroutine statusRoutine;
     private Coroutine refreshLoopRoutine;
+    private bool shouldScrollToBottom = true;
 
     void Start()
     {
@@ -102,9 +103,9 @@ public class ChatroomMenu : MonoBehaviour
             var jsonResponse = JObject.Parse(response);
             if ((bool)jsonResponse["success"])
             {
+                shouldScrollToBottom = true;
                 StopCoroutine(refreshLoopRoutine);
                 refreshLoopRoutine = StartCoroutine(Loop());
-                content.transform.localPosition = new UnityEngine.Vector2(0f, 0f);
             }
             else
             {
@@ -200,15 +201,15 @@ public class ChatroomMenu : MonoBehaviour
                     }
                     if (content.transform.childCount > 50)
                     {
-                        var firstChild = content.transform.GetChild(0);
+                        var firstChild = content.transform.GetChild(1);
                         Destroy(firstChild.gameObject);
                     }
 
                     var rowInfo = Instantiate(sampleObject, content.transform);
                     var usernameText = rowInfo.transform.GetChild(0).GetComponent<TMP_Text>();
-                    var playerIcon = usernameText.transform.GetChild(0).GetComponent<Image>();
+                    var playerIcon = rowInfo.transform.GetChild(1).GetComponent<Image>();
                     var playerOverlayIcon = playerIcon.transform.GetChild(0).GetComponent<Image>();
-                    var messageText = rowInfo.transform.GetChild(1).GetComponent<TMP_Text>();
+                    var messageText = rowInfo.transform.GetChild(2).GetComponent<TMP_Text>();
 
                     usernameText.text = username;
                     messageText.text = chatContent;
@@ -259,5 +260,16 @@ public class ChatroomMenu : MonoBehaviour
                 }
             }
         }
+        if (shouldScrollToBottom)
+        {
+            shouldScrollToBottom = false;
+            StartCoroutine(ScrollToBottom());
+        }
+    }
+
+    IEnumerator ScrollToBottom()
+    {
+        yield return new WaitForEndOfFrame();
+        content.transform.localPosition = new UnityEngine.Vector2(0f, content.GetComponent<RectTransform>().sizeDelta.y);
     }
 }
