@@ -23,6 +23,7 @@ public class ChatroomMenu : MonoBehaviour
     private Coroutine statusRoutine;
     private Coroutine refreshLoopRoutine;
     private bool shouldScrollToBottom = true;
+    public Button downButton;
 
     void Start()
     {
@@ -34,6 +35,7 @@ public class ChatroomMenu : MonoBehaviour
         }
         backButton.onClick.AddListener(async () => await SceneManager.LoadSceneAsync("MainMenu"));
         sendButton.onClick.AddListener(async () => await HandleMessageSubmit());
+        downButton.onClick.AddListener(() => StartCoroutine(ScrollToBottom()));
         messageInputField.textComponent.textWrappingMode = TextWrappingModes.Normal;
         messageInputField.onSubmit.AddListener(async (_) => await HandleMessageSubmit());
         refreshLoopRoutine = StartCoroutine(Loop());
@@ -120,6 +122,13 @@ public class ChatroomMenu : MonoBehaviour
         statusMessage = content;
         if (statusRoutine != null) StopCoroutine(statusRoutine);
         statusRoutine = StartCoroutine(StatusRoutine());
+    }
+
+    void Update()
+    {
+        var max = content.GetComponent<RectTransform>().sizeDelta.y;
+        var current = content.transform.localPosition.y;
+        downButton.gameObject.SetActive(Mathf.Abs(max - current) > 0.1f * max);
     }
 
     IEnumerator StatusRoutine()
