@@ -598,7 +598,7 @@ public class GamePlayer : MonoBehaviour
                     AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/CoinCollect"), Camera.main.transform.position, 0.35f * BazookaManager.Instance.GetSettingSFXVolume());
                     Destroy(coinBerry);
                     totalCoinBerries++;
-                    totalCoins++;
+                    totalCoins += 10;
                     UpdateStats(0, 0);
                 }
                 if (speedyLeft > 0)
