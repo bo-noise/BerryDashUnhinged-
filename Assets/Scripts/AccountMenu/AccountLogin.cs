@@ -39,7 +39,6 @@ public class AccountLogin : MonoBehaviour
         dataForm.AddField("username", loginUsernameInput.text);
         dataForm.AddField("password", loginPasswordInput.text);
         dataForm.AddField("currentHighScore", BazookaManager.Instance.GetGameStoreHighScore().ToString());
-        dataForm.AddField("loginType", "0");
         using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "loginAccount.php", dataForm.form);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
@@ -84,19 +83,6 @@ public class AccountLogin : MonoBehaviour
                 BazookaManager.Instance.SetAccountSession((string)jsonResponse["data"]["session"]);
                 BazookaManager.Instance.SetAccountName((string)jsonResponse["data"]["username"]);
                 BazookaManager.Instance.SetAccountID(BigInteger.Parse((string)jsonResponse["data"]["userid"]));
-                BazookaManager.Instance.SetGameStoreHighScore(BigInteger.Parse((string)jsonResponse["data"]["highscore"]));
-                BazookaManager.Instance.SetBirdIcon((int)jsonResponse["data"]["icon"]);
-                BazookaManager.Instance.SetBirdOverlay((int)jsonResponse["data"]["overlay"]);
-                BazookaManager.Instance.SetGameStoreTotalNormalBerries(BigInteger.Parse((string)jsonResponse["data"]["totalNormalBerries"]));
-                BazookaManager.Instance.SetGameStoreTotalPoisonBerries(BigInteger.Parse((string)jsonResponse["data"]["totalPoisonBerries"]));
-                BazookaManager.Instance.SetGameStoreTotalSlowBerries(BigInteger.Parse((string)jsonResponse["data"]["totalSlowBerries"]));
-                BazookaManager.Instance.SetGameStoreTotalUltraBerries(BigInteger.Parse((string)jsonResponse["data"]["totalUltraBerries"]));
-                BazookaManager.Instance.SetGameStoreTotalSpeedyBerries(BigInteger.Parse((string)jsonResponse["data"]["totalSpeedyBerries"]));
-                BazookaManager.Instance.SetGameStoreTotalCoinBerries(BigInteger.Parse((string)jsonResponse["data"]["totalCoinBerries"]));
-                BazookaManager.Instance.SetGameStoreTotalAttepts(BigInteger.Parse((string)jsonResponse["data"]["totalAttempts"]));
-                BazookaManager.Instance.SetColorSettingIcon(JArray.Parse(jsonResponse["data"]["birdColor"].ToString()));
-                BazookaManager.Instance.SetColorSettingOverlay(JArray.Parse(jsonResponse["data"]["overlayColor"].ToString()));
-                BazookaManager.Instance.SetCustomBirdIconData(JsonConvert.DeserializeObject<MarketplaceIconStorageType>(jsonResponse["data"]["marketplaceData"].ToString()));
                 AccountHandler.instance.SwitchPanel(0);
                 Tools.UpdateStatusText(loginPanelStatusText, "", Color.red);
             }

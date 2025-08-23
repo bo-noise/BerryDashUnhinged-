@@ -31,7 +31,6 @@ public class AccountRefreshLogin : MonoBehaviour
         EncryptedWWWForm dataForm = new();
         dataForm.AddField("username", refreshLoginUsernameInput.text);
         dataForm.AddField("password", refreshLoginPasswordInput.text);
-        dataForm.AddField("loginType", "1");
         using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "loginAccount.php", dataForm.form);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
