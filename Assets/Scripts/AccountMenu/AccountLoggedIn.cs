@@ -28,7 +28,7 @@ public class AccountLoggedIn : MonoBehaviour
         loggedInRefreshLoginButton.onClick.AddListener(() => AccountHandler.instance.SwitchPanel(6));
         loggedInLogoutButton.onClick.AddListener(() =>
         {
-            accountLoggedOut.clearValues = true;
+            BazookaManager.Instance.ResetSave();
             AccountHandler.instance.SwitchPanel(1);
         });
         loggedInBackButton.onClick.AddListener(async () => await SceneManager.LoadSceneAsync("MainMenu"));

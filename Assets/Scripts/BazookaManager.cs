@@ -1,8 +1,6 @@
 using System.IO;
 using System.Numerics;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BazookaManager : MonoBehaviour
@@ -69,12 +67,18 @@ public class BazookaManager : MonoBehaviour
         return;
 #else
         string path = Path.Join(Application.persistentDataPath, SensitiveInfo.BAZOOKA_MANAGER_FILE_KEY + ".dat");
-        var encoded = SensitiveInfo.EncryptRaw(saveFile.ToString(Formatting.None), SensitiveInfo.BAZOOKA_MANAGER_KEY);
+        var encoded = SensitiveInfo.EncryptRaw(saveFile.ToString(Newtonsoft.Json.Formatting.None), SensitiveInfo.BAZOOKA_MANAGER_KEY);
         if (encoded == null) return;
         using var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
         fileStream.Write(encoded, 0, encoded.Length);
         fileStream.Flush(true);
 #endif
+    }
+
+    public void ResetSave()
+    {
+        saveFile = new JObject();
+        Save();
     }
 
     //Bird stuff
