@@ -193,6 +193,7 @@ public class ChatroomMenu : MonoBehaviour
             default:
                 shouldClear = false;
                 var jsonResponse = JArray.Parse(response);
+                var localUserId = BazookaManager.Instance.GetAccountID();
                 foreach (JObject entry in jsonResponse.Cast<JObject>())
                 {
                     var username = (string)entry["username"];
@@ -215,11 +216,13 @@ public class ChatroomMenu : MonoBehaviour
                     }
 
                     var rowInfo = Instantiate(sampleObject, content.transform);
-                    var usernameText = rowInfo.transform.GetChild(0).GetComponent<TMP_Text>();
-                    var playerIcon = rowInfo.transform.GetChild(1).GetComponent<Image>();
+                    var usernameText = rowInfo.transform.GetChild(1).GetComponent<TMP_Text>();
+                    var playerIcon = rowInfo.transform.GetChild(2).GetComponent<Image>();
                     var playerOverlayIcon = playerIcon.transform.GetChild(0).GetComponent<Image>();
-                    var messageText = rowInfo.transform.GetChild(2).GetComponent<TMP_Text>();
+                    var messageText = rowInfo.transform.GetChild(3).GetComponent<TMP_Text>();
+                    var optionsButton = rowInfo.transform.GetChild(4).GetComponent<Button>();
 
+                    optionsButton.gameObject.SetActive(localUserId != null && uid == localUserId);
                     usernameText.text = username;
                     messageText.text = chatContent;
                     playerIcon.sprite = Resources.Load<Sprite>("Icons/Icons/bird_" + icon);
