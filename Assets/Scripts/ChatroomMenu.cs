@@ -216,13 +216,13 @@ public class ChatroomMenu : MonoBehaviour
                     }
 
                     var rowInfo = Instantiate(sampleObject, content.transform);
+                    var bgImg = rowInfo.transform.GetChild(0).GetComponent<Image>();
                     var usernameText = rowInfo.transform.GetChild(1).GetComponent<TMP_Text>();
                     var playerIcon = rowInfo.transform.GetChild(2).GetComponent<Image>();
                     var playerOverlayIcon = playerIcon.transform.GetChild(0).GetComponent<Image>();
                     var messageText = rowInfo.transform.GetChild(3).GetComponent<TMP_Text>();
                     var optionsButton = rowInfo.transform.GetChild(4).GetComponent<Button>();
 
-                    optionsButton.gameObject.SetActive(localUserId != null && uid == localUserId);
                     usernameText.text = username;
                     messageText.text = chatContent;
                     playerIcon.sprite = Resources.Load<Sprite>("Icons/Icons/bird_" + icon);
@@ -258,6 +258,8 @@ public class ChatroomMenu : MonoBehaviour
                         playerOverlayIcon.color = Color.white;
                     }
                     rowInfo.name = "ChatroomRow_" + id + "_" + uid;
+                    var entryComponet = rowInfo.AddComponent<ChatroomMenuEntry>();
+                    entryComponet.Init(bgImg, optionsButton, localUserId != null && uid == localUserId);
                     rowInfo.SetActive(true);
                 }
                 break;
