@@ -2,10 +2,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ChatroomMenuEntry : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+public class ChatroomMenuEntry : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
     private Image bgImg;
     private Button optionsButton;
     private bool isMadeBySelf = false;
+    private static ChatroomMenuEntry activeEntry;
 
     public void Init(Image bgImgArg, Button optionsButtonArg, bool isMadeBySelfArg)
     {
@@ -17,12 +18,39 @@ public class ChatroomMenuEntry : MonoBehaviour, IPointerEnterHandler, IPointerEx
     }
 
     public void OnPointerEnter(PointerEventData e) {
-        bgImg.color = new Color(60f/255f, 60f/255f, 60f/255f);
-        optionsButton.gameObject.SetActive(isMadeBySelf);
+        if (e.pointerId < 0 && activeEntry != this) {
+            bgImg.color = new Color(60f/255f, 60f/255f, 60f/255f);
+        }
     }
 
     public void OnPointerExit(PointerEventData e) {
+        if (e.pointerId < 0 && activeEntry != this) {
+            bgImg.color = new Color(50f/255f, 50f/255f, 50f/255f);
+        }
+    }
+
+    public void OnPointerClick(PointerEventData e) {
+        if (e.pointerId >= 0 && isMadeBySelf) {
+            if (activeEntry != null && activeEntry != this) {
+                activeEntry.Deactivate();
+            }
+            if (activeEntry == this) {
+                Deactivate();
+            } else {
+                Activate();
+            }
+        }
+    }
+
+    private void Activate() {
+        activeEntry = this;
+        bgImg.color = new Color(60f/255f, 60f/255f, 60f/255f);
+        optionsButton.gameObject.SetActive(true);
+    }
+
+    private void Deactivate() {
         bgImg.color = new Color(50f/255f, 50f/255f, 50f/255f);
         optionsButton.gameObject.SetActive(false);
+        if (activeEntry == this) activeEntry = null;
     }
 }
