@@ -3,6 +3,7 @@ using System.Numerics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class GamePlayer : MonoBehaviour
 {
@@ -37,13 +38,15 @@ public class GamePlayer : MonoBehaviour
     private float nextUpdate;
     private float fps;
     public SpriteRenderer overlayRender;
-    private GameObject leftArrow;
-    private GameObject rightArrow;
-    private GameObject jumpArrow;
-    private GameObject restartButton;
-    private GameObject backButton;
     private float lastMoveTime;
     public GameObject berryParent;
+
+    public GameObject mobileButtons;
+    public HoldableButton pauseButton;
+    public HoldableButton restartButton;
+    public HoldableButton jumpButton;
+    public HoldableButton rightButton;
+    public HoldableButton leftButton;
 
     void Start()
     {
@@ -149,51 +152,7 @@ public class GamePlayer : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         backgroundMusic.volume = BazookaManager.Instance.GetSettingMusicVolume();
         screenWidth = Camera.main.orthographicSize * 2f * Camera.main.aspect;
-        if (Application.isMobilePlatform)
-        {
-            leftArrow = new("LeftArrow");
-            rightArrow = new("RightArrow");
-            jumpArrow = new("JumpArrow");
-            restartButton = new("RestartButton");
-            backButton = new("BackButton");
-            leftArrow.AddComponent<SpriteRenderer>();
-            rightArrow.AddComponent<SpriteRenderer>();
-            jumpArrow.AddComponent<SpriteRenderer>();
-            restartButton.AddComponent<SpriteRenderer>();
-            backButton.AddComponent<SpriteRenderer>();
-
-            var leftArrowSprite = leftArrow.GetComponent<SpriteRenderer>();
-            var rightArrowSprite = rightArrow.GetComponent<SpriteRenderer>();
-            var jumpArrowSprite = jumpArrow.GetComponent<SpriteRenderer>();
-            var restartButtonSprite = restartButton.GetComponent<SpriteRenderer>();
-            var backButtonSprite = backButton.GetComponent<SpriteRenderer>();
-
-            leftArrowSprite.sprite = Resources.Load<Sprite>("Arrows/Arrow");
-            leftArrowSprite.sortingOrder = 1000;
-            rightArrowSprite.sprite = Resources.Load<Sprite>("Arrows/Arrow");
-            rightArrowSprite.sortingOrder = 1000;
-            jumpArrowSprite.sprite = Resources.Load<Sprite>("Arrows/Arrow");
-            jumpArrowSprite.sortingOrder = 1000;
-            restartButtonSprite.sprite = Resources.Load<Sprite>("Arrows/Restart");
-            restartButtonSprite.sortingOrder = 1000;
-            backButtonSprite.sprite = Resources.Load<Sprite>("Arrows/Back");
-            backButtonSprite.sortingOrder = 1000;
-
-            leftArrow.transform.rotation = UnityEngine.Quaternion.Euler(0f, 0f, 90f);
-            rightArrow.transform.rotation = UnityEngine.Quaternion.Euler(0f, 0f, -90f);
-
-            leftArrow.transform.position = new UnityEngine.Vector3(-screenWidth / 2.5f, -3.8f, 0f);
-            rightArrow.transform.position = new UnityEngine.Vector3(screenWidth / 2.5f, -3.8f, 0f);
-            jumpArrow.transform.position = new UnityEngine.Vector3(screenWidth / 2.5f, -1f, 0f);
-            restartButton.transform.position = new UnityEngine.Vector3(screenWidth / 2.3f, Camera.main.orthographicSize - 1.2f, 0f);
-            backButton.transform.position = new UnityEngine.Vector3(-screenWidth / 2.3f, Camera.main.orthographicSize - 1.2f, 0f);
-
-            leftArrow.transform.localScale = new UnityEngine.Vector3(screenWidth / 14f, screenWidth / 14f, 1f);
-            rightArrow.transform.localScale = new UnityEngine.Vector3(screenWidth / 14f, screenWidth / 14f, 1f);
-            jumpArrow.transform.localScale = new UnityEngine.Vector3(screenWidth / 14f, screenWidth / 14f, 1f);
-            restartButton.transform.localScale = new UnityEngine.Vector3(screenWidth / 14f, screenWidth / 14f, 1f);
-            backButton.transform.localScale = new UnityEngine.Vector3(screenWidth / 14f, screenWidth / 14f, 1f);
-        }
+        if (Application.isMobilePlatform) mobileButtons.SetActive(true);
         UpdateStats(0, 1);
     }
 
@@ -246,26 +205,11 @@ public class GamePlayer : MonoBehaviour
                 var pos = touches[i].screenPosition;
                 UnityEngine.Vector3 clickPosition = Camera.main.ScreenToWorldPoint(new UnityEngine.Vector3(pos.x, pos.y, 0f));
                 clickPosition.z = 0f;
-                if (leftArrow.GetComponent<SpriteRenderer>().bounds.Contains(clickPosition))
-                {
-                    doMoveLeft = true;
-                }
-                if (rightArrow.GetComponent<SpriteRenderer>().bounds.Contains(clickPosition))
-                {
-                    doMoveRight = true;
-                }
-                if (jumpArrow.GetComponent<SpriteRenderer>().bounds.Contains(clickPosition))
-                {
-                    doJump = true;
-                }
-                if (restartButton.GetComponent<SpriteRenderer>().bounds.Contains(clickPosition))
-                {
-                    doRestart = true;
-                }
-                if (backButton.GetComponent<SpriteRenderer>().bounds.Contains(clickPosition))
-                {
-                    doBack = true;
-                }
+                if (leftButton.isPressed) doMoveLeft = true;
+                if (rightButton.isPressed) doMoveRight = true;
+                if (jumpButton.isPressed) doJump = true;
+                if (restartButton.isPressed) doRestart = true;
+                if (pauseButton.isPressed) doBack = true;
             }
         }
         if (doMoveLeft && !doMoveRight)
@@ -335,17 +279,17 @@ public class GamePlayer : MonoBehaviour
             if (boostLeft > 0f)
             {
                 boostLeft -= Time.deltaTime;
-                boostText.text = "Boost expires in " + $"{boostLeft:0.0}" + "s";
+                boostText.text = "Boost expires in " + string.Format("{0:0.0}", boostLeft) + "s";
             }
             else if (slownessLeft > 0f)
             {
                 slownessLeft -= Time.deltaTime;
-                boostText.text = "Slowness expires in " + $"{slownessLeft:0.0}" + "s";
+                boostText.text = "Slowness expires in " + string.Format("{0:0.0}", slownessLeft) + "s";
             }
             else if (speedyLeft > 0f)
             {
                 speedyLeft -= Time.deltaTime;
-                boostText.text = "Speed expires in " + $"{speedyLeft:0.0}" + "s";
+                boostText.text = "Speed expires in " + string.Format("{0:0.0}", speedyLeft) + "s";
             }
             else
             {
@@ -428,20 +372,6 @@ public class GamePlayer : MonoBehaviour
         {
             screenWidth = Camera.main.orthographicSize * 2f * Camera.main.aspect;
             ClampPosition(bird);
-            if (Application.isMobilePlatform)
-            {
-                leftArrow.transform.position = new UnityEngine.Vector3(-screenWidth / 2.5f, -3.8f, 0f);
-                rightArrow.transform.position = new UnityEngine.Vector3(screenWidth / 2.5f, -3.8f, 0f);
-                jumpArrow.transform.position = new UnityEngine.Vector3(screenWidth / 2.5f, -1f, 0f);
-                restartButton.transform.position = new UnityEngine.Vector3(screenWidth / 2.3f, Camera.main.orthographicSize - 1.2f, 0f);
-                backButton.transform.position = new UnityEngine.Vector3(-screenWidth / 2.3f, Camera.main.orthographicSize - 1.2f, 0f);
-
-                leftArrow.transform.localScale = new UnityEngine.Vector3(screenWidth / 14f, screenWidth / 14f, 1f);
-                rightArrow.transform.localScale = new UnityEngine.Vector3(screenWidth / 14f, screenWidth / 14f, 1f);
-                jumpArrow.transform.localScale = new UnityEngine.Vector3(screenWidth / 14f, screenWidth / 14f, 1f);
-                restartButton.transform.localScale = new UnityEngine.Vector3(screenWidth / 14f, screenWidth / 14f, 1f);
-                backButton.transform.localScale = new UnityEngine.Vector3(screenWidth / 14f, screenWidth / 14f, 1f);
-            }
         }
         GameObject[] normalBerries = GameObject.FindGameObjectsWithTag("NormalBerry");
         GameObject[] poisonBerries = GameObject.FindGameObjectsWithTag("PoisonBerry");
@@ -627,10 +557,7 @@ public class GamePlayer : MonoBehaviour
                 berry.GetComponent<Rigidbody2D>().linearVelocity = UnityEngine.Vector2.zero;
             }
         }
-        if (!Application.isMobilePlatform && (Keyboard.current.escapeKey.wasPressedThisFrame || (Gamepad.current != null && (Gamepad.current.startButton.wasPressedThisFrame || Gamepad.current.buttonEast.wasPressedThisFrame))))
-        {
-            TogglePause();
-        }
+        if ((Application.platform == RuntimePlatform.Android && Keyboard.current.escapeKey.wasPressedThisFrame) || !Application.isMobilePlatform && (Keyboard.current.escapeKey.wasPressedThisFrame || (Gamepad.current != null && (Gamepad.current.startButton.wasPressedThisFrame || Gamepad.current.buttonEast.wasPressedThisFrame)))) TogglePause();
     }
 
     void Respawn()
@@ -681,7 +608,7 @@ public class GamePlayer : MonoBehaviour
         scoreText.text = $"Score: {Tools.FormatWithCommas(score)} \\u2022 Attempts: {Tools.FormatWithCommas(attempts)}";
         highScoreText.text = $"High Score: {Tools.FormatWithCommas(highscore)} \\u2022 Total Attempts: {Tools.FormatWithCommas(totalAttempts)}";
         coinText.text = $"Coins: {Tools.FormatWithCommas(totalCoins)}";
-        if (restartButton != null) restartButton.GetComponent<Renderer>().material.color = score == 0 ? Color.gray : Color.white;
+        if (Application.isMobilePlatform) restartButton.transform.GetChild(0).GetComponent<TMP_Text>().material.color = score == 0 ? Color.gray : Color.white;
     }
 
     void CheckIfGrounded()
@@ -695,10 +622,7 @@ public class GamePlayer : MonoBehaviour
             bird.transform.position = new UnityEngine.Vector2(bird.transform.position.x, -4.1359f);
             rb.linearVelocity = new UnityEngine.Vector2(rb.linearVelocity.x, 0f);
         }
-        if (jumpArrow != null && jumpArrow.GetComponent<Renderer>() != null)
-        {
-            jumpArrow.GetComponent<Renderer>().material.color = isGrounded ? Color.white : Color.red;
-        }
+        if (Application.isMobilePlatform) jumpButton.transform.GetChild(0).GetComponent<TMP_Text>().color = isGrounded ? Color.white : Color.red;
     }
 
     internal void TogglePause()
