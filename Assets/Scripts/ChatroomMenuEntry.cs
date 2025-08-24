@@ -18,19 +18,29 @@ public class ChatroomMenuEntry : MonoBehaviour, IPointerEnterHandler, IPointerEx
     }
 
     public void OnPointerEnter(PointerEventData e) {
-        if (e.pointerId < 0 && activeEntry != this) {
-            bgImg.color = new Color(60f/255f, 60f/255f, 60f/255f);
+        if (!Application.isMobilePlatform) {
+            if (activeEntry != null && activeEntry != this) {
+                activeEntry.Deactivate();
+            }
+            if (activeEntry != this) {
+                Activate();
+            }
         }
     }
 
     public void OnPointerExit(PointerEventData e) {
-        if (e.pointerId < 0 && activeEntry != this) {
-            bgImg.color = new Color(50f/255f, 50f/255f, 50f/255f);
+        if (!Application.isMobilePlatform) {
+            if (activeEntry != null && activeEntry != this) {
+                activeEntry.Deactivate();
+            }
+            if (activeEntry == this) {
+                Deactivate();
+            }
         }
     }
 
     public void OnPointerClick(PointerEventData e) {
-        if (e.pointerId >= 0 && isMadeBySelf) {
+        if (Application.isMobilePlatform) {
             if (activeEntry != null && activeEntry != this) {
                 activeEntry.Deactivate();
             }
@@ -45,7 +55,7 @@ public class ChatroomMenuEntry : MonoBehaviour, IPointerEnterHandler, IPointerEx
     private void Activate() {
         activeEntry = this;
         bgImg.color = new Color(60f/255f, 60f/255f, 60f/255f);
-        optionsButton.gameObject.SetActive(true);
+        optionsButton.gameObject.SetActive(isMadeBySelf);
     }
 
     private void Deactivate() {
