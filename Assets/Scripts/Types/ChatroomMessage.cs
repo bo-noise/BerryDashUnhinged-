@@ -31,9 +31,9 @@ public class ChatroomMessage {
 
   [Preserve]
   [JsonProperty("birdColor")]
-  public JArray BirdColor { get; set; }
+  public int[] BirdColor { get; set; }
 
   [Preserve]
   [JsonProperty("overlayColor")]
-  public JArray OverlayColor { get; set; }
+  public int[] OverlayColor { get; set; }
 }

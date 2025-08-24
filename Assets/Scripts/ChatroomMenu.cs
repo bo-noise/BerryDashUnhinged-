@@ -244,8 +244,8 @@ public class ChatroomMenu : MonoBehaviour
                     }
                     try
                     {
-                        playerIcon.color = new Color((int)message.BirdColor[0] / 255f, (int)message.BirdColor[1] / 255f, (int)message.BirdColor[2] / 255f);
-                        playerOverlayIcon.color = new Color((int)message.OverlayColor[0] / 255f, (int)message.OverlayColor[1] / 255f, (int)message.OverlayColor[2] / 255f);
+                        playerIcon.color = new Color(message.BirdColor[0] / 255f, message.BirdColor[1] / 255f, message.BirdColor[2] / 255f);
+                        playerOverlayIcon.color = new Color(message.OverlayColor[0] / 255f, message.OverlayColor[1] / 255f, message.OverlayColor[2] / 255f);
                     }
                     catch (Exception)
                     {
