@@ -42,11 +42,11 @@ public class GamePlayer : MonoBehaviour
     public GameObject berryParent;
 
     public GameObject mobileButtons;
-    public HoldableButton pauseButton;
-    public HoldableButton restartButton;
-    public HoldableButton jumpButton;
-    public HoldableButton rightButton;
-    public HoldableButton leftButton;
+    public Button pauseButton;
+    public Button restartButton;
+    public Button jumpButton;
+    public Button rightButton;
+    public Button leftButton;
 
     void Start()
     {
@@ -205,11 +205,11 @@ public class GamePlayer : MonoBehaviour
                 var pos = touches[i].screenPosition;
                 UnityEngine.Vector3 clickPosition = Camera.main.ScreenToWorldPoint(new UnityEngine.Vector3(pos.x, pos.y, 0f));
                 clickPosition.z = 0f;
-                if (leftButton.isPressed) doMoveLeft = true;
-                if (rightButton.isPressed) doMoveRight = true;
-                if (jumpButton.isPressed) doJump = true;
-                if (restartButton.isPressed) doRestart = true;
-                if (pauseButton.isPressed) doBack = true;
+                if (leftButton.GetComponent<HoldableButton>().isPressed) doMoveLeft = true;
+                if (rightButton.GetComponent<HoldableButton>().isPressed) doMoveRight = true;
+                if (jumpButton.GetComponent<HoldableButton>().isPressed) doJump = true;
+                if (restartButton.GetComponent<HoldableButton>().isPressed) doRestart = true;
+                if (pauseButton.GetComponent<HoldableButton>().isPressed) doBack = true;
             }
         }
         if (doMoveLeft && !doMoveRight)
@@ -608,7 +608,7 @@ public class GamePlayer : MonoBehaviour
         scoreText.text = $"Score: {Tools.FormatWithCommas(score)} \\u2022 Attempts: {Tools.FormatWithCommas(attempts)}";
         highScoreText.text = $"High Score: {Tools.FormatWithCommas(highscore)} \\u2022 Total Attempts: {Tools.FormatWithCommas(totalAttempts)}";
         coinText.text = $"Coins: {Tools.FormatWithCommas(totalCoins)}";
-        if (Application.isMobilePlatform) restartButton.transform.GetChild(0).GetComponent<TMP_Text>().material.color = score == 0 ? Color.gray : Color.white;
+        if (Application.isMobilePlatform) restartButton.interactable = score != 0;
     }
 
     void CheckIfGrounded()

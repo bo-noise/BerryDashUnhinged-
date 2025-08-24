@@ -2289,11 +2289,11 @@ MonoBehaviour:
   overlayRender: {fileID: 450099081}
   berryParent: {fileID: 157908646}
   mobileButtons: {fileID: 872476494}
-  pauseButton: {fileID: 1577031231}
-  restartButton: {fileID: 34767209}
-  jumpButton: {fileID: 293594132}
-  rightButton: {fileID: 1125207525}
-  leftButton: {fileID: 2069651271}
+  pauseButton: {fileID: 1577031227}
+  restartButton: {fileID: 34767206}
+  jumpButton: {fileID: 293594129}
+  rightButton: {fileID: 1125207522}
+  leftButton: {fileID: 2069651268}
 --- !u!1 &527090675
 GameObject:
   m_ObjectHideFlags: 0
