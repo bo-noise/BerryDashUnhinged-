@@ -13,6 +13,8 @@ using UnityEngine.UI;
 
 public class ChatroomMenu : MonoBehaviour
 {
+    private readonly static WaitForSeconds _waitForSeconds2 = new(2f);
+    private readonly static WaitForSeconds _waitForSeconds3 = new(3f);
     public TMP_Text statusText;
     public Button backButton;
     public Button sendButton;
@@ -24,6 +26,7 @@ public class ChatroomMenu : MonoBehaviour
     private Coroutine refreshLoopRoutine;
     private bool shouldScrollToBottom = true;
     public Button downButton;
+    public GameObject optionsPanel;
 
     void Start()
     {
@@ -46,7 +49,7 @@ public class ChatroomMenu : MonoBehaviour
         while (true)
         {
             Refresh();
-            yield return new WaitForSeconds(3f);
+            yield return _waitForSeconds3;
         }
     }
 
@@ -146,7 +149,7 @@ public class ChatroomMenu : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return _waitForSeconds2;
 
         t = 0f;
         while (t < 0.5f)
@@ -257,6 +260,7 @@ public class ChatroomMenu : MonoBehaviour
                         playerIcon.color = Color.white;
                         playerOverlayIcon.color = Color.white;
                     }
+                    optionsButton.onClick.AddListener(OptionsButtonClick);
                     rowInfo.name = "ChatroomRow_" + id + "_" + uid;
                     var entryComponet = rowInfo.AddComponent<ChatroomMenuEntry>();
                     entryComponet.Init(bgImg, optionsButton, localUserId != null && uid == localUserId);
@@ -285,5 +289,10 @@ public class ChatroomMenu : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         content.transform.localPosition = new UnityEngine.Vector2(0f, content.GetComponent<RectTransform>().sizeDelta.y);
+    }
+
+    void OptionsButtonClick()
+    {
+        optionsPanel.SetActive(true);
     }
 }
