@@ -7,7 +7,10 @@ public class BazookaManager : MonoBehaviour
 {
     public static BazookaManager Instance;
     private bool firstLoadDone = false;
-    public JObject saveFile = new();
+    public JObject saveFile = new()
+    {
+        ["version"] = "0"
+    };
 
     void Awake()
     {
@@ -77,7 +80,10 @@ public class BazookaManager : MonoBehaviour
 
     public void ResetSave()
     {
-        saveFile = new JObject();
+        saveFile = new JObject
+        {
+            ["version"] = "0"
+        };
         Save();
     }
 

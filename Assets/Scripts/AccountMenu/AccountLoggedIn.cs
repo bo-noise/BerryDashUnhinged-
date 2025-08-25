@@ -1,4 +1,5 @@
-using System.Numerics;
+using System;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TMPro;
@@ -49,19 +50,7 @@ public class AccountLoggedIn : MonoBehaviour
         EncryptedWWWForm dataForm = new();
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
-        dataForm.AddField("highScore", BazookaManager.Instance.GetGameStoreHighScore().ToString());
-        dataForm.AddField("icon", BazookaManager.Instance.GetBirdIcon().ToString());
-        dataForm.AddField("overlay", BazookaManager.Instance.GetBirdOverlay().ToString());
-        dataForm.AddField("totalNormalBerries", BazookaManager.Instance.GetGameStoreTotalNormalBerries().ToString());
-        dataForm.AddField("totalPoisonBerries", BazookaManager.Instance.GetGameStoreTotalPoisonBerries().ToString());
-        dataForm.AddField("totalSlowBerries", BazookaManager.Instance.GetGameStoreTotalSlowBerries().ToString());
-        dataForm.AddField("totalUltraBerries", BazookaManager.Instance.GetGameStoreTotalUltraBerries().ToString());
-        dataForm.AddField("totalSpeedyBerries", BazookaManager.Instance.GetGameStoreTotalSpeedyBerries().ToString());
-        dataForm.AddField("totalCoinBerries", BazookaManager.Instance.GetGameStoreTotalCoinBerries().ToString());
-        dataForm.AddField("totalAttempts", BazookaManager.Instance.GetGameStoreTotalAttepts().ToString());
-        dataForm.AddField("birdColor", BazookaManager.Instance.GetColorSettingIcon().ToString(Formatting.None));
-        dataForm.AddField("overlayColor", BazookaManager.Instance.GetColorSettingOverlay().ToString(Formatting.None));
-        dataForm.AddField("marketplaceData", JsonConvert.SerializeObject(BazookaManager.Instance.GetCustomBirdIconData()));
+        dataForm.AddField("saveData", Convert.ToBase64String(Encoding.UTF8.GetBytes(BazookaManager.Instance.saveFile.ToString(Formatting.None))));
         using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "saveAccount.php", dataForm.form);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
@@ -184,19 +173,7 @@ public class AccountLoggedIn : MonoBehaviour
             var jsonResponse = JObject.Parse(response);
             if ((bool)jsonResponse["success"])
             {
-                BazookaManager.Instance.SetGameStoreHighScore(BigInteger.Parse((string)jsonResponse["highscore"]));
-                BazookaManager.Instance.SetBirdIcon((int)jsonResponse["icon"]);
-                BazookaManager.Instance.SetBirdOverlay((int)jsonResponse["overlay"]);
-                BazookaManager.Instance.SetGameStoreTotalNormalBerries(BigInteger.Parse((string)jsonResponse["totalNormalBerries"]));
-                BazookaManager.Instance.SetGameStoreTotalPoisonBerries(BigInteger.Parse((string)jsonResponse["totalPoisonBerries"]));
-                BazookaManager.Instance.SetGameStoreTotalSlowBerries(BigInteger.Parse((string)jsonResponse["totalSlowBerries"]));
-                BazookaManager.Instance.SetGameStoreTotalUltraBerries(BigInteger.Parse((string)jsonResponse["totalUltraBerries"]));
-                BazookaManager.Instance.SetGameStoreTotalSpeedyBerries(BigInteger.Parse((string)jsonResponse["totalSpeedyBerries"]));
-                BazookaManager.Instance.SetGameStoreTotalCoinBerries(BigInteger.Parse((string)jsonResponse["totalCoinBerries"]));
-                BazookaManager.Instance.SetGameStoreTotalAttepts(BigInteger.Parse((string)jsonResponse["totalAttempts"]));
-                BazookaManager.Instance.SetColorSettingIcon(JArray.Parse(jsonResponse["birdColor"].ToString()));
-                BazookaManager.Instance.SetColorSettingOverlay(JArray.Parse(jsonResponse["overlayColor"].ToString()));
-                BazookaManager.Instance.SetCustomBirdIconData(JsonConvert.DeserializeObject<MarketplaceIconStorageType>(jsonResponse["marketplaceData"].ToString()));
+                BazookaManager.Instance.saveFile = JObject.FromObject(jsonResponse["data"]);
                 Tools.UpdateStatusText(loggedInText, "Loaded account data", Color.green);
             }
             else
