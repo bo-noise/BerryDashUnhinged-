@@ -150,6 +150,7 @@ public class Iconsmenu : MonoBehaviour
         iconColorPanel.gameObject.SetActive(false);
         overlayColorPanel.gameObject.SetActive(false);
         var customIconData = BazookaManager.Instance.GetCustomBirdIconData();
+        foreach (var btn in customIcons.Values) btn.interactable = true;
         if (customIconData.Selected != null)
         {
             foreach (var icon in customIconData.Data)
