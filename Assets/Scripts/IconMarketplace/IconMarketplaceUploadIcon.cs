@@ -144,7 +144,7 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
             if ((bool)jsonResponse["success"])
             {
                 Reset();
-                Tools.UpdateStatusText(statusText, "Icon uploaded successfully!", Color.green);
+                Tools.UpdateStatusText(statusText, (string)jsonResponse["message"], Color.green);
             }
             else
             {
