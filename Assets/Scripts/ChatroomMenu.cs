@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
@@ -42,8 +40,14 @@ public class ChatroomMenu : MonoBehaviour
     public GameObject editMessagePanelSample;
     private GameObject editMessagePanelCurrent;
 
+    public GameObject reportMessagePanel;
+    public Button reportMessagePanelExitButton;
+    public Button reportMessagePanelSubmitButton;
+    public TMP_InputField reportMessagePanelReportReason;
+
     void Start()
     {
+        reportMessagePanelReportReason.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>().textWrappingMode = TextWrappingModes.Normal;
         if (BazookaManager.Instance.GetAccountID() == null || BazookaManager.Instance.GetAccountName() == null || BazookaManager.Instance.GetAccountSession() == null)
         {
             sendButton.interactable = false;
@@ -91,8 +95,112 @@ public class ChatroomMenu : MonoBehaviour
                 Destroy(editMessage);
                 selectedMessageForOptions = null;
             });
+
+            var rowInfo = editMessageChild.GetChild(2);
+            var usernameText = rowInfo.transform.GetChild(2).GetComponent<TMP_Text>();
+            var playerIcon = rowInfo.transform.GetChild(3).GetComponent<Image>();
+            var playerOverlayIcon = playerIcon.transform.GetChild(0).GetComponent<Image>();
+            var messageText = rowInfo.transform.GetChild(4).GetComponent<TMP_Text>();
+            var optionsButton = rowInfo.transform.GetChild(5).GetComponent<Button>();
+
+            usernameText.text = selectedMessageForOptions.Username;
+            messageText.text = Encoding.UTF8.GetString(Convert.FromBase64String(selectedMessageForOptions.Content));
+            playerIcon.sprite = Resources.Load<Sprite>("Icons/Icons/bird_" + selectedMessageForOptions.Icon);
+            if (selectedMessageForOptions.Icon == 1)
+            {
+                playerIcon.sprite = Tools.GetIconForUser(selectedMessageForOptions.UserID);
+            }
+            playerOverlayIcon.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + selectedMessageForOptions.Overlay);
+            if (selectedMessageForOptions.Overlay == 0)
+            {
+                playerOverlayIcon.gameObject.SetActive(false);
+            }
+            else if (selectedMessageForOptions.Overlay == 8)
+            {
+                playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.56f, 14.81f);
+            }
+            else if (selectedMessageForOptions.Overlay == 11)
+            {
+                playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-14.74451f, 20.39122f);
+            }
+            else if (selectedMessageForOptions.Overlay == 13)
+            {
+                playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.54019f, 14.70365f);
+            }
+            try
+            {
+                playerIcon.color = new Color(selectedMessageForOptions.BirdColor[0] / 255f, selectedMessageForOptions.BirdColor[1] / 255f, selectedMessageForOptions.BirdColor[2] / 255f);
+                playerOverlayIcon.color = new Color(selectedMessageForOptions.OverlayColor[0] / 255f, selectedMessageForOptions.OverlayColor[1] / 255f, selectedMessageForOptions.OverlayColor[2] / 255f);
+            }
+            catch (Exception)
+            {
+                playerIcon.color = Color.white;
+                playerOverlayIcon.color = Color.white;
+            }
+
+            rowInfo = editMessageChild.GetChild(3);
+            usernameText = rowInfo.transform.GetChild(2).GetComponent<TMP_Text>();
+            playerIcon = rowInfo.transform.GetChild(3).GetComponent<Image>();
+            playerOverlayIcon = playerIcon.transform.GetChild(0).GetComponent<Image>();
+            messageText = rowInfo.transform.GetChild(4).GetComponent<TMP_Text>();
+            optionsButton = rowInfo.transform.GetChild(5).GetComponent<Button>();
+
+            usernameText.text = selectedMessageForOptions.Username;
+            messageText.text = Encoding.UTF8.GetString(Convert.FromBase64String(selectedMessageForOptions.Content));
+            editMessageChildNewContentInputBox.onValueChanged.AddListener((value) => messageText.text = value);
+            playerIcon.sprite = Resources.Load<Sprite>("Icons/Icons/bird_" + selectedMessageForOptions.Icon);
+            if (selectedMessageForOptions.Icon == 1)
+            {
+                playerIcon.sprite = Tools.GetIconForUser(selectedMessageForOptions.UserID);
+            }
+            playerOverlayIcon.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + selectedMessageForOptions.Overlay);
+            if (selectedMessageForOptions.Overlay == 0)
+            {
+                playerOverlayIcon.gameObject.SetActive(false);
+            }
+            else if (selectedMessageForOptions.Overlay == 8)
+            {
+                playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.56f, 14.81f);
+            }
+            else if (selectedMessageForOptions.Overlay == 11)
+            {
+                playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-14.74451f, 20.39122f);
+            }
+            else if (selectedMessageForOptions.Overlay == 13)
+            {
+                playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.54019f, 14.70365f);
+            }
+            try
+            {
+                playerIcon.color = new Color(selectedMessageForOptions.BirdColor[0] / 255f, selectedMessageForOptions.BirdColor[1] / 255f, selectedMessageForOptions.BirdColor[2] / 255f);
+                playerOverlayIcon.color = new Color(selectedMessageForOptions.OverlayColor[0] / 255f, selectedMessageForOptions.OverlayColor[1] / 255f, selectedMessageForOptions.OverlayColor[2] / 255f);
+            }
+            catch (Exception)
+            {
+                playerIcon.color = Color.white;
+                playerOverlayIcon.color = Color.white;
+            }
+
             optionsPanel.SetActive(false);
             editMessage.SetActive(true);
+        });
+        optionsPanelReportButton.onClick.AddListener(() => {
+            reportMessagePanelReportReason.text = "";
+            optionsPanel.SetActive(false);
+            reportMessagePanel.SetActive(true);
+        });
+        reportMessagePanelExitButton.onClick.AddListener(() =>
+        {
+            editMessagePanelCurrent = null;
+            reportMessagePanel.SetActive(false);
+            optionsPanel.SetActive(true);
+        });
+        reportMessagePanelSubmitButton.onClick.AddListener(async () =>
+        {
+            reportMessagePanel.SetActive(false);
+            await HandleReport();
+            editMessagePanelCurrent = null;
+            selectedMessageForOptions = null;
         });
         optionsPanelCopyButton.onClick.AddListener(() =>
         {
@@ -256,8 +364,9 @@ public class ChatroomMenu : MonoBehaviour
                 var messages = JsonConvert.DeserializeObject<ChatroomMessage[]>(response);
                 var localUserId = BazookaManager.Instance.GetAccountID();
                 var sortedMessages = messages.OrderBy(m => m.ID).ToArray();
-                foreach (var message in messages)
+                for (int i = 0; i < sortedMessages.Length; i++)
                 {
+                    var message = sortedMessages[i];
                     var obj = content.transform.Find("ChatroomRow_" + message.ID);
                     if (obj != null || message.Deleted)
                     {
@@ -267,7 +376,7 @@ public class ChatroomMenu : MonoBehaviour
                         }
                         else if (obj != null)
                         {
-                            obj.SetSiblingIndex((int)message.ID);
+                            obj.SetSiblingIndex(i + 1);
                             if (obj.GetChild(3).GetComponent<TMP_Text>().text != Encoding.UTF8.GetString(Convert.FromBase64String(message.Content)))
                             {
                                 obj.GetChild(3).GetComponent<TMP_Text>().text = Encoding.UTF8.GetString(Convert.FromBase64String(message.Content));
@@ -390,6 +499,23 @@ public class ChatroomMenu : MonoBehaviour
         var button = content.transform.Find("ChatroomRow_" + selectedMessageForOptions.ID).GetChild(4).GetComponent<Button>();
         button.onClick.RemoveAllListeners();
         button.interactable = false;
+    }
+
+    async Task HandleReport()
+    {
+        EncryptedWWWForm dataForm = new();
+        dataForm.AddField("id", selectedMessageForOptions.ID.ToString());
+        dataForm.AddField("reason", reportMessagePanelReportReason.text);
+        dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
+        dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "reportChatroomMessage.php", dataForm.form);
+        request.SetRequestHeader("Requester", "BerryDashClient");
+        request.SetRequestHeader("ClientVersion", Application.version);
+        request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
+        await request.SendWebRequest();
+        shouldScrollToBottom = true;
+        StopCoroutine(refreshLoopRoutine);
+        refreshLoopRoutine = StartCoroutine(Loop());
     }
 
     IEnumerator ScrollToBottom()
