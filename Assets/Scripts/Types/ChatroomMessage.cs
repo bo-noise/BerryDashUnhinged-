@@ -1,7 +1,6 @@
 using UnityEngine.Scripting;
 using Newtonsoft.Json;
 using System.Numerics;
-using Newtonsoft.Json.Linq;
 
 [Preserve]
 public class ChatroomMessage {
@@ -36,4 +35,8 @@ public class ChatroomMessage {
   [Preserve]
   [JsonProperty("overlayColor")]
   public int[] OverlayColor { get; set; }
+
+  [Preserve]
+  [JsonProperty("deleted")]
+  public bool Deleted { get; set; }
 }

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
@@ -27,7 +29,18 @@ public class ChatroomMenu : MonoBehaviour
     private Coroutine refreshLoopRoutine;
     private bool shouldScrollToBottom = true;
     public Button downButton;
+    private bool isPaused;
+
     public GameObject optionsPanel;
+    public Button optionsPanelExitButton;
+    public Button optionsPanelDeleteButton;
+    public Button optionsPanelEditButton;
+    public Button optionsPanelReportButton;
+    public Button optionsPanelCopyButton;
+    private ChatroomMessage selectedMessageForOptions;
+
+    public GameObject editMessagePanelSample;
+    private GameObject editMessagePanelCurrent;
 
     void Start()
     {
@@ -43,6 +56,49 @@ public class ChatroomMenu : MonoBehaviour
         messageInputField.textComponent.textWrappingMode = TextWrappingModes.Normal;
         messageInputField.onSubmit.AddListener(async (_) => await HandleMessageSubmit());
         refreshLoopRoutine = StartCoroutine(Loop());
+
+        optionsPanelExitButton.onClick.AddListener(() =>
+        {
+            optionsPanel.SetActive(false);
+            selectedMessageForOptions = null;
+        });
+        optionsPanelDeleteButton.onClick.AddListener(async () =>
+        {
+            if (selectedMessageForOptions != null) await HandleDelete();
+        });
+        optionsPanelDeleteButton.onClick.AddListener(optionsPanelExitButton.onClick.Invoke);
+        optionsPanelEditButton.onClick.AddListener(() =>
+        {
+            var editMessage = Instantiate(editMessagePanelSample, editMessagePanelSample.transform.parent);
+            editMessagePanelCurrent = editMessage;
+            var editMessageChild = editMessage.transform.GetChild(0);
+            var editMessageChildExitButton = editMessageChild.GetChild(0).GetComponent<Button>();
+            var editMessageChildSubmitButton = editMessageChild.GetChild(1).GetComponent<Button>();
+            var editMessageChildOriginalPreview = editMessageChild.GetChild(2).gameObject;
+            var editMessageChildEditedPreview = editMessageChild.GetChild(3).gameObject;
+            var editMessageChildNewContentInputBox = editMessageChild.GetChild(4).GetComponent<TMP_InputField>();
+            editMessageChildNewContentInputBox.text = Encoding.UTF8.GetString(Convert.FromBase64String(selectedMessageForOptions.Content));
+            editMessageChildExitButton.onClick.AddListener(() =>
+            {
+                editMessagePanelCurrent = null;
+                Destroy(editMessage);
+                optionsPanel.SetActive(true);
+            });
+            editMessageChildSubmitButton.onClick.AddListener(async () =>
+            {
+                await HandleEdit();
+                editMessagePanelCurrent = null;
+                Destroy(editMessage);
+                selectedMessageForOptions = null;
+            });
+            optionsPanel.SetActive(false);
+            editMessage.SetActive(true);
+        });
+        optionsPanelCopyButton.onClick.AddListener(() =>
+        {
+            if (selectedMessageForOptions != null) GUIUtility.systemCopyBuffer = Encoding.UTF8.GetString(Convert.FromBase64String(selectedMessageForOptions.Content));
+        });
+        optionsPanelCopyButton.onClick.AddListener(optionsPanelExitButton.onClick.Invoke);
     }
 
     IEnumerator Loop()
@@ -168,6 +224,7 @@ public class ChatroomMenu : MonoBehaviour
 
     async void Refresh()
     {
+        if (isPaused) return;
         using UnityWebRequest request = UnityWebRequest.Get(SensitiveInfo.SERVER_DATABASE_PREFIX + "getChatroomMessages.php");
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
@@ -198,10 +255,30 @@ public class ChatroomMenu : MonoBehaviour
                 shouldClear = false;
                 var messages = JsonConvert.DeserializeObject<ChatroomMessage[]>(response);
                 var localUserId = BazookaManager.Instance.GetAccountID();
+                var sortedMessages = messages.OrderBy(m => m.ID).ToArray();
                 foreach (var message in messages)
                 {
-                    if (content.transform.Find("ChatroomRow_" + message.ID + "_" + message.UserID) != null)
+                    var obj = content.transform.Find("ChatroomRow_" + message.ID);
+                    if (obj != null || message.Deleted)
                     {
+                        if (message.Deleted && obj != null)
+                        {
+                            Destroy(obj.gameObject);
+                        }
+                        else if (obj != null)
+                        {
+                            obj.SetSiblingIndex((int)message.ID);
+                            if (obj.GetChild(3).GetComponent<TMP_Text>().text != Encoding.UTF8.GetString(Convert.FromBase64String(message.Content)))
+                            {
+                                obj.GetChild(3).GetComponent<TMP_Text>().text = Encoding.UTF8.GetString(Convert.FromBase64String(message.Content));
+                            }
+                            var button = obj.GetChild(4).GetComponent<Button>();
+                            if (!button.interactable)
+                            {
+                                button.interactable = true;
+                                button.onClick.AddListener(() => OptionsButtonClick(message, localUserId ?? 0));
+                            }
+                        }
                         continue;
                     }
                     if (content.transform.childCount > 50)
@@ -252,10 +329,10 @@ public class ChatroomMenu : MonoBehaviour
                         playerIcon.color = Color.white;
                         playerOverlayIcon.color = Color.white;
                     }
-                    optionsButton.onClick.AddListener(OptionsButtonClick);
-                    rowInfo.name = "ChatroomRow_" + message.ID + "_" + message.UserID;
+                    optionsButton.onClick.AddListener(() => OptionsButtonClick(message, localUserId ?? 0));
+                    rowInfo.name = "ChatroomRow_" + message.ID;
                     var entryComponet = rowInfo.AddComponent<ChatroomMenuEntry>();
-                    entryComponet.Init(bgImg, optionsButton, localUserId != null && message.UserID == localUserId);
+                    entryComponet.Init(bgImg, optionsButton);
                     rowInfo.SetActive(true);
                 }
                 break;
@@ -277,14 +354,61 @@ public class ChatroomMenu : MonoBehaviour
         }
     }
 
+    async Task HandleDelete()
+    {
+        EncryptedWWWForm dataForm = new();
+        dataForm.AddField("id", selectedMessageForOptions.ID.ToString());
+        dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
+        dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "deleteChatroomMessage.php", dataForm.form);
+        request.SetRequestHeader("Requester", "BerryDashClient");
+        request.SetRequestHeader("ClientVersion", Application.version);
+        request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
+        await request.SendWebRequest();
+        shouldScrollToBottom = true;
+        StopCoroutine(refreshLoopRoutine);
+        refreshLoopRoutine = StartCoroutine(Loop());
+    }
+
+    async Task HandleEdit()
+    {
+        var newContent = editMessagePanelCurrent.transform.GetChild(0).GetChild(4).GetComponent<TMP_InputField>().text;
+        selectedMessageForOptions.Content = newContent;
+        EncryptedWWWForm dataForm = new();
+        dataForm.AddField("id", selectedMessageForOptions.ID.ToString());
+        dataForm.AddField("content", newContent);
+        dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
+        dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "editChatroomMessage.php", dataForm.form);
+        request.SetRequestHeader("Requester", "BerryDashClient");
+        request.SetRequestHeader("ClientVersion", Application.version);
+        request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
+        await request.SendWebRequest();
+        shouldScrollToBottom = true;
+        StopCoroutine(refreshLoopRoutine);
+        refreshLoopRoutine = StartCoroutine(Loop());
+        var button = content.transform.Find("ChatroomRow_" + selectedMessageForOptions.ID).GetChild(4).GetComponent<Button>();
+        button.onClick.RemoveAllListeners();
+        button.interactable = false;
+    }
+
     IEnumerator ScrollToBottom()
     {
         yield return new WaitForEndOfFrame();
         content.transform.localPosition = new UnityEngine.Vector2(0f, content.GetComponent<RectTransform>().sizeDelta.y);
     }
 
-    void OptionsButtonClick()
+    void OptionsButtonClick(ChatroomMessage message, BigInteger localUserId)
     {
+        selectedMessageForOptions = message;
+        optionsPanelDeleteButton.transform.parent.gameObject.SetActive(localUserId != 0 && message.UserID == localUserId);
+        optionsPanelEditButton.transform.parent.gameObject.SetActive(localUserId != 0 && message.UserID == localUserId);
+        optionsPanelReportButton.transform.parent.gameObject.SetActive(localUserId != 0 && message.UserID != localUserId);
         optionsPanel.SetActive(true);
+    }
+
+    void OnApplicationPause(bool pause)
+    {
+        isPaused = pause;
     }
 }

@@ -5,14 +5,12 @@ using UnityEngine.UI;
 public class ChatroomMenuEntry : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
     private Image bgImg;
     private Button optionsButton;
-    private bool isMadeBySelf = false;
     private static ChatroomMenuEntry activeEntry;
 
-    public void Init(Image bgImgArg, Button optionsButtonArg, bool isMadeBySelfArg)
+    public void Init(Image bgImgArg, Button optionsButtonArg)
     {
         bgImg = bgImgArg;
         optionsButton = optionsButtonArg;
-        isMadeBySelf = isMadeBySelfArg;
         bgImg.color = new Color(50f / 255f, 50f / 255f, 50f / 255f);
         optionsButton.gameObject.SetActive(false);
     }
@@ -55,7 +53,7 @@ public class ChatroomMenuEntry : MonoBehaviour, IPointerEnterHandler, IPointerEx
     private void Activate() {
         activeEntry = this;
         bgImg.color = new Color(60f/255f, 60f/255f, 60f/255f);
-        optionsButton.gameObject.SetActive(isMadeBySelf);
+        optionsButton.gameObject.SetActive(true);
     }
 
     private void Deactivate() {
