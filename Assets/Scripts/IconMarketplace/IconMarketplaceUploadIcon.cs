@@ -17,6 +17,7 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
     public TMP_InputField birdNameInput;
     public TMP_InputField birdPriceInput;
     public Image birdImage;
+    public GameObject birdImageNone;
     private string birdData = null;
 
     void Awake()
@@ -56,6 +57,8 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
                 }
                 birdData = Convert.ToBase64String(fileContent);
                 Tools.RenderFromBase64(birdData, birdImage);
+                birdImageNone.SetActive(false);
+                birdImage.gameObject.SetActive(true);
             }
             catch (Exception e)
             {
@@ -155,7 +158,9 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
 
     internal void Reset()
     {
-        birdImage.sprite = Resources.Load<Sprite>("Other/X");
+        birdImage.sprite = null;
+        birdImageNone.SetActive(true);
+        birdImage.gameObject.SetActive(false);
         birdData = null;
         birdNameInput.text = string.Empty;
         birdPriceInput.text = string.Empty;

@@ -15,7 +15,7 @@ public class IconMarketplaceManager : MonoBehaviour
     public Button uploadButton;
     public TMP_Text coinText;
 
-    void Awake()
+    void Start()
     {
         downloadButton.onClick.AddListener(() => SwitchPanel(1));
 #if !UNITY_STANDALONE_OSX && !UNITY_STANDALONE_WIN && !UNITY_STANDALONE_LINUX && !UNITY_EDITOR
