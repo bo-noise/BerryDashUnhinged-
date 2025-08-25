@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -21,6 +22,21 @@ public class LoadingMenu : MonoBehaviour
         {
             Application.targetFrameRate = 360;
             QualitySettings.vSyncCount = 0;
+        }
+        if (PlayerPrefs.GetInt("LegacyConversion", 0) == 0)
+        {
+            if (PlayerPrefs.GetString("latestVersion", Application.version) == "1.4.0-beta1")
+            {
+                PlayerPrefs.DeleteKey("Setting2");
+                PlayerPrefs.DeleteKey("Setting3");
+                PlayerPrefs.SetInt("Setting2", PlayerPrefs.GetInt("Setting4", 0));
+                PlayerPrefs.SetInt("Setting3", PlayerPrefs.GetInt("Setting5", 0));
+            }
+            if (PlayerPrefs.HasKey("HighScore"))
+            {
+                PlayerPrefs.SetString("HighScoreV2", Math.Max(PlayerPrefs.GetInt("HighScore"), 0).ToString());
+                PlayerPrefs.DeleteKey("HighScore");
+            }
         }
         PlayerPrefs.SetString("latestVersion", Application.version);
         updateButton.onClick.AddListener(() =>
