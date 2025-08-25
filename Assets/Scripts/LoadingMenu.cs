@@ -23,7 +23,7 @@ public class LoadingMenu : MonoBehaviour
             Application.targetFrameRate = 360;
             QualitySettings.vSyncCount = 0;
         }
-        if (PlayerPrefs.GetInt("LegacyConversion", 0) == 0)
+        if (!PlayerPrefs.HasKey("LegacyConversion"))
         {
             if (PlayerPrefs.GetString("latestVersion", Application.version) == "1.4.0-beta1")
             {
