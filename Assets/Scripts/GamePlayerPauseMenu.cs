@@ -91,12 +91,22 @@ public class GamePlayerPauseMenu : MonoBehaviour
         coinsText.GetComponent<DraggableUI>().canDrag = !coinsText.GetComponent<DraggableUI>().canDrag;
         if (Application.isMobilePlatform)
         {
-            pauseButton.transform.parent.SetSiblingIndex(pauseButton.GetComponent<DraggableUI>().canDrag ? 0 : 2);
-            pauseButton.GetComponent<DraggableUI>().canDrag = !pauseButton.GetComponent<DraggableUI>().canDrag;
-            restartButton.GetComponent<DraggableUI>().canDrag = !restartButton.GetComponent<DraggableUI>().canDrag;
-            jumpButton.GetComponent<DraggableUI>().canDrag = !jumpButton.GetComponent<DraggableUI>().canDrag;
-            rightButton.GetComponent<DraggableUI>().canDrag = !rightButton.GetComponent<DraggableUI>().canDrag;
-            leftButton.GetComponent<DraggableUI>().canDrag = !leftButton.GetComponent<DraggableUI>().canDrag;
+            var pauseDraggableUI = pauseButton.GetComponent<DraggableUI>();
+            var restartDraggableUI = restartButton.GetComponent<DraggableUI>();
+            var jumpDraggableUI = jumpButton.GetComponent<DraggableUI>();
+            var rightDraggableUI = rightButton.GetComponent<DraggableUI>();
+            var leftDraggableUI = leftButton.GetComponent<DraggableUI>();
+            pauseButton.transform.parent.SetSiblingIndex(pauseDraggableUI.canDrag ? 0 : 2);
+            pauseDraggableUI.canDrag = !pauseDraggableUI.canDrag;
+            restartDraggableUI.canDrag = !restartDraggableUI.canDrag;
+            jumpDraggableUI.canDrag = !jumpDraggableUI.canDrag;
+            rightDraggableUI.canDrag = !rightDraggableUI.canDrag;
+            leftDraggableUI.canDrag = !leftDraggableUI.canDrag;
+            pauseButton.interactable = !pauseDraggableUI.canDrag;
+            restartButton.interactable = !restartDraggableUI.canDrag;
+            jumpButton.interactable = !jumpDraggableUI.canDrag;
+            rightButton.interactable = !rightDraggableUI.canDrag;
+            leftButton.interactable = !leftDraggableUI.canDrag;
         }
     }
 }

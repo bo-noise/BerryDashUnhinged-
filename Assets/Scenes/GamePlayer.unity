@@ -1350,7 +1350,6 @@ MonoBehaviour:
   jumpButton: {fileID: 293594129}
   rightButton: {fileID: 1125207522}
   leftButton: {fileID: 2069651268}
-  editingUI: 0
 --- !u!1 &349314674
 GameObject:
   m_ObjectHideFlags: 0
