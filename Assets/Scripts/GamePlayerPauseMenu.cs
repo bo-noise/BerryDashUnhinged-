@@ -17,7 +17,12 @@ public class GamePlayerPauseMenu : MonoBehaviour
     public TMP_Text highScoreText;
     public TMP_Text boostText;
     public TMP_Text coinsText;
-    public bool editingUI = false;
+    public Button pauseButton;
+    public Button restartButton;
+    public Button jumpButton;
+    public Button rightButton;
+    public Button leftButton;
+    internal bool editingUI = false;
 
     void Awake()
     {
@@ -54,6 +59,19 @@ public class GamePlayerPauseMenu : MonoBehaviour
             PlayerPrefs.DeleteKey("DraggedUIHighScoreText");
             PlayerPrefs.DeleteKey("DraggedUIBoostText");
             PlayerPrefs.DeleteKey("DraggedUICoinsText");
+            if (Application.isMobilePlatform)
+            {
+                ((RectTransform)pauseButton.transform).anchoredPosition = new Vector2(128f, -128f);
+                ((RectTransform)restartButton.transform).anchoredPosition = new Vector2(-128f, -128f);
+                ((RectTransform)jumpButton.transform).anchoredPosition = new Vector2(-128f, 288f);
+                ((RectTransform)rightButton.transform).anchoredPosition = new Vector2(-128f, 128f);
+                ((RectTransform)leftButton.transform).anchoredPosition = new Vector2(128f, 128f);
+                PlayerPrefs.DeleteKey("DraggedUIPauseButton");
+                PlayerPrefs.DeleteKey("DraggedUIRestartButton");
+                PlayerPrefs.DeleteKey("DraggedUIJumpButton");
+                PlayerPrefs.DeleteKey("DraggedUIRightButton");
+                PlayerPrefs.DeleteKey("DraggedUILeftButton");
+            }
         });
     }
 
@@ -71,5 +89,14 @@ public class GamePlayerPauseMenu : MonoBehaviour
         highScoreText.GetComponent<DraggableUI>().canDrag = !highScoreText.GetComponent<DraggableUI>().canDrag;
         boostText.GetComponent<DraggableUI>().canDrag = !boostText.GetComponent<DraggableUI>().canDrag;
         coinsText.GetComponent<DraggableUI>().canDrag = !coinsText.GetComponent<DraggableUI>().canDrag;
+        if (Application.isMobilePlatform)
+        {
+            pauseButton.transform.parent.SetSiblingIndex(pauseButton.GetComponent<DraggableUI>().canDrag ? 0 : 2);
+            pauseButton.GetComponent<DraggableUI>().canDrag = !pauseButton.GetComponent<DraggableUI>().canDrag;
+            restartButton.GetComponent<DraggableUI>().canDrag = !restartButton.GetComponent<DraggableUI>().canDrag;
+            jumpButton.GetComponent<DraggableUI>().canDrag = !jumpButton.GetComponent<DraggableUI>().canDrag;
+            rightButton.GetComponent<DraggableUI>().canDrag = !rightButton.GetComponent<DraggableUI>().canDrag;
+            leftButton.GetComponent<DraggableUI>().canDrag = !leftButton.GetComponent<DraggableUI>().canDrag;
+        }
     }
 }

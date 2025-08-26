@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 34767206}
   - component: {fileID: 34767208}
   - component: {fileID: 34767209}
+  - component: {fileID: 34767210}
   m_Layer: 5
   m_Name: RestartButton
   m_TagString: Untagged
@@ -239,6 +240,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoldableButton
   isPressed: 0
+--- !u!114 &34767210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34767204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4353c3e16b539839e7f8d301ca5e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableUI
+  uiName: RestartButton
+  canDrag: 0
 --- !u!1 &72292951
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,6 +1117,7 @@ GameObject:
   - component: {fileID: 293594129}
   - component: {fileID: 293594131}
   - component: {fileID: 293594132}
+  - component: {fileID: 293594133}
   m_Layer: 5
   m_Name: JumpButton
   m_TagString: Untagged
@@ -1209,6 +1225,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoldableButton
   isPressed: 0
+--- !u!114 &293594133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293594127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4353c3e16b539839e7f8d301ca5e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableUI
+  uiName: JumpButton
+  canDrag: 0
 --- !u!1 &302151016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,6 +1345,11 @@ MonoBehaviour:
   highScoreText: {fileID: 1606868532}
   boostText: {fileID: 497996347}
   coinsText: {fileID: 1527994350}
+  pauseButton: {fileID: 1577031227}
+  restartButton: {fileID: 34767206}
+  jumpButton: {fileID: 293594129}
+  rightButton: {fileID: 1125207522}
+  leftButton: {fileID: 2069651268}
   editingUI: 0
 --- !u!1 &349314674
 GameObject:
@@ -1542,7 +1577,7 @@ MonoBehaviour:
   m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 1
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -3457,6 +3492,7 @@ GameObject:
   - component: {fileID: 1125207522}
   - component: {fileID: 1125207524}
   - component: {fileID: 1125207525}
+  - component: {fileID: 1125207526}
   m_Layer: 5
   m_Name: RightButton
   m_TagString: Untagged
@@ -3564,6 +3600,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoldableButton
   isPressed: 0
+--- !u!114 &1125207526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125207520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4353c3e16b539839e7f8d301ca5e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableUI
+  uiName: RightButton
+  canDrag: 0
 --- !u!1 &1129928586
 GameObject:
   m_ObjectHideFlags: 0
@@ -4480,9 +4530,9 @@ MonoBehaviour:
   m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 1
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 1024
@@ -4677,6 +4727,7 @@ GameObject:
   - component: {fileID: 1577031227}
   - component: {fileID: 1577031230}
   - component: {fileID: 1577031231}
+  - component: {fileID: 1577031233}
   m_Layer: 5
   m_Name: PauseButton
   m_TagString: Untagged
@@ -4784,6 +4835,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoldableButton
   isPressed: 0
+--- !u!114 &1577031233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577031225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4353c3e16b539839e7f8d301ca5e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableUI
+  uiName: PauseButton
+  canDrag: 0
 --- !u!1 &1603915051
 GameObject:
   m_ObjectHideFlags: 0
@@ -4965,7 +5030,7 @@ MonoBehaviour:
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 1
   m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -5937,6 +6002,7 @@ GameObject:
   - component: {fileID: 2069651268}
   - component: {fileID: 2069651270}
   - component: {fileID: 2069651271}
+  - component: {fileID: 2069651272}
   m_Layer: 5
   m_Name: LeftButton
   m_TagString: Untagged
@@ -6044,6 +6110,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoldableButton
   isPressed: 0
+--- !u!114 &2069651272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069651266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4353c3e16b539839e7f8d301ca5e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableUI
+  uiName: LeftButton
+  canDrag: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
