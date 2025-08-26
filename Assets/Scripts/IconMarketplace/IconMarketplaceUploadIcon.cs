@@ -1,7 +1,8 @@
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-using SFB;
+using SimpleFileBrowser;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -42,9 +43,9 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
                 UploadIcon();
             }
         });
-        selectButton.onClick.AddListener(() =>
+        selectButton.onClick.AddListener(async () =>
         {
-            string path = OpenFilePicker();
+            string path = await OpenFilePicker();
             if (path == null) return;
             byte[] fileContent;
             try
@@ -68,17 +69,20 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
         });
     }
 
-    string OpenFilePicker()
+    async Task<string> OpenFilePicker()
     {
-        var filters = new[] {
-            new ExtensionFilter("Image Files", "png"),
-        };
-        var paths = StandaloneFileBrowser.OpenFilePanel("Select an icon file", "", filters, false);
-        if (paths.Length > 0 && !string.IsNullOrEmpty(paths[0]))
-        {
-            return paths[0];
-        }
-        return null;
+        FileBrowser.SetFilters(true, new FileBrowser.Filter("Images", ".png"));
+
+        var tcs = new TaskCompletionSource<string>();
+
+        FileBrowser.ShowLoadDialog(
+            (paths) => tcs.SetResult(paths.Length > 0 ? paths[0] : null),
+            () => tcs.SetResult(null),
+            FileBrowser.PickMode.Files,
+            false
+        );
+
+        return await tcs.Task;
     }
 
     async void UploadIcon()
