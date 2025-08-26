@@ -49,7 +49,9 @@ public class SettingsMenu : MonoBehaviour
         setting1toggle.onValueChanged.AddListener(value =>
         {
             BazookaManager.Instance.SetSettingFullScreen(value);
-            Screen.fullScreen = value;
+            var width = Display.main.systemWidth;
+            var height = Display.main.systemHeight;
+            Screen.SetResolution(width, height, value);
         });
         setting2toggle.onValueChanged.AddListener(value =>
         {
