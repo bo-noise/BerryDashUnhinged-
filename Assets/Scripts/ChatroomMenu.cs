@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
@@ -44,6 +44,7 @@ public class ChatroomMenu : MonoBehaviour
     public Button reportMessagePanelExitButton;
     public Button reportMessagePanelSubmitButton;
     public TMP_InputField reportMessagePanelReportReason;
+    public Dictionary<string, string> customIcons;
 
     void Start()
     {
@@ -105,37 +106,45 @@ public class ChatroomMenu : MonoBehaviour
 
             usernameText.text = selectedMessageForOptions.Username;
             messageText.text = Encoding.UTF8.GetString(Convert.FromBase64String(selectedMessageForOptions.Content));
-            playerIcon.sprite = Resources.Load<Sprite>("Icons/Icons/bird_" + selectedMessageForOptions.Icon);
-            if (selectedMessageForOptions.Icon == 1)
+            if (selectedMessageForOptions.CustomIcon == null)
             {
-                playerIcon.sprite = Tools.GetIconForUser(selectedMessageForOptions.UserID);
+                playerIcon.sprite = Resources.Load<Sprite>("Icons/Icons/bird_" + selectedMessageForOptions.Icon);
+                if (selectedMessageForOptions.Icon == 1)
+                {
+                    playerIcon.sprite = Tools.GetIconForUser(selectedMessageForOptions.UserID);
+                }
+                playerOverlayIcon.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + selectedMessageForOptions.Overlay);
+                if (selectedMessageForOptions.Overlay == 0)
+                {
+                    playerOverlayIcon.gameObject.SetActive(false);
+                }
+                else if (selectedMessageForOptions.Overlay == 8)
+                {
+                    playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.56f, 14.81f);
+                }
+                else if (selectedMessageForOptions.Overlay == 11)
+                {
+                    playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-14.74451f, 20.39122f);
+                }
+                else if (selectedMessageForOptions.Overlay == 13)
+                {
+                    playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.54019f, 14.70365f);
+                }
+                try
+                {
+                    playerIcon.color = new Color(selectedMessageForOptions.BirdColor[0] / 255f, selectedMessageForOptions.BirdColor[1] / 255f, selectedMessageForOptions.BirdColor[2] / 255f);
+                    playerOverlayIcon.color = new Color(selectedMessageForOptions.OverlayColor[0] / 255f, selectedMessageForOptions.OverlayColor[1] / 255f, selectedMessageForOptions.OverlayColor[2] / 255f);
+                }
+                catch (Exception)
+                {
+                    playerIcon.color = Color.white;
+                    playerOverlayIcon.color = Color.white;
+                }
             }
-            playerOverlayIcon.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + selectedMessageForOptions.Overlay);
-            if (selectedMessageForOptions.Overlay == 0)
+            else
             {
+                Tools.RenderFromBase64(customIcons[selectedMessageForOptions.CustomIcon], playerIcon);
                 playerOverlayIcon.gameObject.SetActive(false);
-            }
-            else if (selectedMessageForOptions.Overlay == 8)
-            {
-                playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.56f, 14.81f);
-            }
-            else if (selectedMessageForOptions.Overlay == 11)
-            {
-                playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-14.74451f, 20.39122f);
-            }
-            else if (selectedMessageForOptions.Overlay == 13)
-            {
-                playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.54019f, 14.70365f);
-            }
-            try
-            {
-                playerIcon.color = new Color(selectedMessageForOptions.BirdColor[0] / 255f, selectedMessageForOptions.BirdColor[1] / 255f, selectedMessageForOptions.BirdColor[2] / 255f);
-                playerOverlayIcon.color = new Color(selectedMessageForOptions.OverlayColor[0] / 255f, selectedMessageForOptions.OverlayColor[1] / 255f, selectedMessageForOptions.OverlayColor[2] / 255f);
-            }
-            catch (Exception)
-            {
-                playerIcon.color = Color.white;
-                playerOverlayIcon.color = Color.white;
             }
 
             rowInfo = editMessageChild.GetChild(3);
@@ -148,37 +157,45 @@ public class ChatroomMenu : MonoBehaviour
             usernameText.text = selectedMessageForOptions.Username;
             messageText.text = Encoding.UTF8.GetString(Convert.FromBase64String(selectedMessageForOptions.Content));
             editMessageChildNewContentInputBox.onValueChanged.AddListener((value) => messageText.text = value);
-            playerIcon.sprite = Resources.Load<Sprite>("Icons/Icons/bird_" + selectedMessageForOptions.Icon);
-            if (selectedMessageForOptions.Icon == 1)
+            if (selectedMessageForOptions.CustomIcon == null)
             {
-                playerIcon.sprite = Tools.GetIconForUser(selectedMessageForOptions.UserID);
+                playerIcon.sprite = Resources.Load<Sprite>("Icons/Icons/bird_" + selectedMessageForOptions.Icon);
+                if (selectedMessageForOptions.Icon == 1)
+                {
+                    playerIcon.sprite = Tools.GetIconForUser(selectedMessageForOptions.UserID);
+                }
+                playerOverlayIcon.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + selectedMessageForOptions.Overlay);
+                if (selectedMessageForOptions.Overlay == 0)
+                {
+                    playerOverlayIcon.gameObject.SetActive(false);
+                }
+                else if (selectedMessageForOptions.Overlay == 8)
+                {
+                    playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.56f, 14.81f);
+                }
+                else if (selectedMessageForOptions.Overlay == 11)
+                {
+                    playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-14.74451f, 20.39122f);
+                }
+                else if (selectedMessageForOptions.Overlay == 13)
+                {
+                    playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.54019f, 14.70365f);
+                }
+                try
+                {
+                    playerIcon.color = new Color(selectedMessageForOptions.BirdColor[0] / 255f, selectedMessageForOptions.BirdColor[1] / 255f, selectedMessageForOptions.BirdColor[2] / 255f);
+                    playerOverlayIcon.color = new Color(selectedMessageForOptions.OverlayColor[0] / 255f, selectedMessageForOptions.OverlayColor[1] / 255f, selectedMessageForOptions.OverlayColor[2] / 255f);
+                }
+                catch (Exception)
+                {
+                    playerIcon.color = Color.white;
+                    playerOverlayIcon.color = Color.white;
+                }
             }
-            playerOverlayIcon.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + selectedMessageForOptions.Overlay);
-            if (selectedMessageForOptions.Overlay == 0)
+            else
             {
+                Tools.RenderFromBase64(customIcons[selectedMessageForOptions.CustomIcon], playerIcon);
                 playerOverlayIcon.gameObject.SetActive(false);
-            }
-            else if (selectedMessageForOptions.Overlay == 8)
-            {
-                playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.56f, 14.81f);
-            }
-            else if (selectedMessageForOptions.Overlay == 11)
-            {
-                playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-14.74451f, 20.39122f);
-            }
-            else if (selectedMessageForOptions.Overlay == 13)
-            {
-                playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.54019f, 14.70365f);
-            }
-            try
-            {
-                playerIcon.color = new Color(selectedMessageForOptions.BirdColor[0] / 255f, selectedMessageForOptions.BirdColor[1] / 255f, selectedMessageForOptions.BirdColor[2] / 255f);
-                playerOverlayIcon.color = new Color(selectedMessageForOptions.OverlayColor[0] / 255f, selectedMessageForOptions.OverlayColor[1] / 255f, selectedMessageForOptions.OverlayColor[2] / 255f);
-            }
-            catch (Exception)
-            {
-                playerIcon.color = Color.white;
-                playerOverlayIcon.color = Color.white;
             }
 
             optionsPanel.SetActive(false);
@@ -361,7 +378,9 @@ public class ChatroomMenu : MonoBehaviour
                 break;
             default:
                 shouldClear = false;
-                var messages = JsonConvert.DeserializeObject<ChatroomMessage[]>(response);
+                var jsonResponse = JObject.Parse(response);
+                var messages = jsonResponse["messages"].ToObject<ChatroomMessage[]>();
+                customIcons = jsonResponse["customIcons"].ToObject<Dictionary<string, string>>();
                 var localUserId = BazookaManager.Instance.GetAccountID();
                 var sortedMessages = messages.OrderBy(m => m.ID).ToArray();
                 for (int i = 0; i < sortedMessages.Length; i++)
@@ -406,37 +425,45 @@ public class ChatroomMenu : MonoBehaviour
 
                     usernameText.text = message.Username;
                     messageText.text = Encoding.UTF8.GetString(Convert.FromBase64String(message.Content));
-                    playerIcon.sprite = Resources.Load<Sprite>("Icons/Icons/bird_" + message.Icon);
-                    if (message.Icon == 1)
+                    if (message.CustomIcon == null)
                     {
-                        playerIcon.sprite = Tools.GetIconForUser(message.UserID);
+                        playerIcon.sprite = Resources.Load<Sprite>("Icons/Icons/bird_" + message.Icon);
+                        if (message.Icon == 1)
+                        {
+                            playerIcon.sprite = Tools.GetIconForUser(message.UserID);
+                        }
+                        playerOverlayIcon.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + message.Overlay);
+                        if (message.Overlay == 0)
+                        {
+                            playerOverlayIcon.gameObject.SetActive(false);
+                        }
+                        else if (message.Overlay == 8)
+                        {
+                            playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.56f, 14.81f);
+                        }
+                        else if (message.Overlay == 11)
+                        {
+                            playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-14.74451f, 20.39122f);
+                        }
+                        else if (message.Overlay == 13)
+                        {
+                            playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.54019f, 14.70365f);
+                        }
+                        try
+                        {
+                            playerIcon.color = new Color(message.BirdColor[0] / 255f, message.BirdColor[1] / 255f, message.BirdColor[2] / 255f);
+                            playerOverlayIcon.color = new Color(message.OverlayColor[0] / 255f, message.OverlayColor[1] / 255f, message.OverlayColor[2] / 255f);
+                        }
+                        catch (Exception)
+                        {
+                            playerIcon.color = Color.white;
+                            playerOverlayIcon.color = Color.white;
+                        }
                     }
-                    playerOverlayIcon.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + message.Overlay);
-                    if (message.Overlay == 0)
+                    else
                     {
+                        Tools.RenderFromBase64(customIcons[message.CustomIcon], playerIcon);
                         playerOverlayIcon.gameObject.SetActive(false);
-                    }
-                    else if (message.Overlay == 8)
-                    {
-                        playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.56f, 14.81f);
-                    }
-                    else if (message.Overlay == 11)
-                    {
-                        playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-14.74451f, 20.39122f);
-                    }
-                    else if (message.Overlay == 13)
-                    {
-                        playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.54019f, 14.70365f);
-                    }
-                    try
-                    {
-                        playerIcon.color = new Color(message.BirdColor[0] / 255f, message.BirdColor[1] / 255f, message.BirdColor[2] / 255f);
-                        playerOverlayIcon.color = new Color(message.OverlayColor[0] / 255f, message.OverlayColor[1] / 255f, message.OverlayColor[2] / 255f);
-                    }
-                    catch (Exception)
-                    {
-                        playerIcon.color = Color.white;
-                        playerOverlayIcon.color = Color.white;
                     }
                     optionsButton.onClick.AddListener(() => OptionsButtonClick(message, localUserId ?? 0));
                     rowInfo.name = "ChatroomRow_" + message.ID;

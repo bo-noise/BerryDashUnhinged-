@@ -1,6 +1,6 @@
 using System;
+using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
 using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
@@ -26,6 +26,7 @@ public class LeaderboardsMenu : MonoBehaviour
     public GameObject berryContent;
     public TMP_Dropdown berryShowTypeDropdown;
     public GameObject berrySampleObject;
+    public Dictionary<string, string> customIcons;
 
     void Awake()
     {
@@ -144,10 +145,12 @@ public class LeaderboardsMenu : MonoBehaviour
             }
             else
             {
-                var jsonResponse = JArray.Parse(response);
-                for (int i = 0; i < jsonResponse.Count; i++)
+                var jsonResponse = JObject.Parse(response);
+                var entries = (JArray)jsonResponse["entries"];
+                customIcons = jsonResponse["customIcons"].ToObject<Dictionary<string, string>>();
+                for (int i = 0; i < entries.Count; i++)
                 {
-                    var entry = JObject.Parse(jsonResponse[i].ToString());
+                    var entry = JObject.Parse(entries[i].ToString());
                     var username = (string)entry["username"];
                     var highScore = BigInteger.Parse((string)entry["value"]);
                     var icon = (int)entry["icon"];
@@ -155,6 +158,7 @@ public class LeaderboardsMenu : MonoBehaviour
                     var uid = BigInteger.Parse((string)entry["userid"]);
                     var birdColor = (JArray)entry["birdColor"];
                     var overlayColor = (JArray)entry["overlayColor"];
+                    var customIcon = (string)entry["customIcon"];
 
                     var entryInfo = Instantiate(scoreSampleObject, scoreContent.transform);
                     var usernameText = entryInfo.transform.GetChild(0).GetComponent<TMP_Text>();
@@ -170,37 +174,45 @@ public class LeaderboardsMenu : MonoBehaviour
 
                     usernameText.text = $"{username} (#{i + 1})";
                     highScoreText.text += Tools.FormatWithCommas(highScore);
-                    playerIcon.sprite = Resources.Load<Sprite>("Icons/Icons/bird_" + icon);
-                    if (icon == 1)
+                    if (customIcon == null)
                     {
-                        playerIcon.sprite = Tools.GetIconForUser(uid);
+                        playerIcon.sprite = Resources.Load<Sprite>("Icons/Icons/bird_" + icon);
+                        if (icon == 1)
+                        {
+                            playerIcon.sprite = Tools.GetIconForUser(uid);
+                        }
+                        playerOverlayIcon.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + overlay);
+                        if (overlay == 0)
+                        {
+                            playerOverlayIcon.gameObject.SetActive(false);
+                        }
+                        else if (overlay == 8)
+                        {
+                            playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.56f, 14.81f);
+                        }
+                        else if (overlay == 11)
+                        {
+                            playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-14.74451f, 20.39122f);
+                        }
+                        else if (overlay == 13)
+                        {
+                            playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.54019f, 14.70365f);
+                        }
+                        try
+                        {
+                            playerIcon.color = new Color((int)birdColor[0] / 255f, (int)birdColor[1] / 255f, (int)birdColor[2] / 255f);
+                            playerOverlayIcon.color = new Color((int)overlayColor[0] / 255f, (int)overlayColor[1] / 255f, (int)overlayColor[2] / 255f);
+                        }
+                        catch (Exception)
+                        {
+                            playerIcon.color = Color.white;
+                            playerOverlayIcon.color = Color.white;
+                        }
                     }
-                    playerOverlayIcon.sprite = Resources.Load<Sprite>("Icons/Overlays/overlay_" + overlay);
-                    if (overlay == 0)
+                    else
                     {
+                        Tools.RenderFromBase64(customIcons[customIcon], playerIcon);
                         playerOverlayIcon.gameObject.SetActive(false);
-                    }
-                    else if (overlay == 8)
-                    {
-                        playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.56f, 14.81f);
-                    }
-                    else if (overlay == 11)
-                    {
-                        playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-14.74451f, 20.39122f);
-                    }
-                    else if (overlay == 13)
-                    {
-                        playerOverlayIcon.transform.localPosition = new UnityEngine.Vector2(-16.54019f, 14.70365f);
-                    }
-                    try
-                    {
-                        playerIcon.color = new Color((int)birdColor[0] / 255f, (int)birdColor[1] / 255f, (int)birdColor[2] / 255f);
-                        playerOverlayIcon.color = new Color((int)overlayColor[0] / 255f, (int)overlayColor[1] / 255f, (int)overlayColor[2] / 255f);
-                    }
-                    catch (Exception)
-                    {
-                        playerIcon.color = Color.white;
-                        playerOverlayIcon.color = Color.white;
                     }
                     entryInfo.SetActive(true);
                 }

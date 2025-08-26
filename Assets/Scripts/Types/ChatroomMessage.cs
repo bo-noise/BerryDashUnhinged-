@@ -39,4 +39,8 @@ public class ChatroomMessage {
   [Preserve]
   [JsonProperty("deleted")]
   public bool Deleted { get; set; }
+
+  [Preserve]
+  [JsonProperty("customIcon")]
+  public string CustomIcon { get; set; }
 }
