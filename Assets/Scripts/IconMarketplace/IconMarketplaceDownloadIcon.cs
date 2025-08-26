@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using System.Numerics;
 using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
@@ -8,6 +9,7 @@ using UnityEngine.UI;
 
 public class IconMarketplaceDownloadIcon : MonoBehaviour
 {
+    private static WaitForSeconds _waitForSeconds2 = new(2f);
     public IconMarketplaceManager marketplaceManager;
     public TMP_Text statusText;
     public TMP_Text balanceText;
@@ -79,6 +81,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         {
             ShowStatus(null);
             var icons = JsonConvert.DeserializeObject<MarketplaceIconType[]>(response);
+            var localUserID = BazookaManager.Instance.GetAccountID();
             foreach (var entry in icons)
             {
                 GameObject newIcon = Instantiate(sample, content.transform);
@@ -96,13 +99,27 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
                 if (alreadyBought)
                 {
                     btn.interactable = false;
-                    btnText.text = "Purchased";
+                    if (localUserID != entry.CreatorUserID)
+                    {
+                        btnText.text = "Purchased";
+                    }
+                    else
+                    {
+                        btnText.text = "Claimed";
+                    }
                 }
-                else
-                {
-                    btn.onClick.AddListener(() => HandlePurchase(entry, btn));
-                    btnText.text = "Purchase";
-                }
+                    else
+                    {
+                        btn.onClick.AddListener(() => HandlePurchase(entry, btn, localUserID));
+                        if (localUserID != entry.CreatorUserID)
+                        {
+                            btnText.text = "Purchase";
+                        }
+                        else
+                        {
+                            btnText.text = "Claim";
+                        }
+                    }
 
                 newIcon.SetActive(true);
             }
@@ -110,21 +127,31 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         backButton.interactable = true;
     }
 
-    void HandlePurchase(MarketplaceIconType data, Button button)
+    void HandlePurchase(MarketplaceIconType data, Button button, BigInteger? localUserID)
     {
         button.interactable = false;
         MarketplaceIconStorageType marketplaceIconStorage = BazookaManager.Instance.GetCustomBirdIconData();
-        if (data.Price > marketplaceIconStorage.Balance)
+        if (localUserID != data.CreatorUserID)
         {
-            button.interactable = true;
-            ShowStatus("You can't afford this icon! You need " + Tools.FormatWithCommas(data.Price - marketplaceIconStorage.Balance) + " more coins");
-            return;
+            if (data.Price > marketplaceIconStorage.Balance)
+            {
+                button.interactable = true;
+                ShowStatus("You can't afford this icon! You need " + Tools.FormatWithCommas(data.Price - marketplaceIconStorage.Balance) + " more coins");
+                return;
+            }
+            marketplaceIconStorage.Balance -= data.Price;
         }
         var list = marketplaceIconStorage.Data.ToList();
         list.Add(data);
         marketplaceIconStorage.Data = list.ToArray();
-        marketplaceIconStorage.Balance -= data.Price;
-        button.transform.GetChild(0).GetComponent<TMP_Text>().text = "Purchased";
+        if (localUserID != data.CreatorUserID)
+        {
+            button.transform.GetChild(0).GetComponent<TMP_Text>().text = "Purchased";
+        }
+        else
+        {
+            button.transform.GetChild(0).GetComponent<TMP_Text>().text = "Claimed";
+        }
         balanceText.text = "You have " + Tools.FormatWithCommas(marketplaceIconStorage.Balance) + " coins to spend";
         BazookaManager.Instance.SetCustomBirdIconData(marketplaceIconStorage);
     }
@@ -157,7 +184,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return _waitForSeconds2;
 
         t = 0f;
         while (t < 0.5f)
