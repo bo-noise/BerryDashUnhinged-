@@ -50,35 +50,29 @@ public class GamePlayer : MonoBehaviour
 
     void Start()
     {
+        var backgroundColor = BazookaManager.Instance.GetColorSettingBackground();
+        Camera.main.backgroundColor = new Color(
+            int.Parse(backgroundColor[0].ToString()) / 255f,
+            int.Parse(backgroundColor[1].ToString()) / 255f,
+            int.Parse(backgroundColor[2].ToString()) / 255f
+        );
+
         var customIconData = BazookaManager.Instance.GetCustomBirdIconData();
         SpriteRenderer component = bird.GetComponent<SpriteRenderer>();
         if (customIconData.Selected == null)
         {
-            var backgroundColor = BazookaManager.Instance.GetColorSettingBackground();
             var birdColor = BazookaManager.Instance.GetColorSettingIcon();
             var overlayColor = BazookaManager.Instance.GetColorSettingOverlay();
-            try
-            {
-                Camera.main.backgroundColor = new Color(
-                    int.Parse(backgroundColor[0].ToString()) / 255f,
-                    int.Parse(backgroundColor[1].ToString()) / 255f,
-                    int.Parse(backgroundColor[2].ToString()) / 255f
-                );
-                bird.GetComponent<SpriteRenderer>().color = new Color(
-                    int.Parse(birdColor[0].ToString()) / 255f,
-                    int.Parse(birdColor[1].ToString()) / 255f,
-                    int.Parse(birdColor[2].ToString()) / 255f
-                );
-                bird.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(
-                    int.Parse(overlayColor[0].ToString()) / 255f,
-                    int.Parse(overlayColor[1].ToString()) / 255f,
-                    int.Parse(overlayColor[2].ToString()) / 255f
-                );
-            }
-            catch
-            {
-                Debug.LogError("Invalid BackgroundColor format");
-            }
+            bird.GetComponent<SpriteRenderer>().color = new Color(
+                int.Parse(birdColor[0].ToString()) / 255f,
+                int.Parse(birdColor[1].ToString()) / 255f,
+                int.Parse(birdColor[2].ToString()) / 255f
+            );
+            bird.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(
+                int.Parse(overlayColor[0].ToString()) / 255f,
+                int.Parse(overlayColor[1].ToString()) / 255f,
+                int.Parse(overlayColor[2].ToString()) / 255f
+            );
 
             int num = BazookaManager.Instance.GetBirdIcon();
             int num2 = BazookaManager.Instance.GetBirdOverlay();
