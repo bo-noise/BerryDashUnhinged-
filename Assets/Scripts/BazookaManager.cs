@@ -62,6 +62,10 @@ public class BazookaManager : MonoBehaviour
                 Debug.LogWarning("Failed to load save file");
             }
         }
+        if (saveFile["version"] == null || saveFile["version"].ToString() != "0")
+        {
+            saveFile["version"] = "0";
+        }
         if (!PlayerPrefs.HasKey("LegacyConversion"))
         {
             PlayerPrefs.SetInt("LegacyConversion", 1);
