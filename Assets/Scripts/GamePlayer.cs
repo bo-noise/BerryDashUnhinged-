@@ -312,7 +312,7 @@ public class GamePlayer : MonoBehaviour
             GameObject newBerry = new("Berry");
             newBerry.transform.SetParent(berryParent.transform);
             SpriteRenderer spriteRenderer = newBerry.AddComponent<SpriteRenderer>();
-            if (spawnProbability <= 0.6f)
+            if (spawnProbability <= 0.525f)
             {
                 spriteRenderer.sprite = Resources.Load<Sprite>("Berries/Berry");
                 newBerry.tag = "NormalBerry";
