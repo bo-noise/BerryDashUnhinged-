@@ -12,6 +12,8 @@ public class GamePlayerPauseMenu : MonoBehaviour
     public AudioSource songLoop;
     public Slider musicSlider;
     public Slider sfxSlider;
+    public TMP_Text musicSliderText;
+    public TMP_Text sfxSliderText;
     public TMP_Text fpsText;
     public TMP_Text scoreText;
     public TMP_Text highScoreText;
@@ -80,6 +82,8 @@ public class GamePlayerPauseMenu : MonoBehaviour
         editingUI = !editingUI;
         musicSlider.gameObject.SetActive(!musicSlider.gameObject.activeSelf);
         sfxSlider.gameObject.SetActive(!sfxSlider.gameObject.activeSelf);
+        musicSliderText.gameObject.SetActive(musicSlider.gameObject.activeSelf);
+        sfxSliderText.gameObject.SetActive(sfxSlider.gameObject.activeSelf);
         backButton.gameObject.SetActive(!backButton.gameObject.activeSelf);
         continueButton.gameObject.SetActive(!continueButton.gameObject.activeSelf);
         editUiButton.transform.GetChild(0).GetComponent<TMP_Text>().text = editUiButton.transform.GetChild(0).GetComponent<TMP_Text>().text == "Edit UI" ? "Done" : "Edit UI";
