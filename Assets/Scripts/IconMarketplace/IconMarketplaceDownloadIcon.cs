@@ -108,6 +108,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         }
         ShowStatus("Loading...");
         EncryptedWWWForm dataForm = new();
+        dataForm.AddField("sortBy", optionsPanelSortByDropdown.value.ToString());
         dataForm.AddField("priceRangeEnabled", priceRangeEnabled.ToString());
         dataForm.AddField("priceRangeMin", priceRangeMin);
         dataForm.AddField("priceRangeMax", priceRangeMax);
