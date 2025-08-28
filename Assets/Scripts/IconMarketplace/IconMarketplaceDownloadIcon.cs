@@ -45,10 +45,10 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         optionsButton.onClick.AddListener(() => optionsPanel.SetActive(true));
         optionsPanelSubmitButton.onClick.AddListener(() =>
         {
+            optionsPanel.SetActive(false);
             if (anyChanges)
             {
                 anyChanges = false;
-                optionsPanel.SetActive(false);
                 GetIcons();
             }
         });
