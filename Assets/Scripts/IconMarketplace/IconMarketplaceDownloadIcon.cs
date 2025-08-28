@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class IconMarketplaceDownloadIcon : MonoBehaviour
 {
-    private static WaitForSeconds _waitForSeconds2 = new(2f);
+    private readonly static WaitForSeconds _waitForSeconds2 = new(2f);
     public IconMarketplaceManager marketplaceManager;
     public TMP_Text statusText;
     public TMP_Text balanceText;
