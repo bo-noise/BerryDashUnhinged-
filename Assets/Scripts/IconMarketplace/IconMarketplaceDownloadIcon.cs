@@ -71,6 +71,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
             optionsPanelSearchForInputField.interactable = on;
         });
 
+        optionsPanelSortByDropdown.onValueChanged.AddListener((_) => anyChanges = true);
         optionsPanelPriceRangeMinInput.onValueChanged.AddListener((value) =>
         {
             anyChanges = true;
