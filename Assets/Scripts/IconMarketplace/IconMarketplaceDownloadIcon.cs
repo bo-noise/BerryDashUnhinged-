@@ -18,10 +18,74 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
     public GameObject sample;
     private string statusMessage;
     private Coroutine statusRoutine;
+    public Button refreshButton;
+    public Button optionsButton;
+    public GameObject optionsPanel;
+    public Button optionsPanelSubmitButton;
+    public TMP_Dropdown optionsPanelSortByDropdown;
+    public Toggle optionsPanelPriceRangeToggle;
+    public TMP_InputField optionsPanelPriceRangeMinInput;
+    public TMP_InputField optionsPanelPriceRangeMaxInput;
+    public Toggle optionsPanelSearchForToggle;
+    public TMP_InputField optionsPanelSearchForInputField;
+
+    public bool priceRangeEnabled = false;
+    public string priceRangeMin = "10";
+    public string priceRangeMax = "250";
+
+    public bool searchForEnabled = false;
+    public string searchForValue = "";
+
+    public bool anyChanges = false;
 
     void Awake()
     {
         backButton.onClick.AddListener(() => marketplaceManager.SwitchPanel(0));
+        refreshButton.onClick.AddListener(GetIcons);
+        optionsButton.onClick.AddListener(() => optionsPanel.SetActive(true));
+        optionsPanelSubmitButton.onClick.AddListener(() =>
+        {
+            if (anyChanges)
+            {
+                anyChanges = false;
+                optionsPanel.SetActive(false);
+                GetIcons();
+            }
+        });
+
+        optionsPanelPriceRangeToggle.onValueChanged.AddListener((on) =>
+        {
+            anyChanges = true;
+            if (!on)
+            {
+                optionsPanelPriceRangeMinInput.text = "10";
+                optionsPanelPriceRangeMaxInput.text = "250";
+            }
+            optionsPanelPriceRangeMinInput.interactable = on;
+            optionsPanelPriceRangeMaxInput.interactable = on;
+        });
+        optionsPanelSearchForToggle.onValueChanged.AddListener((on) =>
+        {
+            anyChanges = true;
+            optionsPanelSearchForInputField.text = "";
+            optionsPanelSearchForInputField.interactable = on;
+        });
+
+        optionsPanelPriceRangeMinInput.onValueChanged.AddListener((value) =>
+        {
+            anyChanges = true;
+            priceRangeMin = value;
+        });
+        optionsPanelPriceRangeMaxInput.onValueChanged.AddListener((value) =>
+        {
+            anyChanges = true;
+            priceRangeMax = value;
+        });
+        optionsPanelSearchForInputField.onValueChanged.AddListener((value) =>
+        {
+            anyChanges = true;
+            searchForValue = value;
+        });
     }
 
     internal void Load()
@@ -32,6 +96,8 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
 
     async void GetIcons()
     {
+        refreshButton.interactable = false;
+        optionsButton.interactable = false;
         backButton.interactable = false;
         foreach (Transform item in content.transform)
         {
@@ -41,13 +107,21 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
             }
         }
         ShowStatus("Loading...");
-        using UnityWebRequest request = UnityWebRequest.Get(SensitiveInfo.SERVER_DATABASE_PREFIX + "getMarketplaceIcons.php");
+        EncryptedWWWForm dataForm = new();
+        dataForm.AddField("priceRangeEnabled", priceRangeEnabled.ToString());
+        dataForm.AddField("priceRangeMin", priceRangeMin);
+        dataForm.AddField("priceRangeMax", priceRangeMax);
+        dataForm.AddField("searchForEnabled", searchForEnabled.ToString());
+        dataForm.AddField("searchForValue", searchForValue);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getMarketplaceIcons.php", dataForm.form);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
         await request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.Success)
         {
+            refreshButton.interactable = true;
+            optionsButton.interactable = true;
             backButton.interactable = true;
             ShowStatus("Failed to make HTTP request");
             return;
@@ -55,27 +129,19 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
         if (response == "-999")
         {
-            backButton.interactable = true;
             ShowStatus("Server error while fetching data");
-            return;
         }
         else if (response == "-998")
         {
-            backButton.interactable = true;
             ShowStatus("Client version too outdated to access servers");
-            return;
         }
         else if (response == "-997")
         {
-            backButton.interactable = true;
             ShowStatus("Encryption/decryption issues");
-            return;
         }
         else if (response == "-996")
         {
-            backButton.interactable = true;
             ShowStatus("Can't send requests on self-built instance");
-            return;
         }
         else
         {
@@ -124,6 +190,8 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
                 newIcon.SetActive(true);
             }
         }
+        refreshButton.interactable = true;
+        optionsButton.interactable = true;
         backButton.interactable = true;
     }
 
