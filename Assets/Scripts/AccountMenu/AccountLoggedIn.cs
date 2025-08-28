@@ -44,8 +44,12 @@ public class AccountLoggedIn : MonoBehaviour
 
     async void SaveAccount()
     {
-        loggedInLoadButton.interactable = false;
+        loggedInChangeUsernameButton.interactable = false;
+        loggedInChangePasswordButton.interactable = false;
         loggedInSaveButton.interactable = false;
+        loggedInLoadButton.interactable = false;
+        loggedInRefreshLoginButton.interactable = false;
+        loggedInLogoutButton.interactable = false;
         loggedInBackButton.interactable = false;
         EncryptedWWWForm dataForm = new();
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
@@ -58,8 +62,12 @@ public class AccountLoggedIn : MonoBehaviour
         await request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.Success)
         {
-            loggedInLoadButton.interactable = true;
+            loggedInChangeUsernameButton.interactable = true;
+            loggedInChangePasswordButton.interactable = true;
             loggedInSaveButton.interactable = true;
+            loggedInLoadButton.interactable = true;
+            loggedInRefreshLoginButton.interactable = true;
+            loggedInLogoutButton.interactable = true;
             loggedInBackButton.interactable = true;
             Tools.UpdateStatusText(loggedInText, "Failed to make HTTP request", Color.red);
             return;
@@ -67,35 +75,19 @@ public class AccountLoggedIn : MonoBehaviour
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
         if (response == "-999")
         {
-            loggedInLoadButton.interactable = true;
-            loggedInSaveButton.interactable = true;
-            loggedInBackButton.interactable = true;
             Tools.UpdateStatusText(loggedInText, "Server error while fetching data", Color.red);
-            return;
         }
         else if (response == "-998")
         {
-            loggedInLoadButton.interactable = true;
-            loggedInSaveButton.interactable = true;
-            loggedInBackButton.interactable = true;
             Tools.UpdateStatusText(loggedInText, "Client version too outdated to access servers", Color.red);
-            return;
         }
         else if (response == "-997")
         {
-            loggedInLoadButton.interactable = true;
-            loggedInSaveButton.interactable = true;
-            loggedInBackButton.interactable = true;
             Tools.UpdateStatusText(loggedInText, "Encryption/decryption issues", Color.red);
-            return;
         }
         else if (response == "-996")
         {
-            loggedInLoadButton.interactable = true;
-            loggedInSaveButton.interactable = true;
-            loggedInBackButton.interactable = true;
             Tools.UpdateStatusText(loggedInText, "Can't send requests on self-built instance", Color.red);
-            return;
         }
         else
         {
@@ -109,15 +101,23 @@ public class AccountLoggedIn : MonoBehaviour
                 Tools.UpdateStatusText(loggedInText, (string)jsonResponse["message"], Color.red);
             }
         }
-        loggedInLoadButton.interactable = true;
+        loggedInChangeUsernameButton.interactable = true;
+        loggedInChangePasswordButton.interactable = true;
         loggedInSaveButton.interactable = true;
+        loggedInLoadButton.interactable = true;
+        loggedInRefreshLoginButton.interactable = true;
+        loggedInLogoutButton.interactable = true;
         loggedInBackButton.interactable = true;
     }
 
     async void LoadAccount()
     {
-        loggedInLoadButton.interactable = false;
+        loggedInChangeUsernameButton.interactable = false;
+        loggedInChangePasswordButton.interactable = false;
         loggedInSaveButton.interactable = false;
+        loggedInLoadButton.interactable = false;
+        loggedInRefreshLoginButton.interactable = false;
+        loggedInLogoutButton.interactable = false;
         loggedInBackButton.interactable = false;
         EncryptedWWWForm dataForm = new();
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
@@ -129,8 +129,12 @@ public class AccountLoggedIn : MonoBehaviour
         await request.SendWebRequest();
         if (request.result != UnityWebRequest.Result.Success)
         {
-            loggedInLoadButton.interactable = true;
+            loggedInChangeUsernameButton.interactable = true;
+            loggedInChangePasswordButton.interactable = true;
             loggedInSaveButton.interactable = true;
+            loggedInLoadButton.interactable = true;
+            loggedInRefreshLoginButton.interactable = true;
+            loggedInLogoutButton.interactable = true;
             loggedInBackButton.interactable = true;
             Tools.UpdateStatusText(loggedInText, "Failed to make HTTP request", Color.red);
             return;
@@ -138,35 +142,19 @@ public class AccountLoggedIn : MonoBehaviour
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
         if (response == "-999")
         {
-            loggedInLoadButton.interactable = true;
-            loggedInSaveButton.interactable = true;
-            loggedInBackButton.interactable = true;
             Tools.UpdateStatusText(loggedInText, "Server error while fetching data", Color.red);
-            return;
         }
         else if (response == "-998")
         {
-            loggedInLoadButton.interactable = true;
-            loggedInSaveButton.interactable = true;
-            loggedInBackButton.interactable = true;
             Tools.UpdateStatusText(loggedInText, "Client version too outdated to access servers", Color.red);
-            return;
         }
         else if (response == "-997")
         {
-            loggedInLoadButton.interactable = true;
-            loggedInSaveButton.interactable = true;
-            loggedInBackButton.interactable = true;
             Tools.UpdateStatusText(loggedInText, "Encryption/decryption issues", Color.red);
-            return;
         }
         else if (response == "-996")
         {
-            loggedInLoadButton.interactable = true;
-            loggedInSaveButton.interactable = true;
-            loggedInBackButton.interactable = true;
             Tools.UpdateStatusText(loggedInText, "Can't send requests on self-built instance", Color.red);
-            return;
         }
         else
         {
@@ -181,8 +169,12 @@ public class AccountLoggedIn : MonoBehaviour
                 Tools.UpdateStatusText(loggedInText, (string)jsonResponse["message"], Color.red);
             }
         }
-        loggedInLoadButton.interactable = true;
+        loggedInChangeUsernameButton.interactable = true;
+        loggedInChangePasswordButton.interactable = true;
         loggedInSaveButton.interactable = true;
+        loggedInLoadButton.interactable = true;
+        loggedInRefreshLoginButton.interactable = true;
+        loggedInLogoutButton.interactable = true;
         loggedInBackButton.interactable = true;
     }
 }

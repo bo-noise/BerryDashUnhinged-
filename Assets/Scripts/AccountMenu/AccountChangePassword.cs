@@ -29,13 +29,13 @@ public class AccountChangePassword : MonoBehaviour
 
     async void ChangePassword()
     {
-        changePasswordBackButton.interactable = false;
         if (changePasswordNewPasswordInput.text != changePasswordRetypeNewPasswordInput.text)
         {
-            changePasswordBackButton.interactable = true;
             Tools.UpdateStatusText(changePasswordStatusText, "Passwords do not match", Color.red);
             return;
         }
+        changePasswordBackButton.interactable = false;
+        changePasswordSubmitButton.interactable = false;
         EncryptedWWWForm dataForm = new();
         dataForm.AddField("oldpassword", changePasswordCurrentPasswordInput.text);
         dataForm.AddField("newpassword", changePasswordNewPasswordInput.text);
@@ -49,33 +49,26 @@ public class AccountChangePassword : MonoBehaviour
         if (request.result != UnityWebRequest.Result.Success)
         {
             changePasswordBackButton.interactable = true;
+            changePasswordSubmitButton.interactable = true;
             Tools.UpdateStatusText(changePasswordStatusText, "Failed to make HTTP request", Color.red);
             return;
         }
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
         if (response == "-999")
         {
-            changePasswordBackButton.interactable = true;
             Tools.UpdateStatusText(changePasswordStatusText, "Server error while fetching data", Color.red);
-            return;
         }
         else if (response == "-998")
         {
-            changePasswordBackButton.interactable = true;
             Tools.UpdateStatusText(changePasswordStatusText, "Client version too outdated to access servers", Color.red);
-            return;
         }
         else if (response == "-997")
         {
-            changePasswordBackButton.interactable = true;
             Tools.UpdateStatusText(changePasswordStatusText, "Encryption/decryption issues", Color.red);
-            return;
         }
         else if (response == "-996")
         {
-            changePasswordBackButton.interactable = true;
             Tools.UpdateStatusText(changePasswordStatusText, "Can't send requests on self-built instance", Color.red);
-            return;
         }
         else
         {
@@ -92,5 +85,6 @@ public class AccountChangePassword : MonoBehaviour
             }
         }
         changePasswordBackButton.interactable = true;
+        changePasswordSubmitButton.interactable = true;
     }
 }

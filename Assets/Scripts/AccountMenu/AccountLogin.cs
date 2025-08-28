@@ -1,5 +1,4 @@
 using System.Numerics;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
@@ -30,6 +29,7 @@ public class AccountLogin : MonoBehaviour
     async void SubmitLogin()
     {
         loginBackButton.interactable = false;
+        loginSubmitButton.interactable = false;
         if (loginUsernameInput.text == string.Empty || loginPasswordInput.text == string.Empty)
         {
             Tools.UpdateStatusText(loginPanelStatusText, "All input fields must be filled", Color.red);
@@ -47,33 +47,26 @@ public class AccountLogin : MonoBehaviour
         if (request.result != UnityWebRequest.Result.Success)
         {
             loginBackButton.interactable = true;
+            loginSubmitButton.interactable = true;
             Tools.UpdateStatusText(loginPanelStatusText, "Failed to make HTTP request", Color.red);
             return;
         }
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
         if (response == "-999")
         {
-            loginBackButton.interactable = true;
             Tools.UpdateStatusText(loginPanelStatusText, "Server error while fetching data", Color.red);
-            return;
         }
         else if (response == "-998")
         {
-            loginBackButton.interactable = true;
             Tools.UpdateStatusText(loginPanelStatusText, "Client version too outdated to access servers", Color.red);
-            return;
         }
         else if (response == "-997")
         {
-            loginBackButton.interactable = true;
             Tools.UpdateStatusText(loginPanelStatusText, "Encryption/decryption issues", Color.red);
-            return;
         }
         else if (response == "-996")
         {
-            loginBackButton.interactable = true;
             Tools.UpdateStatusText(loginPanelStatusText, "Can't send requests on self-built instance", Color.red);
-            return;
         }
         else
         {
@@ -92,5 +85,6 @@ public class AccountLogin : MonoBehaviour
             }
         }
         loginBackButton.interactable = true;
+        loginSubmitButton.interactable = true;
     }
 }
