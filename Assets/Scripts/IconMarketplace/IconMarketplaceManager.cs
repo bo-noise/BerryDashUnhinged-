@@ -34,6 +34,10 @@ public class IconMarketplaceManager : MonoBehaviour
     internal void SwitchPanel(int panelIndex)
     {
         downloadPanelScript.iconPurchaseSound.Stop();
+        downloadPanelScript.anyChanges = true;
+        downloadPanelScript.optionsPanelSortByDropdown.value = 3;
+        downloadPanelScript.optionsPanelPriceRangeToggle.isOn = false;
+        downloadPanelScript.optionsPanelSearchForToggle.isOn = false;
         switch (panelIndex)
         {
             case 0:

@@ -31,14 +31,14 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
     public TMP_InputField optionsPanelSearchForInputField;
     public AudioSource iconPurchaseSound;
 
-    private bool priceRangeEnabled = false;
-    private string priceRangeMin = "10";
-    private string priceRangeMax = "250";
+    internal bool priceRangeEnabled = false;
+    internal string priceRangeMin = "10";
+    internal string priceRangeMax = "250";
 
-    private bool searchForEnabled = false;
-    private string searchForValue = "";
+    internal bool searchForEnabled = false;
+    internal string searchForValue = "";
 
-    private bool anyChanges = false;
+    internal bool anyChanges = false;
 
     void Awake()
     {
