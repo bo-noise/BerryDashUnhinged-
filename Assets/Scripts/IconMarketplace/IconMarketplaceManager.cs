@@ -33,6 +33,7 @@ public class IconMarketplaceManager : MonoBehaviour
 
     internal void SwitchPanel(int panelIndex)
     {
+        downloadPanelScript.iconPurchaseSound.Stop();
         switch (panelIndex)
         {
             case 0:

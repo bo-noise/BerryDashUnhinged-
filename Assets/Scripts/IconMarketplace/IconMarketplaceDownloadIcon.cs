@@ -28,15 +28,16 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
     public TMP_InputField optionsPanelPriceRangeMaxInput;
     public Toggle optionsPanelSearchForToggle;
     public TMP_InputField optionsPanelSearchForInputField;
+    public AudioSource iconPurchaseSound;
 
-    public bool priceRangeEnabled = false;
-    public string priceRangeMin = "10";
-    public string priceRangeMax = "250";
+    private bool priceRangeEnabled = false;
+    private string priceRangeMin = "10";
+    private string priceRangeMax = "250";
 
-    public bool searchForEnabled = false;
-    public string searchForValue = "";
+    private bool searchForEnabled = false;
+    private string searchForValue = "";
 
-    public bool anyChanges = false;
+    private bool anyChanges = false;
 
     void Awake()
     {
@@ -210,6 +211,8 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
                 return;
             }
             marketplaceIconStorage.Balance -= data.Price;
+            iconPurchaseSound.Stop();
+            iconPurchaseSound.Play();
         }
         var list = marketplaceIconStorage.Data.ToList();
         list.Add(data);
