@@ -111,6 +111,8 @@ public class GamePlayerPauseMenu : MonoBehaviour
             jumpButton.interactable = !jumpDraggableUI.canDrag;
             rightButton.interactable = !rightDraggableUI.canDrag;
             leftButton.interactable = !leftDraggableUI.canDrag;
+            jumpButton.transform.GetChild(0).GetComponent<TMP_Text>().color = !jumpDraggableUI.canDrag ? GamePlayer.instance.isGrounded ? Color.white : Color.red : Color.white;
+            restartButton.interactable = GamePlayer.instance.score != 0;
         }
     }
 }

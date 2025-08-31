@@ -10,7 +10,7 @@ public class GamePlayer : MonoBehaviour
     public static GamePlayer instance;
     private readonly float spawnRate = 1f;
     private float nextSpawnTime;
-    private BigInteger score;
+    internal BigInteger score;
     private BigInteger attempts;
     private BigInteger highscore;
     private BigInteger totalNormalBerries;
@@ -25,7 +25,7 @@ public class GamePlayer : MonoBehaviour
     private float slownessLeft;
     private float speedyLeft;
     private float screenWidth;
-    private bool isGrounded;
+    internal bool isGrounded;
     public TMP_Text scoreText;
     public TMP_Text highScoreText;
     public TMP_Text boostText;
