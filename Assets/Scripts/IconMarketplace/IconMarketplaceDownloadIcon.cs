@@ -22,6 +22,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
     public Button optionsButton;
     public GameObject optionsPanel;
     public Button optionsPanelSubmitButton;
+    public Button optionsPanelResetButton;
     public TMP_Dropdown optionsPanelSortByDropdown;
     public Toggle optionsPanelPriceRangeToggle;
     public TMP_InputField optionsPanelPriceRangeMinInput;
@@ -52,6 +53,13 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
                 anyChanges = false;
                 GetIcons();
             }
+        });
+        optionsPanelResetButton.onClick.AddListener(() =>
+        {
+            anyChanges = true;
+            optionsPanelSortByDropdown.value = 3;
+            optionsPanelPriceRangeToggle.isOn = false;
+            optionsPanelSearchForToggle.isOn = false;
         });
 
         optionsPanelPriceRangeToggle.onValueChanged.AddListener((on) =>
