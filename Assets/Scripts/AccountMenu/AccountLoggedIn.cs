@@ -162,6 +162,19 @@ public class AccountLoggedIn : MonoBehaviour
             if ((bool)jsonResponse["success"])
             {
                 BazookaManager.Instance.saveFile = JObject.FromObject(jsonResponse["data"]);
+                if (!Application.isMobilePlatform)
+                {
+                    var width = Display.main.systemWidth;
+                    var height = Display.main.systemHeight;
+                    Screen.SetResolution(width, height, BazookaManager.Instance.GetSettingFullScreen());
+                    QualitySettings.vSyncCount = BazookaManager.Instance.GetSettingVsync() ? 1 : -1;
+                }
+                else
+                {
+                    Application.targetFrameRate = 360;
+                    QualitySettings.vSyncCount = 0;
+                }
+                MenuMusic.Instance.GetComponent<AudioSource>().volume = BazookaManager.Instance.GetSettingMusicVolume();
                 Tools.UpdateStatusText(loggedInText, "Loaded account data", Color.green);
             }
             else
