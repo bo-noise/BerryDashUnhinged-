@@ -912,7 +912,7 @@ MonoBehaviour:
   m_Placeholder: {fileID: 0}
   m_ItemText: {fileID: 1766873935}
   m_ItemImage: {fileID: 0}
-  m_Value: 2
+  m_Value: 3
   m_MultiSelect: 0
   m_Options:
     m_Options:
@@ -5273,7 +5273,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Oldest to newest
+  m_text: Newest to oldest
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4fd546dd0900395408d2de20f5025882, type: 2}
   m_sharedMaterial: {fileID: -1476194838487357290, guid: 4fd546dd0900395408d2de20f5025882, type: 2}
@@ -11640,12 +11640,6 @@ MonoBehaviour:
   optionsPanelSearchForToggle: {fileID: 1406400831}
   optionsPanelSearchForInputField: {fileID: 1874724295}
   iconPurchaseSound: {fileID: 709625973}
-  priceRangeEnabled: 0
-  priceRangeMin: 10
-  priceRangeMax: 250
-  searchForEnabled: 0
-  searchForValue: 
-  anyChanges: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
