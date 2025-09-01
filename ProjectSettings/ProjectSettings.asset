@@ -167,7 +167,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: xyz.lncvrt.berrydash
     Standalone: xyz.lncvrt.berrydash
-    iPhone: xyz.lncvrt.berrydash
+    iPhone: xyz.lncvrt.berrydashios
   buildNumber:
     Standalone: 0
     VisionOS: 0
