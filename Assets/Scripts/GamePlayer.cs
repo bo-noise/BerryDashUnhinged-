@@ -581,12 +581,16 @@ public class GamePlayer : MonoBehaviour
 
     void UpdateStats(BigInteger scoreAddAmount, BigInteger attemptAddAmount)
     {
+        var prefix = "";
+        var suffix = "";
         score += scoreAddAmount;
         totalAttempts += attemptAddAmount;
         attempts += attemptAddAmount;
-        if (score > highscore)
+        if (score >= highscore)
         {
             highscore = score;
+            prefix = "<color=#7FFFD4>";
+            suffix = "</color>";
         }
         BazookaManager.Instance.SetGameStoreHighScore(highscore);
         BazookaManager.Instance.SetGameStoreTotalNormalBerries(totalNormalBerries);
@@ -600,7 +604,7 @@ public class GamePlayer : MonoBehaviour
         customBirdIconData.Balance = totalCoins;
         BazookaManager.Instance.SetCustomBirdIconData(customBirdIconData);
         scoreText.text = $"Score: {Tools.FormatWithCommas(score)} \\u2022 Attempts: {Tools.FormatWithCommas(attempts)}";
-        highScoreText.text = $"High Score: {Tools.FormatWithCommas(highscore)} \\u2022 Total Attempts: {Tools.FormatWithCommas(totalAttempts)}";
+        highScoreText.text = prefix + $"High Score: {Tools.FormatWithCommas(highscore) + suffix} \\u2022 Total Attempts: {Tools.FormatWithCommas(totalAttempts)}";
         coinText.text = $"Coins: {Tools.FormatWithCommas(totalCoins)}";
         if (Application.isMobilePlatform) restartButton.interactable = score != 0;
     }
