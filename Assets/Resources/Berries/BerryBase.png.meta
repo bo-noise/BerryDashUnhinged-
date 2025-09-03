@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 11ae9e95c4a724adf93e2e2737de904f
+guid: f3adb2f10adcc4086b98ff1510c621f2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8881203474677911264
-    second: WallBerry_0
+      213: -3628175555863346805
+    second: BerryBase_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WallBerry_0
+      name: BerryBase_0
       rect:
         serializedVersion: 2
         x: 7
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0ee442e618f504b70800000000000000
-      internalID: 8881203474677911264
+      spriteID: b81820a0e8126adc0800000000000000
+      internalID: -3628175555863346805
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      WallBerry_0: 8881203474677911264
+      BerryBase_0: -3628175555863346805
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
