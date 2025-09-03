@@ -268,7 +268,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: /home/lncvrt/Documents/keystores/berrydash.jks
+  AndroidKeystoreName: /Users/travis/Documents/keystores/berrydash.jks
   AndroidKeyaliasName: berrydash
   AndroidEnableArmv9SecurityFeatures: 0
   AndroidEnableArm64MTE: 0
