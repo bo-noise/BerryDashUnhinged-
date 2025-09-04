@@ -639,7 +639,7 @@ public class GamePlayer : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        backgroundMusic.Pause();
+        backgroundMusic.GetComponent<GameMusicHandler>().PauseMusic();
         pausePanel.SetActive(true);
     }
 
@@ -648,7 +648,7 @@ public class GamePlayer : MonoBehaviour
         lastMoveTime = Time.time;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        backgroundMusic.Play();
+        backgroundMusic.GetComponent<GameMusicHandler>().ResumeMusic();
         pausePanel.SetActive(false);
         if (GamePlayerPauseMenu.Instance.editingUI == true) GamePlayerPauseMenu.Instance.ToggleEditingUI();
     }

@@ -4979,6 +4979,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1625416040}
   - component: {fileID: 1625416039}
+  - component: {fileID: 1625416041}
   m_Layer: 0
   m_Name: SongLoop
   m_TagString: Untagged
@@ -4997,11 +4998,11 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 99cb5320fee003746a29683a53dd3337, type: 3}
-  m_PlayOnAwake: 1
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -5098,6 +5099,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1625416041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625416038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81a98a63df08841c4b3fdc71ceecda4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  audioClips:
+  - {fileID: 8300000, guid: ea648a173226047439e18c96ebe3c1bb, type: 3}
+  - {fileID: 8300000, guid: bdf9c412cfb2642209d10186296c0782, type: 3}
+  - {fileID: 8300000, guid: f9fc94c25bdee4c0d9f5774720bd4cfc, type: 3}
+  - {fileID: 8300000, guid: 0e89a6f887c07452aae4a602586ec917, type: 3}
 --- !u!1 &1639562819
 GameObject:
   m_ObjectHideFlags: 0
