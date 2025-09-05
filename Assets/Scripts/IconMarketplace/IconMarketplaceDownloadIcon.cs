@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Linq;
 using System.Numerics;
+using System.Text;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -125,8 +128,14 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
                 Destroy(item.gameObject);
             }
         }
+        var currentIcons = new JArray();
+        foreach (var icon in BazookaManager.Instance.GetCustomBirdIconData().Data)
+        {
+            currentIcons.Add(icon.UUID);
+        }
         ShowStatus("Loading...");
         EncryptedWWWForm dataForm = new();
+        dataForm.AddField("userId", (BazookaManager.Instance.GetAccountID() ?? 0).ToString());
         dataForm.AddField("sortBy", optionsPanelSortByDropdown.value.ToString());
         dataForm.AddField("priceRangeEnabled", optionsPanelPriceRangeToggle.isOn.ToString());
         dataForm.AddField("priceRangeMin", priceRangeMin);
@@ -135,6 +144,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         dataForm.AddField("searchForValue", searchForValue);
         dataForm.AddField("onlyShowEnabled", optionsPanelOnlyShowToggle.isOn.ToString());
         dataForm.AddField("onlyShowValue", optionsPanelOnlyShowDropdown.value.ToString());
+        dataForm.AddField("currentIcons", Convert.ToBase64String(Encoding.UTF8.GetBytes(currentIcons.ToString(Formatting.None))));
         using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getMarketplaceIcons.php", dataForm.form);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
