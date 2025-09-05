@@ -261,14 +261,14 @@ public class GamePlayer : MonoBehaviour
                     if (dir.magnitude < 3f)
                     {
                         berry.GetComponent<Rigidbody2D>().linearVelocity = dir.normalized * 5f;
-                        ClampPosition(berry);
+                        ClampPosition(berry, false);
                     }
                 }
             }
         }
     }
 
-    void ClampPosition(GameObject obj)
+    void ClampPosition(GameObject obj, bool modifyY = true)
     {
         var cam = Camera.main;
         var pos = obj.transform.position;
@@ -280,7 +280,7 @@ public class GamePlayer : MonoBehaviour
         UnityEngine.Vector3 max = cam.ViewportToWorldPoint(new UnityEngine.Vector3(1, 1, zDist));
 
         pos.x = Mathf.Clamp(pos.x, min.x + bounds.x, max.x - bounds.x);
-        pos.y = Mathf.Clamp(pos.y, min.y + bounds.y, max.y - bounds.y);
+        if (modifyY) pos.y = Mathf.Clamp(pos.y, min.y + bounds.y, max.y - bounds.y);
 
         obj.transform.position = pos;
     }
@@ -420,7 +420,7 @@ public class GamePlayer : MonoBehaviour
                 .ToArray();
             foreach (GameObject berry in allberries)
             {
-                ClampPosition(berry);
+                ClampPosition(berry, false);
             }
         }
         GameObject[] normalBerries = GameObject.FindGameObjectsWithTag("NormalBerry");
