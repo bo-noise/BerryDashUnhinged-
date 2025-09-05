@@ -399,11 +399,11 @@ public class GamePlayer : MonoBehaviour
             audio.pitch = speedyLeft > 0f ? 1.3f : 1f;
         }
         if (BazookaManager.Instance.GetSettingShowFPS() && Time.time > nextUpdate)
-            {
-                fps = 1f / Time.deltaTime;
-                fpsCounter.text = "FPS: " + Mathf.Round(fps);
-                nextUpdate = Time.time + 0.25f;
-            }
+        {
+            fps = 1f / Time.deltaTime;
+            fpsCounter.text = "FPS: " + Mathf.Round(fps);
+            nextUpdate = Time.time + 0.25f;
+        }
         if (screenWidth != Camera.main.orthographicSize * 2f * Camera.main.aspect)
         {
             screenWidth = Camera.main.orthographicSize * 2f * Camera.main.aspect;
@@ -568,7 +568,7 @@ public class GamePlayer : MonoBehaviour
                 else if (UnityEngine.Vector3.Distance(bird.transform.position, randomBerry.transform.position) < 1.5f)
                 {
                     totalRandomBerries++;
-                    System.Action[] funcs = { 
+                    System.Action[] funcs = {
                         () => DoNormalBerry(randomBerry),
                         () => DoSlowBerry(randomBerry),
                         () => DoUltraBerry(randomBerry),
