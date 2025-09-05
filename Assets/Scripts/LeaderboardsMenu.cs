@@ -98,7 +98,7 @@ public class LeaderboardsMenu : MonoBehaviour
         }
         else if (legacyPanel.activeSelf)
         {
-            foreach (Transform item in coinContent.transform)
+            foreach (Transform item in legacyContent.transform)
             {
                 if (item.gameObject.activeSelf)
                 {
