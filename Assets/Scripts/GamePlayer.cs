@@ -26,7 +26,7 @@ public class GamePlayer : MonoBehaviour
     private float boostLeft;
     private float slownessLeft;
     private float speedyLeft;
-    private float antiLeft = 10f;
+    private float antiLeft;
     private float screenWidth;
     internal bool isGrounded;
     public TMP_Text scoreText;
