@@ -396,8 +396,7 @@ public class GamePlayer : MonoBehaviour
     {
         foreach (AudioSource audio in FindObjectsByType<AudioSource>(FindObjectsSortMode.None))
         {
-            if (speedyLeft != 0 && audio.pitch == 1f) audio.pitch = 1.3f;
-            if (speedyLeft == 0 && audio.pitch == 1.3f) audio.pitch = 1f;
+            audio.pitch = speedyLeft > 0f ? 1.3f : 1f;
         }
         if (BazookaManager.Instance.GetSettingShowFPS() && Time.time > nextUpdate)
             {
