@@ -10,6 +10,8 @@ TagManager:
   - UltraBerry
   - SpeedyBerry
   - CoinBerry
+  - RandomBerry
+  - AntiBerry
   layers:
   - Default
   - TransparentFX

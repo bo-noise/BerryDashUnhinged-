@@ -819,4 +819,42 @@ public class BazookaManager : MonoBehaviour
         if (saveFile["gameStore"] == null) return;
         (saveFile["gameStore"] as JObject)?.Remove("totalCoinBerries");
     }
+
+    public void SetGameStoreTotalRandomBerries(BigInteger value)
+    {
+        if (saveFile["gameStore"] == null) saveFile["gameStore"] = new JObject();
+        saveFile["gameStore"]["totalRandomBerries"] = value.ToString();
+    }
+
+    public BigInteger GetGameStoreTotalRandomBerries()
+    {
+        if (saveFile["gameStore"] == null) return 0;
+        if (saveFile["gameStore"]["totalRandomBerries"] == null) return 0;
+        return BigInteger.Parse(saveFile["gameStore"]["totalRandomBerries"].ToString());
+    }
+
+    public void UnsetGameStoreTotalRandomBerries()
+    {
+        if (saveFile["gameStore"] == null) return;
+        (saveFile["gameStore"] as JObject)?.Remove("totalRandomBerries");
+    }
+
+    public void SetGameStoreTotalAntiBerries(BigInteger value)
+    {
+        if (saveFile["gameStore"] == null) saveFile["gameStore"] = new JObject();
+        saveFile["gameStore"]["totalAntiBerries"] = value.ToString();
+    }
+
+    public BigInteger GetGameStoreTotalAntiBerries()
+    {
+        if (saveFile["gameStore"] == null) return 0;
+        if (saveFile["gameStore"]["totalAntiBerries"] == null) return 0;
+        return BigInteger.Parse(saveFile["gameStore"]["totalAntiBerries"].ToString());
+    }
+
+    public void UnsetGameStoreTotalAntiBerries()
+    {
+        if (saveFile["gameStore"] == null) return;
+        (saveFile["gameStore"] as JObject)?.Remove("totalAntiBerries");
+    }
 }
