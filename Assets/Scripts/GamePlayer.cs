@@ -407,6 +407,19 @@ public class GamePlayer : MonoBehaviour
         {
             screenWidth = Camera.main.orthographicSize * 2f * Camera.main.aspect;
             ClampPosition(bird);
+            GameObject[] allberries = GameObject.FindGameObjectsWithTag("NormalBerry")
+                .Concat(GameObject.FindGameObjectsWithTag("PoisonBerry"))
+                .Concat(GameObject.FindGameObjectsWithTag("SlowBerry"))
+                .Concat(GameObject.FindGameObjectsWithTag("UltraBerry"))
+                .Concat(GameObject.FindGameObjectsWithTag("SpeedyBerry"))
+                .Concat(GameObject.FindGameObjectsWithTag("CoinBerry"))
+                .Concat(GameObject.FindGameObjectsWithTag("RandomBerry"))
+                .Concat(GameObject.FindGameObjectsWithTag("AntiBerry"))
+                .ToArray();
+            foreach (GameObject berry in allberries)
+            {
+                ClampPosition(berry);
+            }
         }
         GameObject[] normalBerries = GameObject.FindGameObjectsWithTag("NormalBerry");
         GameObject[] poisonBerries = GameObject.FindGameObjectsWithTag("PoisonBerry");
