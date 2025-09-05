@@ -18,25 +18,27 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
     public GameObject sample;
     private string statusMessage;
     private Coroutine statusRoutine;
+    public AudioSource iconPurchaseSound;
     public Button refreshButton;
     public Button optionsButton;
     public GameObject optionsPanel;
     public Button optionsPanelSubmitButton;
     public Button optionsPanelResetButton;
+
     public TMP_Dropdown optionsPanelSortByDropdown;
+
     public Toggle optionsPanelPriceRangeToggle;
     public TMP_InputField optionsPanelPriceRangeMinInput;
     public TMP_InputField optionsPanelPriceRangeMaxInput;
-    public Toggle optionsPanelSearchForToggle;
-    public TMP_InputField optionsPanelSearchForInputField;
-    public AudioSource iconPurchaseSound;
-
-    internal bool priceRangeEnabled = false;
     internal string priceRangeMin = "10";
     internal string priceRangeMax = "250";
 
-    internal bool searchForEnabled = false;
+    public Toggle optionsPanelSearchForToggle;
+    public TMP_InputField optionsPanelSearchForInputField;
     internal string searchForValue = "";
+
+    public Toggle optionsPanelOnlyShowToggle;
+    public TMP_Dropdown optionsPanelOnlyShowDropdown;
 
     internal bool anyChanges = false;
 
@@ -56,10 +58,10 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         });
         optionsPanelResetButton.onClick.AddListener(() =>
         {
-            anyChanges = true;
             optionsPanelSortByDropdown.value = 3;
             optionsPanelPriceRangeToggle.isOn = false;
             optionsPanelSearchForToggle.isOn = false;
+            optionsPanelOnlyShowToggle.isOn = false;
         });
 
         optionsPanelPriceRangeToggle.onValueChanged.AddListener((on) =>
@@ -76,8 +78,14 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         optionsPanelSearchForToggle.onValueChanged.AddListener((on) =>
         {
             anyChanges = true;
-            optionsPanelSearchForInputField.text = "";
+            if (!on) optionsPanelSearchForInputField.text = "";
             optionsPanelSearchForInputField.interactable = on;
+        });
+        optionsPanelOnlyShowToggle.onValueChanged.AddListener((on) =>
+        {
+            anyChanges = true;
+            if (!on) optionsPanelOnlyShowDropdown.value = 0;
+            optionsPanelOnlyShowDropdown.interactable = on;
         });
 
         optionsPanelSortByDropdown.onValueChanged.AddListener((_) => anyChanges = true);
@@ -96,6 +104,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
             anyChanges = true;
             searchForValue = value;
         });
+        optionsPanelOnlyShowDropdown.onValueChanged.AddListener((_) => anyChanges = true);
     }
 
     internal void Load()
@@ -119,11 +128,13 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         ShowStatus("Loading...");
         EncryptedWWWForm dataForm = new();
         dataForm.AddField("sortBy", optionsPanelSortByDropdown.value.ToString());
-        dataForm.AddField("priceRangeEnabled", priceRangeEnabled.ToString());
+        dataForm.AddField("priceRangeEnabled", optionsPanelPriceRangeToggle.isOn.ToString());
         dataForm.AddField("priceRangeMin", priceRangeMin);
         dataForm.AddField("priceRangeMax", priceRangeMax);
-        dataForm.AddField("searchForEnabled", searchForEnabled.ToString());
+        dataForm.AddField("searchForEnabled", optionsPanelSearchForToggle.isOn.ToString());
         dataForm.AddField("searchForValue", searchForValue);
+        dataForm.AddField("onlyShowEnabled", optionsPanelOnlyShowToggle.isOn.ToString());
+        dataForm.AddField("onlyShowValue", optionsPanelOnlyShowDropdown.value.ToString());
         using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getMarketplaceIcons.php", dataForm.form);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
