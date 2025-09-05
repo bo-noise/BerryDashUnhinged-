@@ -520,6 +520,19 @@ public class BazookaManager : MonoBehaviour
         return bool.Parse(saveFile["settings"]["hideSocials"].ToString());
     }
 
+    public void SetSettingRandomMusic(bool value)
+    {
+        if (saveFile["settings"] == null) saveFile["settings"] = new JObject();
+        saveFile["settings"]["randomMusic"] = value;
+    }
+
+    public bool GetSettingRandomMusic()
+    {
+        if (saveFile["settings"] == null) return true;
+        if (saveFile["settings"]["randomMusic"] == null) return true;
+        return bool.Parse(saveFile["settings"]["randomMusic"].ToString());
+    }
+
     public void SetSettingMusicVolume(float value)
     {
         if (saveFile["settings"] == null) saveFile["settings"] = new JObject();

@@ -8,6 +8,7 @@ public class SettingsMenu : MonoBehaviour
     public Toggle setting2toggle;
     public Toggle setting3toggle;
     public Toggle setting4toggle;
+    public Toggle setting5toggle;
     public Slider musicSlider;
     public Slider sfxSlider;
     public ColorPanel bgColorPanel;
@@ -38,6 +39,7 @@ public class SettingsMenu : MonoBehaviour
             setting2toggle.isOn = BazookaManager.Instance.GetSettingShowFPS() == true;
             setting3toggle.isOn = BazookaManager.Instance.GetSettingVsync() == true;
             setting4toggle.isOn = BazookaManager.Instance.GetSettingHideSocials() == true;
+            setting5toggle.isOn = BazookaManager.Instance.GetSettingRandomMusic() == true;
         }
         else
         {
@@ -45,6 +47,7 @@ public class SettingsMenu : MonoBehaviour
             setting2toggle.isOn = BazookaManager.Instance.GetSettingShowFPS() == true;
             setting3toggle.interactable = false;
             setting4toggle.isOn = BazookaManager.Instance.GetSettingHideSocials() == true;
+            setting5toggle.isOn = BazookaManager.Instance.GetSettingRandomMusic() == true;
         }
         setting1toggle.onValueChanged.AddListener(value =>
         {
@@ -63,6 +66,7 @@ public class SettingsMenu : MonoBehaviour
             QualitySettings.vSyncCount = value ? 1 : -1;
         });
         setting4toggle.onValueChanged.AddListener(value => BazookaManager.Instance.SetSettingHideSocials(value));
+        setting5toggle.onValueChanged.AddListener(value => BazookaManager.Instance.SetSettingRandomMusic(value));
         musicSlider.onValueChanged.AddListener(value =>
         {
             BazookaManager.Instance.SetSettingMusicVolume(value);

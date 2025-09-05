@@ -6,28 +6,35 @@ public class GameMusicHandler : MonoBehaviour
     public AudioClip[] audioClips;
     private AudioSource audioSource;
     private int lastIndex = -1;
+    private int currentIndex = 0;
     private bool isPaused = false;
 
-    void Awake()
+    void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        PlayRandomClip();
+        PlayNextClip();
     }
 
     void Update()
     {
-        if (!audioSource.isPlaying && !isPaused) PlayRandomClip();
+        if (!audioSource.isPlaying && !isPaused) PlayNextClip();
     }
 
-    void PlayRandomClip()
+    void PlayNextClip()
     {
         if (audioClips.Length == 0) return;
 
         int index;
-        do
+        if (BazookaManager.Instance.GetSettingRandomMusic())
         {
-            index = Random.Range(0, audioClips.Length);
-        } while (audioClips.Length > 1 && index == lastIndex);
+            do index = Random.Range(0, audioClips.Length);
+            while (audioClips.Length > 1 && index == lastIndex);
+        }
+        else
+        {
+            index = currentIndex;
+            currentIndex = (currentIndex + 1) % audioClips.Length;
+        }
 
         lastIndex = index;
         audioSource.clip = audioClips[index];
