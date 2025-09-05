@@ -142,6 +142,8 @@ public class GamePlayer : MonoBehaviour
         totalUltraBerries = BazookaManager.Instance.GetGameStoreTotalUltraBerries();
         totalSpeedyBerries = BazookaManager.Instance.GetGameStoreTotalSpeedyBerries();
         totalCoinBerries = BazookaManager.Instance.GetGameStoreTotalCoinBerries();
+        totalRandomBerries = BazookaManager.Instance.GetGameStoreTotalRandomBerries();
+        totalAntiBerries = BazookaManager.Instance.GetGameStoreTotalAntiBerries();
         totalAttempts = BazookaManager.Instance.GetGameStoreTotalAttepts();
         totalCoins = BazookaManager.Instance.GetCustomBirdIconData().Balance;
 
@@ -446,6 +448,7 @@ public class GamePlayer : MonoBehaviour
                 }
                 else if (UnityEngine.Vector3.Distance(bird.transform.position, normalBerry.transform.position) < 1.5f)
                 {
+                    totalNormalBerries++;
                     DoNormalBerry(normalBerry);
                 }
                 if (speedyLeft > 0)
@@ -465,6 +468,7 @@ public class GamePlayer : MonoBehaviour
                 }
                 else if (UnityEngine.Vector3.Distance(bird.transform.position, poisonBerry.transform.position) < 1.5f)
                 {
+                    totalPoisonBerries++;
                     DoPoisonBerry();
                 }
                 if (speedyLeft > 0)
@@ -484,6 +488,7 @@ public class GamePlayer : MonoBehaviour
                 }
                 else if (UnityEngine.Vector3.Distance(bird.transform.position, slowBerry.transform.position) < 1.5f)
                 {
+                    totalSlowBerries++;
                     DoSlowBerry(slowBerry);
                 }
                 if (speedyLeft > 0)
@@ -503,6 +508,7 @@ public class GamePlayer : MonoBehaviour
                 }
                 else if (UnityEngine.Vector3.Distance(bird.transform.position, ultraBerry.transform.position) < 1.5f)
                 {
+                    totalUltraBerries++;
                     DoUltraBerry(ultraBerry);
                 }
                 if (speedyLeft > 0)
@@ -522,6 +528,7 @@ public class GamePlayer : MonoBehaviour
                 }
                 else if (UnityEngine.Vector3.Distance(bird.transform.position, speedyBerry.transform.position) < 1.5f)
                 {
+                    totalSpeedyBerries++;
                     DoSpeedyBerry(speedyBerry);
                 }
                 if (speedyLeft > 0)
@@ -541,6 +548,7 @@ public class GamePlayer : MonoBehaviour
                 }
                 else if (UnityEngine.Vector3.Distance(bird.transform.position, coinBerry.transform.position) < 1.5f)
                 {
+                    totalCoinBerries++;
                     DoCoinBerry(coinBerry);
                 }
                 if (speedyLeft > 0)
@@ -560,6 +568,7 @@ public class GamePlayer : MonoBehaviour
                 }
                 else if (UnityEngine.Vector3.Distance(bird.transform.position, randomBerry.transform.position) < 1.5f)
                 {
+                    totalRandomBerries++;
                     System.Action[] funcs = { 
                         () => DoNormalBerry(randomBerry),
                         () => DoSlowBerry(randomBerry),
@@ -586,6 +595,7 @@ public class GamePlayer : MonoBehaviour
                 }
                 else if (UnityEngine.Vector3.Distance(bird.transform.position, antiBerry.transform.position) < 1.5f)
                 {
+                    totalAntiBerries++;
                     DoAntiBerry(antiBerry);
                 }
                 if (speedyLeft > 0)
@@ -629,6 +639,7 @@ public class GamePlayer : MonoBehaviour
         boostLeft = 0f;
         slownessLeft = 0f;
         speedyLeft = 0f;
+        antiLeft = 0f;
         UpdateStats(0, 1);
 
         GameObject[] allberries = GameObject.FindGameObjectsWithTag("NormalBerry")
@@ -737,7 +748,6 @@ public class GamePlayer : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/Eat"), Camera.main.transform.position, 1.2f * BazookaManager.Instance.GetSettingSFXVolume());
         Destroy(berry);
-        totalNormalBerries++;
         UpdateStats(1, 0);
     }
 
@@ -745,7 +755,6 @@ public class GamePlayer : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/Death"), Camera.main.transform.position, 1.2f * BazookaManager.Instance.GetSettingSFXVolume());
         Respawn();
-        totalPoisonBerries++;
         UpdateStats(0, 0);
     }
 
@@ -757,7 +766,6 @@ public class GamePlayer : MonoBehaviour
         slownessLeft = 10f;
         speedyLeft = 0f;
         antiLeft = 0f;
-        totalSlowBerries++;
         if (score > 0)
         {
             UpdateStats(-1, 0);
@@ -768,7 +776,6 @@ public class GamePlayer : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/Powerup"), Camera.main.transform.position, 0.35f * BazookaManager.Instance.GetSettingSFXVolume());
         Destroy(berry);
-        totalUltraBerries++;
         speedyLeft = 0f;
         antiLeft = 0f;
         if (slownessLeft > 0f)
@@ -791,7 +798,6 @@ public class GamePlayer : MonoBehaviour
         slownessLeft = 0f;
         speedyLeft = 10f;
         antiLeft = 0f;
-        totalSpeedyBerries++;
         UpdateStats(10, 0);
     }
 
@@ -799,7 +805,6 @@ public class GamePlayer : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(Resources.Load<AudioClip>("Sounds/CoinCollect"), Camera.main.transform.position, 0.35f * BazookaManager.Instance.GetSettingSFXVolume());
         Destroy(berry);
-        totalCoinBerries++;
         totalCoins += 10;
         UpdateStats(0, 0);
     }
@@ -812,7 +817,6 @@ public class GamePlayer : MonoBehaviour
         slownessLeft = 0f;
         speedyLeft = 0f;
         antiLeft = 10f;
-        totalAntiBerries++;
         UpdateStats(0, 0);
     }
 }
