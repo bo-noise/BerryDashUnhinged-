@@ -259,6 +259,7 @@ public class GamePlayer : MonoBehaviour
                     if (dir.magnitude < 3f)
                     {
                         berry.GetComponent<Rigidbody2D>().linearVelocity = dir.normalized * 5f;
+                        ClampPosition(berry);
                     }
                 }
             }
