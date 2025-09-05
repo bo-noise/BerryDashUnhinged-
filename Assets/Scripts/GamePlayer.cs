@@ -391,12 +391,17 @@ public class GamePlayer : MonoBehaviour
 
     void Update()
     {
-        if (BazookaManager.Instance.GetSettingShowFPS() && Time.time > nextUpdate)
+        foreach (AudioSource audio in FindObjectsByType<AudioSource>(FindObjectsSortMode.None))
         {
-            fps = 1f / Time.deltaTime;
-            fpsCounter.text = "FPS: " + Mathf.Round(fps);
-            nextUpdate = Time.time + 0.25f;
+            if (speedyLeft != 0 && audio.pitch == 1f) audio.pitch = 1.3f;
+            if (speedyLeft == 0 && audio.pitch == 1.3f) audio.pitch = 1f;
         }
+        if (BazookaManager.Instance.GetSettingShowFPS() && Time.time > nextUpdate)
+            {
+                fps = 1f / Time.deltaTime;
+                fpsCounter.text = "FPS: " + Mathf.Round(fps);
+                nextUpdate = Time.time + 0.25f;
+            }
         if (screenWidth != Camera.main.orthographicSize * 2f * Camera.main.aspect)
         {
             screenWidth = Camera.main.orthographicSize * 2f * Camera.main.aspect;
