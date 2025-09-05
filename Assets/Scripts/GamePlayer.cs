@@ -623,6 +623,8 @@ public class GamePlayer : MonoBehaviour
             .Concat(GameObject.FindGameObjectsWithTag("UltraBerry"))
             .Concat(GameObject.FindGameObjectsWithTag("SpeedyBerry"))
             .Concat(GameObject.FindGameObjectsWithTag("CoinBerry"))
+            .Concat(GameObject.FindGameObjectsWithTag("RandomBerry"))
+            .Concat(GameObject.FindGameObjectsWithTag("AntiBerry"))
             .ToArray();
         foreach (GameObject berry in allberries)
         {
