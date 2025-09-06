@@ -574,6 +574,51 @@ public class BazookaManager : MonoBehaviour
         return JArray.Parse(saveFile["settings"]["colors"]["background"].ToString());
     }
 
+    public void SetColorSettingMenuBackground(JArray value)
+    {
+        if (saveFile["settings"] == null) saveFile["settings"] = new JObject();
+        if (saveFile["settings"]["colors"] == null) saveFile["settings"]["colors"] = new JObject();
+        saveFile["settings"]["colors"]["menuBackground"] = value;
+    }
+
+    public JArray GetColorSettingMenuBackground()
+    {
+        if (saveFile["settings"] == null) return new JArray(24, 24, 24);
+        if (saveFile["settings"]["colors"] == null) return new JArray(24, 24, 24);
+        if (saveFile["settings"]["colors"]["menuBackground"] == null) return new JArray(24, 24, 24);
+        return JArray.Parse(saveFile["settings"]["colors"]["menuBackground"].ToString());
+    }
+
+    public void SetColorSettingButton(JArray value)
+    {
+        if (saveFile["settings"] == null) saveFile["settings"] = new JObject();
+        if (saveFile["settings"]["colors"] == null) saveFile["settings"]["colors"] = new JObject();
+        saveFile["settings"]["colors"]["button"] = value;
+    }
+
+    public JArray GetColorSettingButton()
+    {
+        if (saveFile["settings"] == null) return new JArray(255, 255, 255);
+        if (saveFile["settings"]["colors"] == null) return new JArray(255, 255, 255);
+        if (saveFile["settings"]["colors"]["button"] == null) return new JArray(255, 255, 255);
+        return JArray.Parse(saveFile["settings"]["colors"]["button"].ToString());
+    }
+
+    public void SetColorSettingText(JArray value)
+    {
+        if (saveFile["settings"] == null) saveFile["settings"] = new JObject();
+        if (saveFile["settings"]["colors"] == null) saveFile["settings"]["colors"] = new JObject();
+        saveFile["settings"]["colors"]["text"] = value;
+    }
+
+    public JArray GetColorSettingText()
+    {
+        if (saveFile["settings"] == null) return new JArray(255, 255, 255);
+        if (saveFile["settings"]["colors"] == null) return new JArray(255, 255, 255);
+        if (saveFile["settings"]["colors"]["text"] == null) return new JArray(255, 255, 255);
+        return JArray.Parse(saveFile["settings"]["colors"]["text"].ToString());
+    }
+
     public void SetColorSettingIcon(JArray value)
     {
         if (saveFile["settings"] == null) saveFile["settings"] = new JObject();

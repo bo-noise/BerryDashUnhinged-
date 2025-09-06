@@ -17,11 +17,11 @@ public class ColorPanel : MonoBehaviour
     public Button switchModeButton;
     public event Action<JArray> OnColorChanged;
 
-    public void Init(JArray color, Color defaultColor)
+    public void Init(Color color, Color defaultColor)
     {
-        rSlider.value = (int)color[0];
-        gSlider.value = (int)color[1];
-        bSlider.value = (int)color[2];
+        rSlider.value = color.r * 255f;
+        gSlider.value = color.g * 255f;
+        bSlider.value = color.b * 255f;
 
         SyncAll();
 
@@ -62,6 +62,12 @@ public class ColorPanel : MonoBehaviour
             bSlider.SetValueWithoutNotify(color.b * 255);
             SyncAll(fromPicker: true);
         };
+    }
+
+    public void Init(JArray color, Color defaultColor)
+    {
+
+        Init(new Color((int)color[0] / 255f, (int)color[1] / 255f, (int)color[2] / 255f), defaultColor);
     }
 
     void SyncAll(bool fromPicker = false)
