@@ -3463,7 +3463,7 @@ SpriteRenderer:
   m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &808236451
@@ -4561,6 +4561,7 @@ GameObject:
   - component: {fileID: 1539199163}
   - component: {fileID: 1539199162}
   - component: {fileID: 1539199161}
+  - component: {fileID: 1539199164}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -4670,6 +4671,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1539199159}
   m_CullTransparentMesh: 1
+--- !u!114 &1539199164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539199159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a45465fc8803364d968dc6bec70fca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonToScene
+  sceneName: MainMenu
 --- !u!1 &1577031225
 GameObject:
   m_ObjectHideFlags: 0

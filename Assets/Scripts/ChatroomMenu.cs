@@ -55,7 +55,6 @@ public class ChatroomMenu : MonoBehaviour
             messageInputField.interactable = false;
             ShowStatus("Warning: You are not logged in. Please log in to send messages.");
         }
-        backButton.onClick.AddListener(async () => await SceneManager.LoadSceneAsync("MainMenu"));
         sendButton.onClick.AddListener(async () => await HandleMessageSubmit());
         downButton.onClick.AddListener(() => StartCoroutine(ScrollToBottom()));
         messageInputField.textComponent.textWrappingMode = TextWrappingModes.Normal;

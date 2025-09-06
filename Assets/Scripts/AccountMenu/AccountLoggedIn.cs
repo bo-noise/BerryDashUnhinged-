@@ -32,7 +32,6 @@ public class AccountLoggedIn : MonoBehaviour
             BazookaManager.Instance.ResetSave();
             AccountHandler.instance.SwitchPanel(1);
         });
-        loggedInBackButton.onClick.AddListener(async () => await SceneManager.LoadSceneAsync("MainMenu"));
     }
 
     void OnEnable()

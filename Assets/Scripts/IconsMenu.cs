@@ -12,7 +12,6 @@ public class Iconsmenu : MonoBehaviour
     public GameObject marketplaceIconsPanel;
     public GameObject marketplaceIconsContent;
     public GameObject marketplaceIconsSample;
-    public Button backButton;
     public Sprite defaultIcon;
     public Button placeholderButton;
     public TMP_Text selectionText;
@@ -91,10 +90,6 @@ public class Iconsmenu : MonoBehaviour
             SwitchToMarketplaceIcons();
         }
         placeholderButton.onClick.AddListener(ToggleKit);
-        backButton.onClick.AddListener(async () =>
-        {
-            await SceneManager.LoadSceneAsync("MainMenu");
-        });
         previewBird.GetComponentInParent<Button>().onClick.AddListener(() =>
         {
             var scale = previewBird.transform.localScale;

@@ -31,10 +31,6 @@ public class GamePlayerPauseMenu : MonoBehaviour
         Instance = this;
         musicSlider.value = BazookaManager.Instance.GetSettingMusicVolume();
         sfxSlider.value = BazookaManager.Instance.GetSettingSFXVolume();
-        backButton.onClick.AddListener(async () =>
-        {
-            await UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("MainMenu");
-        });
         continueButton.onClick.AddListener(GamePlayer.instance.DisablePause);
         musicSlider.onValueChanged.AddListener(value =>
         {

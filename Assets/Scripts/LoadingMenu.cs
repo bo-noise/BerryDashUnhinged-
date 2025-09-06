@@ -45,10 +45,6 @@ public class LoadingMenu : MonoBehaviour
         {
             Application.OpenURL("https://berrydash.lncvrt.xyz/download");
         });
-        continueButton.onClick.AddListener(async () =>
-        {
-            await SceneManager.LoadSceneAsync("MainMenu");
-        });
         CheckUpdate();
     }
 
