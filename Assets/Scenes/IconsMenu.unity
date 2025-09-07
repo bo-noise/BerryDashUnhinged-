@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 1736705}
   - component: {fileID: 1736704}
   - component: {fileID: 1736703}
+  - component: {fileID: 1736706}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -240,6 +241,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736701}
   m_CullTransparentMesh: 1
+--- !u!114 &1736706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &17356283
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,6 +976,7 @@ GameObject:
   - component: {fileID: 105058371}
   - component: {fileID: 105058370}
   - component: {fileID: 105058369}
+  - component: {fileID: 105058372}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -1068,6 +1086,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 105058367}
   m_CullTransparentMesh: 1
+--- !u!114 &105058372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105058367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &120322523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1763,6 +1797,7 @@ GameObject:
   - component: {fileID: 239371492}
   - component: {fileID: 239371494}
   - component: {fileID: 239371493}
+  - component: {fileID: 239371495}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -1888,6 +1923,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239371491}
   m_CullTransparentMesh: 1
+--- !u!114 &239371495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239371491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &282890366
 GameObject:
   m_ObjectHideFlags: 0
@@ -1974,6 +2025,7 @@ GameObject:
   - component: {fileID: 283532289}
   - component: {fileID: 283532291}
   - component: {fileID: 283532290}
+  - component: {fileID: 283532292}
   m_Layer: 5
   m_Name: TitleText
   m_TagString: Untagged
@@ -2099,6 +2151,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 283532288}
   m_CullTransparentMesh: 1
+--- !u!114 &283532292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283532288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &296019490
 GameObject:
   m_ObjectHideFlags: 0
@@ -2185,6 +2253,7 @@ GameObject:
   - component: {fileID: 301368395}
   - component: {fileID: 301368397}
   - component: {fileID: 301368396}
+  - component: {fileID: 301368398}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -2310,6 +2379,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301368394}
   m_CullTransparentMesh: 1
+--- !u!114 &301368398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301368394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &320905928
 GameObject:
   m_ObjectHideFlags: 0
@@ -2506,6 +2591,7 @@ GameObject:
   - component: {fileID: 346076459}
   - component: {fileID: 346076458}
   - component: {fileID: 346076460}
+  - component: {fileID: 346076461}
   m_Layer: 5
   m_Name: BirdColorPanel
   m_TagString: Untagged
@@ -2596,6 +2682,23 @@ MonoBehaviour:
   previewImage: {fileID: 485555076}
   resetButton: {fileID: 926389698}
   switchModeButton: {fileID: 1727527370}
+  defaultColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &346076461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346076455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.09411765, g: 0.09411765, b: 0.09411765, a: 0}
+  reverseAdd: 0
 --- !u!1 &354669924
 GameObject:
   m_ObjectHideFlags: 0
@@ -2607,6 +2710,7 @@ GameObject:
   - component: {fileID: 354669925}
   - component: {fileID: 354669927}
   - component: {fileID: 354669926}
+  - component: {fileID: 354669928}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -2732,6 +2836,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 354669924}
   m_CullTransparentMesh: 1
+--- !u!114 &354669928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354669924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &367978218
 GameObject:
   m_ObjectHideFlags: 0
@@ -2744,6 +2864,7 @@ GameObject:
   - component: {fileID: 367978222}
   - component: {fileID: 367978221}
   - component: {fileID: 367978220}
+  - component: {fileID: 367978223}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -2853,6 +2974,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 367978218}
   m_CullTransparentMesh: 1
+--- !u!114 &367978223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367978218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &378857774
 GameObject:
   m_ObjectHideFlags: 0
@@ -3001,6 +3138,7 @@ GameObject:
   - component: {fileID: 388694502}
   - component: {fileID: 388694501}
   - component: {fileID: 388694500}
+  - component: {fileID: 388694503}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -3110,6 +3248,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 388694498}
   m_CullTransparentMesh: 1
+--- !u!114 &388694503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388694498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &404872898
 GameObject:
   m_ObjectHideFlags: 0
@@ -3438,6 +3592,7 @@ GameObject:
   - component: {fileID: 420083145}
   - component: {fileID: 420083144}
   - component: {fileID: 420083143}
+  - component: {fileID: 420083146}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -3547,6 +3702,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 420083141}
   m_CullTransparentMesh: 1
+--- !u!114 &420083146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420083141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &437256204
 GameObject:
   m_ObjectHideFlags: 0
@@ -3559,6 +3730,7 @@ GameObject:
   - component: {fileID: 437256208}
   - component: {fileID: 437256207}
   - component: {fileID: 437256206}
+  - component: {fileID: 437256209}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -3668,6 +3840,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 437256204}
   m_CullTransparentMesh: 1
+--- !u!114 &437256209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437256204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &453951315
 GameObject:
   m_ObjectHideFlags: 0
@@ -3892,6 +4080,7 @@ GameObject:
   - component: {fileID: 490807506}
   - component: {fileID: 490807505}
   - component: {fileID: 490807504}
+  - component: {fileID: 490807507}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -4001,6 +4190,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 490807502}
   m_CullTransparentMesh: 1
+--- !u!114 &490807507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490807502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &504555113
 GameObject:
   m_ObjectHideFlags: 0
@@ -4328,6 +4533,7 @@ GameObject:
   - component: {fileID: 519880729}
   - component: {fileID: 519880728}
   - component: {fileID: 519880727}
+  - component: {fileID: 519880730}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -4437,6 +4643,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519880725}
   m_CullTransparentMesh: 1
+--- !u!114 &519880730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519880725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &529729328
 GameObject:
   m_ObjectHideFlags: 0
@@ -4674,6 +4896,7 @@ GameObject:
   - component: {fileID: 606851918}
   - component: {fileID: 606851917}
   - component: {fileID: 606851916}
+  - component: {fileID: 606851919}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -4783,6 +5006,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606851914}
   m_CullTransparentMesh: 1
+--- !u!114 &606851919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606851914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &630109802
 GameObject:
   m_ObjectHideFlags: 0
@@ -4794,6 +5033,7 @@ GameObject:
   - component: {fileID: 630109803}
   - component: {fileID: 630109805}
   - component: {fileID: 630109804}
+  - component: {fileID: 630109806}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -4919,6 +5159,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 630109802}
   m_CullTransparentMesh: 1
+--- !u!114 &630109806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630109802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &631499869
 GameObject:
   m_ObjectHideFlags: 0
@@ -5005,6 +5261,7 @@ GameObject:
   - component: {fileID: 667716486}
   - component: {fileID: 667716488}
   - component: {fileID: 667716487}
+  - component: {fileID: 667716489}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -5130,6 +5387,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 667716485}
   m_CullTransparentMesh: 1
+--- !u!114 &667716489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667716485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &673274032
 GameObject:
   m_ObjectHideFlags: 0
@@ -6158,6 +6431,7 @@ GameObject:
   - component: {fileID: 926389700}
   - component: {fileID: 926389699}
   - component: {fileID: 926389698}
+  - component: {fileID: 926389701}
   m_Layer: 5
   m_Name: ResetToDefault
   m_TagString: Untagged
@@ -6267,6 +6541,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 926389696}
   m_CullTransparentMesh: 1
+--- !u!114 &926389701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926389696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 2
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &974481475
 GameObject:
   m_ObjectHideFlags: 0
@@ -6415,6 +6705,7 @@ GameObject:
   - component: {fileID: 989561982}
   - component: {fileID: 989561981}
   - component: {fileID: 989561983}
+  - component: {fileID: 989561984}
   m_Layer: 5
   m_Name: OverlayColorPanel
   m_TagString: Untagged
@@ -6505,6 +6796,23 @@ MonoBehaviour:
   previewImage: {fileID: 1953625730}
   resetButton: {fileID: 1985228427}
   switchModeButton: {fileID: 2144873236}
+  defaultColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &989561984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989561978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.09411765, g: 0.09411765, b: 0.09411765, a: 0}
+  reverseAdd: 0
 --- !u!1 &1032847310
 GameObject:
   m_ObjectHideFlags: 0
@@ -6569,6 +6877,7 @@ GameObject:
   - component: {fileID: 1062570981}
   - component: {fileID: 1062570984}
   - component: {fileID: 1062570985}
+  - component: {fileID: 1062570986}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6744,6 +7053,22 @@ MonoBehaviour:
   previewBirdObject: {fileID: 2072730781}
   iconColorPanel: {fileID: 346076460}
   overlayColorPanel: {fileID: 989561983}
+--- !u!114 &1062570986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062570980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 1
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1098647304
 GameObject:
   m_ObjectHideFlags: 0
@@ -7017,6 +7342,7 @@ GameObject:
   - component: {fileID: 1167172254}
   - component: {fileID: 1167172256}
   - component: {fileID: 1167172255}
+  - component: {fileID: 1167172257}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -7142,6 +7468,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167172253}
   m_CullTransparentMesh: 1
+--- !u!114 &1167172257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167172253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1186764300
 GameObject:
   m_ObjectHideFlags: 0
@@ -7440,6 +7782,7 @@ GameObject:
   - component: {fileID: 1197784016}
   - component: {fileID: 1197784015}
   - component: {fileID: 1197784014}
+  - component: {fileID: 1197784017}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -7549,6 +7892,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1197784012}
   m_CullTransparentMesh: 1
+--- !u!114 &1197784017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197784012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &1244495135
 GameObject:
   m_ObjectHideFlags: 0
@@ -7560,6 +7919,7 @@ GameObject:
   - component: {fileID: 1244495136}
   - component: {fileID: 1244495138}
   - component: {fileID: 1244495137}
+  - component: {fileID: 1244495139}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -7685,6 +8045,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1244495135}
   m_CullTransparentMesh: 1
+--- !u!114 &1244495139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244495135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1275335463
 GameObject:
   m_ObjectHideFlags: 0
@@ -7697,6 +8073,7 @@ GameObject:
   - component: {fileID: 1275335467}
   - component: {fileID: 1275335466}
   - component: {fileID: 1275335465}
+  - component: {fileID: 1275335468}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -7806,6 +8183,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1275335463}
   m_CullTransparentMesh: 1
+--- !u!114 &1275335468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275335463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &1353508871
 GameObject:
   m_ObjectHideFlags: 0
@@ -7968,6 +8361,7 @@ GameObject:
   - component: {fileID: 1374823589}
   - component: {fileID: 1374823588}
   - component: {fileID: 1374823590}
+  - component: {fileID: 1374823591}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -8077,6 +8471,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1374823591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374823586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &1383037988
 GameObject:
   m_ObjectHideFlags: 0
@@ -8321,6 +8731,7 @@ GameObject:
   - component: {fileID: 1433968979}
   - component: {fileID: 1433968978}
   - component: {fileID: 1433968977}
+  - component: {fileID: 1433968980}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -8430,6 +8841,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1433968975}
   m_CullTransparentMesh: 1
+--- !u!114 &1433968980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433968975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &1442001200
 GameObject:
   m_ObjectHideFlags: 0
@@ -8578,6 +9005,7 @@ GameObject:
   - component: {fileID: 1445639184}
   - component: {fileID: 1445639183}
   - component: {fileID: 1445639182}
+  - component: {fileID: 1445639185}
   m_Layer: 5
   m_Name: HexValue
   m_TagString: Untagged
@@ -8745,6 +9173,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1445639180}
   m_CullTransparentMesh: 1
+--- !u!114 &1445639185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445639180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 2
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1482403541
 GameObject:
   m_ObjectHideFlags: 0
@@ -8987,6 +9431,7 @@ GameObject:
   - component: {fileID: 1513997430}
   - component: {fileID: 1513997429}
   - component: {fileID: 1513997428}
+  - component: {fileID: 1513997431}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -9096,6 +9541,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1513997426}
   m_CullTransparentMesh: 1
+--- !u!114 &1513997431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513997426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &1545692392
 GameObject:
   m_ObjectHideFlags: 0
@@ -9183,6 +9644,7 @@ GameObject:
   - component: {fileID: 1587955965}
   - component: {fileID: 1587955964}
   - component: {fileID: 1587955963}
+  - component: {fileID: 1587955966}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -9292,6 +9754,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1587955961}
   m_CullTransparentMesh: 1
+--- !u!114 &1587955966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587955961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &1603659382
 GameObject:
   m_ObjectHideFlags: 0
@@ -9339,6 +9817,7 @@ GameObject:
   - component: {fileID: 1618029498}
   - component: {fileID: 1618029500}
   - component: {fileID: 1618029499}
+  - component: {fileID: 1618029501}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -9410,6 +9889,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1618029497}
   m_CullTransparentMesh: 1
+--- !u!114 &1618029501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618029497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.09411765, g: 0.09411765, b: 0.09411765, a: 0}
+  reverseAdd: 0
 --- !u!1 &1635406299
 GameObject:
   m_ObjectHideFlags: 0
@@ -9513,6 +10008,7 @@ GameObject:
   - component: {fileID: 1673908008}
   - component: {fileID: 1673908007}
   - component: {fileID: 1673908006}
+  - component: {fileID: 1673908009}
   m_Layer: 5
   m_Name: Sample
   m_TagString: Untagged
@@ -9622,6 +10118,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1673908004}
   m_CullTransparentMesh: 1
+--- !u!114 &1673908009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673908004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &1682251924
 GameObject:
   m_ObjectHideFlags: 0
@@ -9634,6 +10146,7 @@ GameObject:
   - component: {fileID: 1682251928}
   - component: {fileID: 1682251927}
   - component: {fileID: 1682251926}
+  - component: {fileID: 1682251929}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -9743,6 +10256,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1682251924}
   m_CullTransparentMesh: 1
+--- !u!114 &1682251929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682251924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &1689521972
 GameObject:
   m_ObjectHideFlags: 0
@@ -9830,6 +10359,7 @@ GameObject:
   - component: {fileID: 1721135578}
   - component: {fileID: 1721135577}
   - component: {fileID: 1721135576}
+  - component: {fileID: 1721135579}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -9939,6 +10469,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1721135574}
   m_CullTransparentMesh: 1
+--- !u!114 &1721135579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721135574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &1727527368
 GameObject:
   m_ObjectHideFlags: 0
@@ -9951,6 +10497,7 @@ GameObject:
   - component: {fileID: 1727527372}
   - component: {fileID: 1727527371}
   - component: {fileID: 1727527370}
+  - component: {fileID: 1727527373}
   m_Layer: 5
   m_Name: SwitchMode
   m_TagString: Untagged
@@ -10060,6 +10607,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1727527368}
   m_CullTransparentMesh: 1
+--- !u!114 &1727527373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727527368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 2
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1746920227
 GameObject:
   m_ObjectHideFlags: 0
@@ -10147,6 +10710,7 @@ GameObject:
   - component: {fileID: 1786729682}
   - component: {fileID: 1786729681}
   - component: {fileID: 1786729680}
+  - component: {fileID: 1786729683}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -10256,6 +10820,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1786729678}
   m_CullTransparentMesh: 1
+--- !u!114 &1786729683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786729678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &1789602423
 GameObject:
   m_ObjectHideFlags: 0
@@ -10267,6 +10847,7 @@ GameObject:
   - component: {fileID: 1789602424}
   - component: {fileID: 1789602426}
   - component: {fileID: 1789602425}
+  - component: {fileID: 1789602427}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -10392,6 +10973,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1789602423}
   m_CullTransparentMesh: 1
+--- !u!114 &1789602427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789602423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1794682512
 GameObject:
   m_ObjectHideFlags: 0
@@ -10404,6 +11001,7 @@ GameObject:
   - component: {fileID: 1794682516}
   - component: {fileID: 1794682515}
   - component: {fileID: 1794682514}
+  - component: {fileID: 1794682517}
   m_Layer: 5
   m_Name: HexValue
   m_TagString: Untagged
@@ -10571,6 +11169,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1794682512}
   m_CullTransparentMesh: 1
+--- !u!114 &1794682517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794682512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 2
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1798643175
 GameObject:
   m_ObjectHideFlags: 0
@@ -10583,6 +11197,7 @@ GameObject:
   - component: {fileID: 1798643179}
   - component: {fileID: 1798643178}
   - component: {fileID: 1798643177}
+  - component: {fileID: 1798643180}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -10692,6 +11307,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798643175}
   m_CullTransparentMesh: 1
+--- !u!114 &1798643180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798643175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &1812659293
 GameObject:
   m_ObjectHideFlags: 0
@@ -11142,6 +11773,7 @@ GameObject:
   - component: {fileID: 1860444780}
   - component: {fileID: 1860444779}
   - component: {fileID: 1860444778}
+  - component: {fileID: 1860444781}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -11251,6 +11883,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1860444776}
   m_CullTransparentMesh: 1
+--- !u!114 &1860444781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1860444776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &1884762428
 GameObject:
   m_ObjectHideFlags: 0
@@ -11262,6 +11910,7 @@ GameObject:
   - component: {fileID: 1884762429}
   - component: {fileID: 1884762431}
   - component: {fileID: 1884762430}
+  - component: {fileID: 1884762432}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -11387,6 +12036,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884762428}
   m_CullTransparentMesh: 1
+--- !u!114 &1884762432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884762428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1935388247
 GameObject:
   m_ObjectHideFlags: 0
@@ -11815,6 +12480,7 @@ GameObject:
   - component: {fileID: 1985228429}
   - component: {fileID: 1985228428}
   - component: {fileID: 1985228427}
+  - component: {fileID: 1985228430}
   m_Layer: 5
   m_Name: ResetToDefault
   m_TagString: Untagged
@@ -11924,6 +12590,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1985228425}
   m_CullTransparentMesh: 1
+--- !u!114 &1985228430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985228425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 2
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &2007635959
 GameObject:
   m_ObjectHideFlags: 0
@@ -12408,6 +13090,7 @@ GameObject:
   - component: {fileID: 2044046148}
   - component: {fileID: 2044046147}
   - component: {fileID: 2044046146}
+  - component: {fileID: 2044046149}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -12517,6 +13200,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2044046144}
   m_CullTransparentMesh: 1
+--- !u!114 &2044046149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044046144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &2072730781
 GameObject:
   m_ObjectHideFlags: 0
@@ -12529,6 +13228,7 @@ GameObject:
   - component: {fileID: 2072730784}
   - component: {fileID: 2072730783}
   - component: {fileID: 2072730785}
+  - component: {fileID: 2072730786}
   m_Layer: 5
   m_Name: PreviewBird
   m_TagString: Untagged
@@ -12638,6 +13338,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2072730786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072730781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &2080887865
 GameObject:
   m_ObjectHideFlags: 0
@@ -12650,6 +13366,7 @@ GameObject:
   - component: {fileID: 2080887869}
   - component: {fileID: 2080887868}
   - component: {fileID: 2080887867}
+  - component: {fileID: 2080887870}
   m_Layer: 5
   m_Name: Scroll View
   m_TagString: Untagged
@@ -12745,6 +13462,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2080887865}
   m_CullTransparentMesh: 1
+--- !u!114 &2080887870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080887865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.1882353, g: 0.1882353, b: 0.1882353, a: 0}
+  reverseAdd: 0
 --- !u!1 &2082761347
 GameObject:
   m_ObjectHideFlags: 0
@@ -12757,6 +13490,7 @@ GameObject:
   - component: {fileID: 2082761351}
   - component: {fileID: 2082761350}
   - component: {fileID: 2082761349}
+  - component: {fileID: 2082761352}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -12866,6 +13600,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2082761347}
   m_CullTransparentMesh: 1
+--- !u!114 &2082761352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082761347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &2110575831
 GameObject:
   m_ObjectHideFlags: 0
@@ -12953,6 +13703,7 @@ GameObject:
   - component: {fileID: 2122644445}
   - component: {fileID: 2122644444}
   - component: {fileID: 2122644443}
+  - component: {fileID: 2122644446}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -13062,6 +13813,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2122644441}
   m_CullTransparentMesh: 1
+--- !u!114 &2122644446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122644441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.40784314, g: 0.40784314, b: 0.40784314, a: 0}
+  reverseAdd: 0
 --- !u!1 &2134364722
 GameObject:
   m_ObjectHideFlags: 0
@@ -13152,6 +13919,7 @@ GameObject:
   - component: {fileID: 2138721522}
   - component: {fileID: 2138721524}
   - component: {fileID: 2138721523}
+  - component: {fileID: 2138721525}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -13277,6 +14045,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138721521}
   m_CullTransparentMesh: 1
+--- !u!114 &2138721525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138721521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &2144873234
 GameObject:
   m_ObjectHideFlags: 0
@@ -13289,6 +14073,7 @@ GameObject:
   - component: {fileID: 2144873238}
   - component: {fileID: 2144873237}
   - component: {fileID: 2144873236}
+  - component: {fileID: 2144873239}
   m_Layer: 5
   m_Name: SwitchMode
   m_TagString: Untagged
@@ -13398,6 +14183,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144873234}
   m_CullTransparentMesh: 1
+--- !u!114 &2144873239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144873234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 2
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

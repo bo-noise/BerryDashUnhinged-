@@ -12,7 +12,8 @@ public class ChatroomMenuEntry : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         bgImg = bgImgArg;
         optionsButton = optionsButtonArg;
-        bgImg.color = new Color(50f / 255f, 50f / 255f, 50f / 255f);
+        var color = BazookaManager.Instance.GetColorSettingMenuBackground();
+        bgImg.color = new Color((((float)color[0]) + 26f) / 255f, (((float)color[1]) + 26f) / 255f, (((float)color[2]) + 26f) / 255f);
         optionsButton.gameObject.SetActive(false);
     }
 
@@ -72,13 +73,15 @@ public class ChatroomMenuEntry : MonoBehaviour, IPointerEnterHandler, IPointerEx
     private void Activate()
     {
         activeEntry = this;
-        bgImg.color = new Color(60f / 255f, 60f / 255f, 60f / 255f);
+        var color = BazookaManager.Instance.GetColorSettingMenuBackground();
+        bgImg.color = new Color((((float)color[0]) + 36f) / 255f, (((float)color[1]) + 36f) / 255f, (((float)color[2]) + 36f) / 255f);
         optionsButton.gameObject.SetActive(true);
     }
 
     private void Deactivate()
     {
-        bgImg.color = new Color(50f / 255f, 50f / 255f, 50f / 255f);
+        var color = BazookaManager.Instance.GetColorSettingMenuBackground();
+        bgImg.color = new Color((((float)color[0]) + 26f) / 255f, (((float)color[1]) + 26f) / 255f, (((float)color[2]) + 26f) / 255f);
         optionsButton.gameObject.SetActive(false);
         if (activeEntry == this) activeEntry = null;
     }

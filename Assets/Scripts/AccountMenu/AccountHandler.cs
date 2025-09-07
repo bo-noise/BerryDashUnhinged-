@@ -96,5 +96,6 @@ public class AccountHandler : MonoBehaviour
                 accountRefreshLogin.gameObject.SetActive(true);
                 break;
         }
+        foreach (CustomColorObject customColorObject in FindObjectsByType<CustomColorObject>(FindObjectsSortMode.None)) customColorObject.SetColor();
     }
 }

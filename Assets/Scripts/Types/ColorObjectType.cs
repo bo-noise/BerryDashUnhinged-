@@ -2,6 +2,9 @@ public enum ColorObjectType
 {
     InGameBackgroundColor,
     MenuBackgroundColor,
+    ButtonColor,
+    ButtonColorText,
     TextColor,
-    ButtonColor
+    TextColorImage,
+    MenuBackgroundColorImage,
 }

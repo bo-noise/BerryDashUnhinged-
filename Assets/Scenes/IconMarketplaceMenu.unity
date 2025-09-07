@@ -371,6 +371,7 @@ GameObject:
   - component: {fileID: 144846921}
   - component: {fileID: 144846920}
   - component: {fileID: 144846919}
+  - component: {fileID: 144846922}
   m_Layer: 5
   m_Name: RefreshButton
   m_TagString: Untagged
@@ -480,6 +481,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 144846917}
   m_CullTransparentMesh: 1
+--- !u!114 &144846922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144846917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 2
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &149182832
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,6 +675,7 @@ GameObject:
   - component: {fileID: 210372879}
   - component: {fileID: 210372878}
   - component: {fileID: 210372877}
+  - component: {fileID: 210372880}
   m_Layer: 5
   m_Name: Input
   m_TagString: Untagged
@@ -824,6 +842,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 210372875}
   m_CullTransparentMesh: 1
+--- !u!114 &210372880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210372875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 2
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &212797865
 GameObject:
   m_ObjectHideFlags: 0
@@ -981,6 +1015,7 @@ GameObject:
   - component: {fileID: 214770572}
   - component: {fileID: 214770574}
   - component: {fileID: 214770573}
+  - component: {fileID: 214770575}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1106,6 +1141,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214770571}
   m_CullTransparentMesh: 1
+--- !u!114 &214770575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214770571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 3
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &243973690
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,6 +1168,7 @@ GameObject:
   - component: {fileID: 243973691}
   - component: {fileID: 243973693}
   - component: {fileID: 243973692}
+  - component: {fileID: 243973694}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1242,6 +1294,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 243973690}
   m_CullTransparentMesh: 1
+--- !u!114 &243973694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243973690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &250592065
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,6 +1322,7 @@ GameObject:
   - component: {fileID: 250592069}
   - component: {fileID: 250592068}
   - component: {fileID: 250592067}
+  - component: {fileID: 250592070}
   m_Layer: 5
   m_Name: UploadButton
   m_TagString: Untagged
@@ -1363,6 +1432,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 250592065}
   m_CullTransparentMesh: 1
+--- !u!114 &250592070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250592065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 2
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &262578091
 GameObject:
   m_ObjectHideFlags: 0
@@ -1375,6 +1460,7 @@ GameObject:
   - component: {fileID: 262578095}
   - component: {fileID: 262578094}
   - component: {fileID: 262578093}
+  - component: {fileID: 262578096}
   m_Layer: 5
   m_Name: OptionsButton
   m_TagString: Untagged
@@ -1484,6 +1570,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 262578091}
   m_CullTransparentMesh: 1
+--- !u!114 &262578096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262578091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 2
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &265794165
 GameObject:
   m_ObjectHideFlags: 0
@@ -2547,6 +2649,7 @@ GameObject:
   - component: {fileID: 382778014}
   - component: {fileID: 382778013}
   - component: {fileID: 382778012}
+  - component: {fileID: 382778015}
   m_Layer: 5
   m_Name: Input
   m_TagString: Untagged
@@ -2713,6 +2816,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382778010}
   m_CullTransparentMesh: 1
+--- !u!114 &382778015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382778010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 2
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &386557303
 GameObject:
   m_ObjectHideFlags: 0
@@ -2814,6 +2933,7 @@ GameObject:
   - component: {fileID: 401943603}
   - component: {fileID: 401943605}
   - component: {fileID: 401943604}
+  - component: {fileID: 401943606}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2939,6 +3059,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401943602}
   m_CullTransparentMesh: 1
+--- !u!114 &401943606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401943602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 3
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &403919447
 GameObject:
   m_ObjectHideFlags: 0
@@ -3063,6 +3199,7 @@ GameObject:
   - component: {fileID: 428426735}
   - component: {fileID: 428426734}
   - component: {fileID: 428426737}
+  - component: {fileID: 428426738}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -3185,6 +3322,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: MainMenu
+--- !u!114 &428426738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428426732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 2
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &501495250
 GameObject:
   m_ObjectHideFlags: 0
@@ -3675,6 +3828,7 @@ GameObject:
   - component: {fileID: 575003212}
   - component: {fileID: 575003211}
   - component: {fileID: 575003210}
+  - component: {fileID: 575003213}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -3784,6 +3938,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 575003208}
   m_CullTransparentMesh: 1
+--- !u!114 &575003213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575003208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 2
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &601212175
 GameObject:
   m_ObjectHideFlags: 0
@@ -4018,6 +4188,7 @@ GameObject:
   - component: {fileID: 631558096}
   - component: {fileID: 631558098}
   - component: {fileID: 631558097}
+  - component: {fileID: 631558099}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -4143,6 +4314,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 631558095}
   m_CullTransparentMesh: 1
+--- !u!114 &631558099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631558095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &653470112
 GameObject:
   m_ObjectHideFlags: 0
@@ -4155,6 +4342,7 @@ GameObject:
   - component: {fileID: 653470116}
   - component: {fileID: 653470115}
   - component: {fileID: 653470114}
+  - component: {fileID: 653470117}
   m_Layer: 5
   m_Name: Placeholder
   m_TagString: Untagged
@@ -4300,6 +4488,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 653470112}
   m_CullTransparentMesh: 1
+--- !u!114 &653470117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653470112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &660794635
 GameObject:
   m_ObjectHideFlags: 0
@@ -4794,6 +4998,7 @@ GameObject:
   - component: {fileID: 716127914}
   - component: {fileID: 716127917}
   - component: {fileID: 716127916}
+  - component: {fileID: 716127918}
   m_Layer: 5
   m_Name: DesignerName
   m_TagString: Untagged
@@ -4919,6 +5124,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716127913}
   m_CullTransparentMesh: 1
+--- !u!114 &716127918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716127913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &723311846
 GameObject:
   m_ObjectHideFlags: 0
@@ -5066,6 +5287,7 @@ GameObject:
   - component: {fileID: 726213891}
   - component: {fileID: 726213893}
   - component: {fileID: 726213892}
+  - component: {fileID: 726213894}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -5191,6 +5413,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 726213890}
   m_CullTransparentMesh: 1
+--- !u!114 &726213894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726213890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &777320438
 GameObject:
   m_ObjectHideFlags: 0
@@ -5930,6 +6168,7 @@ GameObject:
   - component: {fileID: 985587517}
   - component: {fileID: 985587519}
   - component: {fileID: 985587518}
+  - component: {fileID: 985587520}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -6055,6 +6294,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 985587516}
   m_CullTransparentMesh: 1
+--- !u!114 &985587520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985587516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1008050581
 GameObject:
   m_ObjectHideFlags: 0
@@ -6605,6 +6860,7 @@ GameObject:
   - component: {fileID: 1105394946}
   - component: {fileID: 1105394948}
   - component: {fileID: 1105394947}
+  - component: {fileID: 1105394949}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -6730,6 +6986,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1105394945}
   m_CullTransparentMesh: 1
+--- !u!114 &1105394949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105394945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1109036282
 GameObject:
   m_ObjectHideFlags: 0
@@ -6878,6 +7150,7 @@ GameObject:
   - component: {fileID: 1131495675}
   - component: {fileID: 1131495674}
   - component: {fileID: 1131495673}
+  - component: {fileID: 1131495676}
   m_Layer: 5
   m_Name: UploadButton
   m_TagString: Untagged
@@ -6988,6 +7261,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1131495671}
   m_CullTransparentMesh: 1
+--- !u!114 &1131495676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131495671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 2
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1169526036
 GameObject:
   m_ObjectHideFlags: 0
@@ -8055,6 +8344,7 @@ GameObject:
   - component: {fileID: 1316004657}
   - component: {fileID: 1316004659}
   - component: {fileID: 1316004658}
+  - component: {fileID: 1316004660}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -8180,6 +8470,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1316004656}
   m_CullTransparentMesh: 1
+--- !u!114 &1316004660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316004656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1332173808
 GameObject:
   m_ObjectHideFlags: 0
@@ -8369,6 +8675,7 @@ GameObject:
   - component: {fileID: 1354154486}
   - component: {fileID: 1354154488}
   - component: {fileID: 1354154487}
+  - component: {fileID: 1354154489}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -8494,6 +8801,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1354154485}
   m_CullTransparentMesh: 1
+--- !u!114 &1354154489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354154485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1378723056
 GameObject:
   m_ObjectHideFlags: 0
@@ -8505,6 +8828,7 @@ GameObject:
   - component: {fileID: 1378723057}
   - component: {fileID: 1378723059}
   - component: {fileID: 1378723058}
+  - component: {fileID: 1378723060}
   m_Layer: 5
   m_Name: BalanceText
   m_TagString: Untagged
@@ -8630,6 +8954,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1378723056}
   m_CullTransparentMesh: 1
+--- !u!114 &1378723060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378723056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1386079988
 GameObject:
   m_ObjectHideFlags: 0
@@ -8642,6 +8982,7 @@ GameObject:
   - component: {fileID: 1386079990}
   - component: {fileID: 1386079989}
   - component: {fileID: 1386079992}
+  - component: {fileID: 1386079993}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8767,6 +9108,22 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &1386079993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386079988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 1
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1388300399
 GameObject:
   m_ObjectHideFlags: 0
@@ -8778,6 +9135,7 @@ GameObject:
   - component: {fileID: 1388300400}
   - component: {fileID: 1388300402}
   - component: {fileID: 1388300401}
+  - component: {fileID: 1388300403}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -8845,6 +9203,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1388300399}
   m_CullTransparentMesh: 1
+--- !u!114 &1388300403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388300399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.09411765, g: 0.09411765, b: 0.09411765, a: 0}
+  reverseAdd: 0
 --- !u!1 &1393727223
 GameObject:
   m_ObjectHideFlags: 0
@@ -9338,6 +9712,7 @@ GameObject:
   - component: {fileID: 1475930418}
   - component: {fileID: 1475930417}
   - component: {fileID: 1475930416}
+  - component: {fileID: 1475930419}
   m_Layer: 5
   m_Name: PurchaseButton
   m_TagString: Untagged
@@ -9447,6 +9822,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1475930414}
   m_CullTransparentMesh: 1
+--- !u!114 &1475930419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475930414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 2
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1477374026
 GameObject:
   m_ObjectHideFlags: 0
@@ -9548,6 +9939,7 @@ GameObject:
   - component: {fileID: 1478742509}
   - component: {fileID: 1478742511}
   - component: {fileID: 1478742510}
+  - component: {fileID: 1478742512}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -9673,6 +10065,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1478742508}
   m_CullTransparentMesh: 1
+--- !u!114 &1478742512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478742508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1500963701
 GameObject:
   m_ObjectHideFlags: 0
@@ -9684,6 +10092,7 @@ GameObject:
   - component: {fileID: 1500963702}
   - component: {fileID: 1500963704}
   - component: {fileID: 1500963703}
+  - component: {fileID: 1500963705}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -9809,6 +10218,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500963701}
   m_CullTransparentMesh: 1
+--- !u!114 &1500963705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500963701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1515644782
 GameObject:
   m_ObjectHideFlags: 0
@@ -9981,7 +10406,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -0.00012207031}
-  m_SizeDelta: {x: 0, y: -540}
+  m_SizeDelta: {x: 0, y: -240}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1517048290
 MonoBehaviour:
@@ -10033,6 +10458,7 @@ GameObject:
   - component: {fileID: 1518114945}
   - component: {fileID: 1518114944}
   - component: {fileID: 1518114943}
+  - component: {fileID: 1518114946}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -10142,6 +10568,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1518114941}
   m_CullTransparentMesh: 1
+--- !u!114 &1518114946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518114941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 2
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1526513724
 GameObject:
   m_ObjectHideFlags: 0
@@ -10630,6 +11072,7 @@ GameObject:
   - component: {fileID: 1607919634}
   - component: {fileID: 1607919636}
   - component: {fileID: 1607919635}
+  - component: {fileID: 1607919637}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -10755,6 +11198,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1607919633}
   m_CullTransparentMesh: 1
+--- !u!114 &1607919637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607919633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1629440154
 GameObject:
   m_ObjectHideFlags: 0
@@ -11345,6 +11804,7 @@ GameObject:
   - component: {fileID: 1725555175}
   - component: {fileID: 1725555174}
   - component: {fileID: 1725555176}
+  - component: {fileID: 1725555177}
   m_Layer: 5
   m_Name: BalanceText
   m_TagString: Untagged
@@ -11484,6 +11944,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &1725555177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725555172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1732844196
 GameObject:
   m_ObjectHideFlags: 0
@@ -11645,6 +12121,7 @@ GameObject:
   - component: {fileID: 1745561410}
   - component: {fileID: 1745561409}
   - component: {fileID: 1745561408}
+  - component: {fileID: 1745561411}
   m_Layer: 5
   m_Name: SelectBirdButton
   m_TagString: Untagged
@@ -11754,6 +12231,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1745561406}
   m_CullTransparentMesh: 1
+--- !u!114 &1745561411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745561406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 2
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1751626848
 GameObject:
   m_ObjectHideFlags: 0
@@ -12159,6 +12652,7 @@ GameObject:
   - component: {fileID: 1839975981}
   - component: {fileID: 1839975980}
   - component: {fileID: 1839975979}
+  - component: {fileID: 1839975982}
   m_Layer: 5
   m_Name: Placeholder
   m_TagString: Untagged
@@ -12304,6 +12798,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1839975977}
   m_CullTransparentMesh: 1
+--- !u!114 &1839975982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839975977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1866125037
 GameObject:
   m_ObjectHideFlags: 0
@@ -12316,6 +12826,7 @@ GameObject:
   - component: {fileID: 1866125041}
   - component: {fileID: 1866125040}
   - component: {fileID: 1866125039}
+  - component: {fileID: 1866125042}
   m_Layer: 5
   m_Name: StatusText
   m_TagString: Untagged
@@ -12453,6 +12964,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866125037}
   m_CullTransparentMesh: 1
+--- !u!114 &1866125042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866125037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1866619514
 GameObject:
   m_ObjectHideFlags: 0
@@ -12464,6 +12991,7 @@ GameObject:
   - component: {fileID: 1866619515}
   - component: {fileID: 1866619518}
   - component: {fileID: 1866619517}
+  - component: {fileID: 1866619519}
   m_Layer: 5
   m_Name: BirdName
   m_TagString: Untagged
@@ -12589,6 +13117,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866619514}
   m_CullTransparentMesh: 1
+--- !u!114 &1866619519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866619514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1874724293
 GameObject:
   m_ObjectHideFlags: 0
@@ -12778,6 +13322,7 @@ GameObject:
   - component: {fileID: 1916455836}
   - component: {fileID: 1916455838}
   - component: {fileID: 1916455837}
+  - component: {fileID: 1916455839}
   m_Layer: 5
   m_Name: Price
   m_TagString: Untagged
@@ -12903,6 +13448,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916455835}
   m_CullTransparentMesh: 1
+--- !u!114 &1916455839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916455835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &1963830741
 GameObject:
   m_ObjectHideFlags: 0
@@ -13081,6 +13642,7 @@ GameObject:
   - component: {fileID: 2025130429}
   - component: {fileID: 2025130428}
   - component: {fileID: 2025130427}
+  - component: {fileID: 2025130430}
   m_Layer: 5
   m_Name: DownloadButton
   m_TagString: Untagged
@@ -13190,6 +13752,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2025130425}
   m_CullTransparentMesh: 1
+--- !u!114 &2025130430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025130425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 2
+  invert: 0
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &2060078118
 GameObject:
   m_ObjectHideFlags: 0
@@ -13202,6 +13780,7 @@ GameObject:
   - component: {fileID: 2060078121}
   - component: {fileID: 2060078120}
   - component: {fileID: 2060078122}
+  - component: {fileID: 2060078123}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -13341,6 +13920,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &2060078123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060078118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 4
+  invert: 1
+  addMore: {r: 0, g: 0, b: 0, a: 0}
+  reverseAdd: 0
 --- !u!1 &2082085473
 GameObject:
   m_ObjectHideFlags: 0
@@ -13563,6 +14158,7 @@ GameObject:
   - component: {fileID: 2085787979}
   - component: {fileID: 2085787981}
   - component: {fileID: 2085787980}
+  - component: {fileID: 2085787982}
   m_Layer: 5
   m_Name: Sample
   m_TagString: Untagged
@@ -13632,6 +14228,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2085787978}
   m_CullTransparentMesh: 1
+--- !u!114 &2085787982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085787978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
+  type: 6
+  invert: 0
+  addMore: {r: 0.1882353, g: 0.1882353, b: 0.1882353, a: 0}
+  reverseAdd: 0
 --- !u!1 &2131921991
 GameObject:
   m_ObjectHideFlags: 0

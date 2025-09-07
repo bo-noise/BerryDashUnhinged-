@@ -41,7 +41,8 @@ public class SettingsMenu : MonoBehaviour
             settingsMenu.SetActive(!settingsMenu.activeSelf);
             colorMenu.gameObject.SetActive(!colorMenu.gameObject.activeSelf);
             toggleButton.transform.GetChild(0).GetComponent<TMP_Text>().text = settingsMenu.activeSelf ? "Colors" : "Settings";
-            SwitchColorType(0);
+            SwitchColorType(3);
+            foreach (CustomColorObject customColorObject in FindObjectsByType<CustomColorObject>(FindObjectsSortMode.None)) customColorObject.SetColor();
         });
         switchColorTypeButton.onClick.AddListener(() => SwitchColorType());
 
@@ -100,21 +101,25 @@ public class SettingsMenu : MonoBehaviour
                 text.text = "Menu background color";
                 colorType = 1;
                 colorToSet = BazookaManager.Instance.GetColorSettingMenuBackground();
+                colorMenu.defaultColor = new(24f / 255f, 24f / 255f, 24f / 255f);
                 break;
             case 1: //MBGColor
                 text.text = "Button color";
                 colorType = 2;
                 colorToSet = BazookaManager.Instance.GetColorSettingButton();
+                colorMenu.defaultColor = new(1f, 1f, 1f);
                 break;
             case 2: //BColor
                 text.text = "Text color";
                 colorType = 3;
                 colorToSet = BazookaManager.Instance.GetColorSettingText();
+                colorMenu.defaultColor = new(1f, 1f, 1f);
                 break;
             case 3: //TColor
                 text.text = "In game background color";
                 colorType = 0;
                 colorToSet = BazookaManager.Instance.GetColorSettingBackground();
+                colorMenu.defaultColor = new(58f / 255f, 58f / 255f, 58f / 255f);
                 break;
         }
         colorCanSave = false;
