@@ -32,7 +32,6 @@ public class CustomColorObject : MonoBehaviour
 
     public void SetColor()
     {
-        dynamic obj = null;
         JArray color = null;
         Color colorType = Color.white;
         Color currentColor = Color.white;
@@ -43,7 +42,7 @@ public class CustomColorObject : MonoBehaviour
                 color = BazookaManager.Instance.GetColorSettingBackground();
                 colorType = new((int)color[0] / 255f, (int)color[1] / 255f, (int)color[2] / 255f);
                 colorType = ApplyModifiers(colorType);
-                obj = gameObject.GetComponent<Camera>();
+                var obj = gameObject.GetComponent<Camera>();
                 currentColor = obj.backgroundColor;
                 currentColor.r = colorType.r;
                 currentColor.g = colorType.g;
@@ -65,67 +64,67 @@ public class CustomColorObject : MonoBehaviour
                 color = BazookaManager.Instance.GetColorSettingMenuBackground();
                 colorType = new((int)color[0] / 255f, (int)color[1] / 255f, (int)color[2] / 255f);
                 colorType = ApplyModifiers(colorType);
-                obj = gameObject.GetComponent<Image>();
-                currentColor = obj.color;
+                var obj2 = gameObject.GetComponent<Image>();
+                currentColor = obj2.color;
                 currentColor.r = colorType.r;
                 currentColor.g = colorType.g;
                 currentColor.b = colorType.b;
-                obj.color = currentColor;
+                obj2.color = currentColor;
                 break;
             case ColorObjectType.MenuBackgroundColorText:
                 color = BazookaManager.Instance.GetColorSettingMenuBackground();
                 colorType = new((int)color[0] / 255f, (int)color[1] / 255f, (int)color[2] / 255f);
                 colorType = ApplyModifiers(colorType);
-                obj = gameObject.GetComponent<TMP_Text>();
-                currentColor = obj.color;
+                var obj3 = gameObject.GetComponent<TMP_Text>();
+                currentColor = obj3.color;
                 currentColor.r = colorType.r;
                 currentColor.g = colorType.g;
                 currentColor.b = colorType.b;
-                obj.color = currentColor;
+                obj3.color = currentColor;
                 break;
             case ColorObjectType.ButtonColor:
                 color = BazookaManager.Instance.GetColorSettingButton();
                 colorType = new((int)color[0] / 255f, (int)color[1] / 255f, (int)color[2] / 255f);
                 colorType = ApplyModifiers(colorType);
-                obj = gameObject.GetComponent<Image>();
-                currentColor = obj.color;
+                obj2 = gameObject.GetComponent<Image>();
+                currentColor = obj2.color;
                 currentColor.r = colorType.r;
                 currentColor.g = colorType.g;
                 currentColor.b = colorType.b;
-                obj.color = currentColor;
+                obj2.color = currentColor;
                 break;
             case ColorObjectType.ButtonColorText:
                 color = BazookaManager.Instance.GetColorSettingButton();
                 colorType = new((int)color[0] / 255f, (int)color[1] / 255f, (int)color[2] / 255f);
                 colorType = ApplyModifiers(colorType);
-                obj = gameObject.GetComponent<TMP_Text>();
-                currentColor = obj.color;
+                obj3 = gameObject.GetComponent<TMP_Text>();
+                currentColor = obj3.color;
                 currentColor.r = colorType.r;
                 currentColor.g = colorType.g;
                 currentColor.b = colorType.b;
-                obj.color = currentColor;
+                obj3.color = currentColor;
                 break;
             case ColorObjectType.TextColor:
                 color = BazookaManager.Instance.GetColorSettingText();
                 colorType = new((int)color[0] / 255f, (int)color[1] / 255f, (int)color[2] / 255f);
                 colorType = ApplyModifiers(colorType);
-                obj = gameObject.GetComponent<TMP_Text>();
-                currentColor = obj.color;
+                obj3 = gameObject.GetComponent<TMP_Text>();
+                currentColor = obj3.color;
                 currentColor.r = colorType.r;
                 currentColor.g = colorType.g;
                 currentColor.b = colorType.b;
-                obj.color = currentColor;
+                obj3.color = currentColor;
                 break;
             case ColorObjectType.TextColorImage:
                 color = BazookaManager.Instance.GetColorSettingText();
                 colorType = new((int)color[0] / 255f, (int)color[1] / 255f, (int)color[2] / 255f);
                 colorType = ApplyModifiers(colorType);
-                obj = gameObject.GetComponent<Image>();
-                currentColor = obj.color;
+                obj2 = gameObject.GetComponent<Image>();
+                currentColor = obj2.color;
                 currentColor.r = colorType.r;
                 currentColor.g = colorType.g;
                 currentColor.b = colorType.b;
-                obj.color = currentColor;
+                obj2.color = currentColor;
                 break;
         }
     }
