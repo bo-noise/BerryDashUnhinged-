@@ -227,7 +227,7 @@ public class ProfileMenu : MonoBehaviour
                         .GetLikedPosts()
                         .Select(x => x.ToString())
                         .ToList();
-                    if (!likedPosts.Any(x => x.ToString() == post.ID.ToString())) VotePost(post.ID, entryLikesCount);
+                    if (!likedPosts.Any(x => x.ToString() == post.ID.ToString())) VotePost(post.ID, entryLikesCount, entryLikesTexture);
                 }
             });
             entryMessage.text = Encoding.UTF8.GetString(Convert.FromBase64String(post.Content));
@@ -248,7 +248,7 @@ public class ProfileMenu : MonoBehaviour
         postButton.interactable = true;
     }
 
-    void VotePost(BigInteger postId, TMP_Text entryLikesCount)
+    void VotePost(BigInteger postId, TMP_Text entryLikesCount, TMP_Text entryLikesTexture)
     {
         var popup = Instantiate(voteOverlay, voteOverlay.transform.parent);
         popup.SetActive(true);
@@ -260,19 +260,19 @@ public class ProfileMenu : MonoBehaviour
         {
             canVote = false;
             Destroy(popup);
-            await SendPostVote(postId, true, entryLikesCount);
+            await SendPostVote(postId, true, entryLikesCount, entryLikesTexture);
             canVote = true;
         });
         dislikeButton.onClick.AddListener(async () =>
         {
             canVote = false;
             Destroy(popup);
-            await SendPostVote(postId, false, entryLikesCount);
+            await SendPostVote(postId, false, entryLikesCount, entryLikesTexture);
             canVote = true;
         });
     }
 
-    async Task SendPostVote(BigInteger postId, bool liked, TMP_Text entryLikesCount)
+    async Task SendPostVote(BigInteger postId, bool liked, TMP_Text entryLikesCount, TMP_Text entryLikesTexture)
     {
         EncryptedWWWForm dataForm = new();
         dataForm.AddField("targetId", postId.ToString());
@@ -294,7 +294,10 @@ public class ProfileMenu : MonoBehaviour
             var jsonResponse = JObject.Parse(response);
             if ((bool)jsonResponse["success"])
             {
-                entryLikesCount.text = Tools.FormatWithCommas((string)jsonResponse["likes"]);
+                BigInteger likes = BigInteger.Parse((string)jsonResponse["likes"]);
+                entryLikesCount.text = Tools.FormatWithCommas(likes);
+                entryLikesTexture.text = likes < 0 ? "\\uf165" : "\\uf164";
+                entryLikesTexture.color = likes < 0 ? new Color(1f, 0f, 0.5f) : new Color(1f, 1f, 0f);
                 var likedPosts = BazookaManager.Instance.GetLikedPosts();
                 likedPosts.Add(postId.ToString());
                 BazookaManager.Instance.SetLikedPosts(likedPosts);
