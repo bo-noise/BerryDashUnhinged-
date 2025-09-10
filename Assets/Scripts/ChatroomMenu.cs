@@ -9,7 +9,6 @@ using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ChatroomMenu : MonoBehaviour
@@ -28,6 +27,7 @@ public class ChatroomMenu : MonoBehaviour
     private bool shouldScrollToBottom = true;
     public Button downButton;
     private bool isPaused;
+    public ProfileMenu profilePrefab;
 
     public GameObject optionsPanel;
     public Button optionsPanelExitButton;
@@ -418,6 +418,7 @@ public class ChatroomMenu : MonoBehaviour
                     var bgImg = rowInfo.transform.GetChild(0).GetComponent<Image>();
                     var usernameText = rowInfo.transform.GetChild(1).GetComponent<TMP_Text>();
                     var playerIcon = rowInfo.transform.GetChild(2).GetComponent<Image>();
+                    var playerIconButton = rowInfo.transform.GetChild(2).GetComponent<Button>();
                     var playerOverlayIcon = playerIcon.transform.GetChild(0).GetComponent<Image>();
                     var messageText = rowInfo.transform.GetChild(3).GetComponent<TMP_Text>();
                     var optionsButton = rowInfo.transform.GetChild(4).GetComponent<Button>();
@@ -464,6 +465,12 @@ public class ChatroomMenu : MonoBehaviour
                         Tools.RenderFromBase64(customIcons[message.CustomIcon], playerIcon);
                         playerOverlayIcon.gameObject.SetActive(false);
                     }
+                    playerIconButton.onClick.AddListener(async () =>
+                    {
+                        var clone = Instantiate(profilePrefab.gameObject, profilePrefab.gameObject.transform.parent);
+                        clone.SetActive(true);
+                        await clone.GetComponent<ProfileMenu>().Init(message.UserID);
+                    });
                     optionsButton.onClick.AddListener(() => OptionsButtonClick(message, localUserId ?? 0));
                     rowInfo.name = "ChatroomRow_" + message.ID;
                     var entryComponet = rowInfo.AddComponent<ChatroomMenuEntry>();
