@@ -13,6 +13,7 @@ public class LeaderboardsMenu : MonoBehaviour
     public TMP_Text statusText;
     public Button backButton;
     public Button refreshButton;
+    public ProfileMenu profilePrefab;
 
     public GameObject selectionPanel;
     public Button selectionScoreButton;
@@ -257,6 +258,7 @@ public class LeaderboardsMenu : MonoBehaviour
                     var entryInfo = Instantiate(scoreSampleObject, scoreContent.transform);
                     var usernameText = entryInfo.transform.GetChild(0).GetComponent<TMP_Text>();
                     var playerIcon = usernameText.transform.GetChild(0).GetComponent<Image>();
+                    var playerIconButton = usernameText.transform.GetChild(0).GetComponent<Button>();
                     var playerOverlayIcon = playerIcon.transform.GetChild(0).GetComponent<Image>();
                     var highScoreText = entryInfo.transform.GetChild(1).GetComponent<TMP_Text>();
 
@@ -308,6 +310,12 @@ public class LeaderboardsMenu : MonoBehaviour
                         Tools.RenderFromBase64(customIcons[customIcon], playerIcon);
                         playerOverlayIcon.gameObject.SetActive(false);
                     }
+                    playerIconButton.onClick.AddListener(async () =>
+                    {
+                        var clone = Instantiate(profilePrefab.gameObject, profilePrefab.gameObject.transform.parent);
+                        clone.SetActive(true);
+                        await clone.GetComponent<ProfileMenu>().Init(uid);
+                    });
                     entryInfo.SetActive(true);
                 }
             }
@@ -385,6 +393,7 @@ public class LeaderboardsMenu : MonoBehaviour
                     var entryInfo = Instantiate(berrySampleObject, berryContent.transform);
                     var usernameText = entryInfo.transform.GetChild(0).GetComponent<TMP_Text>();
                     var playerIcon = usernameText.transform.GetChild(0).GetComponent<Image>();
+                    var playerIconButton = usernameText.transform.GetChild(0).GetComponent<Button>();
                     var playerOverlayIcon = playerIcon.transform.GetChild(0).GetComponent<Image>();
                     var highScoreText = entryInfo.transform.GetChild(1).GetComponent<TMP_Text>();
 
@@ -436,6 +445,12 @@ public class LeaderboardsMenu : MonoBehaviour
                         Tools.RenderFromBase64(customIcons[customIcon], playerIcon);
                         playerOverlayIcon.gameObject.SetActive(false);
                     }
+                    playerIconButton.onClick.AddListener(async () =>
+                    {
+                        var clone = Instantiate(profilePrefab.gameObject, profilePrefab.gameObject.transform.parent);
+                        clone.SetActive(true);
+                        await clone.GetComponent<ProfileMenu>().Init(uid);
+                    });
                     entryInfo.SetActive(true);
                 }
             }
@@ -512,6 +527,7 @@ public class LeaderboardsMenu : MonoBehaviour
                     var entryInfo = Instantiate(coinSampleObject, coinContent.transform);
                     var usernameText = entryInfo.transform.GetChild(0).GetComponent<TMP_Text>();
                     var playerIcon = usernameText.transform.GetChild(0).GetComponent<Image>();
+                    var playerIconButton = usernameText.transform.GetChild(0).GetComponent<Button>();
                     var playerOverlayIcon = playerIcon.transform.GetChild(0).GetComponent<Image>();
                     var highScoreText = entryInfo.transform.GetChild(1).GetComponent<TMP_Text>();
 
@@ -563,6 +579,12 @@ public class LeaderboardsMenu : MonoBehaviour
                         Tools.RenderFromBase64(customIcons[customIcon], playerIcon);
                         playerOverlayIcon.gameObject.SetActive(false);
                     }
+                    playerIconButton.onClick.AddListener(async () =>
+                    {
+                        var clone = Instantiate(profilePrefab.gameObject, profilePrefab.gameObject.transform.parent);
+                        clone.SetActive(true);
+                        await clone.GetComponent<ProfileMenu>().Init(uid);
+                    });
                     entryInfo.SetActive(true);
                 }
             }
@@ -638,6 +660,7 @@ public class LeaderboardsMenu : MonoBehaviour
                     var entryInfo = Instantiate(legacySampleObject, legacyContent.transform);
                     var usernameText = entryInfo.transform.GetChild(0).GetComponent<TMP_Text>();
                     var playerIcon = usernameText.transform.GetChild(0).GetComponent<Image>();
+                    var playerIconButton = usernameText.transform.GetChild(0).GetComponent<Button>();
                     var playerOverlayIcon = playerIcon.transform.GetChild(0).GetComponent<Image>();
                     var highScoreText = entryInfo.transform.GetChild(1).GetComponent<TMP_Text>();
 
@@ -689,6 +712,12 @@ public class LeaderboardsMenu : MonoBehaviour
                         Tools.RenderFromBase64(customIcons[customIcon], playerIcon);
                         playerOverlayIcon.gameObject.SetActive(false);
                     }
+                    playerIconButton.onClick.AddListener(async () =>
+                    {
+                        var clone = Instantiate(profilePrefab.gameObject, profilePrefab.gameObject.transform.parent);
+                        clone.SetActive(true);
+                        await clone.GetComponent<ProfileMenu>().Init(uid);
+                    });
                     entryInfo.SetActive(true);
                 }
             }
@@ -764,6 +793,7 @@ public class LeaderboardsMenu : MonoBehaviour
                     var entryInfo = Instantiate(totalBerriesSampleObject, totalBerriesContent.transform);
                     var usernameText = entryInfo.transform.GetChild(0).GetComponent<TMP_Text>();
                     var playerIcon = usernameText.transform.GetChild(0).GetComponent<Image>();
+                    var playerIconButton = usernameText.transform.GetChild(0).GetComponent<Button>();
                     var playerOverlayIcon = playerIcon.transform.GetChild(0).GetComponent<Image>();
                     var highScoreText = entryInfo.transform.GetChild(1).GetComponent<TMP_Text>();
 
@@ -815,6 +845,12 @@ public class LeaderboardsMenu : MonoBehaviour
                         Tools.RenderFromBase64(customIcons[customIcon], playerIcon);
                         playerOverlayIcon.gameObject.SetActive(false);
                     }
+                    playerIconButton.onClick.AddListener(async () =>
+                    {
+                        var clone = Instantiate(profilePrefab.gameObject, profilePrefab.gameObject.transform.parent);
+                        clone.SetActive(true);
+                        await clone.GetComponent<ProfileMenu>().Init(uid);
+                    });
                     entryInfo.SetActive(true);
                 }
             }
