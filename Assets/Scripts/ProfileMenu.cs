@@ -221,7 +221,7 @@ public class ProfileMenu : MonoBehaviour
             entryLikesCount.text = Tools.FormatWithCommas(post.Likes);
             entryLikesButton.onClick.AddListener(() =>
             {
-                if (canVote && BazookaManager.Instance.GetAccountID() != post.UserID)
+                if (canVote && BazookaManager.Instance.GetAccountID() != null && BazookaManager.Instance.GetAccountID() != post.UserID)
                 {
                     var likedPosts = BazookaManager.Instance
                         .GetLikedPosts()
