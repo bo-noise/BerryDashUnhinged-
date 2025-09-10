@@ -16,6 +16,8 @@ public class ProfileMenu : MonoBehaviour
     public Button refreshButton;
     public Button postButton;
 
+    public GameObject contentPanel;
+    public TMP_Text loadingText;
     public GameObject voteOverlay;
     public GameObject postOverlay;
 
@@ -109,9 +111,71 @@ public class ProfileMenu : MonoBehaviour
             postButton.onClick.AddListener(UploadPostPopup);
         }
 
+        contentPanel.SetActive(true);
+        loadingText.gameObject.SetActive(false);
+
         Tools.RefreshHierarchy(gameObject);
         refreshButton.onClick.AddListener(async () => await RefreshPosts(playerID, playerName));
         await RefreshPosts(playerID, playerName);
+    }
+
+    public async Task Init(BigInteger playerID)
+    {
+        EncryptedWWWForm dataForm = new();
+        dataForm.AddField("uesrId", playerID.ToString());
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getAccountProfile.php", dataForm.form);
+        request.SetRequestHeader("Requester", "BerryDashClient");
+        request.SetRequestHeader("ClientVersion", Application.version);
+        request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
+        await request.SendWebRequest();
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            return;
+        }
+        string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+        var jsonResponse = JObject.Parse(response);
+        if ((bool)jsonResponse["success"])
+        {
+            var totalNormalBerries = (string)jsonResponse["totalNormalBerries"];
+            var totalPoisonBerries = (string)jsonResponse["totalPoisonBerries"];
+            var totalSlowBerries = (string)jsonResponse["totalSlowBerries"];
+            var totalUltraBerries = (string)jsonResponse["totalUltraBerries"];
+            var totalSpeedyBerries = (string)jsonResponse["totalSpeedyBerries"];
+            var totalCoinBerries = (string)jsonResponse["totalCoinBerries"];
+            var totalRandomBerries = (string)jsonResponse["totalRandomBerries"];
+            var totalAntiBerries = (string)jsonResponse["totalAntiBerries"];
+            var coins = (string)jsonResponse["coins"];
+            var name = (string)jsonResponse["name"];
+            var icon = (int)jsonResponse["icon"];
+            var overlay = (int)jsonResponse["overlay"];
+            var customIcon = (string)jsonResponse["customIcon"];
+            var playerIconColorArray = JArray.Parse(jsonResponse["playerIconColor"].ToString());
+            var playerIconColor = new Color((int)playerIconColorArray[0] / 255f, (int)playerIconColorArray[1] / 255f, (int)playerIconColorArray[2] / 255f);
+            var playerOverlayColorArray = JArray.Parse(jsonResponse["playerOverlayColor"].ToString());
+            var playerOverlayColor = new Color((int)playerOverlayColorArray[0] / 255f, (int)playerOverlayColorArray[1] / 255f, (int)playerOverlayColorArray[2] / 255f);
+            await Init(
+                totalNormalBerries,
+                totalPoisonBerries,
+                totalSlowBerries,
+                totalUltraBerries,
+                totalSpeedyBerries,
+                totalCoinBerries,
+                totalRandomBerries,
+                totalAntiBerries,
+                coins,
+                name,
+                playerID,
+                icon,
+                overlay,
+                customIcon,
+                playerIconColor,
+                playerOverlayColor
+            );
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     async Task RefreshPosts(BigInteger playerID, string playerName)
