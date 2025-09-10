@@ -404,6 +404,19 @@ public class BazookaManager : MonoBehaviour
         Save();
     }
 
+    //Random stuff
+
+    public void SetLikedPosts(JArray value)
+    {
+        saveFile["likedPosts"] = value;
+    }
+
+    public JArray GetLikedPosts()
+    {
+        if (saveFile["likedPosts"] == null) return new JArray();
+        return JArray.Parse(saveFile["likedPosts"].ToString());
+    }
+
     //Bird stuff
 
     public void SetBirdIcon(int value)
