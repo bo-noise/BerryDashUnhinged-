@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/AccountMenu.unity
     guid: 61d560f45a39646489a33d9e871b5336
   - enabled: 1
+    path: Assets/Scenes/CustomGamePlayer.unity
+    guid: a34b74c5a1fc341178b14476e39597b3
+  - enabled: 1
     path: Assets/Scenes/ChatroomMenu.unity
     guid: 6d51f8ef1f7d4f01a8416e468a7ed278
   - enabled: 1
@@ -29,6 +32,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LeaderboardMenu.unity
     guid: 7cac5956257281848842dff97b10124b
+  - enabled: 1
+    path: Assets/Scenes/PlayMenu.unity
+    guid: 0d0c0e097b9d840f4b43c29611fc27e1
   - enabled: 1
     path: Assets/Scenes/SettingsMenu.unity
     guid: 82b6fbd13818d174fbcda658514d0cf4
