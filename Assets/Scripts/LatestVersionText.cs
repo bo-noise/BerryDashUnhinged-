@@ -20,7 +20,10 @@ public class LatestVersionText : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
 
+    void Start()
+    {
         if (updateButton != null)
         {
             updateButton.onClick.AddListener(() =>
@@ -28,10 +31,6 @@ public class LatestVersionText : MonoBehaviour
                 Application.OpenURL("https://berrydash.lncvrt.xyz/download");
             });
         }
-    }
-
-    void Start()
-    {
         RefreshText();
         if (latest == null) GetLatestVersion();
     }
