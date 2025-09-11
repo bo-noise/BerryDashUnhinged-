@@ -45,6 +45,7 @@ public class BazookaManager : MonoBehaviour
 
     public void Load()
     {
+        if (SensitiveInfo.BAZOOKA_MANAGER_KEY.Trim().Length == 0 || SensitiveInfo.BAZOOKA_MANAGER_FILE_KEY.Trim().Length == 0) return;
         string path = Path.Join(Application.persistentDataPath, SensitiveInfo.BAZOOKA_MANAGER_FILE_KEY + ".dat");
         if (!File.Exists(path))
         {
@@ -386,6 +387,7 @@ public class BazookaManager : MonoBehaviour
 #if UNITY_EDITOR
         return;
 #else
+        if (SensitiveInfo.BAZOOKA_MANAGER_KEY.Trim().Length == 0 || SensitiveInfo.BAZOOKA_MANAGER_FILE_KEY.Trim().Length == 0) return;
         string path = Path.Join(Application.persistentDataPath, SensitiveInfo.BAZOOKA_MANAGER_FILE_KEY + ".dat");
         var encoded = SensitiveInfo.EncryptRaw(saveFile.ToString(Newtonsoft.Json.Formatting.None), SensitiveInfo.BAZOOKA_MANAGER_KEY);
         if (encoded == null) return;
