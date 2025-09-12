@@ -88,6 +88,7 @@ public class PlayMenu : MonoBehaviour
             customBackButton.interactable = false;
             customPlayButton.interactable = false;
             poisonBerryChance.text = value.Replace("%", "");
+            poisonBerryChance.stringPosition = poisonBerryChance.text.Length;
         });
         poisonBerryChance.onDeselect.AddListener((value) =>
         {
@@ -105,6 +106,7 @@ public class PlayMenu : MonoBehaviour
             customBackButton.interactable = false;
             customPlayButton.interactable = false;
             slowBerryChance.text = value.Replace("%", "");
+            slowBerryChance.stringPosition = slowBerryChance.text.Length;
         });
         slowBerryChance.onDeselect.AddListener((value) =>
         {
@@ -122,6 +124,7 @@ public class PlayMenu : MonoBehaviour
             customBackButton.interactable = false;
             customPlayButton.interactable = false;
             ultraBerryChance.text = value.Replace("%", "");
+            ultraBerryChance.stringPosition = ultraBerryChance.text.Length;
         });
         ultraBerryChance.onDeselect.AddListener((value) =>
         {
@@ -139,6 +142,7 @@ public class PlayMenu : MonoBehaviour
             customBackButton.interactable = false;
             customPlayButton.interactable = false;
             speedyBerryChance.text = value.Replace("%", "");
+            speedyBerryChance.stringPosition = speedyBerryChance.text.Length;
         });
         speedyBerryChance.onDeselect.AddListener((value) =>
         {
@@ -156,6 +160,7 @@ public class PlayMenu : MonoBehaviour
             customBackButton.interactable = false;
             customPlayButton.interactable = false;
             randomBerryChance.text = value.Replace("%", "");
+            randomBerryChance.stringPosition = randomBerryChance.text.Length;
         });
         randomBerryChance.onDeselect.AddListener((value) =>
         {
@@ -173,6 +178,7 @@ public class PlayMenu : MonoBehaviour
             customBackButton.interactable = false;
             customPlayButton.interactable = false;
             antiBerryChance.text = value.Replace("%", "");
+            antiBerryChance.stringPosition = antiBerryChance.text.Length;
         });
         antiBerryChance.onDeselect.AddListener((value) =>
         {
