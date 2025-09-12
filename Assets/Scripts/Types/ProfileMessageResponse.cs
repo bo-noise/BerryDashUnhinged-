@@ -3,7 +3,8 @@ using Newtonsoft.Json;
 using System.Numerics;
 
 [Preserve]
-public class ProfileMessageResponse  {
+public class ProfileMessageResponse
+{
   [Preserve]
   [JsonProperty("id")]
   public BigInteger ID { get; set; }

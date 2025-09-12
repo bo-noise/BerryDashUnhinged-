@@ -96,7 +96,7 @@ public class SettingsMenu : MonoBehaviour
     {
         var type = color == -1 ? colorType : color;
         var text = colorMenu.transform.GetChild(0).GetComponent<TMP_Text>();
-        var colorToSet = new JArray(255, 255, 255);;
+        var colorToSet = new JArray(255, 255, 255);
         switch (type)
         {
             case 0: //IGBGColor

@@ -200,7 +200,8 @@ public class ChatroomMenu : MonoBehaviour
             optionsPanel.SetActive(false);
             editMessage.SetActive(true);
         });
-        optionsPanelReportButton.onClick.AddListener(() => {
+        optionsPanelReportButton.onClick.AddListener(() =>
+        {
             reportMessagePanelReportReason.text = "";
             optionsPanel.SetActive(false);
             reportMessagePanel.SetActive(true);

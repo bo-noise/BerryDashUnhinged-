@@ -460,7 +460,7 @@ public class BazookaManager : MonoBehaviour
         if (saveFile["bird"]["overlay"] == null) return 0;
         return int.Parse(saveFile["bird"]["overlay"].ToString());
     }
-    
+
     public void SetCustomBirdIconData(MarketplaceIconStorageType value)
     {
         if (saveFile["bird"] == null) saveFile["bird"] = new JObject();

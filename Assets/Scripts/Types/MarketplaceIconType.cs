@@ -3,7 +3,8 @@ using Newtonsoft.Json;
 using System.Numerics;
 
 [Preserve]
-public class MarketplaceIconType {
+public class MarketplaceIconType
+{
   [Preserve]
   [JsonProperty("username")]
   public string CreatorUsername { get; set; }

@@ -206,18 +206,18 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
                         btnText.text = "Claimed";
                     }
                 }
+                else
+                {
+                    btn.onClick.AddListener(() => HandlePurchase(entry, btn, localUserID));
+                    if (localUserID != entry.CreatorUserID)
+                    {
+                        btnText.text = "Purchase";
+                    }
                     else
                     {
-                        btn.onClick.AddListener(() => HandlePurchase(entry, btn, localUserID));
-                        if (localUserID != entry.CreatorUserID)
-                        {
-                            btnText.text = "Purchase";
-                        }
-                        else
-                        {
-                            btnText.text = "Claim";
-                        }
+                        btnText.text = "Claim";
                     }
+                }
 
                 newIcon.SetActive(true);
             }

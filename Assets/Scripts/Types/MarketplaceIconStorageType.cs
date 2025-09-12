@@ -2,7 +2,8 @@ using System;
 using System.Numerics;
 using Newtonsoft.Json;
 
-public class MarketplaceIconStorageType {
+public class MarketplaceIconStorageType
+{
   [JsonProperty("selected")]
   public string Selected { get; set; } = null;
   [JsonProperty("balance")]

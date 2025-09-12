@@ -389,7 +389,7 @@ public class CustomGamePlayer : MonoBehaviour
                 newBerry.tag = "AntiBerry";
                 goto finish;
             }
-            finish:
+        finish:
             spriteRenderer.sortingOrder = -5;
 
             float screenWidth = Camera.main.orthographicSize * 2 * Camera.main.aspect;

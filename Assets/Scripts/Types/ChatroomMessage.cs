@@ -3,7 +3,8 @@ using Newtonsoft.Json;
 using System.Numerics;
 
 [Preserve]
-public class ChatroomMessage {
+public class ChatroomMessage
+{
   [Preserve]
   [JsonProperty("username")]
   public string Username { get; set; }
