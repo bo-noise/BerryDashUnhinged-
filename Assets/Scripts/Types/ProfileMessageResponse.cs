@@ -1,6 +1,6 @@
-using UnityEngine.Scripting;
-using Newtonsoft.Json;
 using System.Numerics;
+using Newtonsoft.Json;
+using UnityEngine.Scripting;
 
 [Preserve]
 public class ProfileMessageResponse
