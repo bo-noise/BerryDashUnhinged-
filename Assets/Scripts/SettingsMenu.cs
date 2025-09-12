@@ -55,30 +55,30 @@ public class SettingsMenu : MonoBehaviour
             setting3toggle.isOn = BazookaManager.Instance.GetSettingVsync() == true;
             setting4toggle.isOn = BazookaManager.Instance.GetSettingHideSocials() == true;
             setting5toggle.isOn = BazookaManager.Instance.GetSettingRandomMusic() == true;
+            setting1toggle.onValueChanged.AddListener(value =>
+            {
+                BazookaManager.Instance.SetSettingFullScreen(value);
+                var width = Display.main.systemWidth;
+                var height = Display.main.systemHeight;
+                Screen.SetResolution(width, height, value);
+            });
+            setting3toggle.onValueChanged.AddListener(value =>
+            {
+                BazookaManager.Instance.SetSettingVsync(value);
+                QualitySettings.vSyncCount = value ? 1 : -1;
+            });
         }
         else
         {
-            setting1toggle.interactable = false;
+            setting1toggle.gameObject.SetActive(false);
             setting2toggle.isOn = BazookaManager.Instance.GetSettingShowFPS() == true;
-            setting3toggle.interactable = false;
+            setting3toggle.gameObject.SetActive(false);
             setting4toggle.isOn = BazookaManager.Instance.GetSettingHideSocials() == true;
             setting5toggle.isOn = BazookaManager.Instance.GetSettingRandomMusic() == true;
         }
-        setting1toggle.onValueChanged.AddListener(value =>
-        {
-            BazookaManager.Instance.SetSettingFullScreen(value);
-            var width = Display.main.systemWidth;
-            var height = Display.main.systemHeight;
-            Screen.SetResolution(width, height, value);
-        });
         setting2toggle.onValueChanged.AddListener(value =>
         {
             BazookaManager.Instance.SetSettingShowFPS(value);
-        });
-        setting3toggle.onValueChanged.AddListener(value =>
-        {
-            BazookaManager.Instance.SetSettingVsync(value);
-            QualitySettings.vSyncCount = value ? 1 : -1;
         });
         setting4toggle.onValueChanged.AddListener(value => BazookaManager.Instance.SetSettingHideSocials(value));
         setting5toggle.onValueChanged.AddListener(value => BazookaManager.Instance.SetSettingRandomMusic(value));
@@ -88,6 +88,7 @@ public class SettingsMenu : MonoBehaviour
             MenuMusic.Instance.GetComponent<AudioSource>().volume = value;
         });
         sfxSlider.onValueChanged.AddListener(value => BazookaManager.Instance.SetSettingSFXVolume(value));
+        Tools.RefreshHierarchy(setting1toggle.transform.parent.gameObject);
     }
 
     void SwitchColorType(int color = -1)
