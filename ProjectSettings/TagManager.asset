@@ -12,6 +12,7 @@ TagManager:
   - CoinBerry
   - RandomBerry
   - AntiBerry
+  - NothingBerry
   layers:
   - Default
   - TransparentFX

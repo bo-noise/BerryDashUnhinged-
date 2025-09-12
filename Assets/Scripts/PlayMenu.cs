@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class PlayMenu : MonoBehaviour
 {
-    private static WaitForSeconds _waitForSeconds7 = new WaitForSeconds(7);
-    private static WaitForSeconds _waitForSeconds3 = new WaitForSeconds(3);
+    private static WaitForSeconds _waitForSeconds7 = new(7);
+    private static WaitForSeconds _waitForSeconds3 = new(3);
     public GameObject selectionMenu;
     public GameObject customMenu;
     public Button customButton;
@@ -22,6 +22,7 @@ public class PlayMenu : MonoBehaviour
     public TMP_InputField speedyBerryChance;
     public TMP_InputField randomBerryChance;
     public TMP_InputField antiBerryChance;
+    public TMP_InputField nothingBerryChance;
 
     public TMP_Text validateTotalText;
 
@@ -48,6 +49,7 @@ public class PlayMenu : MonoBehaviour
             speedyBerryChance.text = "10%";
             randomBerryChance.text = "5%";
             antiBerryChance.text = "5%";
+            nothingBerryChance.text = "0%";
             ValidateTotal();
         });
         customPlayButton.onClick.AddListener(async () =>
@@ -62,6 +64,7 @@ public class PlayMenu : MonoBehaviour
             customGameTempData.speedyBerryChance = float.Parse(speedyBerryChance.text.Replace("%", "").Trim());
             customGameTempData.randomBerryChance = float.Parse(randomBerryChance.text.Replace("%", "").Trim());
             customGameTempData.antiBerryChance = float.Parse(antiBerryChance.text.Replace("%", "").Trim());
+            customGameTempData.nothingBerryChance = float.Parse(nothingBerryChance.text.Replace("%", "").Trim());
             await SceneManager.LoadSceneAsync("CustomGamePlayer");
         });
 
@@ -190,6 +193,24 @@ public class PlayMenu : MonoBehaviour
             customBackButton.interactable = true;
             ValidateTotal();
         });
+        nothingBerryChance.onSelect.AddListener((value) =>
+        {
+            validateTotalText.gameObject.SetActive(false);
+            customBackButton.interactable = false;
+            customPlayButton.interactable = false;
+            nothingBerryChance.text = value.Replace("%", "");
+            nothingBerryChance.stringPosition = nothingBerryChance.text.Length;
+        });
+        nothingBerryChance.onDeselect.AddListener((value) =>
+        {
+            if (float.TryParse(value, out var value2) && value2 < 0f)
+            {
+                value = "0";
+            }
+            nothingBerryChance.text = value + "%";
+            customBackButton.interactable = true;
+            ValidateTotal();
+        });
         jumpscareButton.onClick.AddListener(() =>
         {
             jumpscareButton.GetComponent<Image>().color = Color.red;
@@ -211,6 +232,7 @@ public class PlayMenu : MonoBehaviour
             total += float.Parse(speedyBerryChance.text.Replace("%", ""));
             total += float.Parse(randomBerryChance.text.Replace("%", ""));
             total += float.Parse(antiBerryChance.text.Replace("%", ""));
+            total += float.Parse(nothingBerryChance.text.Replace("%", ""));
         }
         catch (Exception)
         {

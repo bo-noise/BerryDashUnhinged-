@@ -552,7 +552,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &164218987
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1385,7 +1385,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 658.25, y: 45.01}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &459138108
 MonoBehaviour:
@@ -2192,6 +2192,7 @@ MonoBehaviour:
   speedyBerryChance: {fileID: 1878332340}
   randomBerryChance: {fileID: 2018765150}
   antiBerryChance: {fileID: 1230511725}
+  nothingBerryChance: {fileID: 830548777}
   validateTotalText: {fileID: 598155839}
   jumpscareImage: {fileID: 972157958}
   jumpscareAudio: {fileID: 1202270393}
@@ -3392,7 +3393,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 5%
+  m_Text: 0%
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -5052,7 +5053,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: 400.43, y: 70.01}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1447186681
 MonoBehaviour:
@@ -6074,7 +6075,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1723463929
 RectTransform:
   m_ObjectHideFlags: 0
