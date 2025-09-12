@@ -42,7 +42,7 @@ public class SettingsMenu : MonoBehaviour
             settingsMenu.SetActive(!settingsMenu.activeSelf);
             colorMenu.gameObject.SetActive(!colorMenu.gameObject.activeSelf);
             toggleButton.transform.GetChild(0).GetComponent<TMP_Text>().text = settingsMenu.activeSelf ? "Colors" : "Settings";
-            SwitchColorType(3);
+            SwitchColorType(4);
             foreach (CustomColorObject customColorObject in FindObjectsByType<CustomColorObject>(FindObjectsSortMode.None)) customColorObject.SetColor();
         });
         switchColorTypeButton.onClick.AddListener(() => SwitchColorType());
