@@ -268,8 +268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &485090444

@@ -32,7 +32,8 @@ public class SettingsMenu : MonoBehaviour
             if (colorType == 0) BazookaManager.Instance.SetColorSettingBackground(color);
             else if (colorType == 1) BazookaManager.Instance.SetColorSettingMenuBackground(color);
             else if (colorType == 2) BazookaManager.Instance.SetColorSettingButton(color);
-            else if (colorType == 3) BazookaManager.Instance.SetColorSettingText(color);
+            else if (colorType == 3) BazookaManager.Instance.SetColorSettingButtonContent(color);
+            else if (colorType == 4) BazookaManager.Instance.SetColorSettingText(color);
 
             foreach (CustomColorObject customColorObject in FindObjectsByType<CustomColorObject>(FindObjectsSortMode.None)) customColorObject.SetColor();
         };
@@ -110,13 +111,19 @@ public class SettingsMenu : MonoBehaviour
                 colorToSet = BazookaManager.Instance.GetColorSettingButton();
                 colorMenu.defaultColor = new(1f, 1f, 1f);
                 break;
-            case 2: //BColor
-                text.text = "Text color";
+            case 2: //BCColor
+                text.text = "Button content color";
                 colorType = 3;
+                colorToSet = BazookaManager.Instance.GetColorSettingButtonContent();
+                colorMenu.defaultColor = new(0f, 0f, 0f);
+                break;
+            case 3: //TColor
+                text.text = "Text color";
+                colorType = 4;
                 colorToSet = BazookaManager.Instance.GetColorSettingText();
                 colorMenu.defaultColor = new(1f, 1f, 1f);
                 break;
-            case 3: //TColor
+            case 4: //IGColor
                 text.text = "In game background color";
                 colorType = 0;
                 colorToSet = BazookaManager.Instance.GetColorSettingBackground();

@@ -634,6 +634,21 @@ public class BazookaManager : MonoBehaviour
         return JArray.Parse(saveFile["settings"]["colors"]["text"].ToString());
     }
 
+    public void SetColorSettingButtonContent(JArray value)
+    {
+        if (saveFile["settings"] == null) saveFile["settings"] = new JObject();
+        if (saveFile["settings"]["colors"] == null) saveFile["settings"]["colors"] = new JObject();
+        saveFile["settings"]["colors"]["buttonColor"] = value;
+    }
+
+    public JArray GetColorSettingButtonContent()
+    {
+        if (saveFile["settings"] == null) return new JArray(0, 0, 0);
+        if (saveFile["settings"]["colors"] == null) return new JArray(0, 0, 0);
+        if (saveFile["settings"]["colors"]["buttonColor"] == null) return new JArray(0, 0, 0);
+        return JArray.Parse(saveFile["settings"]["colors"]["buttonColor"].ToString());
+    }
+
     public void SetColorSettingIcon(JArray value)
     {
         if (saveFile["settings"] == null) saveFile["settings"] = new JObject();

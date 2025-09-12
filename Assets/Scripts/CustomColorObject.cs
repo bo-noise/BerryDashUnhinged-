@@ -126,6 +126,28 @@ public class CustomColorObject : MonoBehaviour
                 currentColor.b = colorType.b;
                 obj2.color = currentColor;
                 break;
+            case ColorObjectType.ButtonContentColorImage:
+                color = BazookaManager.Instance.GetColorSettingButtonContent();
+                colorType = new((int)color[0] / 255f, (int)color[1] / 255f, (int)color[2] / 255f);
+                colorType = ApplyModifiers(colorType);
+                obj2 = gameObject.GetComponent<Image>();
+                currentColor = obj2.color;
+                currentColor.r = colorType.r;
+                currentColor.g = colorType.g;
+                currentColor.b = colorType.b;
+                obj2.color = currentColor;
+                break;
+            case ColorObjectType.ButtonContentColorText:
+                color = BazookaManager.Instance.GetColorSettingButtonContent();
+                colorType = new((int)color[0] / 255f, (int)color[1] / 255f, (int)color[2] / 255f);
+                colorType = ApplyModifiers(colorType);
+                obj3 = gameObject.GetComponent<TMP_Text>();
+                currentColor = obj3.color;
+                currentColor.r = colorType.r;
+                currentColor.g = colorType.g;
+                currentColor.b = colorType.b;
+                obj3.color = currentColor;
+                break;
         }
     }
 

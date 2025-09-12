@@ -421,8 +421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &36575983
@@ -657,8 +657,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &47913144
@@ -831,8 +831,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &49296034
@@ -1068,8 +1068,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &93780118
@@ -1273,8 +1273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &164861578
@@ -1564,8 +1564,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &191793695
@@ -1717,8 +1717,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &195389080
@@ -2023,8 +2023,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &224445732
@@ -2412,8 +2412,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &301439474
@@ -2565,8 +2565,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &309067085
@@ -3065,8 +3065,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &334774823
@@ -3239,8 +3239,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &387595459
@@ -3573,8 +3573,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &501899885
@@ -4017,8 +4017,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &637228391
@@ -4365,8 +4365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &656413808
@@ -5226,8 +5226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &720281943
@@ -5605,8 +5605,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &750272023
@@ -6481,8 +6481,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &863124076
@@ -6634,8 +6634,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &879955348
@@ -6787,8 +6787,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &887262934
@@ -7443,8 +7443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &993207783
@@ -7617,8 +7617,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1013882792
@@ -7770,8 +7770,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1027629208
@@ -8334,8 +8334,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1086714074
@@ -8644,8 +8644,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1094007097
@@ -8899,8 +8899,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1109380279
@@ -9052,8 +9052,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1132893453
@@ -9343,8 +9343,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1181315892
@@ -9554,8 +9554,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1212242845
@@ -9912,8 +9912,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1290315521
@@ -10065,8 +10065,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1293982783
@@ -10218,8 +10218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1296377148
@@ -10392,8 +10392,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1314209911
@@ -10545,8 +10545,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1323393719
@@ -10719,8 +10719,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1325175326
@@ -10893,8 +10893,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1358307032
@@ -11236,8 +11236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1423757739
@@ -11389,8 +11389,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1437636619
@@ -11789,8 +11789,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1526404193
@@ -12531,8 +12531,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1572018537
@@ -12908,8 +12908,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1644648865
@@ -13218,8 +13218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1724546899
@@ -13805,8 +13805,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1799549041
@@ -14800,8 +14800,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1880819782
@@ -15344,8 +15344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1922197375
@@ -15549,8 +15549,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1963173385
@@ -15702,8 +15702,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1990658861
@@ -15876,8 +15876,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b30df2b3a7144b99b75ce70168fd50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomColorObject
-  type: 4
-  invert: 1
+  type: 9
+  invert: 0
   addMore: {r: 0, g: 0, b: 0, a: 0}
   reverseAdd: 0
 --- !u!1 &1993836201

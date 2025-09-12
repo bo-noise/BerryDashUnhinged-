@@ -7,5 +7,7 @@ public enum ColorObjectType
     TextColor,
     TextColorImage,
     MenuBackgroundColorImage,
-    MenuBackgroundColorText
+    MenuBackgroundColorText,
+    ButtonContentColorImage,
+    ButtonContentColorText
 }
