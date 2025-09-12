@@ -174,6 +174,7 @@ public class AccountLoggedIn : MonoBehaviour
                     QualitySettings.vSyncCount = 0;
                 }
                 MenuMusic.Instance.GetComponent<AudioSource>().volume = BazookaManager.Instance.GetSettingMusicVolume();
+                foreach (CustomColorObject customColorObject in FindObjectsByType<CustomColorObject>(FindObjectsSortMode.None)) customColorObject.SetColor();
                 Tools.UpdateStatusText(loggedInText, "Loaded account data", Color.green);
             }
             else
