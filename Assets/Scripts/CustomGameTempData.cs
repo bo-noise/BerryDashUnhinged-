@@ -9,6 +9,7 @@ public class CustomGameTempData : MonoBehaviour
     public float speedyBerryChance;
     public float randomBerryChance;
     public float antiBerryChance;
+    public float nothingBerryChance;
 
     void Awake()
     {
