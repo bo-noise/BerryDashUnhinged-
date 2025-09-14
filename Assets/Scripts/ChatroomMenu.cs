@@ -237,7 +237,7 @@ public class ChatroomMenu : MonoBehaviour
 
     async Task HandleMessageSubmit()
     {
-        if (!sendButton.interactable) return;
+        if (!sendButton.interactable || messageInputField.text.Trim().Length == 0) return;
         backButton.interactable = false;
         var text = messageInputField.text.Clone() as string;
         messageInputField.text = string.Empty;
@@ -263,27 +263,19 @@ public class ChatroomMenu : MonoBehaviour
         string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
         if (response == "-999")
         {
-            backButton.interactable = true;
             ShowStatus("Server error while fetching data");
-            return;
         }
         else if (response == "-998")
         {
-            backButton.interactable = true;
             ShowStatus("Client version too outdated to access servers");
-            return;
         }
         else if (response == "-997")
         {
-            backButton.interactable = true;
             ShowStatus("Encryption/decryption issues");
-            return;
         }
         else if (response == "-996")
         {
-            backButton.interactable = true;
             ShowStatus("Can't send requests on self-built instance");
-            return;
         }
         else
         {
