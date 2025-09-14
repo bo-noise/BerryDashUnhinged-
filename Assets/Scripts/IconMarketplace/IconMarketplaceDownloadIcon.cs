@@ -274,6 +274,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
             list.Remove(owned);
             marketplaceIconStorage.Data = list.ToArray();
             marketplaceIconStorage.Balance += data.Price;
+            if (data.UUID == marketplaceIconStorage.Selected) marketplaceIconStorage.Selected = null;
             iconPurchaseSound.Stop();
             iconPurchaseSound.Play();
             balanceText.text = "You have " + Tools.FormatWithCommas(marketplaceIconStorage.Balance) + " coins to spend";
