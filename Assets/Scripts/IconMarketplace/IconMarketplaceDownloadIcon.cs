@@ -190,36 +190,41 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
                 newIcon.transform.GetChild(2).GetComponent<TMP_Text>().text = "Price " + Tools.FormatWithCommas(entry.Price) + " coins";
                 newIcon.transform.GetChild(3).GetComponent<TMP_Text>().text = "Designer Name: " + entry.CreatorUsername;
 
-                var btn = newIcon.transform.GetChild(4).GetComponent<Button>();
-                var btnText = btn.transform.GetChild(0).GetComponent<TMP_Text>();
+                var btnGrid = newIcon.transform.GetChild(4);
+                var buybtn = btnGrid.transform.GetChild(0).GetComponent<Button>();
+                var sellbtn = btnGrid.transform.GetChild(1).GetComponent<Button>();
+                var buyttnText = buybtn.transform.GetChild(0).GetComponent<TMP_Text>();
 
+                sellbtn.onClick.AddListener(() => HandleSell(entry, buybtn, buyttnText, sellbtn, localUserID));
+                buybtn.onClick.AddListener(() => HandlePurchase(entry, buybtn, sellbtn, localUserID));
                 bool alreadyBought = BazookaManager.Instance.GetCustomBirdIconData().Data.Any(d => d.UUID == entry.UUID);
                 if (alreadyBought)
                 {
-                    btn.interactable = false;
+                    buybtn.interactable = false;
                     if (localUserID != entry.CreatorUserID)
                     {
-                        btnText.text = "Purchased";
+                        buyttnText.text = "Purchased";
+                        sellbtn.gameObject.SetActive(true);
                     }
                     else
                     {
-                        btnText.text = "Claimed";
+                        buyttnText.text = "Claimed";
                     }
                 }
                 else
                 {
-                    btn.onClick.AddListener(() => HandlePurchase(entry, btn, localUserID));
                     if (localUserID != entry.CreatorUserID)
                     {
-                        btnText.text = "Purchase";
+                        buyttnText.text = "Purchase";
                     }
                     else
                     {
-                        btnText.text = "Claim";
+                        buyttnText.text = "Claim";
                     }
                 }
 
                 newIcon.SetActive(true);
+                Tools.RefreshHierarchy(btnGrid.gameObject);
             }
         }
         refreshButton.interactable = true;
@@ -227,7 +232,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         backButton.interactable = true;
     }
 
-    void HandlePurchase(MarketplaceIconType data, Button button, BigInteger? localUserID)
+    void HandlePurchase(MarketplaceIconType data, Button button, Button sellButton, BigInteger? localUserID)
     {
         button.interactable = false;
         MarketplaceIconStorageType marketplaceIconStorage = BazookaManager.Instance.GetCustomBirdIconData();
@@ -249,6 +254,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         if (localUserID != data.CreatorUserID)
         {
             button.transform.GetChild(0).GetComponent<TMP_Text>().text = "Purchased";
+            sellButton.gameObject.SetActive(true);
         }
         else
         {
@@ -256,6 +262,33 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         }
         balanceText.text = "You have " + Tools.FormatWithCommas(marketplaceIconStorage.Balance) + " coins to spend";
         BazookaManager.Instance.SetCustomBirdIconData(marketplaceIconStorage);
+    }
+
+    void HandleSell(MarketplaceIconType data, Button buyBtn, TMP_Text buyttnText, Button sellButton, BigInteger? localUserID)
+    {
+        MarketplaceIconStorageType marketplaceIconStorage = BazookaManager.Instance.GetCustomBirdIconData();
+        var list = marketplaceIconStorage.Data.ToList();
+        var owned = list.FirstOrDefault(d => d.UUID == data.UUID);
+        if (owned != null)
+        {
+            list.Remove(owned);
+            marketplaceIconStorage.Data = list.ToArray();
+            marketplaceIconStorage.Balance += data.Price;
+            iconPurchaseSound.Stop();
+            iconPurchaseSound.Play();
+            balanceText.text = "You have " + Tools.FormatWithCommas(marketplaceIconStorage.Balance) + " coins to spend";
+            BazookaManager.Instance.SetCustomBirdIconData(marketplaceIconStorage);
+            if (localUserID != data.CreatorUserID)
+            {
+                buyttnText.text = "Purchase";
+            }
+            else
+            {
+                buyttnText.text = "Claim";
+            }
+            buyBtn.interactable = true;
+            sellButton.gameObject.SetActive(false);
+        }
     }
 
     void ShowStatus(string content)
