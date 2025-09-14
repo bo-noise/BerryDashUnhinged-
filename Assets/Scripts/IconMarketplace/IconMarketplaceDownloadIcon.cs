@@ -195,8 +195,16 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
                 var sellbtn = btnGrid.transform.GetChild(1).GetComponent<Button>();
                 var buyttnText = buybtn.transform.GetChild(0).GetComponent<TMP_Text>();
 
-                sellbtn.onClick.AddListener(() => HandleSell(entry, buybtn, buyttnText, sellbtn, localUserID));
-                buybtn.onClick.AddListener(() => HandlePurchase(entry, buybtn, sellbtn, localUserID));
+                sellbtn.onClick.AddListener(() =>
+                {
+                    HandleSell(entry, buybtn, buyttnText, sellbtn, localUserID);
+                    Tools.RefreshHierarchy(newIcon);
+                });
+                buybtn.onClick.AddListener(() =>
+                {
+                    HandlePurchase(entry, buybtn, sellbtn, localUserID);
+                    Tools.RefreshHierarchy(newIcon);
+                });
                 bool alreadyBought = BazookaManager.Instance.GetCustomBirdIconData().Data.Any(d => d.UUID == entry.UUID);
                 if (alreadyBought)
                 {
@@ -224,7 +232,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
                 }
 
                 newIcon.SetActive(true);
-                Tools.RefreshHierarchy(btnGrid.gameObject);
+                Tools.RefreshHierarchy(newIcon);
             }
         }
         refreshButton.interactable = true;
