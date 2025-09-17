@@ -5552,10 +5552,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   audioClips:
   - {fileID: 8300000, guid: ea648a173226047439e18c96ebe3c1bb, type: 3}
-  - {fileID: 8300000, guid: bdf9c412cfb2642209d10186296c0782, type: 3}
-  - {fileID: 8300000, guid: f9fc94c25bdee4c0d9f5774720bd4cfc, type: 3}
+  - {fileID: 8300000, guid: 2ea90856f6f7748e49eeb7dca4ce4483, type: 3}
+  - {fileID: 8300000, guid: f3d76631d25024fcba08acfd3576bcd6, type: 3}
+  - {fileID: 8300000, guid: 169ad7ab4b30248658ff2476f82c1ccf, type: 3}
+  - {fileID: 8300000, guid: 9f9fdb72bfef54955a2422ab19db9147, type: 3}
   - {fileID: 8300000, guid: 0e89a6f887c07452aae4a602586ec917, type: 3}
+  - {fileID: 8300000, guid: 35fdbb71c12014b5daa134c85e657f9d, type: 3}
+  - {fileID: 8300000, guid: 67ffd85c89ca04ee4a03b3f8e585b6d1, type: 3}
   - {fileID: 8300000, guid: f9fc94c25bdee4c0d9f5774720bd4cfc, type: 3}
+  - {fileID: 8300000, guid: 0659cf39b39414101be304aeae2ea88f, type: 3}
+  - {fileID: 8300000, guid: bdf9c412cfb2642209d10186296c0782, type: 3}
 --- !u!1 &1639562819
 GameObject:
   m_ObjectHideFlags: 0
