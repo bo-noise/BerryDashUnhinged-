@@ -17,6 +17,7 @@ public class IconMarketplaceManager : MonoBehaviour
 
     void Start()
     {
+        downloadPanelScript.iconPurchaseSound.volume = BazookaManager.Instance.GetSettingSFXVolume();
         downloadButton.onClick.AddListener(() => SwitchPanel(1));
         if (BazookaManager.Instance.GetAccountID() != null && BazookaManager.Instance.GetAccountName() != null && BazookaManager.Instance.GetAccountSession() != null)
         {
