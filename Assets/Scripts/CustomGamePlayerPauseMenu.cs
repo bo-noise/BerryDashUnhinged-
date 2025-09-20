@@ -14,7 +14,6 @@ public class CustomGamePlayerPauseMenu : MonoBehaviour
     public Slider sfxSlider;
     public TMP_Text musicSliderText;
     public TMP_Text sfxSliderText;
-    public TMP_Text fpsText;
     public TMP_Text scoreText;
     public TMP_Text boostText;
     public Button pauseButton;
@@ -45,10 +44,8 @@ public class CustomGamePlayerPauseMenu : MonoBehaviour
         });
         resetUiButton.onClick.AddListener(() =>
         {
-            ((RectTransform)fpsText.transform).anchoredPosition = new Vector2(210f, -35f);
             ((RectTransform)scoreText.transform).anchoredPosition = new Vector2(0f, -70f);
             ((RectTransform)boostText.transform).anchoredPosition = new Vector2(0f, -190f);
-            PlayerPrefs.DeleteKey("DraggedUIFPSText");
             PlayerPrefs.DeleteKey("DraggedUIScoreText");
             PlayerPrefs.DeleteKey("DraggedUIBoostTextCustom");
             if (Application.isMobilePlatform)
@@ -78,7 +75,6 @@ public class CustomGamePlayerPauseMenu : MonoBehaviour
         continueButton.gameObject.SetActive(!continueButton.gameObject.activeSelf);
         editUiButton.transform.GetChild(0).GetComponent<TMP_Text>().text = editUiButton.transform.GetChild(0).GetComponent<TMP_Text>().text == "Edit UI" ? "Done" : "Edit UI";
         resetUiButton.gameObject.SetActive(!resetUiButton.gameObject.activeSelf);
-        fpsText.GetComponent<DraggableUI>().canDrag = !fpsText.GetComponent<DraggableUI>().canDrag;
         scoreText.GetComponent<DraggableUI>().canDrag = !scoreText.GetComponent<DraggableUI>().canDrag;
         boostText.GetComponent<DraggableUI>().canDrag = !boostText.GetComponent<DraggableUI>().canDrag;
         if (Application.isMobilePlatform)

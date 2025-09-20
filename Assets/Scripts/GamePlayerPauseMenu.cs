@@ -14,7 +14,6 @@ public class GamePlayerPauseMenu : MonoBehaviour
     public Slider sfxSlider;
     public TMP_Text musicSliderText;
     public TMP_Text sfxSliderText;
-    public TMP_Text fpsText;
     public TMP_Text scoreText;
     public TMP_Text highScoreText;
     public TMP_Text boostText;
@@ -47,12 +46,10 @@ public class GamePlayerPauseMenu : MonoBehaviour
         });
         resetUiButton.onClick.AddListener(() =>
         {
-            ((RectTransform)fpsText.transform).anchoredPosition = new Vector2(210f, -35f);
             ((RectTransform)scoreText.transform).anchoredPosition = new Vector2(0f, -70f);
             ((RectTransform)highScoreText.transform).anchoredPosition = new Vector2(0f, -140f);
             ((RectTransform)boostText.transform).anchoredPosition = new Vector2(0f, -190f);
             ((RectTransform)coinsText.transform).anchoredPosition = new Vector2(260f, 47.5f);
-            PlayerPrefs.DeleteKey("DraggedUIFPSText");
             PlayerPrefs.DeleteKey("DraggedUIScoreText");
             PlayerPrefs.DeleteKey("DraggedUIHighScoreText");
             PlayerPrefs.DeleteKey("DraggedUIBoostText");
@@ -84,7 +81,6 @@ public class GamePlayerPauseMenu : MonoBehaviour
         continueButton.gameObject.SetActive(!continueButton.gameObject.activeSelf);
         editUiButton.transform.GetChild(0).GetComponent<TMP_Text>().text = editUiButton.transform.GetChild(0).GetComponent<TMP_Text>().text == "Edit UI" ? "Done" : "Edit UI";
         resetUiButton.gameObject.SetActive(!resetUiButton.gameObject.activeSelf);
-        fpsText.GetComponent<DraggableUI>().canDrag = !fpsText.GetComponent<DraggableUI>().canDrag;
         scoreText.GetComponent<DraggableUI>().canDrag = !scoreText.GetComponent<DraggableUI>().canDrag;
         highScoreText.GetComponent<DraggableUI>().canDrag = !highScoreText.GetComponent<DraggableUI>().canDrag;
         boostText.GetComponent<DraggableUI>().canDrag = !boostText.GetComponent<DraggableUI>().canDrag;

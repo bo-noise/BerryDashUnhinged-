@@ -1338,7 +1338,6 @@ MonoBehaviour:
   sfxSlider: {fileID: 604620478}
   musicSliderText: {fileID: 1859415099}
   sfxSliderText: {fileID: 699129040}
-  fpsText: {fileID: 0}
   scoreText: {fileID: 432923591}
   boostText: {fileID: 497996347}
   pauseButton: {fileID: 1577031227}
