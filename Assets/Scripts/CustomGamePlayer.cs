@@ -24,9 +24,7 @@ public class CustomGamePlayer : MonoBehaviour
     public GameObject pausePanel;
     public Rigidbody2D rb;
     public AudioSource backgroundMusic;
-    public TMP_Text fpsCounter;
     private float nextUpdate;
-    private float fps;
     public SpriteRenderer overlayRender;
     private float lastMoveTime;
     public GameObject berryParent;
@@ -416,12 +414,6 @@ public class CustomGamePlayer : MonoBehaviour
         foreach (AudioSource audio in FindObjectsByType<AudioSource>(FindObjectsSortMode.None))
         {
             audio.pitch = speedyLeft > 0f ? 1.3f : 1f;
-        }
-        if (BazookaManager.Instance.GetSettingShowFPS() && Time.time > nextUpdate)
-        {
-            fps = 1f / Time.deltaTime;
-            fpsCounter.text = "FPS: " + Mathf.Round(fps);
-            nextUpdate = Time.time + 0.25f;
         }
         if (screenWidth != Camera.main.orthographicSize * 2f * Camera.main.aspect)
         {
