@@ -22,7 +22,13 @@ public class GlobalFPSText : MonoBehaviour
 
     void Update()
     {
-        if (!BazookaManager.Instance.GetSettingShowFPS() && text.text != "") text.text = "";
+        var enabled = BazookaManager.Instance.GetSettingShowFPS();
+        if (!enabled && text.text != "")
+        {
+            text.text = "";
+            return;
+        }
+        else if (!enabled) return;
         frames++;
         timer += Time.unscaledDeltaTime;
         if (timer >= 0.25f)
