@@ -663,6 +663,7 @@ public class CustomGamePlayer : MonoBehaviour
         score += scoreAddAmount;
         scoreText.text = $"Score: {Tools.FormatWithCommas(score)}";
         if (Application.isMobilePlatform) restartButton.interactable = score != 0;
+        if (DiscordRPCHandler.Instance != null) DiscordRPCHandler.Instance.UpdateRPC("Playing in custom mode", "Score: " + Tools.FormatWithCommas(score));
     }
 
     void CheckIfGrounded()

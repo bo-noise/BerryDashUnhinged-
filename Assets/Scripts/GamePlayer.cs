@@ -678,6 +678,7 @@ public class GamePlayer : MonoBehaviour
         highScoreText.text = prefix + $"High Score: {Tools.FormatWithCommas(highscore) + suffix} \\u2022 Total Attempts: {Tools.FormatWithCommas(totalAttempts)}";
         coinText.text = $"Coins: {Tools.FormatWithCommas(totalCoins)}";
         if (Application.isMobilePlatform) restartButton.interactable = score != 0;
+        if (DiscordRPCHandler.Instance != null) DiscordRPCHandler.Instance.UpdateRPC("Playing in normal mode", $"Score: {Tools.FormatWithCommas(score)} | High Score: {Tools.FormatWithCommas(highscore)}");
     }
 
     void CheckIfGrounded()
