@@ -46,6 +46,7 @@ public class IconMarketplaceManager : MonoBehaviour
                 normalPanel.SetActive(true);
                 downloadPanel.SetActive(false);
                 uploadPanel.SetActive(false);
+                if (DiscordRPCHandler.Instance != null) DiscordRPCHandler.Instance.UpdateRPC("Choosing what to do in the icon marketplace", null);
                 break;
             case 1:
                 foreach (Transform item in downloadPanelScript.content.transform)
@@ -59,12 +60,14 @@ public class IconMarketplaceManager : MonoBehaviour
                 downloadPanel.SetActive(true);
                 uploadPanel.SetActive(false);
                 downloadPanelScript.Load();
+                if (DiscordRPCHandler.Instance != null) DiscordRPCHandler.Instance.UpdateRPC("Browsing the icon marketplace", "They have " + Tools.FormatWithCommas(BazookaManager.Instance.GetCustomBirdIconData().Balance) + " coins");
                 break;
             case 2:
                 uploadPanelScript.Reset();
                 normalPanel.SetActive(false);
                 downloadPanel.SetActive(false);
                 uploadPanel.SetActive(true);
+                if (DiscordRPCHandler.Instance != null) DiscordRPCHandler.Instance.UpdateRPC("Uploading an icon to the icon marketplace", null);
                 break;
         }
     }
