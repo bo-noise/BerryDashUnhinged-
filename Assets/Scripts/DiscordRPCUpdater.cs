@@ -1,5 +1,3 @@
-
-using DiscordRPC;
 using UnityEngine;
 
 public class DiscordRPCUpdater : MonoBehaviour
