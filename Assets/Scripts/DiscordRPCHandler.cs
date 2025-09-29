@@ -7,6 +7,10 @@ public class DiscordRPCHandler : MonoBehaviour
     public DiscordRpcClient client;
     private readonly Timestamps timestamp = Timestamps.Now;
 
+    private bool isIdle = false;
+    private string savedDetails;
+    private string savedState;
+
     void Awake()
     {
         if (Application.isMobilePlatform || Instance != null)
@@ -27,8 +31,28 @@ public class DiscordRPCHandler : MonoBehaviour
         client.Dispose();
     }
 
-    public void UpdateRPC(string details, string state)
+    void OnApplicationPause(bool pause)
     {
+        isIdle = pause;
+        if (pause)
+        {
+            UpdateRPC("Idle", null, true);
+        }
+        else
+        {
+            UpdateRPC(savedDetails, savedState, true);
+        }
+    }
+
+    public void UpdateRPC(string details, string state, bool force = false)
+    {
+        if (!force && isIdle)
+        {
+            savedDetails = details;
+            savedState = state;
+            return;
+        }
+
         client.SetPresence(new RichPresence
         {
             Details = details,
@@ -47,5 +71,8 @@ public class DiscordRPCHandler : MonoBehaviour
             },
             Timestamps = timestamp
         });
+
+        savedDetails = details;
+        savedState = state;
     }
 }
