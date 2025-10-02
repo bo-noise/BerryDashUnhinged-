@@ -1,3 +1,4 @@
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,13 +8,10 @@ public class CustomGamePlayerPauseMenu : MonoBehaviour
     public static CustomGamePlayerPauseMenu Instance;
     public Button backButton;
     public Button continueButton;
+    public Button statsButton;
     public Button editUiButton;
     public Button resetUiButton;
     public AudioSource songLoop;
-    public Slider musicSlider;
-    public Slider sfxSlider;
-    public TMP_Text musicSliderText;
-    public TMP_Text sfxSliderText;
     public TMP_Text scoreText;
     public TMP_Text boostText;
     public Button pauseButton;
@@ -23,11 +21,21 @@ public class CustomGamePlayerPauseMenu : MonoBehaviour
     public Button leftButton;
     internal bool editingUI = false;
 
+    public GameObject statsMenu;
+    public Button statsMenuExitButton;
+    public TMP_Text statsText;
+
+    public Toggle settingFullscreenToggle;
+    public Toggle settingVSyncToggle;
+    public Toggle settingRandomMusicToggle;
+    public Slider musicSlider;
+    public Slider sfxSlider;
+    public TMP_Text musicSliderText;
+    public TMP_Text sfxSliderText;
+
     void Awake()
     {
         Instance = this;
-        musicSlider.value = BazookaManager.Instance.GetSettingMusicVolume();
-        sfxSlider.value = BazookaManager.Instance.GetSettingSFXVolume();
         continueButton.onClick.AddListener(CustomGamePlayer.instance.DisablePause);
         musicSlider.onValueChanged.AddListener(value =>
         {
@@ -62,6 +70,60 @@ public class CustomGamePlayerPauseMenu : MonoBehaviour
                 PlayerPrefs.DeleteKey("DraggedUILeftButton");
             }
         });
+        statsButton.onClick.AddListener(() =>
+        {
+            statsMenu.SetActive(true);
+            var text = new StringBuilder();
+            text.AppendLine("High Score: " + Tools.FormatWithCommas(BazookaManager.Instance.GetGameStoreHighScore()));
+            text.AppendLine("Total Normal Berries: " + Tools.FormatWithCommas(BazookaManager.Instance.GetGameStoreTotalNormalBerries()));
+            text.AppendLine("Total Poison Berries: " + Tools.FormatWithCommas(BazookaManager.Instance.GetGameStoreTotalPoisonBerries()));
+            text.AppendLine("Total Slow Berries: " + Tools.FormatWithCommas(BazookaManager.Instance.GetGameStoreTotalSlowBerries()));
+            text.AppendLine("Total Ultra Berries: " + Tools.FormatWithCommas(BazookaManager.Instance.GetGameStoreTotalUltraBerries()));
+            text.AppendLine("Total Speedy Berries: " + Tools.FormatWithCommas(BazookaManager.Instance.GetGameStoreTotalSpeedyBerries()));
+            text.AppendLine("Total Random Berries: " + Tools.FormatWithCommas(BazookaManager.Instance.GetGameStoreTotalRandomBerries()));
+            text.AppendLine("Total Anti Berries: " + Tools.FormatWithCommas(BazookaManager.Instance.GetGameStoreTotalAntiBerries()));
+            text.AppendLine("Total Attempts: " + Tools.FormatWithCommas(BazookaManager.Instance.GetGameStoreTotalAttepts()));
+            statsText.text = text.ToString();
+        });
+        statsMenuExitButton.onClick.AddListener(() =>
+        {
+            statsMenu.SetActive(false);
+            statsText.text = string.Empty;
+        });
+
+        musicSlider.value = BazookaManager.Instance.GetSettingMusicVolume();
+        sfxSlider.value = BazookaManager.Instance.GetSettingSFXVolume();
+        if (!Application.isMobilePlatform)
+        {
+            settingFullscreenToggle.isOn = BazookaManager.Instance.GetSettingFullScreen() == true;
+            settingVSyncToggle.isOn = BazookaManager.Instance.GetSettingVsync() == true;
+            settingRandomMusicToggle.isOn = BazookaManager.Instance.GetSettingRandomMusic() == true;
+            settingFullscreenToggle.onValueChanged.AddListener(value =>
+            {
+                BazookaManager.Instance.SetSettingFullScreen(value);
+                var width = Display.main.systemWidth;
+                var height = Display.main.systemHeight;
+                Screen.SetResolution(width, height, value);
+            });
+            settingVSyncToggle.onValueChanged.AddListener(value =>
+            {
+                BazookaManager.Instance.SetSettingVsync(value);
+                QualitySettings.vSyncCount = value ? 1 : -1;
+            });
+        }
+        else
+        {
+            settingFullscreenToggle.interactable = false;
+            settingVSyncToggle.interactable = false;
+            settingRandomMusicToggle.isOn = BazookaManager.Instance.GetSettingRandomMusic() == true;
+        }
+        settingRandomMusicToggle.onValueChanged.AddListener(value => BazookaManager.Instance.SetSettingRandomMusic(value));
+        musicSlider.onValueChanged.AddListener(value =>
+        {
+            BazookaManager.Instance.SetSettingMusicVolume(value);
+            GamePlayer.instance.backgroundMusic.volume = value;
+        });
+        sfxSlider.onValueChanged.AddListener(value => BazookaManager.Instance.SetSettingSFXVolume(value));
     }
 
     public void ToggleEditingUI()
@@ -69,10 +131,14 @@ public class CustomGamePlayerPauseMenu : MonoBehaviour
         editingUI = !editingUI;
         musicSlider.gameObject.SetActive(!musicSlider.gameObject.activeSelf);
         sfxSlider.gameObject.SetActive(!sfxSlider.gameObject.activeSelf);
-        musicSliderText.gameObject.SetActive(musicSlider.gameObject.activeSelf);
-        sfxSliderText.gameObject.SetActive(sfxSlider.gameObject.activeSelf);
+        musicSliderText.gameObject.SetActive(!musicSliderText.gameObject.activeSelf);
+        sfxSliderText.gameObject.SetActive(!sfxSliderText.gameObject.activeSelf);
+        settingFullscreenToggle.gameObject.SetActive(!settingFullscreenToggle.gameObject.activeSelf);
+        settingVSyncToggle.gameObject.SetActive(!settingVSyncToggle.gameObject.activeSelf);
+        settingRandomMusicToggle.gameObject.SetActive(!settingRandomMusicToggle.gameObject.activeSelf);
         backButton.gameObject.SetActive(!backButton.gameObject.activeSelf);
         continueButton.gameObject.SetActive(!continueButton.gameObject.activeSelf);
+        statsButton.gameObject.SetActive(!statsButton.gameObject.activeSelf);
         editUiButton.transform.GetChild(0).GetComponent<TMP_Text>().text = editUiButton.transform.GetChild(0).GetComponent<TMP_Text>().text == "Edit UI" ? "Done" : "Edit UI";
         resetUiButton.gameObject.SetActive(!resetUiButton.gameObject.activeSelf);
         scoreText.GetComponent<DraggableUI>().canDrag = !scoreText.GetComponent<DraggableUI>().canDrag;
