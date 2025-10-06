@@ -26,10 +26,6 @@ public class PlayMenu : MonoBehaviour
 
     public TMP_Text validateTotalText;
 
-    public Image jumpscareImage;
-    public AudioSource jumpscareAudio;
-    public Button jumpscareButton;
-
     void Awake()
     {
         customButton.onClick.AddListener(() =>
@@ -211,12 +207,6 @@ public class PlayMenu : MonoBehaviour
             customBackButton.interactable = true;
             ValidateTotal();
         });
-        jumpscareButton.onClick.AddListener(() =>
-        {
-            jumpscareButton.GetComponent<Image>().color = Color.red;
-            jumpscareButton.onClick.RemoveAllListeners();
-            StartCoroutine(Jumpscare());
-        });
     }
 
     void ValidateTotal()
@@ -250,35 +240,5 @@ public class PlayMenu : MonoBehaviour
             validateTotalText.text = "Total must add up to 100%!";
             validateTotalText.gameObject.SetActive(true);
         }
-    }
-
-    IEnumerator Jumpscare()
-    {
-        jumpscareAudio.Play();
-        float t = 0;
-        jumpscareImage.gameObject.SetActive(true);
-        jumpscareImage.rectTransform.localScale = Vector3.zero;
-        while (t < 0.25f)
-        {
-            t += Time.deltaTime;
-            float p = t / 0.25f;
-            jumpscareImage.rectTransform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, p);
-            jumpscareImage.color = Color.Lerp(Color.white, Color.red, p);
-            yield return null;
-        }
-        jumpscareImage.rectTransform.localScale = Vector3.one;
-        yield return _waitForSeconds3;
-        jumpscareAudio.Stop();
-        jumpscareImage.gameObject.SetActive(false);
-        jumpscareImage.rectTransform.localScale = Vector3.zero;
-        jumpscareImage.color = Color.white;
-        yield return _waitForSeconds7;
-        jumpscareButton.GetComponent<Image>().color = Color.white;
-        jumpscareButton.onClick.AddListener(() =>
-        {
-            jumpscareButton.GetComponent<Image>().color = Color.red;
-            jumpscareButton.onClick.RemoveAllListeners();
-            StartCoroutine(Jumpscare());
-        });
     }
 }
