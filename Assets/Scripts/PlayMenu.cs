@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,8 +6,6 @@ using UnityEngine.UI;
 
 public class PlayMenu : MonoBehaviour
 {
-    private static WaitForSeconds _waitForSeconds7 = new(7);
-    private static WaitForSeconds _waitForSeconds3 = new(3);
     public GameObject selectionMenu;
     public GameObject customMenu;
     public Button customButton;
