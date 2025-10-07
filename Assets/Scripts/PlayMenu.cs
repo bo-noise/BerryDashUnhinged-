@@ -107,6 +107,7 @@ public class PlayMenu : MonoBehaviour
         total += GetValueFrom(nothingBerryChance);
         if (total == 100f)
         {
+            customBackButton.interactable = true;
             customPlayButton.interactable = true;
             validateTotalText.gameObject.SetActive(false);
         }
