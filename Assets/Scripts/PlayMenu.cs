@@ -10,6 +10,7 @@ public class PlayMenu : MonoBehaviour
     [SerializeField] private Button customButton;
     [SerializeField] private Button customBackButton;
     [SerializeField] private Button customPlayButton;
+    [SerializeField] private Button customNormalizeButton;
 
     [SerializeField] private TMP_InputField normalBerryChance;
     [SerializeField] private TMP_InputField poisonBerryChance;
@@ -53,6 +54,10 @@ public class PlayMenu : MonoBehaviour
             nothingBerryChance.text = defaultNothingBerryChance.ToString();
             ValidateTotal();
         });
+        customNormalizeButton.onClick.AddListener(() =>
+        {
+            //the fun logic here
+        });
         customPlayButton.onClick.AddListener(async () =>
         {
             GameObject obj = new("CustomGameTempData");
@@ -90,6 +95,7 @@ public class PlayMenu : MonoBehaviour
     void ValidateTotal()
     {
         customPlayButton.interactable = false;
+        customNormalizeButton.interactable = false;
         float total = 0f;
         total += GetValueFrom(normalBerryChance);
         total += GetValueFrom(poisonBerryChance);
@@ -106,6 +112,7 @@ public class PlayMenu : MonoBehaviour
         }
         else
         {
+            customNormalizeButton.interactable = true;
             validateTotalText.text = "Total must add up to 100%!";
             validateTotalText.gameObject.SetActive(true);
         }
@@ -133,6 +140,7 @@ public class PlayMenu : MonoBehaviour
         validateTotalText.gameObject.SetActive(false);
         customBackButton.interactable = false;
         customPlayButton.interactable = false;
+        customNormalizeButton.interactable = false;
         inputField.text = value.Replace("%", "");
         inputField.stringPosition = inputField.text.Length;
     }
@@ -144,7 +152,6 @@ public class PlayMenu : MonoBehaviour
             value = "0";
         }
         inputField.text = value + "%";
-        customBackButton.interactable = true;
         ValidateTotal();
     }
 }
