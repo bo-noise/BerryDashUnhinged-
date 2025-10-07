@@ -56,7 +56,161 @@ public class PlayMenu : MonoBehaviour
         });
         customNormalizeButton.onClick.AddListener(() =>
         {
-            //the fun logic here
+            float normalBerry = GetValueFrom(normalBerryChance);
+            float poisonBerry = GetValueFrom(poisonBerryChance);
+            float slowBerry = GetValueFrom(slowBerryChance);
+            float ultraBerry = GetValueFrom(ultraBerryChance);
+            float speedyBerry = GetValueFrom(speedyBerryChance);
+            float randomBerry = GetValueFrom(randomBerryChance);
+            float antiBerry = GetValueFrom(antiBerryChance);
+            float nothingBerry = GetValueFrom(nothingBerryChance);
+
+            int divideBy = 0;
+
+            divideBy += normalBerry > 0 ? 1 : 0;
+            divideBy += poisonBerry > 0 ? 1 : 0;
+            divideBy += slowBerry > 0 ? 1 : 0;
+            divideBy += ultraBerry > 0 ? 1 : 0;
+            divideBy += speedyBerry > 0 ? 1 : 0;
+            divideBy += randomBerry > 0 ? 1 : 0;
+            divideBy += antiBerry > 0 ? 1 : 0;
+            divideBy += nothingBerry > 0 ? 1 : 0;
+
+            float addedChances = normalBerry + poisonBerry + slowBerry + ultraBerry + speedyBerry + randomBerry + antiBerry + nothingBerry;
+            float difference = addedChances - 100f;
+            float remainingDifference = difference;
+            int remainingCount = divideBy;
+            int sumAssigned = 0;
+
+            if (normalBerry > 0)
+            {
+                float adjust = remainingCount > 0 ? (remainingDifference / remainingCount) : 0f;
+                float newVal = normalBerry - adjust;
+                int displayVal;
+                if (remainingCount == 1)
+                    displayVal = 100 - sumAssigned;
+                else
+                    displayVal = (int)System.Math.Round(newVal);
+                normalBerryChance.text = displayVal.ToString().Replace("%", "");
+                normalBerryChance.stringPosition = normalBerryChance.text.Length;
+                remainingDifference -= adjust;
+                remainingCount--;
+                sumAssigned += displayVal;
+            }
+
+            if (poisonBerry > 0)
+            {
+                float adjust = remainingCount > 0 ? (remainingDifference / remainingCount) : 0f;
+                float newVal = poisonBerry - adjust;
+                int displayVal;
+                if (remainingCount == 1)
+                    displayVal = 100 - sumAssigned;
+                else
+                    displayVal = (int)System.Math.Round(newVal);
+                poisonBerryChance.text = displayVal.ToString().Replace("%", "");
+                poisonBerryChance.stringPosition = poisonBerryChance.text.Length;
+                remainingDifference -= adjust;
+                remainingCount--;
+                sumAssigned += displayVal;
+            }
+
+            if (slowBerry > 0)
+            {
+                float adjust = remainingCount > 0 ? (remainingDifference / remainingCount) : 0f;
+                float newVal = slowBerry - adjust;
+                int displayVal;
+                if (remainingCount == 1)
+                    displayVal = 100 - sumAssigned;
+                else
+                    displayVal = (int)System.Math.Round(newVal);
+                slowBerryChance.text = displayVal.ToString().Replace("%", "");
+                slowBerryChance.stringPosition = slowBerryChance.text.Length;
+                remainingDifference -= adjust;
+                remainingCount--;
+                sumAssigned += displayVal;
+            }
+
+            if (ultraBerry > 0)
+            {
+                float adjust = remainingCount > 0 ? (remainingDifference / remainingCount) : 0f;
+                float newVal = ultraBerry - adjust;
+                int displayVal;
+                if (remainingCount == 1)
+                    displayVal = 100 - sumAssigned;
+                else
+                    displayVal = (int)System.Math.Round(newVal);
+                ultraBerryChance.text = displayVal.ToString().Replace("%", "");
+                ultraBerryChance.stringPosition = ultraBerryChance.text.Length;
+                remainingDifference -= adjust;
+                remainingCount--;
+                sumAssigned += displayVal;
+            }
+
+            if (speedyBerry > 0)
+            {
+                float adjust = remainingCount > 0 ? (remainingDifference / remainingCount) : 0f;
+                float newVal = speedyBerry - adjust;
+                int displayVal;
+                if (remainingCount == 1)
+                    displayVal = 100 - sumAssigned;
+                else
+                    displayVal = (int)System.Math.Round(newVal);
+                speedyBerryChance.text = displayVal.ToString().Replace("%", "");
+                speedyBerryChance.stringPosition = speedyBerryChance.text.Length;
+                remainingDifference -= adjust;
+                remainingCount--;
+                sumAssigned += displayVal;
+            }
+
+            if (randomBerry > 0)
+            {
+                float adjust = remainingCount > 0 ? (remainingDifference / remainingCount) : 0f;
+                float newVal = randomBerry - adjust;
+                int displayVal;
+                if (remainingCount == 1)
+                    displayVal = 100 - sumAssigned;
+                else
+                    displayVal = (int)System.Math.Round(newVal);
+                randomBerryChance.text = displayVal.ToString().Replace("%", "");
+                randomBerryChance.stringPosition = randomBerryChance.text.Length;
+                remainingDifference -= adjust;
+                remainingCount--;
+                sumAssigned += displayVal;
+            }
+
+            if (antiBerry > 0)
+            {
+                float adjust = remainingCount > 0 ? (remainingDifference / remainingCount) : 0f;
+                float newVal = antiBerry - adjust;
+                int displayVal;
+                if (remainingCount == 1)
+                    displayVal = 100 - sumAssigned;
+                else
+                    displayVal = (int)System.Math.Round(newVal);
+                antiBerryChance.text = displayVal.ToString().Replace("%", "");
+                antiBerryChance.stringPosition = antiBerryChance.text.Length;
+                remainingDifference -= adjust;
+                remainingCount--;
+                sumAssigned += displayVal;
+            }
+
+            if (nothingBerry > 0)
+            {
+                float adjust = remainingCount > 0 ? (remainingDifference / remainingCount) : 0f;
+                float newVal = nothingBerry - adjust;
+                int displayVal;
+                if (remainingCount == 1)
+                    displayVal = 100 - sumAssigned;
+                else
+                    displayVal = (int)System.Math.Round(newVal);
+                nothingBerryChance.text = displayVal.ToString().Replace("%", "");
+                nothingBerryChance.stringPosition = nothingBerryChance.text.Length;
+                remainingDifference -= adjust;
+                remainingCount--;
+                sumAssigned += displayVal;
+            }
+
+            ValidateTotal();
         });
         customPlayButton.onClick.AddListener(async () =>
         {
