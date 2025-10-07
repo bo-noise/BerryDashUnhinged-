@@ -94,6 +94,7 @@ public class PlayMenu : MonoBehaviour
 
     void ValidateTotal()
     {
+        customBackButton.interactable = false;
         customPlayButton.interactable = false;
         customNormalizeButton.interactable = false;
         float total = 0f;
