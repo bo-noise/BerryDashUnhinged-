@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,22 +5,31 @@ using UnityEngine.UI;
 
 public class PlayMenu : MonoBehaviour
 {
-    public GameObject selectionMenu;
-    public GameObject customMenu;
-    public Button customButton;
-    public Button customBackButton;
-    public Button customPlayButton;
+    [SerializeField] private GameObject selectionMenu;
+    [SerializeField] private GameObject customMenu;
+    [SerializeField] private Button customButton;
+    [SerializeField] private Button customBackButton;
+    [SerializeField] private Button customPlayButton;
 
-    public TMP_InputField normalBerryChance;
-    public TMP_InputField poisonBerryChance;
-    public TMP_InputField slowBerryChance;
-    public TMP_InputField ultraBerryChance;
-    public TMP_InputField speedyBerryChance;
-    public TMP_InputField randomBerryChance;
-    public TMP_InputField antiBerryChance;
-    public TMP_InputField nothingBerryChance;
+    [SerializeField] private TMP_InputField normalBerryChance;
+    [SerializeField] private TMP_InputField poisonBerryChance;
+    [SerializeField] private TMP_InputField slowBerryChance;
+    [SerializeField] private TMP_InputField ultraBerryChance;
+    [SerializeField] private TMP_InputField speedyBerryChance;
+    [SerializeField] private TMP_InputField randomBerryChance;
+    [SerializeField] private TMP_InputField antiBerryChance;
+    [SerializeField] private TMP_InputField nothingBerryChance;
 
-    public TMP_Text validateTotalText;
+    [SerializeField] private TMP_Text validateTotalText;
+
+    private readonly float defaultNormalBerryChance = 47.5f;
+    private readonly float defaultPoisonBerryChance = 12.5f;
+    private readonly float defaultSlowBerryChance = 10f;
+    private readonly float defaultUltraBerryChance = 10f;
+    private readonly float defaultSpeedyBerryChance = 10f;
+    private readonly float defaultRandomBerryChance = 5f;
+    private readonly float defaultAntiBerryChance = 5f;
+    private readonly float defaultNothingBerryChance = 0f;
 
     void Awake()
     {
@@ -35,14 +43,14 @@ public class PlayMenu : MonoBehaviour
             customMenu.SetActive(false);
             selectionMenu.SetActive(true);
 
-            normalBerryChance.text = "47.5%";
-            poisonBerryChance.text = "12.5%";
-            slowBerryChance.text = "10%";
-            ultraBerryChance.text = "10%";
-            speedyBerryChance.text = "10%";
-            randomBerryChance.text = "5%";
-            antiBerryChance.text = "5%";
-            nothingBerryChance.text = "0%";
+            normalBerryChance.text = defaultNormalBerryChance.ToString();
+            poisonBerryChance.text = defaultPoisonBerryChance.ToString();
+            slowBerryChance.text = defaultSlowBerryChance.ToString();
+            ultraBerryChance.text = defaultUltraBerryChance.ToString();
+            speedyBerryChance.text = defaultSpeedyBerryChance.ToString();
+            randomBerryChance.text = defaultRandomBerryChance.ToString();
+            antiBerryChance.text = defaultAntiBerryChance.ToString();
+            nothingBerryChance.text = defaultNothingBerryChance.ToString();
             ValidateTotal();
         });
         customPlayButton.onClick.AddListener(async () =>
@@ -50,183 +58,47 @@ public class PlayMenu : MonoBehaviour
             GameObject obj = new("CustomGameTempData");
             obj.AddComponent<CustomGameTempData>();
             CustomGameTempData customGameTempData = obj.GetComponent<CustomGameTempData>();
-            customGameTempData.normalBerryChance = float.Parse(normalBerryChance.text.Replace("%", "").Trim());
-            customGameTempData.poisonBerryChance = float.Parse(poisonBerryChance.text.Replace("%", "").Trim());
-            customGameTempData.slowBerryChance = float.Parse(slowBerryChance.text.Replace("%", "").Trim());
-            customGameTempData.ultraBerryChance = float.Parse(ultraBerryChance.text.Replace("%", "").Trim());
-            customGameTempData.speedyBerryChance = float.Parse(speedyBerryChance.text.Replace("%", "").Trim());
-            customGameTempData.randomBerryChance = float.Parse(randomBerryChance.text.Replace("%", "").Trim());
-            customGameTempData.antiBerryChance = float.Parse(antiBerryChance.text.Replace("%", "").Trim());
-            customGameTempData.nothingBerryChance = float.Parse(nothingBerryChance.text.Replace("%", "").Trim());
+            customGameTempData.normalBerryChance = GetValueFrom(normalBerryChance);
+            customGameTempData.poisonBerryChance = GetValueFrom(poisonBerryChance);
+            customGameTempData.slowBerryChance = GetValueFrom(slowBerryChance);
+            customGameTempData.ultraBerryChance = GetValueFrom(ultraBerryChance);
+            customGameTempData.speedyBerryChance = GetValueFrom(speedyBerryChance);
+            customGameTempData.randomBerryChance = GetValueFrom(randomBerryChance);
+            customGameTempData.antiBerryChance = GetValueFrom(antiBerryChance);
+            customGameTempData.nothingBerryChance = GetValueFrom(nothingBerryChance);
             await SceneManager.LoadSceneAsync("CustomGamePlayer");
         });
 
-        normalBerryChance.onSelect.AddListener((value) =>
-        {
-            validateTotalText.gameObject.SetActive(false);
-            customBackButton.interactable = false;
-            customPlayButton.interactable = false;
-            normalBerryChance.text = value.Replace("%", "");
-        });
-        normalBerryChance.onDeselect.AddListener((value) =>
-        {
-            if (float.TryParse(value, out var value2) && value2 < 0f)
-            {
-                value = "0";
-            }
-            normalBerryChance.text = value + "%";
-            customBackButton.interactable = true;
-            ValidateTotal();
-        });
-        poisonBerryChance.onSelect.AddListener((value) =>
-        {
-            validateTotalText.gameObject.SetActive(false);
-            customBackButton.interactable = false;
-            customPlayButton.interactable = false;
-            poisonBerryChance.text = value.Replace("%", "");
-            poisonBerryChance.stringPosition = poisonBerryChance.text.Length;
-        });
-        poisonBerryChance.onDeselect.AddListener((value) =>
-        {
-            if (float.TryParse(value, out var value2) && value2 < 0f)
-            {
-                value = "0";
-            }
-            poisonBerryChance.text = value + "%";
-            customBackButton.interactable = true;
-            ValidateTotal();
-        });
-        slowBerryChance.onSelect.AddListener((value) =>
-        {
-            validateTotalText.gameObject.SetActive(false);
-            customBackButton.interactable = false;
-            customPlayButton.interactable = false;
-            slowBerryChance.text = value.Replace("%", "");
-            slowBerryChance.stringPosition = slowBerryChance.text.Length;
-        });
-        slowBerryChance.onDeselect.AddListener((value) =>
-        {
-            if (float.TryParse(value, out var value2) && value2 < 0f)
-            {
-                value = "0";
-            }
-            slowBerryChance.text = value + "%";
-            customBackButton.interactable = true;
-            ValidateTotal();
-        });
-        ultraBerryChance.onSelect.AddListener((value) =>
-        {
-            validateTotalText.gameObject.SetActive(false);
-            customBackButton.interactable = false;
-            customPlayButton.interactable = false;
-            ultraBerryChance.text = value.Replace("%", "");
-            ultraBerryChance.stringPosition = ultraBerryChance.text.Length;
-        });
-        ultraBerryChance.onDeselect.AddListener((value) =>
-        {
-            if (float.TryParse(value, out var value2) && value2 < 0f)
-            {
-                value = "0";
-            }
-            ultraBerryChance.text = value + "%";
-            customBackButton.interactable = true;
-            ValidateTotal();
-        });
-        speedyBerryChance.onSelect.AddListener((value) =>
-        {
-            validateTotalText.gameObject.SetActive(false);
-            customBackButton.interactable = false;
-            customPlayButton.interactable = false;
-            speedyBerryChance.text = value.Replace("%", "");
-            speedyBerryChance.stringPosition = speedyBerryChance.text.Length;
-        });
-        speedyBerryChance.onDeselect.AddListener((value) =>
-        {
-            if (float.TryParse(value, out var value2) && value2 < 0f)
-            {
-                value = "0";
-            }
-            speedyBerryChance.text = value + "%";
-            customBackButton.interactable = true;
-            ValidateTotal();
-        });
-        randomBerryChance.onSelect.AddListener((value) =>
-        {
-            validateTotalText.gameObject.SetActive(false);
-            customBackButton.interactable = false;
-            customPlayButton.interactable = false;
-            randomBerryChance.text = value.Replace("%", "");
-            randomBerryChance.stringPosition = randomBerryChance.text.Length;
-        });
-        randomBerryChance.onDeselect.AddListener((value) =>
-        {
-            if (float.TryParse(value, out var value2) && value2 < 0f)
-            {
-                value = "0";
-            }
-            randomBerryChance.text = value + "%";
-            customBackButton.interactable = true;
-            ValidateTotal();
-        });
-        antiBerryChance.onSelect.AddListener((value) =>
-        {
-            validateTotalText.gameObject.SetActive(false);
-            customBackButton.interactable = false;
-            customPlayButton.interactable = false;
-            antiBerryChance.text = value.Replace("%", "");
-            antiBerryChance.stringPosition = antiBerryChance.text.Length;
-        });
-        antiBerryChance.onDeselect.AddListener((value) =>
-        {
-            if (float.TryParse(value, out var value2) && value2 < 0f)
-            {
-                value = "0";
-            }
-            antiBerryChance.text = value + "%";
-            customBackButton.interactable = true;
-            ValidateTotal();
-        });
-        nothingBerryChance.onSelect.AddListener((value) =>
-        {
-            validateTotalText.gameObject.SetActive(false);
-            customBackButton.interactable = false;
-            customPlayButton.interactable = false;
-            nothingBerryChance.text = value.Replace("%", "");
-            nothingBerryChance.stringPosition = nothingBerryChance.text.Length;
-        });
-        nothingBerryChance.onDeselect.AddListener((value) =>
-        {
-            if (float.TryParse(value, out var value2) && value2 < 0f)
-            {
-                value = "0";
-            }
-            nothingBerryChance.text = value + "%";
-            customBackButton.interactable = true;
-            ValidateTotal();
-        });
+        normalBerryChance.onSelect.AddListener((value) => OnSelect(value, normalBerryChance));
+        normalBerryChance.onDeselect.AddListener((value) => OnDeselect(value, normalBerryChance));
+        poisonBerryChance.onSelect.AddListener((value) => OnSelect(value, poisonBerryChance));
+        poisonBerryChance.onDeselect.AddListener((value) => OnDeselect(value, poisonBerryChance));
+        slowBerryChance.onSelect.AddListener((value) => OnSelect(value, slowBerryChance));
+        slowBerryChance.onDeselect.AddListener((value) => OnDeselect(value, slowBerryChance));
+        ultraBerryChance.onSelect.AddListener((value) => OnSelect(value, ultraBerryChance));
+        ultraBerryChance.onDeselect.AddListener((value) => OnDeselect(value, ultraBerryChance));
+        speedyBerryChance.onSelect.AddListener((value) => OnSelect(value, speedyBerryChance));
+        speedyBerryChance.onDeselect.AddListener((value) => OnDeselect(value, speedyBerryChance));
+        randomBerryChance.onSelect.AddListener((value) => OnSelect(value, randomBerryChance));
+        randomBerryChance.onDeselect.AddListener((value) => OnDeselect(value, randomBerryChance));
+        antiBerryChance.onSelect.AddListener((value) => OnSelect(value, antiBerryChance));
+        antiBerryChance.onDeselect.AddListener((value) => OnDeselect(value, antiBerryChance));
+        nothingBerryChance.onSelect.AddListener((value) => OnSelect(value, nothingBerryChance));
+        nothingBerryChance.onDeselect.AddListener((value) => OnDeselect(value, nothingBerryChance));
     }
 
     void ValidateTotal()
     {
         customPlayButton.interactable = false;
         float total = 0f;
-        try
-        {
-            total += float.Parse(normalBerryChance.text.Replace("%", ""));
-            total += float.Parse(poisonBerryChance.text.Replace("%", ""));
-            total += float.Parse(slowBerryChance.text.Replace("%", ""));
-            total += float.Parse(ultraBerryChance.text.Replace("%", ""));
-            total += float.Parse(speedyBerryChance.text.Replace("%", ""));
-            total += float.Parse(randomBerryChance.text.Replace("%", ""));
-            total += float.Parse(antiBerryChance.text.Replace("%", ""));
-            total += float.Parse(nothingBerryChance.text.Replace("%", ""));
-        }
-        catch (Exception)
-        {
-            validateTotalText.text = "Failed to parse total";
-            validateTotalText.gameObject.SetActive(true);
-            return;
-        }
+        total += GetValueFrom(normalBerryChance);
+        total += GetValueFrom(poisonBerryChance);
+        total += GetValueFrom(slowBerryChance);
+        total += GetValueFrom(ultraBerryChance);
+        total += GetValueFrom(speedyBerryChance);
+        total += GetValueFrom(randomBerryChance);
+        total += GetValueFrom(antiBerryChance);
+        total += GetValueFrom(nothingBerryChance);
         if (total == 100f)
         {
             customPlayButton.interactable = true;
@@ -237,5 +109,42 @@ public class PlayMenu : MonoBehaviour
             validateTotalText.text = "Total must add up to 100%!";
             validateTotalText.gameObject.SetActive(true);
         }
+    }
+
+    private float GetValueFrom(TMP_InputField inputField)
+    {
+        return GetValueFroText(inputField.text);
+    }
+
+    private float GetValueFroText(string text)
+    {
+        try
+        {
+            return float.Parse(text.Replace("%", "").Trim());
+        }
+        catch
+        {
+            return 0f;
+        }
+    }
+
+    void OnSelect(string value, TMP_InputField inputField)
+    {
+        validateTotalText.gameObject.SetActive(false);
+        customBackButton.interactable = false;
+        customPlayButton.interactable = false;
+        inputField.text = value.Replace("%", "");
+        inputField.stringPosition = inputField.text.Length;
+    }
+
+    void OnDeselect(string value, TMP_InputField inputField)
+    {
+        if (float.TryParse(value, out var value2) && value2 < 0f)
+        {
+            value = "0";
+        }
+        inputField.text = value + "%";
+        customBackButton.interactable = true;
+        ValidateTotal();
     }
 }
