@@ -80,53 +80,14 @@ public class PlayMenu : MonoBehaviour
             float addedChances = normalBerry + poisonBerry + slowBerry + ultraBerry + speedyBerry + randomBerry + antiBerry + nothingBerry;
             float difference = addedChances - 100f;
 
-            if (normalBerry > 0)
-            {
-                normalBerryChance.text = (normalBerry - (difference / divideBy)).ToString() + "%";
-                normalBerryChance.stringPosition = normalBerryChance.text.Length;
-            }
-
-            if (poisonBerry > 0)
-            {
-                poisonBerryChance.text = (poisonBerry - (difference / divideBy)).ToString() + "%";
-                poisonBerryChance.stringPosition = poisonBerryChance.text.Length;
-            }
-
-            if (slowBerry > 0)
-            {
-                slowBerryChance.text = (slowBerry - (difference / divideBy)).ToString() + "%";
-                slowBerryChance.stringPosition = slowBerryChance.text.Length;
-            }
-
-            if (ultraBerry > 0)
-            {
-                ultraBerryChance.text = (ultraBerry - (difference / divideBy)).ToString() + "%";
-                ultraBerryChance.stringPosition = ultraBerryChance.text.Length;
-            }
-
-            if (speedyBerry > 0)
-            {
-                speedyBerryChance.text = (speedyBerry - (difference / divideBy)).ToString() + "%";
-                speedyBerryChance.stringPosition = speedyBerryChance.text.Length;
-            }
-
-            if (randomBerry > 0)
-            {
-                randomBerryChance.text = (randomBerry - (difference / divideBy)).ToString() + "%";
-                randomBerryChance.stringPosition = randomBerryChance.text.Length;
-            }
-
-            if (antiBerry > 0)
-            {
-                antiBerryChance.text = (antiBerry - (difference / divideBy)).ToString() + "%";
-                antiBerryChance.stringPosition = antiBerryChance.text.Length;
-            }
-
-            if (nothingBerry > 0)
-            {
-                nothingBerryChance.text = (nothingBerry - (difference / divideBy)).ToString() + "%";
-                nothingBerryChance.stringPosition = nothingBerryChance.text.Length;
-            }
+            if (normalBerry > 0) NormalizeOne(normalBerryChance, normalBerry, divideBy, difference);
+            if (poisonBerry > 0) NormalizeOne(poisonBerryChance, poisonBerry, divideBy, difference);
+            if (slowBerry > 0) NormalizeOne(slowBerryChance, slowBerry, divideBy, difference);
+            if (ultraBerry > 0) NormalizeOne(ultraBerryChance, ultraBerry, divideBy, difference);
+            if (speedyBerry > 0) NormalizeOne(speedyBerryChance, speedyBerry, divideBy, difference);
+            if (randomBerry > 0) NormalizeOne(randomBerryChance, randomBerry, divideBy, difference);
+            if (antiBerry > 0) NormalizeOne(antiBerryChance, antiBerry, divideBy, difference);
+            if (nothingBerry > 0) NormalizeOne(nothingBerryChance, nothingBerry, divideBy, difference);
 
             normalBerry = GetValueFrom(normalBerryChance);
             poisonBerry = GetValueFrom(poisonBerryChance);
@@ -137,180 +98,58 @@ public class PlayMenu : MonoBehaviour
             antiBerry = GetValueFrom(antiBerryChance);
             nothingBerry = GetValueFrom(nothingBerryChance);
 
-            if (normalBerry > 0)
-            {
-                normalBerry = (float)Math.Floor(normalBerry);
-            }
-
-            if (poisonBerry > 0)
-            {
-                poisonBerry = (float)Math.Floor(poisonBerry);
-            }
-
-            if (slowBerry > 0)
-            {
-                slowBerry = (float)Math.Floor(slowBerry);
-            }
-
-            if (ultraBerry > 0)
-            {
-                ultraBerry = (float)Math.Floor(ultraBerry);
-            }
-
-            if (speedyBerry > 0)
-            {
-                speedyBerry = (float)Math.Floor(speedyBerry);
-            }
-
-            if (randomBerry > 0)
-            {
-                randomBerry = (float)Math.Floor(randomBerry);
-            }
-
-            if (antiBerry > 0)
-            {
-                antiBerry = (float)Math.Floor(antiBerry);
-            }
-
-            if (nothingBerry > 0)
-            {
-                nothingBerry = (float)Math.Floor(nothingBerry);
-            }
+            if (normalBerry > 0) normalBerry = (float)Math.Floor(normalBerry);
+            if (poisonBerry > 0) poisonBerry = (float)Math.Floor(poisonBerry);
+            if (slowBerry > 0) slowBerry = (float)Math.Floor(slowBerry);
+            if (ultraBerry > 0) ultraBerry = (float)Math.Floor(ultraBerry);
+            if (speedyBerry > 0) speedyBerry = (float)Math.Floor(speedyBerry);
+            if (randomBerry > 0) randomBerry = (float)Math.Floor(randomBerry);
+            if (antiBerry > 0) antiBerry = (float)Math.Floor(antiBerry);
+            if (nothingBerry > 0) nothingBerry = (float)Math.Floor(nothingBerry);
 
             float addedChances2 = normalBerry + poisonBerry + slowBerry + ultraBerry + speedyBerry + randomBerry + antiBerry + nothingBerry;
             float difference2 = addedChances2 - 100f;
             bool fixedValues = false;
 
-            Debug.Log(difference2);
-            Debug.Log(normalBerry - difference2);
-            Debug.Log(poisonBerry - difference2);
-
             if (normalBerry > 0)
             {
-                if (!fixedValues)
-                {
-                    normalBerryChance.text = (normalBerry - difference2).ToString() + "%";
-                    normalBerryChance.stringPosition = normalBerryChance.text.Length;
-                    fixedValues = true;
-                }
-                else
-                {
-                    normalBerryChance.text = normalBerry.ToString() + "%";
-                    normalBerryChance.stringPosition = normalBerryChance.text.Length;
-                    fixedValues = true;
-                }
+                NormalizeTwo(normalBerryChance, fixedValues, normalBerry, difference2);
+                fixedValues = true;
             }
-
             if (poisonBerry > 0)
             {
-                if (!fixedValues)
-                {
-                    poisonBerryChance.text = (poisonBerry - difference2).ToString() + "%";
-                    poisonBerryChance.stringPosition = poisonBerryChance.text.Length;
-                    fixedValues = true;
-                }
-                else
-                {
-                    poisonBerryChance.text = poisonBerry.ToString() + "%";
-                    poisonBerryChance.stringPosition = poisonBerryChance.text.Length;
-                    fixedValues = true;
-                }
+                NormalizeTwo(poisonBerryChance, fixedValues, poisonBerry, difference2);
+                fixedValues = true;
             }
-
             if (slowBerry > 0)
             {
-                if (!fixedValues)
-                {
-                    slowBerryChance.text = (slowBerry - difference2).ToString() + "%";
-                    slowBerryChance.stringPosition = slowBerryChance.text.Length;
-                    fixedValues = true;
-                }
-                else
-                {
-                    slowBerryChance.text = slowBerry.ToString() + "%";
-                    slowBerryChance.stringPosition = slowBerryChance.text.Length;
-                    fixedValues = true;
-                }
+                NormalizeTwo(slowBerryChance, fixedValues, slowBerry, difference2);
+                fixedValues = true;
             }
-
             if (ultraBerry > 0)
             {
-                if (!fixedValues)
-                {
-                    ultraBerryChance.text = (ultraBerry - difference2).ToString() + "%";
-                    ultraBerryChance.stringPosition = ultraBerryChance.text.Length;
-                    fixedValues = true;
-                }
-                else
-                {
-                    ultraBerryChance.text = ultraBerry.ToString() + "%";
-                    ultraBerryChance.stringPosition = ultraBerryChance.text.Length;
-                    fixedValues = true;
-                }
+                NormalizeTwo(ultraBerryChance, fixedValues, ultraBerry, difference2);
+                fixedValues = true;
             }
-
             if (speedyBerry > 0)
             {
-                if (!fixedValues)
-                {
-                    speedyBerryChance.text = (speedyBerry - difference2).ToString() + "%";
-                    speedyBerryChance.stringPosition = speedyBerryChance.text.Length;
-                    fixedValues = true;
-                }
-                else
-                {
-                    speedyBerryChance.text = speedyBerry.ToString() + "%";
-                    speedyBerryChance.stringPosition = speedyBerryChance.text.Length;
-                    fixedValues = true;
-                }
+                NormalizeTwo(speedyBerryChance, fixedValues, speedyBerry, difference2);
+                fixedValues = true;
             }
-
             if (randomBerry > 0)
             {
-                if (!fixedValues)
-                {
-                    randomBerryChance.text = (randomBerry - difference2).ToString() + "%";
-                    randomBerryChance.stringPosition = randomBerryChance.text.Length;
-                    fixedValues = true;
-                }
-                else
-                {
-                    randomBerryChance.text = randomBerry.ToString() + "%";
-                    randomBerryChance.stringPosition = randomBerryChance.text.Length;
-                    fixedValues = true;
-                }
+                NormalizeTwo(randomBerryChance, fixedValues, randomBerry, difference2);
+                fixedValues = true;
             }
-
             if (antiBerry > 0)
             {
-                if (!fixedValues)
-                {
-                    antiBerryChance.text = (antiBerry - difference2).ToString() + "%";
-                    antiBerryChance.stringPosition = antiBerryChance.text.Length;
-                    fixedValues = true;
-                }
-                else
-                {
-                    antiBerryChance.text = antiBerry.ToString() + "%";
-                    antiBerryChance.stringPosition = antiBerryChance.text.Length;
-                    fixedValues = true;
-                }
+                NormalizeTwo(antiBerryChance, fixedValues, antiBerry, difference2);
+                fixedValues = true;
             }
-
             if (nothingBerry > 0)
             {
-                if (!fixedValues)
-                {
-                    nothingBerryChance.text = (nothingBerry - difference2).ToString() + "%";
-                    nothingBerryChance.stringPosition = nothingBerryChance.text.Length;
-                    fixedValues = true;
-                }
-                else
-                {
-                    nothingBerryChance.text = nothingBerry.ToString() + "%";
-                    nothingBerryChance.stringPosition = nothingBerryChance.text.Length;
-                    fixedValues = true;
-                }
+                NormalizeTwo(nothingBerryChance, fixedValues, nothingBerry, difference2);
+                fixedValues = true;
             }
 
             ValidateTotal();
@@ -412,5 +251,25 @@ public class PlayMenu : MonoBehaviour
         }
         inputField.text = value + "%";
         ValidateTotal();
+    }
+
+    void NormalizeOne(TMP_InputField inputField, float berryChance, int divideBy, float difference)
+    {
+        inputField.text = (berryChance - (difference / divideBy)).ToString() + "%";
+        inputField.stringPosition = inputField.text.Length;
+    }
+
+    void NormalizeTwo(TMP_InputField inputField, bool fixedValues, float berryChance, float difference2)
+    {
+        if (!fixedValues)
+        {
+            inputField.text = (berryChance - difference2).ToString() + "%";
+            inputField.stringPosition = inputField.text.Length;
+        }
+        else
+        {
+            inputField.text = berryChance.ToString() + "%";
+            inputField.stringPosition = inputField.text.Length;
+        }
     }
 }
