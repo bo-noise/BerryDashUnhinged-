@@ -121,7 +121,7 @@ public class CustomGamePlayerPauseMenu : MonoBehaviour
         musicSlider.onValueChanged.AddListener(value =>
         {
             BazookaManager.Instance.SetSettingMusicVolume(value);
-            GamePlayer.instance.backgroundMusic.volume = value;
+            CustomGamePlayer.instance.backgroundMusic.volume = value;
         });
         sfxSlider.onValueChanged.AddListener(value => BazookaManager.Instance.SetSettingSFXVolume(value));
     }
