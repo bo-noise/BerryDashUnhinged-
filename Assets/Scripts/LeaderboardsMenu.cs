@@ -4,6 +4,7 @@ using System.Numerics;
 using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -867,5 +868,14 @@ public class LeaderboardsMenu : MonoBehaviour
     {
         statusText.gameObject.SetActive(enabled);
         statusText.text = message;
+    }
+
+    async void Update()
+    {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame && FindFirstObjectByType<ProfileMenu>() == null)
+        {
+            if (!selectionPanel.activeSelf) SwitchMenu(0);
+            else await SceneManager.LoadSceneAsync("MainMenu");
+        }
     }
 }

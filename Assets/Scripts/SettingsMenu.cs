@@ -1,6 +1,8 @@
 using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
@@ -133,5 +135,14 @@ public class SettingsMenu : MonoBehaviour
         colorCanSave = false;
         colorMenu.SetColor(new Color((int)colorToSet[0] / 255f, (int)colorToSet[1] / 255f, (int)colorToSet[2] / 255f));
         colorCanSave = true;
+    }
+
+    async void Update()
+    {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            if (colorMenu.gameObject.activeSelf) toggleButton.onClick.Invoke();
+            else await SceneManager.LoadSceneAsync("MainMenu");
+        }
     }
 }

@@ -1,5 +1,7 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class IconMarketplaceManager : MonoBehaviour
@@ -66,6 +68,15 @@ public class IconMarketplaceManager : MonoBehaviour
                 downloadPanel.SetActive(false);
                 uploadPanel.SetActive(true);
                 break;
+        }
+    }
+
+    async void Update()
+    {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            if (downloadPanel.activeSelf || uploadPanel.activeSelf) SwitchPanel(0);
+            else await SceneManager.LoadSceneAsync("MainMenu");
         }
     }
 }

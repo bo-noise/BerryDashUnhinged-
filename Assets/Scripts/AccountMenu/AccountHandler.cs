@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class AccountHandler : MonoBehaviour
 {
@@ -97,5 +99,15 @@ public class AccountHandler : MonoBehaviour
                 break;
         }
         foreach (CustomColorObject customColorObject in FindObjectsByType<CustomColorObject>(FindObjectsSortMode.None)) customColorObject.SetColor();
+    }
+
+    async void Update()
+    {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            if (accountChangePassword.gameObject.activeSelf || accountChangeUsername.gameObject.activeSelf || accountRefreshLogin.gameObject.activeSelf) SwitchPanel(0);
+            else if (accountLogin.gameObject.activeSelf || accountRegister.gameObject.activeSelf) SwitchPanel(1);
+            else await SceneManager.LoadSceneAsync("MainMenu");
+        }
     }
 }

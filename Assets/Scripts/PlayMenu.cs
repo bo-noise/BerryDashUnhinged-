@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -270,6 +271,15 @@ public class PlayMenu : MonoBehaviour
         {
             inputField.text = berryChance.ToString() + "%";
             inputField.stringPosition = inputField.text.Length;
+        }
+    }
+
+    async void Update()
+    {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            if (customMenu.activeSelf) customBackButton.onClick.Invoke();
+            else await SceneManager.LoadSceneAsync("MainMenu");
         }
     }
 }

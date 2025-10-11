@@ -1,6 +1,8 @@
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class StatsMenu : MonoBehaviour
 {
@@ -21,5 +23,10 @@ public class StatsMenu : MonoBehaviour
         text.AppendLine("Total Coins: " + Tools.FormatWithCommas(BazookaManager.Instance.GetCustomBirdIconData().Balance));
         text.AppendLine("Total Attempts: " + Tools.FormatWithCommas(BazookaManager.Instance.GetGameStoreTotalAttepts()));
         statText.text = text.ToString();
+    }
+
+    async void Update()
+    {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame) await SceneManager.LoadSceneAsync("MainMenu");
     }
 }

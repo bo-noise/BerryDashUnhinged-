@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ChatroomMenu : MonoBehaviour
@@ -301,11 +303,18 @@ public class ChatroomMenu : MonoBehaviour
         statusRoutine = StartCoroutine(StatusRoutine());
     }
 
-    void Update()
+    async void Update()
     {
         var max = content.GetComponent<RectTransform>().sizeDelta.y;
         var current = content.transform.localPosition.y;
         downButton.gameObject.SetActive(Mathf.Abs(max - current) > 0.1f * max);
+        if (Keyboard.current.escapeKey.wasPressedThisFrame && FindFirstObjectByType<ProfileMenu>() == null)
+        {
+            if (optionsPanel.activeSelf) optionsPanelExitButton.onClick.Invoke();
+            else if (reportMessagePanel.activeSelf) reportMessagePanelExitButton.onClick.Invoke();
+            else if (editMessagePanelCurrent != null) editMessagePanelCurrent.transform.GetChild(0).GetChild(0).GetComponent<Button>().onClick.Invoke();
+            else await SceneManager.LoadSceneAsync("MainMenu");
+        }
     }
 
     IEnumerator StatusRoutine()

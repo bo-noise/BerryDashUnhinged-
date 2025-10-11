@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Iconsmenu : MonoBehaviour
@@ -280,5 +282,10 @@ public class Iconsmenu : MonoBehaviour
         {
             customIcons[loopIcon.UUID].interactable = loopIcon.UUID != icon.UUID;
         }
+    }
+
+    async void Update()
+    {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame) await SceneManager.LoadSceneAsync("MainMenu");
     }
 }

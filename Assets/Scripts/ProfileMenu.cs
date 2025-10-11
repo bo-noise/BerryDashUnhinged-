@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
@@ -392,5 +393,10 @@ public class ProfileMenu : MonoBehaviour
         {
             Debug.LogError("Failed to upload post");
         }
+    }
+
+    void Update()
+    {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame) Destroy(gameObject);
     }
 }
