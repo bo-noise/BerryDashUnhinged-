@@ -696,6 +696,11 @@ public class GamePlayer : MonoBehaviour
 
     internal void TogglePause()
     {
+        if (GamePlayerPauseMenu.Instance != null && GamePlayerPauseMenu.Instance.statsMenu.activeSelf)
+        {
+            GamePlayerPauseMenu.Instance.statsMenuExitButton.onClick.Invoke();
+            return;
+        }
         if (pausePanel.activeSelf)
         {
             DisablePause();
