@@ -208,9 +208,9 @@ public class LeaderboardsMenu : MonoBehaviour
             }
         }
         UpdateStatus(true, "Loading...");
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("type", "0");
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getTopPlayers.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getTopPlayers.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -218,7 +218,7 @@ public class LeaderboardsMenu : MonoBehaviour
         if (request.result == UnityWebRequest.Result.Success)
         {
             UpdateStatus(false);
-            string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+            string response = request.downloadHandler.text;
             if (response == "-999")
             {
                 UpdateStatus(true, "Server error while fetching data");
@@ -342,10 +342,10 @@ public class LeaderboardsMenu : MonoBehaviour
             }
         }
         UpdateStatus(true, "Loading...");
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("showType", showAmount.ToString());
         dataForm.AddField("type", "1");
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getTopPlayers.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getTopPlayers.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -353,7 +353,7 @@ public class LeaderboardsMenu : MonoBehaviour
         if (request.result == UnityWebRequest.Result.Success)
         {
             UpdateStatus(false);
-            string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+            string response = request.downloadHandler.text;
             if (response == "-999")
             {
                 UpdateStatus(true, "Server error while fetching data");
@@ -477,9 +477,9 @@ public class LeaderboardsMenu : MonoBehaviour
             }
         }
         UpdateStatus(true, "Loading...");
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("type", "2");
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getTopPlayers.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getTopPlayers.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -487,7 +487,7 @@ public class LeaderboardsMenu : MonoBehaviour
         if (request.result == UnityWebRequest.Result.Success)
         {
             UpdateStatus(false);
-            string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+            string response = request.downloadHandler.text;
             if (response == "-999")
             {
                 UpdateStatus(true, "Server error while fetching data");
@@ -610,9 +610,9 @@ public class LeaderboardsMenu : MonoBehaviour
             }
         }
         UpdateStatus(true, "Loading...");
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("type", "3");
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getTopPlayers.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getTopPlayers.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -620,7 +620,7 @@ public class LeaderboardsMenu : MonoBehaviour
         if (request.result == UnityWebRequest.Result.Success)
         {
             UpdateStatus(false);
-            string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+            string response = request.downloadHandler.text;
             if (response == "-999")
             {
                 UpdateStatus(true, "Server error while fetching data");
@@ -743,9 +743,9 @@ public class LeaderboardsMenu : MonoBehaviour
             }
         }
         UpdateStatus(true, "Loading...");
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("type", "4");
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getTopPlayers.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getTopPlayers.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -753,7 +753,7 @@ public class LeaderboardsMenu : MonoBehaviour
         if (request.result == UnityWebRequest.Result.Success)
         {
             UpdateStatus(false);
-            string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+            string response = request.downloadHandler.text;
             if (response == "-999")
             {
                 UpdateStatus(true, "Server error while fetching data");

@@ -248,11 +248,11 @@ public class ChatroomMenu : MonoBehaviour
             return;
         }
 
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("content", text);
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "sendChatroomMessage.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "sendChatroomMessage.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -262,7 +262,7 @@ public class ChatroomMenu : MonoBehaviour
             backButton.interactable = true;
             return;
         }
-        string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+        string response = request.downloadHandler.text;
         if (response == "-999")
         {
             ShowStatus("Server error while fetching data");
@@ -361,7 +361,7 @@ public class ChatroomMenu : MonoBehaviour
             Debug.LogError("Failed to fetch chatroom messages: " + request.error);
             return;
         }
-        string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+        string response = request.downloadHandler.text;
         var shouldClear = true;
         switch (response)
         {
@@ -500,11 +500,11 @@ public class ChatroomMenu : MonoBehaviour
 
     async Task HandleDelete()
     {
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("id", selectedMessageForOptions.ID.ToString());
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "deleteChatroomMessage.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "deleteChatroomMessage.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -518,12 +518,12 @@ public class ChatroomMenu : MonoBehaviour
     {
         var newContent = editMessagePanelCurrent.transform.GetChild(0).GetChild(4).GetComponent<TMP_InputField>().text;
         selectedMessageForOptions.Content = newContent;
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("id", selectedMessageForOptions.ID.ToString());
         dataForm.AddField("content", newContent);
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "editChatroomMessage.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "editChatroomMessage.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -538,12 +538,12 @@ public class ChatroomMenu : MonoBehaviour
 
     async Task HandleReport()
     {
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("id", selectedMessageForOptions.ID.ToString());
         dataForm.AddField("reason", reportMessagePanelReportReason.text);
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "reportChatroomMessage.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "reportChatroomMessage.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());

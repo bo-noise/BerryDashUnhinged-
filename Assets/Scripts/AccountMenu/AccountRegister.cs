@@ -56,11 +56,11 @@ public class AccountRegister : MonoBehaviour
         }
         registerBackButton.interactable = false;
         registerSubmitButton.interactable = false;
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("username", registerUsernameInput.text);
         dataForm.AddField("email", registerEmailInput.text);
         dataForm.AddField("password", registerPasswordInput.text);
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "registerAccount.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "registerAccount.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -72,7 +72,7 @@ public class AccountRegister : MonoBehaviour
             Tools.UpdateStatusText(registerPanelStatusText, "Failed to make HTTP request", Color.red);
             return;
         }
-        string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+        string response = request.downloadHandler.text;
         if (response == "-999")
         {
             Tools.UpdateStatusText(registerPanelStatusText, "Server error while fetching data", Color.red);

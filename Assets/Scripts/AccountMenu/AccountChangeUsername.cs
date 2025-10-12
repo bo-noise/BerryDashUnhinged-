@@ -29,12 +29,12 @@ public class AccountChangeUsername : MonoBehaviour
     {
         changeUsernameBackButton.interactable = false;
         changeUsernameSubmitButton.interactable = false;
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("oldusername", changeUsernameCurrentUsernameInput.text);
         dataForm.AddField("newusername", changeUsernameNewUsernameInput.text);
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "changeAccountUsername.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "changeAccountUsername.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -46,7 +46,7 @@ public class AccountChangeUsername : MonoBehaviour
             Tools.UpdateStatusText(changeUsernameStatusText, "Failed to make HTTP request", Color.red);
             return;
         }
-        string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+        string response = request.downloadHandler.text;
         if (response == "-999")
         {
             Tools.UpdateStatusText(changeUsernameStatusText, "Server error while fetching data", Color.red);

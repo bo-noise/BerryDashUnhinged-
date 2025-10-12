@@ -134,7 +134,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
             currentIcons.Add(icon.UUID);
         }
         ShowStatus("Loading...");
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("userId", (BazookaManager.Instance.GetAccountID() ?? 0).ToString());
         dataForm.AddField("sortBy", optionsPanelSortByDropdown.value.ToString());
         dataForm.AddField("priceRangeEnabled", optionsPanelPriceRangeToggle.isOn.ToString());
@@ -145,7 +145,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         dataForm.AddField("onlyShowEnabled", optionsPanelOnlyShowToggle.isOn.ToString());
         dataForm.AddField("onlyShowValue", optionsPanelOnlyShowDropdown.value.ToString());
         dataForm.AddField("currentIcons", Convert.ToBase64String(Encoding.UTF8.GetBytes(currentIcons.ToString(Formatting.None))));
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getMarketplaceIcons.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getMarketplaceIcons.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -158,7 +158,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
             ShowStatus("Failed to make HTTP request");
             return;
         }
-        string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+        string response = request.downloadHandler.text;
         if (response == "-999")
         {
             ShowStatus("Server error while fetching data");

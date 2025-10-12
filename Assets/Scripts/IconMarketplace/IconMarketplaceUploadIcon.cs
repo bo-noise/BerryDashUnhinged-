@@ -90,13 +90,13 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
         uploadButton.interactable = false;
         backButton.interactable = false;
         selectButton.interactable = false;
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
         dataForm.AddField("name", birdNameInput.text);
         dataForm.AddField("price", birdPriceInput.text);
         dataForm.AddField("filecontent", birdData);
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "uploadMarketplaceIcon.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "uploadMarketplaceIcon.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -109,7 +109,7 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
             Tools.UpdateStatusText(statusText, "Failed to make HTTP request", Color.red);
             return;
         }
-        string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+        string response = request.downloadHandler.text;
         if (response == "-999")
         {
             uploadButton.interactable = true;

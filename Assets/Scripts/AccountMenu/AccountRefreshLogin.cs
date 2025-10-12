@@ -29,10 +29,10 @@ public class AccountRefreshLogin : MonoBehaviour
     {
         refreshLoginBackButton.interactable = false;
         refreshLoginSubmitButton.interactable = false;
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("username", refreshLoginUsernameInput.text);
         dataForm.AddField("password", refreshLoginPasswordInput.text);
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "loginAccount.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "loginAccount.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -44,7 +44,7 @@ public class AccountRefreshLogin : MonoBehaviour
             Tools.UpdateStatusText(refreshLoginStatusText, "Failed to make HTTP request", Color.red);
             return;
         }
-        string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+        string response = request.downloadHandler.text;
         if (response == "-999")
         {
             Tools.UpdateStatusText(refreshLoginStatusText, "Server error while fetching data", Color.red);

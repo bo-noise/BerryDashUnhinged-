@@ -49,11 +49,11 @@ public class AccountLoggedIn : MonoBehaviour
         loggedInRefreshLoginButton.interactable = false;
         loggedInLogoutButton.interactable = false;
         loggedInBackButton.interactable = false;
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
         dataForm.AddField("saveData", Convert.ToBase64String(Encoding.UTF8.GetBytes(BazookaManager.Instance.saveFile.ToString(Formatting.None))));
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "saveAccount.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "saveAccount.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -70,7 +70,7 @@ public class AccountLoggedIn : MonoBehaviour
             Tools.UpdateStatusText(loggedInText, "Failed to make HTTP request", Color.red);
             return;
         }
-        string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+        string response = request.downloadHandler.text;
         if (response == "-999")
         {
             Tools.UpdateStatusText(loggedInText, "Server error while fetching data", Color.red);
@@ -117,10 +117,10 @@ public class AccountLoggedIn : MonoBehaviour
         loggedInRefreshLoginButton.interactable = false;
         loggedInLogoutButton.interactable = false;
         loggedInBackButton.interactable = false;
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "loadAccount.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "loadAccount.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -137,7 +137,7 @@ public class AccountLoggedIn : MonoBehaviour
             Tools.UpdateStatusText(loggedInText, "Failed to make HTTP request", Color.red);
             return;
         }
-        string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+        string response = request.downloadHandler.text;
         if (response == "-999")
         {
             Tools.UpdateStatusText(loggedInText, "Server error while fetching data", Color.red);

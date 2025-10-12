@@ -7,7 +7,6 @@ public class MenuScript : MonoBehaviour
     public Button exitButton;
     public TMP_Text updateText;
     public Button updateButton;
-    public GameObject selfBuiltPanel;
     public Button profileButton;
     public ProfileMenu profilePrefab;
 
@@ -28,7 +27,6 @@ public class MenuScript : MonoBehaviour
                 Application.Quit();
             });
         }
-        if (SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY.Trim() == string.Empty || SensitiveInfo.SERVER_SEND_TRANSFER_KEY.Trim() == string.Empty) selfBuiltPanel.SetActive(true);
     }
 
     void Start()

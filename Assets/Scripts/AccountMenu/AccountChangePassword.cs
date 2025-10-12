@@ -36,12 +36,12 @@ public class AccountChangePassword : MonoBehaviour
         }
         changePasswordBackButton.interactable = false;
         changePasswordSubmitButton.interactable = false;
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("oldpassword", changePasswordCurrentPasswordInput.text);
         dataForm.AddField("newpassword", changePasswordNewPasswordInput.text);
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "changeAccountPassword.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "changeAccountPassword.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -53,7 +53,7 @@ public class AccountChangePassword : MonoBehaviour
             Tools.UpdateStatusText(changePasswordStatusText, "Failed to make HTTP request", Color.red);
             return;
         }
-        string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+        string response = request.downloadHandler.text;
         if (response == "-999")
         {
             Tools.UpdateStatusText(changePasswordStatusText, "Server error while fetching data", Color.red);

@@ -35,11 +35,11 @@ public class AccountLogin : MonoBehaviour
             Tools.UpdateStatusText(loginPanelStatusText, "All input fields must be filled", Color.red);
             return;
         }
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("username", loginUsernameInput.text);
         dataForm.AddField("password", loginPasswordInput.text);
         dataForm.AddField("currentHighScore", BazookaManager.Instance.GetGameStoreHighScore().ToString());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "loginAccount.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "loginAccount.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -51,7 +51,7 @@ public class AccountLogin : MonoBehaviour
             Tools.UpdateStatusText(loginPanelStatusText, "Failed to make HTTP request", Color.red);
             return;
         }
-        string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+        string response = request.downloadHandler.text;
         if (response == "-999")
         {
             Tools.UpdateStatusText(loginPanelStatusText, "Server error while fetching data", Color.red);

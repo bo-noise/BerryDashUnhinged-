@@ -122,9 +122,9 @@ public class ProfileMenu : MonoBehaviour
 
     public async Task Init(BigInteger playerID)
     {
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("uesrId", playerID.ToString());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getAccountProfile.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getAccountProfile.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -133,7 +133,7 @@ public class ProfileMenu : MonoBehaviour
         {
             return;
         }
-        string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+        string response = request.downloadHandler.text;
         var jsonResponse = JObject.Parse(response);
         if ((bool)jsonResponse["success"])
         {
@@ -191,9 +191,9 @@ public class ProfileMenu : MonoBehaviour
                 Destroy(post.gameObject);
             }
         }
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("targetId", playerID.ToString());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getAccountProfileMessages.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getAccountProfileMessages.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -202,7 +202,7 @@ public class ProfileMenu : MonoBehaviour
         {
             return;
         }
-        string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+        string response = request.downloadHandler.text;
         var posts = JArray.Parse(response).ToObject<ProfileMessageResponse[]>();
         foreach (var post in posts)
         {
@@ -275,12 +275,12 @@ public class ProfileMenu : MonoBehaviour
 
     async Task SendPostVote(BigInteger postId, bool liked, TMP_Text entryLikesCount, TMP_Text entryLikesTexture)
     {
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("targetId", postId.ToString());
         dataForm.AddField("liked", liked ? "1" : "0");
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "voteAccountProfileMessage.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "voteAccountProfileMessage.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -289,7 +289,7 @@ public class ProfileMenu : MonoBehaviour
         {
             return;
         }
-        string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+        string response = request.downloadHandler.text;
         try
         {
             var jsonResponse = JObject.Parse(response);
@@ -337,11 +337,11 @@ public class ProfileMenu : MonoBehaviour
 
     async Task UploadPost(string message)
     {
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("content", message);
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "uploadAccountProfileMessage.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "uploadAccountProfileMessage.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -350,7 +350,7 @@ public class ProfileMenu : MonoBehaviour
         {
             return;
         }
-        string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+        string response = request.downloadHandler.text;
         try
         {
             var jsonResponse = JObject.Parse(response);
@@ -367,11 +367,11 @@ public class ProfileMenu : MonoBehaviour
 
     async Task DeletePost(GameObject entryObject, BigInteger targetId)
     {
-        EncryptedWWWForm dataForm = new();
+        WWWForm dataForm = new();
         dataForm.AddField("targetId", targetId.ToString());
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "deleteAccountProfileMessage.php", dataForm.form);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "deleteAccountProfileMessage.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -380,7 +380,7 @@ public class ProfileMenu : MonoBehaviour
         {
             return;
         }
-        string response = SensitiveInfo.Decrypt(request.downloadHandler.text, SensitiveInfo.SERVER_RECEIVE_TRANSFER_KEY);
+        string response = request.downloadHandler.text;
         try
         {
             var jsonResponse = JObject.Parse(response);
