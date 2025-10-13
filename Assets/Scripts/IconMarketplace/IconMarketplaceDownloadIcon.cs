@@ -145,7 +145,7 @@ public class IconMarketplaceDownloadIcon : MonoBehaviour
         dataForm.AddField("onlyShowEnabled", optionsPanelOnlyShowToggle.isOn.ToString());
         dataForm.AddField("onlyShowValue", optionsPanelOnlyShowDropdown.value.ToString());
         dataForm.AddField("currentIcons", Convert.ToBase64String(Encoding.UTF8.GetBytes(currentIcons.ToString(Formatting.None))));
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getMarketplaceIcons.php", dataForm);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "berrydash/getMarketplaceIcons.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());

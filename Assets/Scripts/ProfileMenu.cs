@@ -124,7 +124,7 @@ public class ProfileMenu : MonoBehaviour
     {
         WWWForm dataForm = new();
         dataForm.AddField("uesrId", playerID.ToString());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getAccountProfile.php", dataForm);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "berrydash/getAccountProfile.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -193,7 +193,7 @@ public class ProfileMenu : MonoBehaviour
         }
         WWWForm dataForm = new();
         dataForm.AddField("targetId", playerID.ToString());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "getAccountProfileMessages.php", dataForm);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "berrydash/getAccountProfileMessages.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -280,7 +280,7 @@ public class ProfileMenu : MonoBehaviour
         dataForm.AddField("liked", liked ? "1" : "0");
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "voteAccountProfileMessage.php", dataForm);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "berrydash/voteAccountProfileMessage.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -341,7 +341,7 @@ public class ProfileMenu : MonoBehaviour
         dataForm.AddField("content", message);
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "uploadAccountProfileMessage.php", dataForm);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "berrydash/uploadAccountProfileMessage.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -371,7 +371,7 @@ public class ProfileMenu : MonoBehaviour
         dataForm.AddField("targetId", targetId.ToString());
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "deleteAccountProfileMessage.php", dataForm);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "berrydash/deleteAccountProfileMessage.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());

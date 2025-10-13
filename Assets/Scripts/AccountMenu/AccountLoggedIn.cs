@@ -53,7 +53,7 @@ public class AccountLoggedIn : MonoBehaviour
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
         dataForm.AddField("saveData", Convert.ToBase64String(Encoding.UTF8.GetBytes(BazookaManager.Instance.saveFile.ToString(Formatting.None))));
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "saveAccount.php", dataForm);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "berrydash/saveAccount.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
@@ -120,7 +120,7 @@ public class AccountLoggedIn : MonoBehaviour
         WWWForm dataForm = new();
         dataForm.AddField("token", BazookaManager.Instance.GetAccountSession());
         dataForm.AddField("username", BazookaManager.Instance.GetAccountName());
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "loadAccount.php", dataForm);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "berrydash/loadAccount.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());

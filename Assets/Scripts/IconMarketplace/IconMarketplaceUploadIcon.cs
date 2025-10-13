@@ -96,7 +96,7 @@ public class IconMarketplaceUploadIcon : MonoBehaviour
         dataForm.AddField("name", birdNameInput.text);
         dataForm.AddField("price", birdPriceInput.text);
         dataForm.AddField("filecontent", birdData);
-        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "uploadMarketplaceIcon.php", dataForm);
+        using UnityWebRequest request = UnityWebRequest.Post(SensitiveInfo.SERVER_DATABASE_PREFIX + "berrydash/uploadMarketplaceIcon.php", dataForm);
         request.SetRequestHeader("Requester", "BerryDashClient");
         request.SetRequestHeader("ClientVersion", Application.version);
         request.SetRequestHeader("ClientPlatform", Application.platform.ToString());
