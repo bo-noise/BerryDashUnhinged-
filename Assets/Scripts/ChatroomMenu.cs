@@ -407,7 +407,7 @@ public class ChatroomMenu : MonoBehaviour
                         }
                         obj.SetSiblingIndex(i);
                     }
-                        if (content.transform.childCount > 50)
+                    if (content.transform.childCount > 50)
                     {
                         var firstChild = content.transform.GetChild(1);
                         Destroy(firstChild.gameObject);
