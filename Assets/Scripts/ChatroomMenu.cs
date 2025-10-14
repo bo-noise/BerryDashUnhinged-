@@ -388,35 +388,33 @@ public class ChatroomMenu : MonoBehaviour
                 {
                     var message = sortedMessages[i];
                     var obj = content.transform.Find("ChatroomRow_" + message.ID);
-                    if (obj != null || message.Deleted)
+                    if (message.Deleted)
                     {
-                        if (message.Deleted && obj != null)
-                        {
-                            Destroy(obj.gameObject);
-                        }
-                        else if (obj != null)
-                        {
-                            obj.SetSiblingIndex(i + 1);
-                            if (obj.GetChild(3).GetComponent<TMP_Text>().text != Encoding.UTF8.GetString(Convert.FromBase64String(message.Content)))
-                            {
-                                obj.GetChild(3).GetComponent<TMP_Text>().text = Encoding.UTF8.GetString(Convert.FromBase64String(message.Content));
-                            }
-                            var button = obj.GetChild(4).GetComponent<Button>();
-                            if (!button.interactable)
-                            {
-                                button.interactable = true;
-                                button.onClick.AddListener(() => OptionsButtonClick(message, localUserId ?? 0));
-                            }
-                        }
+                        if (obj != null) Destroy(obj.gameObject);
                         continue;
                     }
-                    if (content.transform.childCount > 50)
+
+                    if (obj != null)
+                    {
+                        var txt = obj.GetChild(3).GetComponent<TMP_Text>();
+                        var decoded = Encoding.UTF8.GetString(Convert.FromBase64String(message.Content));
+                        if (txt.text != decoded) txt.text = decoded;
+                        var btn = obj.GetChild(4).GetComponent<Button>();
+                        if (!btn.interactable)
+                        {
+                            btn.interactable = true;
+                            btn.onClick.AddListener(() => OptionsButtonClick(message, localUserId ?? 0));
+                        }
+                        obj.SetSiblingIndex(i);
+                    }
+                        if (content.transform.childCount > 50)
                     {
                         var firstChild = content.transform.GetChild(1);
                         Destroy(firstChild.gameObject);
                     }
 
                     var rowInfo = Instantiate(sampleObject, content.transform);
+                    rowInfo.transform.SetSiblingIndex(content.transform.childCount - 1);
                     var bgImg = rowInfo.transform.GetChild(0).GetComponent<Image>();
                     var usernameText = rowInfo.transform.GetChild(1).GetComponent<TMP_Text>();
                     var playerIcon = rowInfo.transform.GetChild(2).GetComponent<Image>();
