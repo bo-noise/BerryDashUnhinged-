@@ -70,7 +70,6 @@ public class AccountLogin : MonoBehaviour
         }
         else
         {
-            Debug.Log(response);
             var jsonResponse = JObject.Parse(response);
             if ((bool)jsonResponse["success"])
             {
