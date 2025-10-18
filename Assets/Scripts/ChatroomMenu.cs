@@ -407,10 +407,17 @@ public class ChatroomMenu : MonoBehaviour
                         }
                         obj.SetSiblingIndex(i);
                     }
-                    if (content.transform.childCount > 50)
+                    int activeCount = content.transform.Cast<Transform>().Count(t => t.gameObject.activeSelf);
+                    if (activeCount > 50)
                     {
-                        var firstChild = content.transform.GetChild(1);
-                        Destroy(firstChild.gameObject);
+                        int toRemove = activeCount - 50;
+                        foreach (Transform item in content.transform)
+                        {
+                            if (!item.gameObject.activeSelf) continue;
+                            Destroy(item.gameObject);
+                            toRemove--;
+                            if (toRemove <= 0) break;
+                        }
                     }
 
                     var rowInfo = Instantiate(sampleObject, content.transform);
@@ -483,10 +490,9 @@ public class ChatroomMenu : MonoBehaviour
         {
             foreach (Transform item in content.transform)
             {
-                if (item.gameObject.activeSelf)
-                {
-                    Destroy(item.gameObject);
-                }
+                if (!item.gameObject.activeSelf) continue;
+                Destroy(item.gameObject);
+                break;
             }
         }
         if (shouldScrollToBottom)
